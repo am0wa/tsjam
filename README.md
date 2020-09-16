@@ -1,3 +1,3 @@
 # tsjam
 
-vanila typescript sweets
+Vanilla Typescript Sweets (types, minimalistic utils)

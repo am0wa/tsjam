@@ -1,7 +1,7 @@
 {
   "root": true,
   "parser": "@typescript-eslint/parser",
-  "parserOptions": { "project": "./tsconfig.json" },
+  "parserOptions": { "project": "./tsconfig.eslint.json" },
   "env": { "es6": true },
   "ignorePatterns": ["node_modules", "build", "coverage"],
   "plugins": ["import", "eslint-comments", "functional"],
@@ -9,6 +9,7 @@
     "eslint:recommended",
     "plugin:eslint-comments/recommended",
     "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
     "plugin:import/typescript",
     "plugin:functional/lite",
     "prettier",
@@ -17,6 +18,10 @@
   "globals": { "BigInt": true, "console": true, "WebAssembly": true },
   "rules": {
     "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-namespace": 0,
+    "@typescript-eslint/restrict-plus-operands": 0,
+    "object-curly-spacing": ["error", "always"],
+    "spaced-comment": ["error", "always", { "exceptions": ["-", "+"] }],
     "eslint-comments/disable-enable-pair": [
       "error",
       { "allowWholeFile": true }
@@ -29,6 +34,23 @@
     "sort-imports": [
       "error",
       { "ignoreDeclarationSort": true, "ignoreCase": true }
-    ]
-  }
+    ],
+    "no-restricted-imports": ["error", {
+      "paths": [{
+        "name": "../build/*",
+        "message": "Please use src instead."
+      }]
+    }],
+    "functional/no-class": 0,
+    "functional/no-method-signature": 0,
+    "functional/prefer-type-literal": 0,
+    "functional/no-this-expression": 0,
+    "functional/no-throw-statement": 0
+  },
+  "overrides": [
+    {
+      "files": ["./*.js"],
+      "excludedFiles": "*.config.js"
+    }
+  ]
 }
