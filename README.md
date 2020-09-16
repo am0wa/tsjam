@@ -1,0 +1,3 @@
+# tsjam
+
+vanila typescript sweets
