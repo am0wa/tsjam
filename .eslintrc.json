@@ -21,6 +21,7 @@
     "@typescript-eslint/no-namespace": 0,
     "@typescript-eslint/restrict-plus-operands": 0,
     "object-curly-spacing": ["error", "always"],
+    "operator-linebreak": ["error", "before"],
     "spaced-comment": ["error", "always", { "exceptions": ["-", "+"] }],
     "eslint-comments/disable-enable-pair": [
       "error",

@@ -1,7 +1,7 @@
 export enum ComparisonResult {
   Ascending = -1,
   Same = 0,
-  Descending = 1
+  Descending = 1,
 }
 
 export type Comparator<T> = (first: T, second: T) => ComparisonResult;

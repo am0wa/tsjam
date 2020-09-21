@@ -9,5 +9,4 @@
  *
  * - core/    Cool stuff can be found here.
  */
-export * from './core'
-
+export * from './core';

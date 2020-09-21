@@ -22,17 +22,17 @@ export abstract class JamError extends Error {
 
 export class AssertionError extends JamError {
   @nonenumerable
-  protected readonly _AssertionError!:never;
+  protected readonly _AssertionError!: never;
 }
 
 export class NotImplementedError extends JamError {
   @nonenumerable
-  protected readonly _NotImplementedError!:never;
+  protected readonly _NotImplementedError!: never;
 }
 
 export class UnreachableCodeError extends Error {
   @nonenumerable
-  protected readonly _UnreachableCodeError!:never;
+  protected readonly _UnreachableCodeError!: never;
   constructor(message = 'This code should be unreachable!') {
     super(message);
   }
@@ -40,23 +40,18 @@ export class UnreachableCodeError extends Error {
 
 export class ValidationError extends JamError {
   @nonenumerable
-  protected readonly _ValidationError!:never;
+  protected readonly _ValidationError!: never;
 }
 
 export class ConfigurationError extends JamError {
   @nonenumerable
-  protected readonly _ConfigurationError!:never;
+  protected readonly _ConfigurationError!: never;
 }
 
 export class APIError<ErrorCodeT = unknown> extends JamError {
   @nonenumerable
-  protected readonly _APIError!:never;
+  protected readonly _APIError!: never;
   constructor(readonly code: ErrorCodeT, message: string) {
     super(message);
   }
 }
-
-
-
-
-
