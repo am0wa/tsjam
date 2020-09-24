@@ -19,10 +19,10 @@ export namespace Comparable {
         : ComparisonResult.Same;
   }
 
-  export function compareStrings(a: string, b: string, caseInsensitive = true): ComparisonResult {
+  export function compareStrings(a: string, b: string, ignoreCase = true): ComparisonResult {
     return comparePrimitives(
-      caseInsensitive ? a.toLowerCase() : a,
-      caseInsensitive ? b.toLowerCase() : b
+      ignoreCase ? a.toLowerCase() : a,
+      ignoreCase ? b.toLowerCase() : b
     );
   }
 }

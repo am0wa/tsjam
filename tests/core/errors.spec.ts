@@ -1,4 +1,4 @@
-import { JamError } from 'tsjam';
+import { JamError } from 'core/errors';
 
 describe('Errors',() => {
 

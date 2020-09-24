@@ -1,4 +1,4 @@
-import { isEquatable } from 'tsjam';
+import { isEquatable } from 'core/equatable';
 
 describe('Equatable',() => {
 
@@ -10,5 +10,3 @@ describe('Equatable',() => {
     expect(isEquatable({ equals: () => false })).toBe(true);
   });
 })
-// needed for imports and lint diffs check
-export type EquatableSpec = string;

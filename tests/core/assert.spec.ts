@@ -1,4 +1,4 @@
-import { assert } from 'tsjam';
+import { assert } from 'core/assert';
 
 describe('Assert',() => {
 
