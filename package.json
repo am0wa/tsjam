@@ -4,7 +4,7 @@
   "description": "vanilla typescript sweets",
   "main": "build/lib/index.js",
   "typings": "build/lib/index.d.ts",
-  "repository": "https://github.com/YOUR_GITHUB_USER_NAME/tsjam",
+  "repository": "https://github.com/am0wa/tsjam",
   "license": "MIT",
   "keywords": [],
   "scripts": {
@@ -22,8 +22,9 @@
     "doc:json": "typedoc src/ --exclude **/*.spec.ts --target ES6 --mode file --json build/docs/typedoc.json",
     "doc:publish": "gh-pages -m \"[ci skip] Updates\" -d build/docs",
     "version": "standard-version",
-    "reset-hard": "git clean -dfx && git reset --hard && npm i",
-    "prepare-release": "run-s reset-hard test cov:check doc:html version doc:publish"
+    "reset-hard": "git clean -f -d && git reset --hard && npm i",
+    "prepare-release": "run-s reset-hard test doc:html version doc:publish",
+    "prepublish": "run-s build"
   },
   "engines": {
     "node": ">=10"
