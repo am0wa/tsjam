@@ -18,3 +18,13 @@ export const isEquatable = (x: unknown): x is Equatable => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any
   return !!x && typeof (x as any).equals === 'function';
 };
+
+export namespace Equatable {
+  export function areEqualByRef(o1: unknown, o2: unknown): boolean {
+    return o1 === o2;
+  }
+  
+  export function areEqual<T extends Equatable>(o1: T, o2: T): boolean {
+    return o1.equals(o2);
+  }
+}
