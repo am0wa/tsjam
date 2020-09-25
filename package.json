@@ -1,12 +1,15 @@
 {
   "name": "tsjam",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "vanilla typescript sweets",
   "main": "build/lib/index.js",
   "typings": "build/lib/index.d.ts",
   "repository": "https://github.com/am0wa/tsjam",
   "license": "MIT",
   "keywords": [],
+  "publishConfig": {
+    "registry:": "https://registry.npmjs.org/"
+  },
   "scripts": {
     "build": "tsc -b tsconfig.json",
     "fix": "run-s fix:*",
@@ -22,14 +25,14 @@
     "doc:publish": "gh-pages -m \"[ci skip] Updates\" -d docs",
     "version": "standard-version",
     "reset-hard": "git clean -f -d && git reset --hard && npm i",
-    "prepare-release": "run-s reset-hard test doc:html version doc:publish",
+    "clean": "rm -rf node_modules/ package-lock.json",
+    "prepare-release": "run-s reset-hard test doc:html version",
     "prepublish": "run-s build"
   },
   "engines": {
     "node": ">=10"
   },
   "dependencies": {
-    "jest-watch-typeahead": "^0.6.1",
     "nonenumerable": "^1.1.1"
   },
   "devDependencies": {
@@ -44,6 +47,7 @@
     "eslint-plugin-import": "^2.22.0",
     "gh-pages": "^3.1.0",
     "jest": "^26.4.2",
+    "jest-watch-typeahead": "^0.6.1",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.1.1",
     "standard-version": "^9.0.0",
