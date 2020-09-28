@@ -7,7 +7,7 @@ export type Float = number;
 export type Bit = 0 | 1;
 
 /** Unifies all option input flags */
-export type StringNumberBoolean = 'false' | 'true' | 'FALSE' | 'TRUE' | '0' | '1' | Bit | boolean;
+export type BooleanLike = 'false' | 'true' | 'FALSE' | 'TRUE' | '0' | '1' | Bit | boolean;
 
 /** Marker for Case Insensitive strings */
 export type StringCaseInsensitive = string;
@@ -26,6 +26,14 @@ export type Typeguard<T extends RawT, RawT = unknown> = (obj: RawT) => obj is T;
  * https://github.com/microsoft/TypeScript/issues/21732
  */
 export type SomeObject = Record<string, unknown>;
+
+/**
+ * Approximate Type for String Enums
+ * @see suggestion: allow "T extends enum" generic constraint #30611
+ * https://github.com/microsoft/TypeScript/issues/30611
+ */
+export type StringEnum = Record<string, string>;
+export type NumericEnum = { readonly [id: number]: string };
 
 // eslint-disable-next-line functional/prefer-readonly-type
 export type OneOrMany<T> = T | T[];

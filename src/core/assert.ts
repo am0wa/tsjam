@@ -24,7 +24,7 @@ export function assert(expression: unknown, message?: string): asserts expressio
 }
 
 export namespace assert {
-  export function never(x: never) {
+  export function never(x: never): never {
     throw new AssertionError('assertNever: ' + x);
   }
 
