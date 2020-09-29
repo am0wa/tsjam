@@ -1,4 +1,26 @@
-import { isEmpty, isObject, isSomething } from 'core/is-it';
+import { isEmpty, isObject, isSomething, isString } from 'core/is-it';
+
+describe('isString', () => {
+  it('should be true with strings', () => {
+    expect(isString('SomeString')).toBe(false);
+    expect(isString('')).toBe(false);
+  });
+  it('should be false if its null', () => {
+    expect(isString(null)).toBe(false);
+    expect(isString(undefined)).toBe(false);
+  });
+  it('should be false with objects and arrays', () => {
+    expect(isString([])).toBe(false);
+    expect(isString({})).toBe(false);
+  });
+  it('should work as typeguard', () => {
+    const x: unknown = 25;
+    // just semantic compile-time check
+    if (isString(x)) {
+      x.toLowerCase();
+    }
+  });
+});
 
 describe('isObject', () => {
   it('should be true if its object or array', () => {
