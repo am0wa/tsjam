@@ -31,7 +31,7 @@ export function primitiveToBoolean(value: StringCaseInsensitive | number | boole
 export function stringToEnum<T extends StringEnum>(
   enumType: T,
   rawValue: string | undefined | null,
-  ignoreCase?: boolean
+  ignoreCase = true
 ): T[keyof T] | undefined {
 
   if (!isSomething(rawValue)) {

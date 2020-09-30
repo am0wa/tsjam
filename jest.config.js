@@ -1,4 +1,3 @@
-// eslint-disable-next-line functional/immutable-data, no-undef
 module.exports = {
   rootDir: './',
   bail: false,

@@ -67,9 +67,13 @@ describe('fromIt', () => {
       expect(stringToEnum(TestEnum, 'barValue')).toBe(TestEnum.Bar);
     });
 
-    it('uses matcher fn to find enum value', () => {
-      expect(stringToEnum(TestEnum, 'foovalue', true)).toBe(TestEnum.Foo);
-      expect(stringToEnum(TestEnum, 'foo', true)).toBeUndefined();
+    it('case insensitive find enum value by default', () => {
+      expect(stringToEnum(TestEnum, 'foovalue')).toBe(TestEnum.Foo);
+      expect(stringToEnum(TestEnum, 'foo')).toBeUndefined();
+    });
+
+    it('case sensitive find if case not ignored', () => {
+      expect(stringToEnum(TestEnum, 'foovalue', false)).toBeUndefined();
     });
 
     it('fails to find enum value', () => {

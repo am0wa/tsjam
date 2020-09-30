@@ -3,7 +3,7 @@ import { ComparisonResult } from './comparison';
 import { stringToEnum } from './from-it';
 
 const semver = /^$|^([v=~^><*]?(\d+[a-z-]*\.?)+)|(\*)/;  // empty or numeric or semantic version or star(*)
-const validateVersion = (ver: string) => {
+const validateVersion = (ver: string): void => {
   assert(semver.test(ver), `Invalid semantic version received '${ver}'`);
 };
 

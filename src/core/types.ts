@@ -35,8 +35,7 @@ export type SomeObject = Record<string, unknown>;
 export type StringEnum = Record<string, string>;
 export type NumericEnum = { readonly [id: number]: string };
 
-// eslint-disable-next-line functional/prefer-readonly-type
-export type OneOrMany<T> = T | T[];
+export type OneOrMany<T> = T | readonly T[];
 
 /** Helper type to retrieve `message` content from any type */
 export type MessageOf<T extends { readonly message: unknown }> = T["message"];
@@ -51,4 +50,4 @@ export type MessageOf<T extends { readonly message: unknown }> = T["message"];
  mapTo(NoValue)
  );
  */
-const NoValue = void 0; // void(0) - literally undefined
+export const NoValue = void 0; // void(0) - literally undefined

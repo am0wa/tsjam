@@ -11,7 +11,7 @@ export const isDisposable = (x: unknown): x is Disposable => {
 };
 
 export namespace Disposable {
-  export function dispose(x: unknown) {
+  export function dispose(x: unknown): void {
     if (isDisposable(x)) {
       x.dispose();
     }
