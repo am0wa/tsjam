@@ -21,7 +21,7 @@
     "watch:build": "tsc -b tsconfig.json -w",
     "watch:test": "node ./node_modules/jest/bin/jest.js --config jest.config.js --watchAll",
     "doc": "run-s doc:html",
-    "doc:html": "typedoc src/ --exclude **/*.spec.ts --target ES6 --mode file --out docs",
+    "doc:html": "typedoc src/ --exclude **/*.spec.ts --target es2018 --mode file --out docs",
     "doc:publish": "gh-pages -m \"[ci skip] Updates\" -d docs",
     "version": "standard-version",
     "reset-hard": "git clean -f -d && git reset --hard && npm i",
@@ -53,7 +53,7 @@
     "standard-version": "^9.0.0",
     "ts-jest": "^26.3.0",
     "ts-node": "^9.0.0",
-    "typedoc": "^0.19.0",
+    "typedoc": "^0.19.2",
     "typescript": "^4.0.2"
   },
   "files": [
