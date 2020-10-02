@@ -40,14 +40,5 @@ export type OneOrMany<T> = T | readonly T[];
 /** Helper type to retrieve `message` content from any type */
 export type MessageOf<T extends { readonly message: unknown }> = T["message"];
 
-/**
- * void 0 is effectively a compile time bulletproof constant for undefined with no look-up requirements.
- * difference is that some browsers allow to overwrite undefined, yet not void 0
- @example:
- readonly notification$: Observable<void>;
- ...
- notification$ = source$.pipe(
- mapTo(NoValue)
- );
- */
-export const NoValue = void 0; // void(0) - literally undefined
+export type ParseFn<T, U> = (data: T) => U | undefined;
+

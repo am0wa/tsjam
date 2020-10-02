@@ -20,6 +20,8 @@
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/no-namespace": 0,
     "@typescript-eslint/restrict-plus-operands": 0,
+    "@typescript-eslint/no-unsafe-member-access": 0,
+    "@typescript-eslint/no-unsafe-call" : 0, // concerns on this invocations((
     // Makes no sense to allow type inferrence for expression parameters, but require typing the response
     "@typescript-eslint/explicit-function-return-type": [
       "error",
@@ -56,7 +58,8 @@
     "functional/prefer-type-literal": 0,
     "functional/no-this-expression": 0,
     "functional/no-throw-statement": 0,
-    "functional/no-return-void": 0
+    "functional/no-return-void": 0,
+    "functional/no-mixed-type": 0
     /*"functional/prefer-readonly-type": 0*/
   },
   "overrides": [

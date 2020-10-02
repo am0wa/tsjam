@@ -70,10 +70,22 @@ export function fetchData(
   mode?: OriginControl
 ): Promise<Response> {
   return new Promise<Response>((resolve, reject) => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-member-access
     fetch(path, { cache, mode })
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       .then((response) => response.ok ? resolve(response) : reject(response))
       .catch((reason) => reject(reason));
   });
+}
+
+export function JSONParseAsync(str: unknown): Promise<unknown> {
+  return Promise.resolve(JSON.parse(str as string));
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function JSONParseSafely<U = unknown>(data: unknown, logCb?: (err: any) => void): U | undefined {
+  try {
+    return JSON.parse(data as string) as U;
+  } catch (err) {
+    logCb?.call(null, err);
+    return undefined;
+  }
 }
