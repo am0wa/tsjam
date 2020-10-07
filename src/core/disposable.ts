@@ -6,7 +6,7 @@ export interface Disposable {
 }
 
 export const isDisposable = (x: unknown): x is Disposable => {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return !!x && typeof (x as any).dispose === 'function';
 };
 

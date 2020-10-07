@@ -15,7 +15,7 @@ export interface Equatable {
 }
 
 export const isEquatable = (x: unknown): x is Equatable => {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return !!x && typeof (x as any).equals === 'function';
 };
 
