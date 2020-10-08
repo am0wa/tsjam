@@ -1,4 +1,4 @@
-import { nonenumerable } from 'nonenumerable/src/index';
+import { nonenumerable } from './enumerable.decorator';
 
 export abstract class JamError extends Error {
   /**

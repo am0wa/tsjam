@@ -2,6 +2,7 @@
   "extends": "./tsconfig.eslint.json",
   "include": ["tests/**/*.ts"],
   "compilerOptions": {
+    "types": ["node","jest"],
     "noImplicitReturns": false,
     "noUnusedParameters": false
   }

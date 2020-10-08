@@ -15,7 +15,7 @@ module.exports = {
   /* moduleNameMapper: {
     "\\.(css|sass|scss|svg|png)$": "identity-obj-proxy"
   }, */
-  testEnvironment: "jest-environment-jsdom",
+  testEnvironment: "jsdom", // default. no need for node so far
   globals: {
     'ts-jest': {
       tsConfig: 'tsconfig.tests.json', // tsconfig-test.json
