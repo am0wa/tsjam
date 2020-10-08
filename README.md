@@ -1,6 +1,6 @@
 # tsjam
 
-**Vanilla Typescript Sweets** 
+**Vanilla Typescript Sweets**   
 Not opinionated types, assertions, minimalistic utils, reactive tools  
 
-[TSJam Documentation Page](https://am0wa.github.io/tsjam/globals.html)
+[TSJam API Documentation](https://am0wa.github.io/tsjam/globals.html)

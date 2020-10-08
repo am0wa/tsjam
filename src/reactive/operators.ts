@@ -24,7 +24,6 @@ export const connectablePublishReplay = <T>(bufferSize: number) =>
  * map + filter operator - maps then filters out `undefined` values.
  */
 export function mapFilterNotUndefined<T, R>(mapFn: (value: T) => R | undefined) {
-  // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
   return (source: Observable<T>): Observable<R> => source.pipe(
     map(mapFn),
     filter((m): m is R => m !== undefined)

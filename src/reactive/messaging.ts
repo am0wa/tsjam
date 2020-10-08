@@ -30,7 +30,6 @@ export type RPCFn<ResponseT, RequestT> = (request: RequestT) => Observable<Respo
  * @param matcher - selector for the appropriate response
  */
 export const replayLastMessage$ = <ResponseT extends SourceT, SourceT>(
-  // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
   source$: Observable<SourceT>,
   matcher: Typeguard<ResponseT, SourceT>
 ): Observable<ResponseT> => {
@@ -43,7 +42,6 @@ export const replayLastMessage$ = <ResponseT extends SourceT, SourceT>(
 }
 
 export function filterMessage$<T, U>(
-  // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
   source$: Observable<T>,
   parser: ParseFn<T, U>
 ): Observable<U> {

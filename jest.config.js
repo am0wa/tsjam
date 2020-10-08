@@ -18,7 +18,7 @@ module.exports = {
   testEnvironment: "jsdom", // default. no need for node so far
   globals: {
     'ts-jest': {
-      tsConfig: 'tsconfig.tests.json', // tsconfig-test.json
+      tsConfig: '<rootDir>/tests/tsconfig.json', // tests tsconfig
       isolatedModules: true // @see https://github.com/kulshekhar/ts-jest/issues/805#issuecomment-456055213
     },
     "__DEVELOPMENT__": false
