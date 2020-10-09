@@ -1,4 +1,4 @@
-import { Integer, SomeObject } from 'core/types';
+import { Callback, Integer, SomeObject } from 'core/types';
 
 export function isString(x: unknown): x is string {
   return typeof x === 'string';
@@ -13,7 +13,7 @@ export function isInteger(x: unknown): x is Integer {
 }
 
 /**
- * Type guard (also great for rx `filter` operations), that restricts `undefined` or `null` values
+ * Type guard (also great for rx `filter` operations), that restricts `undefined` or `null` values.
  */
 export function isSomething<T>(x: T | undefined | null): x is NonNullable<T> {
   // Quick comparison with both undefined and null
@@ -24,14 +24,18 @@ export function isObject(item: unknown): item is SomeObject {
   return item !== null && typeof item === 'object';
 }
 
-/** shorthand for `Array.isArray(item)` */
+export function isCallback(x: unknown): x is Callback {
+  return typeof x === 'function';
+}
+
+/** Shorthand for `Array.isArray(item)`. */
 // eslint-disable-next-line functional/prefer-readonly-type, @typescript-eslint/no-explicit-any
 export function isArrayLike(item: unknown): item is any[] {
   return Array.isArray(item);
 }
 
 /**
- * Checks Iterable like entities whether it's empty or not
+ * Checks Iterable like entities whether it's empty or not.
  *
  * isEmpty(null) => true
  * isEmpty(undefined) => true

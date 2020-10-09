@@ -2,6 +2,7 @@ export * from './noop';
 export * from './types';
 export * from './equatable';
 export * from './disposable';
+export * from './dispose-bag';
 export * from './milliseconds';
 export * from './comparison';
 export * from './versioning';

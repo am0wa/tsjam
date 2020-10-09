@@ -6,6 +6,7 @@
   "plugins": ["jest"],
   "extends": ["plugin:jest/recommended"],
   "rules": {
-    "functional/no-let": 0
+    "functional/no-let": 0,
+    "functional/immutable-data": 0
   }
 }

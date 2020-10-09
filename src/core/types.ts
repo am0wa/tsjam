@@ -27,6 +27,10 @@ export type Typeguard<T extends RawT, RawT = unknown> = (obj: RawT) => obj is T;
  */
 export type SomeObject = Record<string, unknown>;
 
+/** Semantic Marker for the Callback function. */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type Callback = (...args: readonly any[]) => void;
+
 /**
  * Approximate Type for String Enums
  * @see suggestion: allow "T extends enum" generic constraint #30611
@@ -41,4 +45,10 @@ export type OneOrMany<T> = T | readonly T[];
 export type MessageOf<T extends { readonly message: unknown }> = T["message"];
 
 export type ParseFn<T, U> = (data: T) => U | undefined;
+
+/**
+ * Rest in Peace Process Identifier.
+ * Identifier number used to kill the entity when necessary.
+ */
+export type RipId = Opaque<'RipId', number>
 

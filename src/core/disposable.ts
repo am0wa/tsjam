@@ -1,19 +1,37 @@
-/**
- * Often we need to explicitly cleanup in order to avoid memory leaks.
- */
-export interface Disposable {
+/** Disposable interface to explicitly cleanup in order to avoid memory leaks. */
+import { DisposeBag } from './dispose-bag';
+
+/** Functional interface. */
+export interface DisposableLike {
+  /** Teardown logic. */
   dispose(): void;
 }
 
-export const isDisposable = (x: unknown): x is Disposable => {
+/** Callback function that should be invoked on Dispose. */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type DisposeCallback = (...args: readonly any[]) => void;
+
+export const isDisposable = (x: unknown): x is DisposableLike => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return !!x && typeof (x as any).dispose === 'function';
 };
 
-export namespace Disposable {
-  export function dispose(x: unknown): void {
-    if (isDisposable(x)) {
-      x.dispose();
-    }
+/**
+ * Disposable entity to avoid memory Leaks.
+ * Base abstraction with the instance of DisposeBag for life-cycle management of resources.
+ * RIP any Disposable or invoke cleanup callback on the instance dispose.
+ */
+export class Disposable implements DisposableLike {
+  protected readonly _ripBag = DisposeBag.create();
+
+  /**
+   * Kill all Disposable Objects
+   * @param teardown
+   */
+  autoDispose<T extends DisposableLike | DisposeCallback>(teardown: T): T {
+    return this._ripBag.add(teardown);
   }
+
+  get disposed(): boolean { return this._ripBag.disposed };
+  dispose(): void { this._ripBag.dispose() };
 }
