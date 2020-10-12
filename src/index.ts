@@ -12,5 +12,4 @@
  * - web/    Handy http like stuff can be found here
  */
 export * from './core';
-export * as reactive from './reactive';
-export * as web from './web';
+export * from './reactive';

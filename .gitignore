@@ -8,6 +8,8 @@
 
 # production (added to git in order to distribute this folder)
 /build
+/dist
+*.tsbuildinfo
 
 # logs & reports
 diff

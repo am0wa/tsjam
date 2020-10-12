@@ -5,7 +5,6 @@ import { Subject } from 'rxjs';
 describe('RxBag',() => {
 
   it('dispose - has to unsubscribe from all - dispose added afterwards', () => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const rxBag = RxBag.create();
     const subjA$ = new Subject<string>();
     const subjB$ = new Subject<string>();
@@ -50,7 +49,6 @@ describe('RxBag',() => {
 
 class TestDisposable extends Disposable {
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   constructor(readonly $s = RxBag.create()) {
     super();
     const subjA$ = new Subject<string>();
@@ -60,7 +58,6 @@ class TestDisposable extends Disposable {
       stream$.subscribe(() => { console.log('emitted') })
     )
 
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     this._ripBag.add(() => $s.dispose());
   }
 }
