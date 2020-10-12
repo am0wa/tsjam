@@ -8,5 +8,9 @@
  * ===============
  *
  * - core/    Cool stuff can be found here.
+ * - reactive/    Awesome reactive stuff can be found here
+ * - web/    Handy http like stuff can be found here
  */
 export * from './core';
+export * as reactive from './reactive';
+export * as web from './web';
