@@ -9,6 +9,7 @@
 # production (added to git in order to distribute this folder)
 /build
 /dist
+/lib
 *.tsbuildinfo
 
 # logs & reports

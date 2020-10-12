@@ -3,7 +3,7 @@
     "target": "es2017", // ES8,
     "module": "esnext",
     "strict": true /* Enable all strict type-checking options. */,
-    "outDir": "dist",
+    "outDir": "lib",
     "moduleResolution": "node",
     "incremental": true,
     "declaration": true,

@@ -2,8 +2,8 @@
   "name": "tsjam",
   "version": "1.0.9",
   "description": "vanilla typescript sweets",
-  "main": "build/lib/index.js",
-  "typings": "build/lib/index.d.ts",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
   "repository": "https://github.com/am0wa/tsjam",
   "license": "MIT",
   "keywords": [],
@@ -56,7 +56,7 @@
     "typescript": "^4.0.2"
   },
   "files": [
-    "build/lib",
+    "lib",
     "!**/*.spec.*",
     "!**/*.json",
     "CHANGELOG.md",
