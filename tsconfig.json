@@ -21,7 +21,7 @@
     "noImplicitReturns": true,
     /* Paths */
     "rootDir": "src", // for compiler
-    "baseUrl": ".", // for absolute imports
+    "baseUrl": "src", // for absolute imports
     "outDir": "lib",
     "paths": {
       "*": [

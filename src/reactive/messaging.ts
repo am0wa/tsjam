@@ -1,7 +1,8 @@
 import { ParseFn, Typeguard } from 'core';
-import { mapFilterNotUndefined } from 'reactive/operators';
 import { Observable } from 'rxjs';
 import { filter, publishReplay, refCount, share, take } from 'rxjs/operators';
+
+import { mapFilterNotUndefined } from './operators';
 
 export type MessagingProvider<InboundT, OutboundT> = {
   readonly message$: Observable<InboundT>;

@@ -1,4 +1,4 @@
-import { Callback, Integer, SomeObject } from 'core/types';
+import { Callback, Integer, SomeObject } from './types';
 
 export function isString(x: unknown): x is string {
   return typeof x === 'string';
