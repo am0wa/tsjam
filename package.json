@@ -28,7 +28,7 @@
     "doc:html": "typedoc src/ --exclude **/*.spec.ts --target es2018 --mode file --out docs",
     "doc:publish": "gh-pages -m \"[ci skip] Updates\" -d docs",
     "clean": "run-p clean:*",
-    "clean:dist": "rimraf lib",
+    "clean:dist": "rimraf tsconfig.tsbuildinfo && rimraf lib",
     "reset-hard": "git clean -f -d && git reset --hard && npm i",
     "version": "standard-version",
     "prepare-release": "run-s reset-hard test doc:html version",
