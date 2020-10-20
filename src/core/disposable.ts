@@ -32,6 +32,6 @@ export class Disposable implements DisposableLike {
     return this._ripBag.add(teardown);
   }
 
-  get disposed(): boolean { return this._ripBag.disposed };
-  dispose(): void { this._ripBag.dispose() };
+  get disposed(): boolean { return this._ripBag.disposed }
+  dispose(): void { this._ripBag.dispose() }
 }

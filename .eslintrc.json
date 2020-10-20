@@ -11,9 +11,7 @@
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
     "plugin:import/typescript",
-    "plugin:functional/lite",
-    "prettier",
-    "prettier/@typescript-eslint"
+    "plugin:functional/lite"
   ],
   "globals": { "BigInt": true, "console": true, "WebAssembly": true },
   "rules": {
@@ -21,7 +19,7 @@
     "@typescript-eslint/no-namespace": 0,
     "@typescript-eslint/restrict-plus-operands": 0,
     "@typescript-eslint/no-unsafe-member-access": 0,
-    "@typescript-eslint/no-unsafe-call" : 0, // concerns on this invocations((
+    "@typescript-eslint/no-unsafe-call" : 0, // concerns on '.this' invocations((
     // Makes no sense to allow type inferrence for expression parameters, but require typing the response
     "@typescript-eslint/explicit-function-return-type": [
       "error",
@@ -48,10 +46,8 @@
     "no-new-object": "error",
     "prefer-destructuring": "warn",
     "no-restricted-imports": ["error", {
-      "paths": [{
-        "name": "../build/*",
-        "message": "Please use src instead."
-      }]
+      // don't import from dist / use absolute imports / avoid parent imports
+      "patterns": ["../lib/*", "../src/*", "../../*"]
     }],
     "functional/no-class": 0,
     "functional/no-method-signature": 0,

@@ -6,7 +6,7 @@
   "typings": "lib/index.d.ts",
   "repository": "https://github.com/am0wa/tsjam",
   "license": "MIT",
-  "keywords": [],
+  "keywords": ["typescript","utils","disposable","rx-tools"],
   "publishConfig": {
     "registry:": "https://registry.npmjs.org/"
   },
@@ -14,8 +14,7 @@
     "build": "tsc -b tsconfig.json",
     "fix": "run-s fix:*",
     "fix:lint": "eslint src --ext .ts --fix",
-    "fix:prettier": "prettier \"src/**/*.ts\" --write",
-    "test": "run-s build test:*",
+    "test": "run-s test:*",
     "test:lint": "eslint src --ext .ts",
     "test:unit": "node ./node_modules/jest/bin/jest.js --config jest.config.js",
     "watch:build": "tsc -b tsconfig.json -w",
@@ -23,11 +22,12 @@
     "doc": "run-s doc:html",
     "doc:html": "typedoc src/ --exclude **/*.spec.ts --target es2018 --mode file --out docs",
     "doc:publish": "gh-pages -m \"[ci skip] Updates\" -d docs",
-    "version": "standard-version",
+    "clean": "run-p clean:*",
+    "clean:dist": "rimraf lib",
     "reset-hard": "git clean -f -d && git reset --hard && npm i",
-    "clean": "rm -rf node_modules/ package-lock.json",
+    "version": "standard-version",
     "prepare-release": "run-s reset-hard test doc:html version",
-    "prepublish": "run-s build"
+    "prepublishOnly": "run-s clean:dist build test"
   },
   "engines": {
     "node": ">=10"
@@ -36,24 +36,22 @@
   "devDependencies": {
     "@types/jest": "^26.0.13",
     "@typescript-eslint/eslint-plugin": "^4.3.0",
-    "@typescript-eslint/parser": "^4.0.1",
     "cz-conventional-changelog": "^3.3.0",
-    "eslint": "^7.10.0",
-    "eslint-config-prettier": "^6.11.0",
+    "eslint": "^7.11.0",
     "eslint-plugin-eslint-comments": "^3.2.0",
     "eslint-plugin-functional": "^3.0.2",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-jest": "^24.1.0",
     "gh-pages": "^3.1.0",
-    "jest": "^26.4.2",
-    "jest-watch-typeahead": "^0.6.1",
+    "jest": "^26.6.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.1.1",
+    "rimraf": "^3.0.2",
     "rxjs": "^6.6.3",
     "standard-version": "^9.0.0",
-    "ts-jest": "^26.3.0",
+    "ts-jest": "^26.4.1",
     "typedoc": "^0.19.2",
-    "typescript": "^4.0.2"
+    "typescript": "^4.0.3"
   },
   "files": [
     "lib",

@@ -28,7 +28,6 @@ module.exports = {
    '<rootDir>./jest.setup.js' // add polyfills, fetch, etc.
   ],
   watchPlugins: [
-    "jest-watch-typeahead/filename",
-    "jest-watch-typeahead/testname"
+    // "jest-watch-typeahead/filename",
   ]
 };

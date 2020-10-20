@@ -50,5 +50,5 @@ export class RxBag implements DisposableBag<Unsubscribable | UnsubscribeCallback
     this._size = 0;
     this._closed = true;
     RxBag.all.delete(this.id); // cleans up its reference
-  };
+  }
 }
