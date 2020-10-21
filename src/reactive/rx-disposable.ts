@@ -1,7 +1,9 @@
-import { Disposable, DisposableLike, DisposeCallback, isCallback, isDisposable } from 'core';
-import { RxBag } from 'reactive/rx-bag';
 import { Observable, Subject, Unsubscribable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+
+import { Disposable, DisposableLike, DisposeCallback, isCallback, isDisposable } from '../core';
+
+import { RxBag } from './rx-bag';
 
 export const isUnsubscribable = (x: unknown): x is Unsubscribable => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
