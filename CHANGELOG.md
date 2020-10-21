@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.13](https://github.com/am0wa/tsjam/compare/v1.0.12...v1.0.13) (2020-10-21)
+
+
+### Bug Fixes
+
+* correct imports ([5416c95](https://github.com/am0wa/tsjam/commit/5416c95cb1af5eb6026cd167318a3837e3c3847b))
+
 ### [1.0.12](https://github.com/am0wa/tsjam/compare/v1.0.11...v1.0.12) (2020-10-20)
 
 ### [1.0.11](https://github.com/am0wa/tsjam/compare/v1.0.10...v1.0.11) (2020-10-20)
