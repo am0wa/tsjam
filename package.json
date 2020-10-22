@@ -1,6 +1,6 @@
 {
   "name": "tsjam",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "vanilla typescript sweets",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -38,7 +38,9 @@
     "node": ">=10"
   },
   "dependencies": {},
-  "peerDependencies": {"rxjs": "^6.6.3"},
+  "peerDependencies": {
+    "rxjs": "^6.6.3"
+  },
   "devDependencies": {
     "@types/jest": "^26.0.13",
     "@typescript-eslint/eslint-plugin": "^4.3.0",
