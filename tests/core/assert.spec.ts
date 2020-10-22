@@ -1,7 +1,7 @@
 import { assert } from 'core/assert';
-
 describe('Assert',() => {
 
+  // eslint-disable-next-line jest/expect-expect
   it('true with truthy condition', () => {
     assert(true);
   });
@@ -16,6 +16,7 @@ describe('Assert',() => {
     const obj = { ok: () => true, fail: () => false };
     expect(() => {assert(obj.fail) }).toThrow();
   });
+  // eslint-disable-next-line jest/expect-expect
   it('forgotten dev expression should be invoked only in dev', () => {
     const obj = { ok: () => true, fail: () => false };
     assert.dev(obj.fail);

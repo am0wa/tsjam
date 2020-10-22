@@ -1,5 +1,5 @@
 {
-  "extends": "../tsconfig.eslint.json",
+  "extends": "../tsconfig.json",
   "include": ["./**/*.ts"], // if in root = [tests/**/*.ts]
   "compilerOptions": {
     "types": ["node","jest"],

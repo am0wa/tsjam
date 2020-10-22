@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "target": "es2017", // ES8,
+    "target": "es2018", // ES9,
     "strict": true /* enable all strict type-checking options. */,
     "moduleResolution": "node",
     "downlevelIteration": true,
@@ -20,7 +20,6 @@
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     /* Paths */
-    "rootDir": "src", // for compiler
     "baseUrl": "src", // for absolute imports
     "outDir": "lib",
     "paths": {
@@ -32,6 +31,13 @@
     },
     "typeRoots": ["node_modules/@types"]
   },
-  "include": ["src/**/*"], // no need to include tests in build lib
-  "exclude": ["node_modules/**", "jest.*.js"]
+  "include": [ // include both src and tests for linting
+    "src/**/*",
+    "tests/**/*"
+  ],
+  "exclude": [
+    "lib/**",
+    "node_modules/**",
+    "jest.*.js"
+  ]
 }

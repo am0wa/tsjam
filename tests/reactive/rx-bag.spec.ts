@@ -47,12 +47,14 @@ describe('RxBag',() => {
   });
 })
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 class TestDisposable extends Disposable {
 
   constructor(readonly $s = RxBag.create()) {
     super();
     const subjA$ = new Subject<string>();
     const stream$ = subjA$.asObservable();
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const subA = stream$.subscribe(() => { console.log('emitted') });
     $s.add(
       stream$.subscribe(() => { console.log('emitted') })

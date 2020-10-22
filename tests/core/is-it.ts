@@ -13,6 +13,7 @@ describe('isString', () => {
     expect(isString([])).toBe(false);
     expect(isString({})).toBe(false);
   });
+  // eslint-disable-next-line jest/expect-expect
   it('should work as typeguard', () => {
     const x: unknown = 25;
     // just semantic compile-time check
@@ -51,6 +52,7 @@ describe('isSomething', () => {
     expect(isSomething(null)).toBe(false);
   });
 
+  // eslint-disable-next-line jest/expect-expect
   it('should act as typeguard', () => {
     const foo = getUncertainResult();
     if (isSomething(foo)) {

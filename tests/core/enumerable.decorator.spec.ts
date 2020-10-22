@@ -1,4 +1,4 @@
-/* eslint-disable functional/immutable-data,functional/prefer-readonly-type */
+/* eslint-disable functional/prefer-readonly-type */
 import { enumerable } from 'core';
 
 class NonEnumerable {

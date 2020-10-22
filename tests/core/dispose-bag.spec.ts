@@ -4,7 +4,6 @@ import { DisposeBag } from 'core';
 describe('DisposeBag',() => {
 
   it('dispose - has to dispose all immediately after dispose invocation', () => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const bag = DisposeBag.create();
 
     let a: string | undefined;
@@ -33,7 +32,6 @@ describe('DisposeBag',() => {
     expect(bag.size).toBe(0);
   });
   it('dispose - to avoid extra invocations when disposed', () => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const bag = DisposeBag.create();
 
     let invocations = 0;

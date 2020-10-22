@@ -55,6 +55,7 @@ describe('fromIt', () => {
       // NonStringOption = 1, // Managed to make it non-compilable for non-string enums
     }
 
+    // eslint-disable-next-line jest/expect-expect
     it('returns expected type (generic type test)', () => {
       function expectInputOfOptionalTestEnum(arg: TestEnum | undefined): arg is TestEnum {
         return !!arg;

@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type,functional/prefer-readonly-type,@typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/explicit-function-return-type,functional/prefer-readonly-type */
 import { DisposableLike } from 'core';
 import { RxBag, RxDisposable } from 'reactive';
 import { Observable, Subject, Subscription } from 'rxjs';

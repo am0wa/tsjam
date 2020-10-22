@@ -16,11 +16,11 @@
     "registry:": "https://registry.npmjs.org/"
   },
   "scripts": {
-    "build": "tsc -b tsconfig.json",
+    "build": "tsc -b tsconfig.build.json",
     "fix": "run-s fix:*",
-    "fix:lint": "eslint src --ext .ts --fix",
+    "fix:lint": "eslint . --ext .ts --fix",
     "test": "run-s test:*",
-    "test:lint": "eslint src --ext .ts",
+    "test:lint": "eslint . --ext .ts",
     "test:unit": "node ./node_modules/jest/bin/jest.js --config jest.config.js",
     "watch:build": "tsc -b tsconfig.json -w",
     "watch:test": "node ./node_modules/jest/bin/jest.js --config jest.config.js --watchAll",
@@ -28,7 +28,7 @@
     "doc:html": "typedoc src/ --exclude **/*.spec.ts --target es2018 --mode file --out docs",
     "doc:publish": "gh-pages -m \"[ci skip] Updates\" -d docs",
     "clean": "run-p clean:*",
-    "clean:dist": "rimraf tsconfig.tsbuildinfo && rimraf lib",
+    "clean:dist": "rimraf lib",
     "reset-hard": "git clean -f -d && git reset --hard && npm i",
     "version": "standard-version",
     "prepare-release": "run-s reset-hard test doc:html version",
@@ -38,6 +38,7 @@
     "node": ">=10"
   },
   "dependencies": {},
+  "peerDependencies": {"rxjs": "^6.6.3"},
   "devDependencies": {
     "@types/jest": "^26.0.13",
     "@typescript-eslint/eslint-plugin": "^4.3.0",
@@ -52,7 +53,6 @@
     "npm-run-all": "^4.1.5",
     "prettier": "^2.1.1",
     "rimraf": "^3.0.2",
-    "rxjs": "^6.6.3",
     "standard-version": "^9.0.0",
     "ts-jest": "^26.4.1",
     "typedoc": "^0.19.2",
