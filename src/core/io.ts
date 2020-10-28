@@ -1,3 +1,5 @@
+import { Json } from './types';
+
 /**
  * Input Output Utils for working with loading, serialization and file system.
  * Handy for fetching the *.json from REST APIs and files.
@@ -76,14 +78,16 @@ export function fetchData(
   });
 }
 
-export function JSONParseAsync(str: unknown): Promise<unknown> {
-  return Promise.resolve(JSON.parse(str as string));
+export function JSONParseAsync(data: string): Promise<Json> {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+  return Promise.resolve(JSON.parse(data));
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function JSONParseSafely<U = unknown>(data: unknown, logCb?: (err: any) => void): U | undefined {
+export function JSONParseSafely(data: string, logCb?: (err: any) => void): Json | undefined {
   try {
-    return JSON.parse(data as string) as U;
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+    return JSON.parse(data);
   } catch (err) {
     logCb?.call(null, err);
     return undefined;

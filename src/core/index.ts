@@ -11,4 +11,5 @@ export * from './unwrap';
 export * from './assert';
 export * from './errors';
 export * from './io';
+export * from './optional';
 export * from './enumerable.decorator';

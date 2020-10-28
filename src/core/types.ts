@@ -27,6 +27,13 @@ export type Typeguard<T extends RawT, RawT = unknown> = (obj: RawT) => obj is T;
  */
 export type SomeObject = Record<string, unknown>;
 
+/**
+ * Fair JSON type.
+ * @see https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#more-recursive-type-aliases
+ */
+// eslint-disable-next-line functional/prefer-readonly-type
+export type Json = number | string | null | boolean | Json[] | { [key: string]: Json };
+
 /** Semantic Marker for the Callback function. */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type Callback = (...args: readonly any[]) => void;
