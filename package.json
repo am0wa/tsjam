@@ -1,6 +1,6 @@
 {
   "name": "tsjam",
-  "version": "1.0.15",
+  "version": "1.0.16",
   "description": "vanilla typescript sweets",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -31,7 +31,7 @@
     "clean:dist": "rimraf lib",
     "reset-hard": "git clean -f -d && git reset --hard && npm i",
     "version": "standard-version",
-    "prepare-release": "run-s reset-hard test doc:html version",
+    "prepare-release": "run-s clean:dist test doc:html version",
     "prepublishOnly": "run-s clean:dist build test"
   },
   "engines": {
