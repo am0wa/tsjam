@@ -59,7 +59,7 @@
 					<a href="postmessagehost.html">PostMessageHost</a>
 				</li>
 			</ul>
-			<h1>Class PostMessageHost&lt;InboundT, OutboundT&gt;</h1>
+			<h1>Class PostMessageHost&lt;InboundT, OutboundT, RawT&gt;</h1>
 		</div>
 	</div>
 </header>
@@ -81,6 +81,9 @@
 					</li>
 					<li>
 						<h4>OutboundT</h4>
+					</li>
+					<li>
+						<h4>RawT</h4>
 					</li>
 				</ul>
 			</section>
@@ -111,17 +114,18 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="postmessagehost.html#_jsondeserializer" class="tsd-kind-icon">_json<wbr>Deserializer</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="postmessagehost.html#_jsonserializer" class="tsd-kind-icon">_json<wbr>Serializer</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="postmessagehost.html#_serialize" class="tsd-kind-icon">#serialize</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="postmessagehost.html#message_" class="tsd-kind-icon">message$</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="postmessagehost.html#rpcid" class="tsd-kind-icon">rpc<wbr>Id</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="postmessagehost.html#target" class="tsd-kind-icon">target</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="postmessagehost.html#targetorigin" class="tsd-kind-icon">target<wbr>Origin</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="postmessagehost.html#send" class="tsd-kind-icon">send</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static"><a href="postmessagehost.html#bakewithjson" class="tsd-kind-icon">bake<wbr>WithJSON</a></li>
 							</ul>
 						</section>
 					</div>
@@ -133,13 +137,13 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Post<wbr>Message<wbr>Host<span class="tsd-signature-symbol">(</span>target<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Window</span>, messageParser<span class="tsd-signature-symbol">: </span><a href="../globals.html#parsefn" class="tsd-signature-type">ParseFn</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">InboundT</span><span class="tsd-signature-symbol">&gt;</span>, rpcId<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, _jsonSerializer<span class="tsd-signature-symbol">?: </span><a href="../globals.html#parsefn" class="tsd-signature-type">ParseFn</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">OutboundT</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span>, _jsonDeserializer<span class="tsd-signature-symbol">?: </span><a href="../globals.html#parsefn" class="tsd-signature-type">ParseFn</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">InboundT</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="postmessagehost.html" class="tsd-signature-type">PostMessageHost</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Post<wbr>Message<wbr>Host<span class="tsd-signature-symbol">(</span>target<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Window</span>, deserialize<span class="tsd-signature-symbol">: </span><a href="../globals.html#parsefn" class="tsd-signature-type">ParseFn</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">RawT</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">InboundT</span><span class="tsd-signature-symbol">&gt;</span>, serialize<span class="tsd-signature-symbol">: </span><a href="../globals.html#parsefn" class="tsd-signature-type">ParseFn</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">OutboundT</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">RawT</span><span class="tsd-signature-symbol">&gt;</span>, rpcId<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, targetOrigin<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="postmessagehost.html" class="tsd-signature-type">PostMessageHost</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/web/post-message-host.ts:38</li>
+									<li>Defined in src/web/post-message-host.ts:61</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -155,10 +159,18 @@
 									</div>
 								</li>
 								<li>
-									<h5>messageParser: <a href="../globals.html#parsefn" class="tsd-signature-type">ParseFn</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">InboundT</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>deserialize: <a href="../globals.html#parsefn" class="tsd-signature-type">ParseFn</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">RawT</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">InboundT</span><span class="tsd-signature-symbol">&gt;</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
 											<p>parse the unknown inbound messages</p>
+										</div>
+									</div>
+								</li>
+								<li>
+									<h5>serialize: <a href="../globals.html#parsefn" class="tsd-signature-type">ParseFn</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">OutboundT</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">RawT</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>stringify the outbound messages</p>
 										</div>
 									</div>
 								</li>
@@ -171,18 +183,10 @@
 									</div>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> _jsonSerializer: <a href="../globals.html#parsefn" class="tsd-signature-type">ParseFn</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">OutboundT</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = JSON.stringify</span></h5>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> targetOrigin: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;*&quot;</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
-											<p>serialize your outbound data into JSON</p>
-										</div>
-									</div>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> _jsonDeserializer: <a href="../globals.html#parsefn" class="tsd-signature-type">ParseFn</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">InboundT</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = JSONParseSafely</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<div class="lead">
-											<p>deserialize your inbound data from JSON</p>
+											<p>specifies what the origin from <code>targetWindow</code> must be for the event.</p>
 										</div>
 									</div>
 								</li>
@@ -195,34 +199,14 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="_jsondeserializer" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> _json<wbr>Deserializer</h3>
-					<div class="tsd-signature tsd-kind-icon">_json<wbr>Deserializer<span class="tsd-signature-symbol">:</span> <a href="../globals.html#parsefn" class="tsd-signature-type">ParseFn</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">InboundT</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<a name="_serialize" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> <span class="tsd-flag ts-flagPrivate">Private</span> #serialize</h3>
+					<div class="tsd-signature tsd-kind-icon">#serialize<span class="tsd-signature-symbol">:</span> <a href="../globals.html#parsefn" class="tsd-signature-type">ParseFn</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">OutboundT</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">RawT</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/web/post-message-host.ts:53</li>
+							<li>Defined in src/web/post-message-host.ts:15</li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>deserialize your inbound data from JSON</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="_jsonserializer" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> _json<wbr>Serializer</h3>
-					<div class="tsd-signature tsd-kind-icon">_json<wbr>Serializer<span class="tsd-signature-symbol">:</span> <a href="../globals.html#parsefn" class="tsd-signature-type">ParseFn</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">OutboundT</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in src/web/post-message-host.ts:52</li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>serialize your outbound data into JSON</p>
-						</div>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="message_" class="tsd-anchor"></a>
@@ -230,7 +214,7 @@
 					<div class="tsd-signature tsd-kind-icon">message$<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">InboundT</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/web/post-message-host.ts:13</li>
+							<li>Defined in src/web/post-message-host.ts:14</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -245,7 +229,7 @@
 					<div class="tsd-signature tsd-kind-icon">rpc<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/web/post-message-host.ts:51</li>
+							<li>Defined in src/web/post-message-host.ts:75</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -260,12 +244,27 @@
 					<div class="tsd-signature tsd-kind-icon">target<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Window</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/web/post-message-host.ts:49</li>
+							<li>Defined in src/web/post-message-host.ts:72</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
 							<p><code>window</code> to which post message will be send</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="targetorigin" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> target<wbr>Origin</h3>
+					<div class="tsd-signature tsd-kind-icon">target<wbr>Origin<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/web/post-message-host.ts:76</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>specifies what the origin from <code>targetWindow</code> must be for the event.</p>
 						</div>
 					</div>
 				</section>
@@ -276,13 +275,28 @@
 					<a name="send" class="tsd-anchor"></a>
 					<h3>send</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
-						<li class="tsd-signature tsd-kind-icon">send&lt;ResponseT&gt;<span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">OutboundT</span>, responseMatcher<span class="tsd-signature-symbol">?: </span><a href="../globals.html#typeguard" class="tsd-signature-type">Typeguard</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ResponseT</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">InboundT</span><span class="tsd-signature-symbol">&gt;</span>, targetOrigin<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ResponseT</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">send<span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">OutboundT</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">send&lt;ResponseT&gt;<span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">OutboundT</span>, responseMatcher<span class="tsd-signature-symbol">: </span><a href="../globals.html#typeguard" class="tsd-signature-type">Typeguard</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ResponseT</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">InboundT</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ResponseT</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/web/post-message-host.ts:15</li>
+									<li>Defined in src/web/post-message-host.ts:35</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>message: <span class="tsd-signature-type">OutboundT</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in src/web/post-message-host.ts:36</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -297,13 +311,56 @@
 									<h5>message: <span class="tsd-signature-type">OutboundT</span></h5>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> responseMatcher: <a href="../globals.html#typeguard" class="tsd-signature-type">Typeguard</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ResponseT</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">InboundT</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>responseMatcher: <a href="../globals.html#typeguard" class="tsd-signature-type">Typeguard</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ResponseT</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">InboundT</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ResponseT</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static">
+					<a name="bakewithjson" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> bake<wbr>WithJSON</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">bake<wbr>WithJSON&lt;I, O&gt;<span class="tsd-signature-symbol">(</span>target<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Window</span>, typeMatcher<span class="tsd-signature-symbol">: </span><a href="../globals.html#parsefn" class="tsd-signature-type">ParseFn</a><span class="tsd-signature-symbol">&lt;</span><a href="../globals.html#json" class="tsd-signature-type">Json</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">I</span><span class="tsd-signature-symbol">&gt;</span>, rpcId<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, targetOrigin<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="postmessagehost.html" class="tsd-signature-type">PostMessageHost</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">I</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">O</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in src/web/post-message-host.ts:20</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Creates JSON based PostMessage Host with JSON.parse / JSON.stringify under hood.</p>
+								</div>
+							</div>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>I</h4>
+								</li>
+								<li>
+									<h4>O</h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>target: <span class="tsd-signature-type">Window</span></h5>
+								</li>
+								<li>
+									<h5>typeMatcher: <a href="../globals.html#parsefn" class="tsd-signature-type">ParseFn</a><span class="tsd-signature-symbol">&lt;</span><a href="../globals.html#json" class="tsd-signature-type">Json</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">I</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> rpcId: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;id&quot;</span></h5>
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> targetOrigin: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;*&quot;</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ResponseT</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="postmessagehost.html" class="tsd-signature-type">PostMessageHost</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">I</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">O</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -328,10 +385,7 @@
 								<a href="postmessagehost.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="postmessagehost.html#_jsondeserializer" class="tsd-kind-icon">_json<wbr>Deserializer</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="postmessagehost.html#_jsonserializer" class="tsd-kind-icon">_json<wbr>Serializer</a>
+								<a href="postmessagehost.html#_serialize" class="tsd-kind-icon">#serialize</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="postmessagehost.html#message_" class="tsd-kind-icon">message$</a>
@@ -342,8 +396,14 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="postmessagehost.html#target" class="tsd-kind-icon">target</a>
 							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="postmessagehost.html#targetorigin" class="tsd-kind-icon">target<wbr>Origin</a>
+							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
 								<a href="postmessagehost.html#send" class="tsd-kind-icon">send</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static">
+								<a href="postmessagehost.html#bakewithjson" class="tsd-kind-icon">bake<wbr>WithJSON</a>
 							</li>
 						</ul>
 					</li>
