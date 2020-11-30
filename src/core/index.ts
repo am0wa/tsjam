@@ -6,6 +6,7 @@ export * from './dispose-bag';
 export * from './milliseconds';
 export * from './comparison';
 export * from './versioning';
+export * from './from-it';
 export * from './is-it';
 export * from './unwrap';
 export * from './assert';
