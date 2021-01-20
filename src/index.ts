@@ -14,3 +14,4 @@
 export * from './core';
 export * from './reactive';
 export * from './web';
+export * from './logging';

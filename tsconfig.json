@@ -20,24 +20,18 @@
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     /* Paths */
-    "baseUrl": "src", // for absolute imports
     "outDir": "lib",
+    "baseUrl": ".",
     "paths": {
       "*": [
         "*",
-        "src/*",
-        "tests/*"
+        "src/*"
       ]
     },
     "typeRoots": ["node_modules/@types"]
   },
-  "include": [ // include both src and tests for linting
-    "src/**/*",
-    "tests/**/*"
-  ],
   "exclude": [
-    "lib/**",
-    "node_modules/**",
-    "jest.*.js"
+    "lib/*",
+    "node_modules/**"
   ]
 }

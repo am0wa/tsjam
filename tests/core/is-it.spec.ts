@@ -2,8 +2,8 @@ import { isEmpty, isObject, isSomething, isString } from 'core/is-it';
 
 describe('isString', () => {
   it('should be true with strings', () => {
-    expect(isString('SomeString')).toBe(false);
-    expect(isString('')).toBe(false);
+    expect(isString('SomeString')).toBe(true);
+    expect(isString('')).toBe(true);
   });
   it('should be false if its null', () => {
     expect(isString(null)).toBe(false);
@@ -66,7 +66,7 @@ describe('isEmpty', () => {
   it('should be true for array like entities with no items', () => {
     expect(isEmpty([])).toBe(true);
     expect(isEmpty('')).toBe(true);
-    const rList: ReadonlyArray<number> = [];
+    const rList: readonly number[] = [];
     expect(isEmpty(rList)).toBe(true);
   });
 
@@ -78,7 +78,7 @@ describe('isEmpty', () => {
   it('should be false for array like entities with items)', () => {
     expect(isEmpty('A')).toBe(false);
     expect(isEmpty(['A'])).toBe(false);
-    const rList: ReadonlyArray<number> = [1, 2, 3, 4];
+    const rList: readonly number[] = [1, 2, 3, 4];
     expect(isEmpty(rList)).toBe(false);
   });
 
