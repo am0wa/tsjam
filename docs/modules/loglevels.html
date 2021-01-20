@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>VersionSignificanceLvl | tsjam</title>
+	<title>LogLevels | tsjam</title>
 	<meta name="description" content="Documentation for tsjam">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,10 +56,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="versionsignificancelvl.html">VersionSignificanceLvl</a>
+					<a href="loglevels.html">LogLevels</a>
 				</li>
 			</ul>
-			<h1>Enumeration VersionSignificanceLvl</h1>
+			<h1>Namespace LogLevels</h1>
 		</div>
 	</div>
 </header>
@@ -71,47 +71,57 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Enumeration members</h3>
+							<h3>Variables</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="versionsignificancelvl.html#major" class="tsd-kind-icon">Major</a></li>
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="versionsignificancelvl.html#minor" class="tsd-kind-icon">Minor</a></li>
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="versionsignificancelvl.html#patch" class="tsd-kind-icon">Patch</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-namespace"><a href="loglevels.html#all" class="tsd-kind-icon">all</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Functions</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-function tsd-parent-kind-namespace"><a href="loglevels.html#severity" class="tsd-kind-icon">severity</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Enumeration members</h2>
-				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
-					<a name="major" class="tsd-anchor"></a>
-					<h3>Major</h3>
-					<div class="tsd-signature tsd-kind-icon">Major<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = 1</span></div>
+				<h2>Variables</h2>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-namespace">
+					<a name="all" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> all</h3>
+					<div class="tsd-signature tsd-kind-icon">all<span class="tsd-signature-symbol">:</span> <a href="../enums/loglevel.html" class="tsd-signature-type">LogLevel</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = [LogLevel.Debug, LogLevel.Info, LogLevel.Warn, LogLevel.Error]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/am0wa/tsjam/blob/41573d5/src/core/versioning.ts#L16">src/core/versioning.ts:16</a></li>
+							<li>Defined in <a href="https://github.com/am0wa/tsjam/blob/41573d5/src/logging/level.enum.ts#L9">src/logging/level.enum.ts:9</a></li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
-					<a name="minor" class="tsd-anchor"></a>
-					<h3>Minor</h3>
-					<div class="tsd-signature tsd-kind-icon">Minor<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = 2</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/am0wa/tsjam/blob/41573d5/src/core/versioning.ts#L17">src/core/versioning.ts:17</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
-					<a name="patch" class="tsd-anchor"></a>
-					<h3>Patch</h3>
-					<div class="tsd-signature tsd-kind-icon">Patch<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = 3</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/am0wa/tsjam/blob/41573d5/src/core/versioning.ts#L18">src/core/versioning.ts:18</a></li>
-						</ul>
-					</aside>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Functions</h2>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-namespace">
+					<a name="severity" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> severity</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace">
+						<li class="tsd-signature tsd-kind-icon">severity<span class="tsd-signature-symbol">(</span>level<span class="tsd-signature-symbol">?: </span><a href="../enums/loglevel.html" class="tsd-signature-type">LogLevel</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/am0wa/tsjam/blob/41573d5/src/logging/level.enum.ts#L10">src/logging/level.enum.ts:10</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> level: <a href="../enums/loglevel.html" class="tsd-signature-type">LogLevel</a><span class="tsd-signature-symbol"> = LogLevel.Debug</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+					</ul>
 				</section>
 			</section>
 		</div>
@@ -121,28 +131,34 @@
 					<li class="globals  ">
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
+					<li class=" tsd-kind-namespace tsd-has-type-parameter">
+						<a href="comparable.html">Comparable</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="equatable.html">Equatable</a>
+					</li>
+					<li class="current tsd-kind-namespace">
+						<a href="loglevels.html">Log<wbr>Levels</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="logger.html">Logger</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="assert.html">assert</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="unwrap.html">unwrap</a>
+					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-enum">
-						<a href="versionsignificancelvl.html" class="tsd-kind-icon">Version<wbr>Significance<wbr>Lvl</a>
-						<ul>
-							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
-								<a href="versionsignificancelvl.html#major" class="tsd-kind-icon">Major</a>
-							</li>
-							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
-								<a href="versionsignificancelvl.html#minor" class="tsd-kind-icon">Minor</a>
-							</li>
-							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
-								<a href="versionsignificancelvl.html#patch" class="tsd-kind-icon">Patch</a>
-							</li>
-						</ul>
+					<li class=" tsd-kind-variable tsd-parent-kind-namespace">
+						<a href="loglevels.html#all" class="tsd-kind-icon">all</a>
 					</li>
-				</ul>
-				<ul class="after-current">
+					<li class=" tsd-kind-function tsd-parent-kind-namespace">
+						<a href="loglevels.html#severity" class="tsd-kind-icon">severity</a>
+					</li>
 				</ul>
 			</nav>
 		</div>
