@@ -20,10 +20,16 @@ export const contextLine = (context: LogContext | undefined): string => {
   // eslint-disable-next-line functional/no-let
   let line = ''
   Object.keys(context).forEach(key => {
-    line += key !== 'tags'
-      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-      ? stringNode(`${context[key]}`)
-      : tagsLine(context[key])
+    if (key == 'tags') {
+      line += tagsLine(context[key])
+    } else {
+      line += key !== 'withStack'
+        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+        ? stringNode(`${context[key]}`)
+        : ''
+    }
+
+
   });
   return line
 }
