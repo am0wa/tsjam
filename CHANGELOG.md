@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.1](https://github.com/am0wa/tsjam/compare/v1.1.0...v1.1.1) (2021-01-20)
+
+
+### Bug Fixes
+
+* console context output ([cbd205f](https://github.com/am0wa/tsjam/commit/cbd205f7b37d8cbee2cd45dd72fbf8aa77197e7f))
+
+### [1.1.1](https://github.com/am0wa/tsjam/compare/v1.1.0...v1.1.1) (2021-01-20)
+
+
+### Bug Fixes
+
+* console context output ([cbd205f](https://github.com/am0wa/tsjam/commit/cbd205f7b37d8cbee2cd45dd72fbf8aa77197e7f))
+
 ## [1.1.0](https://github.com/am0wa/tsjam/compare/v1.0.17...v1.1.0) (2021-01-20)
 
 ### [1.0.17](https://github.com/am0wa/tsjam/compare/v1.0.15...v1.0.17) (2020-11-30)
