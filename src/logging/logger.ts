@@ -2,8 +2,9 @@ import { isSomething } from '../core';
 
 import { ConsoleOutput } from './console.output';
 import { LogLevel } from './level.enum';
+import { commonSensitiveFields, sanitizeSensitiveData } from './log.utils';
 import { LogOutputRegistry } from './output.registry';
-import { LogContext, LogEntry, LogOutputChannel, LogTag } from './types';
+import { LogContext, LogEntry, LogMessage, LogOutputChannel, LogTag, LogTranslator } from './types';
 
 interface LogMethod {
   // eslint-disable-next-line functional/prefer-readonly-type,@typescript-eslint/no-explicit-any
@@ -39,6 +40,7 @@ const bakeLogWithLevel = (
   outputChannels: LogOutputRegistry,
   tags: readonly LogTag[],
   appId?: string,
+  translator: LogTranslator = emptyTranslator
 ): LogMethod => {
   // eslint-disable-next-line functional/prefer-readonly-type,@typescript-eslint/no-explicit-any
   return (...args: any[]): void => {
@@ -60,14 +62,18 @@ const bakeLogWithLevel = (
 
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment,functional/immutable-data
     const message: string = typeof args[0] === 'string' ? args.shift() : '';
+    const logMessage = context.sanitize
+      ? translator.map(sanitizeSensitiveTranslator.map({ message, data: args }, context.sanitize))
+      : translator.map({ message, data: args });
+
     write(
       {
         date: new Date(),
         level,
         appId,
         context,
-        message,
-        data: args,
+        message: logMessage.message,
+        data: logMessage.data,
         stack
       },
       outputChannels
@@ -105,15 +111,35 @@ export interface Logger {
   readonly tagged: (...tags: readonly LogTag[]) => Logger
 }
 
+export const emptyTranslator: LogTranslator = {
+  map(logMessage: LogMessage): LogMessage {
+    return logMessage;
+  }
+}
+
+/**
+ * Sanitizes all sensitive data that should not be exposed.
+ * For performance optimization – it's good to sanitize data ONLY in places when it's actually needed.
+ */
+export const sanitizeSensitiveTranslator: LogTranslator<readonly string[]> = {
+  map({ message, data }: LogMessage, sensitive = commonSensitiveFields): LogMessage {
+    return { message, data: sanitizeSensitiveData(data, true, sensitive) };
+  }
+}
+
 type LoggerOptions = {
   /** Application Id - to distinguish loggers of multiple instances of your Apps or services */
   readonly appId?: string,
+  /** Stream your log simultaneously into multiple output channels */
   readonly channels?: readonly LogOutputChannel[],
+  /** Tag your logger, so it would be easily to filter logs */
   readonly tags?: readonly LogTag[]
+  /** Implement your custom transformation of your log data before write, e.g sanitize */
+  readonly translator?: LogTranslator
 }
 
 export const createLogger = (
-  { appId, channels, tags }: LoggerOptions = {}
+  { appId, channels, tags, translator }: LoggerOptions = {}
 ): Logger => {
   const sortedTags = tags?.slice() ?? [];
   // eslint-disable-next-line functional/immutable-data
@@ -121,16 +147,17 @@ export const createLogger = (
   const id = appId ?? `app${Date.now()}`;
   const logChannels = new LogOutputRegistry(channels ?? Logger.getDefaultChannels());
   return  {
-    error: bakeLogWithLevel(LogLevel.Error, logChannels, sortedTags, id),
-    warn: bakeLogWithLevel(LogLevel.Warn, logChannels, sortedTags, id),
-    info: bakeLogWithLevel(LogLevel.Info, logChannels, sortedTags, id),
-    debug: bakeLogWithLevel(LogLevel.Debug, logChannels, sortedTags, id),
+    error: bakeLogWithLevel(LogLevel.Error, logChannels, sortedTags, id, translator),
+    warn: bakeLogWithLevel(LogLevel.Warn, logChannels, sortedTags, id, translator),
+    info: bakeLogWithLevel(LogLevel.Info, logChannels, sortedTags, id, translator),
+    debug: bakeLogWithLevel(LogLevel.Debug, logChannels, sortedTags, id, translator),
     channels: logChannels,
     tags: sortedTags,
     tagged: (...newTags): Logger => createLogger( {
       appId,
       channels,
-      tags: sortedTags.concat(newTags)
+      tags: sortedTags.concat(newTags),
+      translator
     }),
     appId: id
   };

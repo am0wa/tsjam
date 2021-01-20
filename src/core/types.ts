@@ -53,6 +53,9 @@ export type MessageOf<T extends { readonly message: unknown }> = T["message"];
 
 export type ParseFn<T, U> = (data: T) => U | undefined;
 
+/** Helper for pipeline like modifiers */
+export type PipeFn<T, U> = (data: T, info?: U) => T;
+
 /**
  * Rest in Peace Process Identifier.
  * Identifier number used to kill the entity when necessary.

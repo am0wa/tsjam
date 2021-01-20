@@ -1,3 +1,5 @@
+import { PipeFn } from '../core';
+
 import { LogLevel } from './level.enum';
 
 /**
@@ -13,6 +15,7 @@ export interface LogContext {
   readonly [key: string]: unknown;
   readonly tags?: readonly LogTag[];
   readonly withStack?: boolean;
+  readonly sanitize?: readonly string[];
 }
 
 export type LogEntry = {
@@ -38,4 +41,15 @@ export interface LogOutput {
 export type LogOutputChannel = {
   readonly out: LogOutput;
   readonly level?: LogLevel;
+}
+
+export type LogMessage = {
+  readonly message: string,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  readonly data: readonly any[],
+}
+
+/** Log Message mapping layer, common use-case is sensitive data sanitization */
+export type LogTranslator<U = unknown> = {
+  readonly map: PipeFn<LogMessage, U>;
 }
