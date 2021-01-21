@@ -1,33 +1,28 @@
-import { blank } from 'core/blank';
+import { blank, jamBlank } from 'core/blank';
 
 describe('blank', () => {
   it('should be replace nullable with blank', () => {
-    expect(blank(null)).toBe(blank.dash);
-    expect(blank(undefined)).toBe(blank.dash);
+    expect(null ?? jamBlank).toBe(blank.dash);
+    expect(undefined ?? jamBlank).toBe(blank.dash);
   });
   it('should be customizable', () => {
-    expect(blank(null, blank.dots)).toBe(blank.dots);
-    expect(blank(null, blank.stars)).toBe(blank.stars);
+    expect(null ?? blank.star).toBe(blank.treeStars);
+    expect(null ?? blank.treeStars).toBe(blank.treeStars);
   });
   it('should not replace value', () => {
-    expect(blank('some', blank.dots)).toBe('some');
-    expect(blank('', blank.stars)).toBe('');
+    expect('some' ?? blank.treeDots).toBe('some');
+    expect('' ?? blank.treeStars).toBe('');
   });
-  it('should narrows type if not null', () => {
-    // eslint-disable-next-line functional/prefer-readonly-type
-    let obj: undefined | { a: string | undefined } = { a: 'A' };
-    expect(blank('some', blank.dots)).toBe('some');
-    obj.a = undefined;
-    if (Date.now() > 100000) {
-      obj = undefined;
-    }
-    expect(blank('', blank.stars)).toBe('');
-    const sign = blank(obj);
-    expect(sign).toBe(blank.dash || 'A');
+  it('mask with sign', () => {
+    const password = '1252525353';
+    const masked   = '**********';
+    expect(blank.mask(password).length).toBe(password.length);
+    expect(blank.mask(password)).toBe(masked);
   });
-  it('should be possible to bake sign', () => {
-    const myBlank = blank.bake('$$$');
-    const sanitized = myBlank(null);
-    expect(sanitized).toBe('$$$');
+  it('truncate overflow with sign', () => {
+    const boringText = 'text is boring';
+    expect(blank.truncate(boringText, 7)).toBe('text...');
+    const coolText = 'text is ';
+    expect(blank.truncate(coolText, 7)).toBe('text is');
   });
 })
