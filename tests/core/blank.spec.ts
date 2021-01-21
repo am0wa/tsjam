@@ -6,7 +6,7 @@ describe('blank', () => {
     expect(undefined ?? jamBlank).toBe(blank.dash);
   });
   it('should be customizable', () => {
-    expect(null ?? blank.star).toBe(blank.treeStars);
+    expect(null ?? blank.treeStars).toBe(blank.treeStars);
     expect(null ?? blank.treeStars).toBe(blank.treeStars);
   });
   it('should not replace value', () => {
@@ -22,7 +22,7 @@ describe('blank', () => {
   it('truncate overflow with sign', () => {
     const boringText = 'text is boring';
     expect(blank.truncate(boringText, 7)).toBe('text...');
-    const coolText = 'text is ';
+    const coolText = 'text is';
     expect(blank.truncate(coolText, 7)).toBe('text is');
   });
 })
