@@ -66,42 +66,26 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel">
-				<h3 class="tsd-before-signature">Callable</h3>
-				<ul class="tsd-signatures tsd-kind-namespace tsd-has-type-parameter">
-					<li class="tsd-signature tsd-kind-icon">blank&lt;T&gt;<span class="tsd-signature-symbol">(</span>maybe<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span>, sign<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">NonNullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></li>
-				</ul>
-				<ul class="tsd-descriptions">
-					<li class="tsd-description">
-						<aside class="tsd-sources">
-							<ul>
-								<li>Defined in <a href="https://github.com/am0wa/tsjam/blob/2cdcca0/src/core/blank.ts#L5">src/core/blank.ts:5</a></li>
-							</ul>
-						</aside>
-						<div class="tsd-comment tsd-typography">
-							<div class="lead">
-								<p>It&#39;s not nice to show <code>null</code> or <code>undefined</code> to user,
-								use blank to hide nullables under user friendly string</p>
-							</div>
-						</div>
-						<h4 class="tsd-type-parameters-title">Type parameters</h4>
-						<ul class="tsd-type-parameters">
-							<li>
-								<h4>T</h4>
-							</li>
-						</ul>
-						<h4 class="tsd-parameters-title">Parameters</h4>
-						<ul class="tsd-parameters">
-							<li>
-								<h5>maybe: <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></h5>
-							</li>
-							<li>
-								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> sign: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;-&quot;</span></h5>
-							</li>
-						</ul>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">NonNullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h4>
-					</li>
-				</ul>
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>It&#39;s not nice to show <code>null</code> or <code>undefined</code> to user,
+						use blank to hide nullables under user friendly string.</p>
+					</div>
+					<p>Encourages usage of Nullish Coalescing operator...
+					Fyi:</p>
+					<ul>
+						<li>to multiply signs use <code>string.repeat</code> api</li>
+						<li>to remove leading and trailing whitespaces use <code>string.trim</code> api</li>
+					</ul>
+					<dl class="tsd-comment-tags">
+						<dt>example</dt>
+						<dd><p>export const sameBlank = blank.emDash;</p>
+							<p>{`username: ${user.name ?? sameBlank}`}</p>
+							<p>{`country: ${user.country ?? sameBlank}`}</p>
+						</dd>
+					</dl>
+				</div>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
@@ -111,16 +95,21 @@
 							<h3>Variables</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-variable tsd-parent-kind-namespace"><a href="blank.html#dash" class="tsd-kind-icon">dash</a></li>
-								<li class="tsd-kind-variable tsd-parent-kind-namespace"><a href="blank.html#dots" class="tsd-kind-icon">dots</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-namespace"><a href="blank.html#dollar" class="tsd-kind-icon">dollar</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-namespace"><a href="blank.html#emdash" class="tsd-kind-icon">em<wbr>Dash</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-namespace"><a href="blank.html#empty" class="tsd-kind-icon">empty</a></li>
-								<li class="tsd-kind-variable tsd-parent-kind-namespace"><a href="blank.html#stars" class="tsd-kind-icon">stars</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-namespace"><a href="blank.html#hash" class="tsd-kind-icon">hash</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-namespace"><a href="blank.html#star" class="tsd-kind-icon">star</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-namespace"><a href="blank.html#treedollars" class="tsd-kind-icon">tree<wbr>Dollars</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-namespace"><a href="blank.html#treedots" class="tsd-kind-icon">tree<wbr>Dots</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-namespace"><a href="blank.html#treestars" class="tsd-kind-icon">tree<wbr>Stars</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-namespace"><a href="blank.html#bake" class="tsd-kind-icon">bake</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-namespace"><a href="blank.html#mask" class="tsd-kind-icon">mask</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-namespace"><a href="blank.html#truncate" class="tsd-kind-icon">truncate</a></li>
 							</ul>
 						</section>
 					</div>
@@ -134,17 +123,17 @@
 					<div class="tsd-signature tsd-kind-icon">dash<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"-"</span><span class="tsd-signature-symbol"> = &quot;-&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/am0wa/tsjam/blob/2cdcca0/src/core/blank.ts#L17">src/core/blank.ts:17</a></li>
+							<li>Defined in <a href="https://github.com/am0wa/tsjam/blob/e76e732/src/core/blank.ts#L27">src/core/blank.ts:27</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-namespace">
-					<a name="dots" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> dots</h3>
-					<div class="tsd-signature tsd-kind-icon">dots<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"..."</span><span class="tsd-signature-symbol"> = &quot;...&quot;</span></div>
+					<a name="dollar" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> dollar</h3>
+					<div class="tsd-signature tsd-kind-icon">dollar<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"$"</span><span class="tsd-signature-symbol"> = &quot;$&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/am0wa/tsjam/blob/2cdcca0/src/core/blank.ts#L19">src/core/blank.ts:19</a></li>
+							<li>Defined in <a href="https://github.com/am0wa/tsjam/blob/e76e732/src/core/blank.ts#L32">src/core/blank.ts:32</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -154,7 +143,7 @@
 					<div class="tsd-signature tsd-kind-icon">em<wbr>Dash<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"–"</span><span class="tsd-signature-symbol"> = &quot;–&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/am0wa/tsjam/blob/2cdcca0/src/core/blank.ts#L18">src/core/blank.ts:18</a></li>
+							<li>Defined in <a href="https://github.com/am0wa/tsjam/blob/e76e732/src/core/blank.ts#L28">src/core/blank.ts:28</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -164,17 +153,67 @@
 					<div class="tsd-signature tsd-kind-icon">empty<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">""</span><span class="tsd-signature-symbol"> = &quot;&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/am0wa/tsjam/blob/2cdcca0/src/core/blank.ts#L16">src/core/blank.ts:16</a></li>
+							<li>Defined in <a href="https://github.com/am0wa/tsjam/blob/e76e732/src/core/blank.ts#L26">src/core/blank.ts:26</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-namespace">
-					<a name="stars" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> stars</h3>
-					<div class="tsd-signature tsd-kind-icon">stars<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"***"</span><span class="tsd-signature-symbol"> = &quot;***&quot;</span></div>
+					<a name="hash" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> hash</h3>
+					<div class="tsd-signature tsd-kind-icon">hash<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"#"</span><span class="tsd-signature-symbol"> = &quot;#&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/am0wa/tsjam/blob/2cdcca0/src/core/blank.ts#L20">src/core/blank.ts:20</a></li>
+							<li>Defined in <a href="https://github.com/am0wa/tsjam/blob/e76e732/src/core/blank.ts#L30">src/core/blank.ts:30</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Hash sign or Number sign, also used as hashtags prefix</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-namespace">
+					<a name="star" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> star</h3>
+					<div class="tsd-signature tsd-kind-icon">star<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"*"</span><span class="tsd-signature-symbol"> = &quot;*&quot;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/am0wa/tsjam/blob/e76e732/src/core/blank.ts#L31">src/core/blank.ts:31</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-namespace">
+					<a name="treedollars" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> tree<wbr>Dollars</h3>
+					<div class="tsd-signature tsd-kind-icon">tree<wbr>Dollars<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"$$$"</span><span class="tsd-signature-symbol"> = &quot;$$$&quot;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/am0wa/tsjam/blob/e76e732/src/core/blank.ts#L36">src/core/blank.ts:36</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-namespace">
+					<a name="treedots" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> tree<wbr>Dots</h3>
+					<div class="tsd-signature tsd-kind-icon">tree<wbr>Dots<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"..."</span><span class="tsd-signature-symbol"> = &quot;...&quot;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/am0wa/tsjam/blob/e76e732/src/core/blank.ts#L34">src/core/blank.ts:34</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Known as Rest sign, literally to be Continued...</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-namespace">
+					<a name="treestars" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> tree<wbr>Stars</h3>
+					<div class="tsd-signature tsd-kind-icon">tree<wbr>Stars<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"***"</span><span class="tsd-signature-symbol"> = &quot;***&quot;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/am0wa/tsjam/blob/e76e732/src/core/blank.ts#L35">src/core/blank.ts:35</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -182,54 +221,57 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-namespace">
-					<a name="bake" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> bake</h3>
+					<a name="mask" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> mask</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace">
-						<li class="tsd-signature tsd-kind-icon">bake<span class="tsd-signature-symbol">(</span>sign<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span>&lt;T&gt;<span class="tsd-signature-symbol">(</span>maybe<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">NonNullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></li>
+						<li class="tsd-signature tsd-kind-icon">mask<span class="tsd-signature-symbol">(</span>word<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, maskSign<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/am0wa/tsjam/blob/2cdcca0/src/core/blank.ts#L13">src/core/blank.ts:13</a></li>
+									<li>Defined in <a href="https://github.com/am0wa/tsjam/blob/e76e732/src/core/blank.ts#L16">src/core/blank.ts:16</a></li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Create your own Blank function, so all blank fields in your project would be replaced with same sign.</p>
-								</div>
-							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> sign: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;-&quot;</span></h5>
+									<h5>word: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> maskSign: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = star</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns &lt;T&gt;<span class="tsd-signature-symbol">(</span>maybe<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">NonNullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-namespace">
+					<a name="truncate" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> truncate</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace">
+						<li class="tsd-signature tsd-kind-icon">truncate<span class="tsd-signature-symbol">(</span>word<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, limit<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, overflowSign<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/am0wa/tsjam/blob/e76e732/src/core/blank.ts#L21">src/core/blank.ts:21</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
-								<li class="tsd-parameter-signature">
-									<ul class="tsd-signatures tsd-kind-type-literal tsd-has-type-parameter">
-										<li class="tsd-signature tsd-kind-icon">&lt;T&gt;<span class="tsd-signature-symbol">(</span>maybe<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">NonNullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></li>
-									</ul>
-									<ul class="tsd-descriptions">
-										<li class="tsd-description">
-											<h4 class="tsd-type-parameters-title">Type parameters</h4>
-											<ul class="tsd-type-parameters">
-												<li>
-													<h4>T</h4>
-												</li>
-											</ul>
-											<h4 class="tsd-parameters-title">Parameters</h4>
-											<ul class="tsd-parameters">
-												<li>
-													<h5>maybe: <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></h5>
-												</li>
-											</ul>
-											<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">NonNullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h4>
-										</li>
-									</ul>
+								<li>
+									<h5>word: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> limit: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 120</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> overflowSign: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = treeDots</span></h5>
 								</li>
 							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -256,7 +298,7 @@
 					<li class=" tsd-kind-namespace">
 						<a href="assert.html">assert</a>
 					</li>
-					<li class="current tsd-kind-namespace tsd-has-type-parameter">
+					<li class="current tsd-kind-namespace">
 						<a href="blank.html">blank</a>
 					</li>
 					<li class=" tsd-kind-namespace">
@@ -270,7 +312,7 @@
 						<a href="blank.html#dash" class="tsd-kind-icon">dash</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-namespace">
-						<a href="blank.html#dots" class="tsd-kind-icon">dots</a>
+						<a href="blank.html#dollar" class="tsd-kind-icon">dollar</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-namespace">
 						<a href="blank.html#emdash" class="tsd-kind-icon">em<wbr>Dash</a>
@@ -279,10 +321,25 @@
 						<a href="blank.html#empty" class="tsd-kind-icon">empty</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-namespace">
-						<a href="blank.html#stars" class="tsd-kind-icon">stars</a>
+						<a href="blank.html#hash" class="tsd-kind-icon">hash</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-namespace">
+						<a href="blank.html#star" class="tsd-kind-icon">star</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-namespace">
+						<a href="blank.html#treedollars" class="tsd-kind-icon">tree<wbr>Dollars</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-namespace">
+						<a href="blank.html#treedots" class="tsd-kind-icon">tree<wbr>Dots</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-namespace">
+						<a href="blank.html#treestars" class="tsd-kind-icon">tree<wbr>Stars</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-namespace">
-						<a href="blank.html#bake" class="tsd-kind-icon">bake</a>
+						<a href="blank.html#mask" class="tsd-kind-icon">mask</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-namespace">
+						<a href="blank.html#truncate" class="tsd-kind-icon">truncate</a>
 					</li>
 				</ul>
 			</nav>
