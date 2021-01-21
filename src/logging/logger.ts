@@ -96,6 +96,14 @@ export namespace Logger {
   }
 }
 
+/**
+ * Not Opinionated ts Logger with:
+ * - appId (distinguish log between multiple instances)
+ * - tags support (tag child loggers, find and filter certain logs super-fast)
+ * - multiple channels output (you could add your own one: e.g. for parallel monitoring; @see `LoggerOptions`)
+ * - sensitive fields sanitization (perf optimized, customizable: @see `LogContext`)
+ * - stack output of any call (configurable: @see `LogContext`)
+ */
 export interface Logger {
   readonly appId: string;
   readonly error: LogMethod,
@@ -138,6 +146,12 @@ type LoggerOptions = {
   readonly translator?: LogTranslator
 }
 
+/**
+ * Factory method for Main application Logger.
+ * Use `jamLogger` instance if you prefer out of box solution.
+ *
+ * @see `LoggerOptions` to customize.
+ */
 export const createLogger = (
   { appId, channels, tags, translator }: LoggerOptions = {}
 ): Logger => {
@@ -163,4 +177,15 @@ export const createLogger = (
   };
 }
 
+/**
+ * Ready made - Application Logger with:
+ * - Console Output (same api)
+ * - stacks for Error log Level
+ * - auto-generated appId
+ * - tags support
+ * - fields sanitization by demand. (e.g. `jamLogger.info({ sanitize: ['sessionId'] }, 'Wow', someData)`)
+ *
+ * log example:
+ *  `[app1611253982848][2021-01-21T18:33:02.981Z][debug][#client] Logged In, { username: Bob, password: '***' }`
+ */
 export const jamLogger = createLogger();
