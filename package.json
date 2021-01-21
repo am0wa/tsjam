@@ -60,11 +60,7 @@
   },
   "files": [
     "lib",
-    "!**/*.spec.*",
-    "!**/*.json",
-    "CHANGELOG.md",
-    "LICENSE",
-    "README.md"
+    "tsconfig.json"
   ],
   "config": {
     "commitizen": {
