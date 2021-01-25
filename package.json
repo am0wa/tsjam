@@ -60,7 +60,8 @@
   },
   "files": [
     "lib",
-    "tsconfig.json"
+    "tsconfig.json",
+    "!**/tsconfig.tsbuildinfo"
   ],
   "config": {
     "commitizen": {
