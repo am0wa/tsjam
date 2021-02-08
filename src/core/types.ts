@@ -51,7 +51,11 @@ export type OneOrMany<T> = T | readonly T[];
 /** Helper type to retrieve `message` content from any type */
 export type MessageOf<T extends { readonly message: unknown }> = T["message"];
 
+/** Helper for data parsing modifiers */
 export type ParseFn<T, U> = (data: T) => U | undefined;
+
+/** Literally – its not nullable ParseFn */
+export type MapFn<T, U> = (info: T) => U;
 
 /** Helper for pipeline like modifiers */
 export type PipeFn<T, U> = (data: T, info?: U) => T;
