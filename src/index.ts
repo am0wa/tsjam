@@ -15,4 +15,4 @@ export * from './core';
 export * from './reactive';
 export * from './web';
 export * from './logging';
-export * as money from './money';
+export { default as money } from './money';

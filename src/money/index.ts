@@ -1,1 +1,2 @@
-export * from './currency';
+import * as money from './currency';
+export default money;
