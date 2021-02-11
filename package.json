@@ -1,6 +1,6 @@
 {
   "name": "tsjam",
-  "version": "1.1.13",
+  "version": "1.1.14",
   "description": "vanilla typescript sweets",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -72,8 +72,5 @@
     "singleQuote": true,
     "printWidth": 120,
     "endOfLine": "auto"
-  },
-  "exports": {
-    "./money": "./src/money/"
   }
 }
