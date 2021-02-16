@@ -15,3 +15,4 @@ export * from './io';
 export * from './optional';
 export * from './enumerable.decorator';
 export * from './blank';
+export * from './result';
