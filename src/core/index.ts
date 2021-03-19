@@ -16,3 +16,4 @@ export * from './optional';
 export * from './enumerable.decorator';
 export * from './blank';
 export * from './result';
+export * from './collections';

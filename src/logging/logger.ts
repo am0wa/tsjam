@@ -161,6 +161,8 @@ type LoggerOptions = {
   readonly translator?: LogTranslator
 }
 
+export const generateAppId = (): string => `app${Date.now()}`;
+
 /**
  * Factory method for Main application Logger.
  * Use `jamLogger` instance if you prefer out of box solution.
@@ -173,7 +175,7 @@ export const createLogger = (
   const sortedTags = tags?.slice() ?? [];
   // eslint-disable-next-line functional/immutable-data
   sortedTags.sort();
-  const id = appId ?? `app${Date.now()}`;
+  const id = appId ?? generateAppId();
   const logChannels = new LogOutputRegistry(channels ?? Logger.getDefaultChannels());
   return  {
     error: bakeLogWithLevel(LogLevel.Error, logChannels, sortedTags, id, translator),
