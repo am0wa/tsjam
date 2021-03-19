@@ -1,6 +1,6 @@
 {
   "name": "tsjam",
-  "version": "1.1.16",
+  "version": "1.1.17",
   "description": "vanilla typescript sweets",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
