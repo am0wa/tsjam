@@ -62,9 +62,15 @@ const bakeLogWithLevel = (
 
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment,functional/immutable-data
     const message: string = typeof args[0] === 'string' ? args.shift() : '';
-    const logMessage = context.sanitize
-      ? translator.map(sanitizeSensitiveTranslator.map({ message, data: args }, context.sanitize))
-      : translator.map({ message, data: args });
+    // eslint-disable-next-line functional/no-let
+    let logMessage: LogMessage = { message, optionalParams: args };
+    if (context.sanitize) {
+      logMessage = sanitizeSensitiveTranslator.map(logMessage, context.sanitize);
+    }
+    if (context.stringify) {
+      logMessage = jsonStringifyTranslator.map(logMessage);
+    }
+    logMessage = translator.map(logMessage);
 
     write(
       {
@@ -73,7 +79,7 @@ const bakeLogWithLevel = (
         appId,
         context,
         message: logMessage.message,
-        data: logMessage.data,
+        data: logMessage.optionalParams,
         stack
       },
       outputChannels
@@ -126,12 +132,21 @@ export const emptyTranslator: LogTranslator = {
 }
 
 /**
+ * Invokes JSON.stringify on log data arguments.
+ */
+export const jsonStringifyTranslator: LogTranslator = {
+  map: ( { message, optionalParams } ) => {
+    return { message, optionalParams: optionalParams.map((one) => JSON.stringify(one)) };
+  }
+}
+
+/**
  * Sanitizes all sensitive data that should not be exposed.
  * For performance optimization – it's good to sanitize data ONLY in places when it's actually needed.
  */
 export const sanitizeSensitiveTranslator: LogTranslator<readonly string[]> = {
-  map({ message, data }: LogMessage, sensitive = commonSensitiveFields): LogMessage {
-    return { message, data: sanitizeSensitiveData(data, true, sensitive) };
+  map({ message, optionalParams }: LogMessage, sensitive = commonSensitiveFields): LogMessage {
+    return { message, optionalParams: sanitizeSensitiveData(optionalParams, true, sensitive) };
   }
 }
 

@@ -16,6 +16,7 @@ export interface LogContext {
   readonly tags?: readonly LogTag[];
   readonly withStack?: boolean;
   readonly sanitize?: readonly string[];
+  readonly stringify?: boolean;
 }
 
 export type LogEntry = {
@@ -46,7 +47,7 @@ export type LogOutputChannel = {
 export type LogMessage = {
   readonly message: string,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  readonly data: readonly any[],
+  readonly optionalParams: readonly any[],
 }
 
 /** Log Message mapping layer, common use-case is sensitive data sanitization */
