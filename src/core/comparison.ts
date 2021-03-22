@@ -10,16 +10,18 @@ export namespace Comparable {
 
 export type Comparator<T> = (first: T, second: T) => ComparisonResult;
 export enum ComparisonResult {
-  Ascending = -1,
+  /** (a < b) - ascending order */
+  Lower = -1,
   Same = 0,
-  Descending = 1,
+  /** (a > b) - descending order */
+  Higher = 1,
 }
 
 export function comparePrimitives<T extends number | string>(a: T, b: T): ComparisonResult {
   return a > b
-    ? ComparisonResult.Descending
+    ? ComparisonResult.Higher
     : a < b
-      ? ComparisonResult.Ascending
+      ? ComparisonResult.Lower
       : ComparisonResult.Same;
 }
 

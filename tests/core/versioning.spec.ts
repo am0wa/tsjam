@@ -11,19 +11,19 @@ describe('Versioning', () => {
       expect(compareVersions('77.7', '77.7.7')).toBe(ComparisonResult.Same);
     });
     it('Should be lower', () => {
-      expect(compareVersions('67.0', '77.0')).toBe(ComparisonResult.Ascending);
+      expect(compareVersions('67.0', '77.0')).toBe(ComparisonResult.Lower);
     });
     it('Should be higher', () => {
-      expect(compareVersions('77.0', '67.0.1')).toBe(ComparisonResult.Descending);
+      expect(compareVersions('77.0', '67.0.1')).toBe(ComparisonResult.Higher);
     });
     it('Should ignore leading v', () => {
-      expect(compareVersions('v77.0.2', 'v77.0.1')).toBe(ComparisonResult.Descending);
+      expect(compareVersions('v77.0.2', 'v77.0.1')).toBe(ComparisonResult.Higher);
     });
     it('Should ignore leading semantic', () => {
       expect(compareVersions('^77.0.2', '~77.0.2')).toBe(ComparisonResult.Same);
     });
     it('Should not be f*ckd up be specific releases', () => {
-      expect(compareVersions('v77.0.2-rc', 'v77.0.1-beta')).toBe(ComparisonResult.Descending);
+      expect(compareVersions('v77.0.2-rc', 'v77.0.1-beta')).toBe(ComparisonResult.Higher);
     });
     it('Should accept empty string', () => {
       expect(compareVersions('', '*')).toBe(ComparisonResult.Same);

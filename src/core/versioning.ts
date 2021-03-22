@@ -50,10 +50,10 @@ export function compareVersions(
     const subVer2 = parseInt(levelsVer2[significance], 10);
 
     if (subVer1 > subVer2) {
-      return ComparisonResult.Descending;
+      return ComparisonResult.Higher;
     }
     if (subVer1 < subVer2) {
-      return ComparisonResult.Ascending;
+      return ComparisonResult.Lower;
     }
   }
   return ComparisonResult.Same;
@@ -76,10 +76,10 @@ export function compareVersionsSemantically(
       return compareVersions(ver1, ver2, VersionSignificanceLvl.Major) === ComparisonResult.Same;
 
     case SemanticRange.Higher:
-      return compareVersions(ver1, ver2) === ComparisonResult.Descending;
+      return compareVersions(ver1, ver2) === ComparisonResult.Higher;
 
     case SemanticRange.Lower:
-      return compareVersions(ver1, ver2) === ComparisonResult.Ascending;
+      return compareVersions(ver1, ver2) === ComparisonResult.Lower;
 
     case SemanticRange.Same:
       return compareVersions(ver1, ver2) === ComparisonResult.Same;
