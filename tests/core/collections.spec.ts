@@ -21,6 +21,11 @@ describe('collections', () => {
     expect(Collections.removeLast(['A', 'B'])).toEqual(['A']);
     expect(Collections.removeLast([])).toEqual([]);
   });
+  it('removeLast N', () => {
+    expect(Collections.removeLast(['A', 'B', 'C'], 2)).toEqual(['A']);
+    expect(Collections.removeLast(['A', 'B', 'C'], 3)).toEqual([]);
+    expect(Collections.removeLast(['A', 'B', 'C'], 7)).toEqual([]);
+  });
   describe('removeSlice', () => {
     it('remove Middle part', () => {
       expect(Collections.removeSlice(['A', 'B', 'C', 'D'], { start: 1, end: 3 })).toEqual(['A', 'D']);

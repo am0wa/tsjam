@@ -20,11 +20,10 @@ export namespace Collections {
     return list ? list[list.length - 1] : undefined;
   }
   /**
-   * Returns copy of list without the last element.
+   * Returns copy of list without the N last elements.
    */
-  export function removeLast<T>(list: readonly T[]): readonly T[] {
-    const { length } = list;
-    return list.slice(0, length - 1);
+  export function removeLast<T>(list: readonly T[], N: Integer = 1): readonly T[] {
+    return list.slice(0, -1 * N);
   }
   /**
    * Returns copy of list without the first element.
