@@ -21,4 +21,21 @@ describe('collections', () => {
     expect(Collections.removeLast(['A', 'B'])).toEqual(['A']);
     expect(Collections.removeLast([])).toEqual([]);
   });
+  describe('removeSlice', () => {
+    it('remove Middle part', () => {
+      expect(Collections.removeSlice(['A', 'B', 'C', 'D'], { start: 1, end: 3 })).toEqual(['A', 'D']);
+    });
+    it('remove Till the End', () => {
+      expect(Collections.removeSlice(['A', 'B', 'C', 'D'], { start: 1 })).toEqual(['A']);
+    });
+    it('remove with negative Start', () => {
+      expect(Collections.removeSlice(['A', 'B', 'C', 'D'], { start: -2 })).toEqual(['A', 'B']);
+    });
+    it('remove with negative Start and End', () => {
+      expect(Collections.removeSlice(['A', 'B', 'C', 'D'], { start: -2, end: -1 })).toEqual(['A', 'B', 'D']);
+    });
+    it('remove with negative End', () => {
+      expect(Collections.removeSlice(['A', 'B', 'C', 'D'], { start: 2, end: -1 })).toEqual(['A', 'B', 'D']);
+    });
+  });
 })
