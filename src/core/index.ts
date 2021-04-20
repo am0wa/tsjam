@@ -18,3 +18,4 @@ export * from './blank';
 export * from './result';
 export * from './collections';
 export * from './math';
+export * from './percentage';
