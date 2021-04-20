@@ -81,6 +81,7 @@
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-function tsd-parent-kind-namespace"><a href="percentage.html#calculate" class="tsd-kind-icon">calculate</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-namespace"><a href="percentage.html#fromnumber" class="tsd-kind-icon">from<wbr>Number</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-namespace"><a href="percentage.html#isit" class="tsd-kind-icon">is<wbr>It</a></li>
 							</ul>
@@ -91,6 +92,46 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-namespace">
+					<a name="calculate" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> calculate</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace">
+						<li class="tsd-signature tsd-kind-icon">calculate<span class="tsd-signature-symbol">(</span>part<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, total<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, fractionDigits<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="percentage.html" class="tsd-signature-type">Percentage</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/am0wa/tsjam/blob/3e815a4/src/core/percentage.ts#L27">src/core/percentage.ts:27</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Calculates percentage <code>(part/total * 100)</code></p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>part: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5>total: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> fractionDigits: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 2</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>digits after decimal place (2 by default).
+											The number is rounded if necessary. If negative - no rounding then.</p>
+										</div>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="percentage.html" class="tsd-signature-type">Percentage</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-namespace">
 					<a name="fromnumber" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> from<wbr>Number</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace">
@@ -100,7 +141,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/am0wa/tsjam/blob/3b5bcbd/src/core/math.ts#L11">src/core/math.ts:11</a></li>
+									<li>Defined in <a href="https://github.com/am0wa/tsjam/blob/3e815a4/src/core/percentage.ts#L11">src/core/percentage.ts:11</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -123,7 +164,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/am0wa/tsjam/blob/3b5bcbd/src/core/math.ts#L16">src/core/math.ts:16</a></li>
+									<li>Defined in <a href="https://github.com/am0wa/tsjam/blob/3e815a4/src/core/percentage.ts#L16">src/core/percentage.ts:16</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -187,6 +228,9 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-function tsd-parent-kind-namespace">
+						<a href="percentage.html#calculate" class="tsd-kind-icon">calculate</a>
+					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-namespace">
 						<a href="percentage.html#fromnumber" class="tsd-kind-icon">from<wbr>Number</a>
 					</li>
