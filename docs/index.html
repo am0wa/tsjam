@@ -69,6 +69,13 @@
 				</a>
 				<p><strong>Vanilla Typescript Sweets</strong><br>Not opinionated types, assertions, minimalistic utils, reactive tools  </p>
 				<p><a href="https://am0wa.github.io/tsjam/globals.html">TSJam API Documentation</a></p>
+				<p>note: to be split by exports in a future:</p>
+				<pre><code><span class="hljs-string">&quot;exports&quot;</span>: {
+    <span class="hljs-string">&quot;.&quot;</span>: <span class="hljs-string">&quot;./lib/main.js&quot;</span>,
+    <span class="hljs-string">&quot;./logging&quot;</span>: <span class="hljs-string">&quot;./lib/logging/index.js&quot;</span>,
+    <span class="hljs-string">&quot;./reactive&quot;</span>: <span class="hljs-string">&quot;./lib/reactive/index.js&quot;</span>,
+    <span class="hljs-string">&quot;./web&quot;</span>: <span class="hljs-string">&quot;./lib/web/index.js&quot;</span>
+  },</code></pre>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -95,6 +102,9 @@
 					<li class=" tsd-kind-namespace tsd-has-type-parameter">
 						<a href="modules/numberid.html">Number<wbr>Id</a>
 					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="modules/percentage.html">Percentage</a>
+					</li>
 					<li class=" tsd-kind-namespace tsd-has-type-parameter">
 						<a href="modules/result.html">Result</a>
 					</li>
@@ -106,6 +116,9 @@
 					</li>
 					<li class=" tsd-kind-namespace">
 						<a href="modules/blank.html">blank</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="modules/math.html">math</a>
 					</li>
 					<li class=" tsd-kind-namespace">
 						<a href="modules/unwrap.html">unwrap</a>
@@ -301,6 +314,9 @@
 						<a href="globals.html#unsubscribecallback" class="tsd-kind-icon">Unsubscribe<wbr>Callback</a>
 					</li>
 					<li class=" tsd-kind-variable">
+						<a href="globals.html#currencycodes" class="tsd-kind-icon">Currency<wbr>Codes</a>
+					</li>
+					<li class=" tsd-kind-variable">
 						<a href="globals.html#__development__" class="tsd-kind-icon">__DEVELOPMENT__</a>
 					</li>
 					<li class=" tsd-kind-variable">
@@ -373,10 +389,16 @@
 						<a href="globals.html#firstvaluefrom" class="tsd-kind-icon">first<wbr>Value<wbr>From</a>
 					</li>
 					<li class=" tsd-kind-function">
+						<a href="globals.html#generateappid" class="tsd-kind-icon">generate<wbr>App<wbr>Id</a>
+					</li>
+					<li class=" tsd-kind-function">
 						<a href="globals.html#isarraylike" class="tsd-kind-icon">is<wbr>Array<wbr>Like</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="globals.html#iscallback" class="tsd-kind-icon">is<wbr>Callback</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#iscurrencycode" class="tsd-kind-icon">is<wbr>Currency<wbr>Code</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="globals.html#isdisposable" class="tsd-kind-icon">is<wbr>Disposable</a>
@@ -461,6 +483,9 @@
 					</li>
 					<li class=" tsd-kind-object-literal">
 						<a href="globals.html#emptytranslator" class="tsd-kind-icon">empty<wbr>Translator</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#jsonstringifytranslator" class="tsd-kind-icon">json<wbr>Stringify<wbr>Translator</a>
 					</li>
 					<li class=" tsd-kind-object-literal">
 						<a href="globals.html#sanitizesensitivetranslator" class="tsd-kind-icon">sanitize<wbr>Sensitive<wbr>Translator</a>
