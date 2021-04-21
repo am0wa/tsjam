@@ -1,6 +1,7 @@
 export * from './noop';
 export * from './types';
 export * from './equatable';
+export * from './hashable';
 export * from './disposable';
 export * from './dispose-bag';
 export * from './milliseconds';
