@@ -1,5 +1,3 @@
-import { isSomething } from '../core';
-
 import { ConsoleOutput } from './console.output';
 import { LogLevel } from './level.enum';
 import { commonSensitiveFields, sanitizeSensitiveData } from './log.utils';
@@ -26,13 +24,23 @@ const write = (logEntry: LogEntry, outputChannels: LogOutputRegistry): void => {
   }
 }
 
-const createStack = (): string => {
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const stack: string = new Error().stack!.replace("Error\n", "");
+const createStack = (numStackLines: number | undefined): string => {
+  if (numStackLines === 0) {
+    return ''
+  }
+  return stringifyError(new Error(), numStackLines).replace('Error:', 'Stack:');
+}
+
+const stringifyError = (error: Error, numStackLines: number | undefined): string => {
+  if (numStackLines === 0) {
+    return `${error.name}: ${error.message}`;
+  }
+
+  const stack: string = error.stack ?? '';
   const out: readonly string[] = stack.split("\n")
     .filter(line => !line.includes('logger.')); // remove logger related lines
 
-  return out.join("\n");
+  return `${out.slice(0, numStackLines ?? out.length).join("\n")}`;
 }
 
 const bakeLogWithLevel = (
@@ -55,22 +63,30 @@ const bakeLogWithLevel = (
       tags: argsContext.tags?.length ? argsContext.tags?.concat(tags) : tags.slice()
     }
 
-    // we show stack for Errors unless its turned off. yet we show stack for any level if its passed in context
-    const stack = level === LogLevel.Error && !isSomething(context.withStack) || !!context.withStack
-      ? createStack()
-      : ''
-
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment,functional/immutable-data
     const message: string = typeof args[0] === 'string' ? args.shift() : '';
     // eslint-disable-next-line functional/no-let
     let logMessage: LogMessage = { message, optionalParams: args };
+
     if (context.sanitize) {
       logMessage = sanitizeSensitiveTranslator.map(logMessage, context.sanitize);
     }
+
+    const hasErrorPayload = logMessage.optionalParams.some((one) => one instanceof Error);
+    const trimStack = context.withStack === false ? 0 : context.trimStack;
+    if (hasErrorPayload) {
+      logMessage = stringifyErrorStackTranslator.map(logMessage, trimStack);
+    }
+
     if (context.stringify) {
       logMessage = jsonStringifyTranslator.map(logMessage);
     }
     logMessage = translator.map(logMessage);
+
+    // create synthetic stack if there is no Error payload.
+    const stack = context.withStack && !hasErrorPayload
+      ? createStack(trimStack)
+      : ''
 
     write(
       {
@@ -132,11 +148,24 @@ export const emptyTranslator: LogTranslator = {
 }
 
 /**
+ * Stringifies Error Stack.
+ */
+export const stringifyErrorStackTranslator: LogTranslator<number | undefined> = {
+  map({ message, optionalParams }: LogMessage, trimStack ): LogMessage {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+    return { message, optionalParams: optionalParams.map((one) => one instanceof Error ? stringifyError(one, trimStack) : one) };
+  }
+}
+
+/**
  * Invokes JSON.stringify on log data arguments.
+ * Stringifies Errors fairly (not just {} as regular JSON.stringify(new Error('Boo')))
  */
 export const jsonStringifyTranslator: LogTranslator = {
   map: ( { message, optionalParams } ) => {
-    return { message, optionalParams: optionalParams.map((one) => JSON.stringify(one)) };
+    return { message, optionalParams: optionalParams.map((one) => one instanceof Error
+        ? JSON.stringify(stringifyError(one, undefined)) : JSON.stringify(one))
+    };
   }
 }
 

@@ -63,7 +63,7 @@ export const contextLine = (context: LogContext | undefined): string => {
     if (key == 'tags') {
       line += tagsLine(context[key])
     } else {
-      line += key !== 'withStack' && key !== 'sanitize'
+      line += key !== 'withStack' && key !== 'trimStack' && key !== 'sanitize'
         // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
         ? stringNode(`${context[key]}`)
         : ''

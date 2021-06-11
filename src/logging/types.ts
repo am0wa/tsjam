@@ -14,7 +14,15 @@ export type LogTag = string;
 export interface LogContext {
   readonly [key: string]: unknown;
   readonly tags?: readonly LogTag[];
+  /**
+   * True for payloads with Error.
+   * Creates synthetic stack for any level if there is no Error payload. Otherwise hides it.
+   */
   readonly withStack?: boolean;
+  /**
+   * Trims Errors payload stack to number of lines.
+   */
+  readonly trimStack?: number;
   readonly sanitize?: readonly string[];
   readonly stringify?: boolean;
 }
