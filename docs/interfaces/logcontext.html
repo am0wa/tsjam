@@ -100,6 +100,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="logcontext.html#sanitize" class="tsd-kind-icon">sanitize</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="logcontext.html#stringify" class="tsd-kind-icon">stringify</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="logcontext.html#tags" class="tsd-kind-icon">tags</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="logcontext.html#trimstack" class="tsd-kind-icon">trim<wbr>Stack</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="logcontext.html#withstack" class="tsd-kind-icon">with<wbr>Stack</a></li>
 							</ul>
 						</section>
@@ -114,7 +115,7 @@
 					<div class="tsd-signature tsd-kind-icon">sanitize<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">readonly </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/am0wa/tsjam/blob/3e815a4/src/logging/types.ts#L18">src/logging/types.ts:18</a></li>
+							<li>Defined in <a href="https://github.com/am0wa/tsjam/blob/7824c14/src/logging/types.ts#L26">src/logging/types.ts:26</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -124,7 +125,7 @@
 					<div class="tsd-signature tsd-kind-icon">stringify<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/am0wa/tsjam/blob/3e815a4/src/logging/types.ts#L19">src/logging/types.ts:19</a></li>
+							<li>Defined in <a href="https://github.com/am0wa/tsjam/blob/7824c14/src/logging/types.ts#L27">src/logging/types.ts:27</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -134,9 +135,24 @@
 					<div class="tsd-signature tsd-kind-icon">tags<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">readonly </span><a href="../globals.html#logtag" class="tsd-signature-type">LogTag</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/am0wa/tsjam/blob/3e815a4/src/logging/types.ts#L16">src/logging/types.ts:16</a></li>
+							<li>Defined in <a href="https://github.com/am0wa/tsjam/blob/7824c14/src/logging/types.ts#L16">src/logging/types.ts:16</a></li>
 						</ul>
 					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="trimstack" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> trim<wbr>Stack</h3>
+					<div class="tsd-signature tsd-kind-icon">trim<wbr>Stack<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/am0wa/tsjam/blob/7824c14/src/logging/types.ts#L25">src/logging/types.ts:25</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Trims Errors payload stack to number of lines.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="withstack" class="tsd-anchor"></a>
@@ -144,9 +160,15 @@
 					<div class="tsd-signature tsd-kind-icon">with<wbr>Stack<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/am0wa/tsjam/blob/3e815a4/src/logging/types.ts#L17">src/logging/types.ts:17</a></li>
+							<li>Defined in <a href="https://github.com/am0wa/tsjam/blob/7824c14/src/logging/types.ts#L21">src/logging/types.ts:21</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>True for payloads with Error.
+							Creates synthetic stack for any level if there is no Error payload. Otherwise hides it.</p>
+						</div>
+					</div>
 				</section>
 			</section>
 		</div>
@@ -173,6 +195,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="logcontext.html#tags" class="tsd-kind-icon">tags</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="logcontext.html#trimstack" class="tsd-kind-icon">trim<wbr>Stack</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="logcontext.html#withstack" class="tsd-kind-icon">with<wbr>Stack</a>

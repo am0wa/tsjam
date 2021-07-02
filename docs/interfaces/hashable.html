@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Equatable | tsjam</title>
+	<title>Hashable | tsjam</title>
 	<meta name="description" content="Documentation for tsjam">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,10 +56,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="equatable.html">Equatable</a>
+					<a href="hashable.html">Hashable</a>
 				</li>
 			</ul>
-			<h1>Namespace Equatable</h1>
+			<h1>Interface Hashable</h1>
 		</div>
 	</div>
 </header>
@@ -69,18 +69,20 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>The equals method should implement an equivalence relation on non-null object references:</p>
+						<p>Hashable mimics Java native Object.hashCode implementation, which benefits hash tables such as those provided by HashMap
+						The general contract of hashCode() method is:</p>
 					</div>
 					<ul>
-						<li>It is reflexive: for any non-null reference value x, x.equals(x) should return true.</li>
-						<li>It is symmetric: for any non-null reference values x and y, x.equals(y) should return true if and
-						only if y.equals(x) returns true.</li>
-						<li>It is transitive: for any non-null reference values x, y, and z, if x.equals(y) returns true and y.equals(z)
-						returns true, then x.equals(z) should return true.</li>
-						<li>It is consistent: for any non-null reference values x and y, multiple invocations of x.equals(y)
-							consistently return true or consistently return false, provided no information used in equals
-						comparisons on the objects is modified.</li>
-						<li>For any non-null reference value x, x.equals(null) should return false.</li>
+						<li>Multiple invocations of hashCode() should return the same integer value, unless the object property is modified that is being used in the equals() method.</li>
+						<li>An object hash code value can change in multiple executions of the same application.</li>
+						<li>If two objects are equal according to equals() method, then their hash code must be same.</li>
+						<li>If two objects are unequal according to equals() method, their hash code are not required to be different.</li>
+						<li>Their hash code value may or may-not be equal.</li>
+					</ul>
+					<p>The implementation of equals() and hashCode() should follow these rules:</p>
+					<ul>
+						<li>If o1.equals(o2), then o1.hashCode() == o2.hashCode() should always be true.</li>
+						<li>If o1.hashCode() == o2.hashCode is true, it doesn’t mean that o1.equals(o2) will be true.</li>
 					</ul>
 				</div>
 			</section>
@@ -88,10 +90,10 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">Equatable</span>
+						<a href="../modules/equatable.html" class="tsd-signature-type">Equatable</a>
 						<ul class="tsd-hierarchy">
 							<li>
-								<a href="../interfaces/hashable.html" class="tsd-signature-type">Hashable</a>
+								<span class="target">Hashable</span>
 							</li>
 						</ul>
 					</li>
@@ -102,27 +104,23 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Functions</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-has-type-parameter"><a href="equatable.html#areequal" class="tsd-kind-icon">are<wbr>Equal</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-namespace"><a href="equatable.html#areequalbyref" class="tsd-kind-icon">are<wbr>Equal<wbr>ByRef</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-namespace"><a href="equatable.html#equals" class="tsd-kind-icon">equals</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter"><a href="hashable.html#areequal" class="tsd-kind-icon">are<wbr>Equal</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="hashable.html#areequalbyref" class="tsd-kind-icon">are<wbr>Equal<wbr>ByRef</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-inherited"><a href="hashable.html#equals" class="tsd-kind-icon">equals</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="hashable.html#hashcode" class="tsd-kind-icon">hash<wbr>Code</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Functions</h2>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-namespace tsd-has-type-parameter">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter">
 					<a name="areequal" class="tsd-anchor"></a>
 					<h3>are<wbr>Equal</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace tsd-has-type-parameter">
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter">
 						<li class="tsd-signature tsd-kind-icon">are<wbr>Equal&lt;T&gt;<span class="tsd-signature-symbol">(</span>o1<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span>, o2<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
@@ -135,7 +133,7 @@
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
 							<ul class="tsd-type-parameters">
 								<li>
-									<h4>T<span class="tsd-signature-symbol">: </span><a href="equatable.html" class="tsd-signature-type">Equatable</a></h4>
+									<h4>T<span class="tsd-signature-symbol">: </span><a href="../modules/equatable.html" class="tsd-signature-type">Equatable</a></h4>
 								</li>
 							</ul>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -151,10 +149,10 @@
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-namespace">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
 					<a name="areequalbyref" class="tsd-anchor"></a>
 					<h3>are<wbr>Equal<wbr>ByRef</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace">
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
 						<li class="tsd-signature tsd-kind-icon">are<wbr>Equal<wbr>ByRef<span class="tsd-signature-symbol">(</span>o1<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span>, o2<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
@@ -177,18 +175,16 @@
 						</li>
 					</ul>
 				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-namespace">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
 					<a name="equals" class="tsd-anchor"></a>
 					<h3>equals</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-namespace">
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
 						<li class="tsd-signature tsd-kind-icon">equals<span class="tsd-signature-symbol">(</span>other<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Inherited from <a href="../modules/equatable.html">Equatable</a>.<a href="../modules/equatable.html#equals">equals</a></p>
 								<ul>
 									<li>Defined in <a href="https://github.com/am0wa/tsjam/blob/7824c14/src/core/equatable.ts#L15">src/core/equatable.ts:15</a></li>
 								</ul>
@@ -203,6 +199,28 @@
 						</li>
 					</ul>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
+					<a name="hashcode" class="tsd-anchor"></a>
+					<h3>hash<wbr>Code</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
+						<li class="tsd-signature tsd-kind-icon">hash<wbr>Code<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/am0wa/tsjam/blob/7824c14/src/core/hashable.ts#L23">src/core/hashable.ts:23</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns a hash code value for the object</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+					</ul>
+				</section>
 			</section>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -211,58 +229,31 @@
 					<li class="globals  ">
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
-					<li class=" tsd-kind-namespace">
-						<a href="collections.html">Collections</a>
-					</li>
-					<li class=" tsd-kind-namespace tsd-has-type-parameter">
-						<a href="comparable.html">Comparable</a>
-					</li>
-					<li class="current tsd-kind-namespace">
-						<a href="equatable.html">Equatable</a>
-					</li>
-					<li class=" tsd-kind-namespace">
-						<a href="loglevels.html">Log<wbr>Levels</a>
-					</li>
-					<li class=" tsd-kind-namespace">
-						<a href="logger.html">Logger</a>
-					</li>
-					<li class=" tsd-kind-namespace tsd-has-type-parameter">
-						<a href="numberid.html">Number<wbr>Id</a>
-					</li>
-					<li class=" tsd-kind-namespace">
-						<a href="percentage.html">Percentage</a>
-					</li>
-					<li class=" tsd-kind-namespace tsd-has-type-parameter">
-						<a href="result.html">Result</a>
-					</li>
-					<li class=" tsd-kind-namespace tsd-has-type-parameter">
-						<a href="stringid.html">String<wbr>Id</a>
-					</li>
-					<li class=" tsd-kind-namespace">
-						<a href="assert.html">assert</a>
-					</li>
-					<li class=" tsd-kind-namespace">
-						<a href="blank.html">blank</a>
-					</li>
-					<li class=" tsd-kind-namespace">
-						<a href="math.html">math</a>
-					</li>
-					<li class=" tsd-kind-namespace">
-						<a href="unwrap.html">unwrap</a>
-					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-has-type-parameter">
-						<a href="equatable.html#areequal" class="tsd-kind-icon">are<wbr>Equal</a>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface">
+						<a href="hashable.html" class="tsd-kind-icon">Hashable</a>
+						<ul>
+							<li class=" tsd-kind-method tsd-parent-kind-interface tsd-has-type-parameter">
+								<a href="hashable.html#areequal" class="tsd-kind-icon">are<wbr>Equal</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-interface">
+								<a href="hashable.html#areequalbyref" class="tsd-kind-icon">are<wbr>Equal<wbr>ByRef</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
+								<a href="hashable.html#equals" class="tsd-kind-icon">equals</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-interface">
+								<a href="hashable.html#hashcode" class="tsd-kind-icon">hash<wbr>Code</a>
+							</li>
+						</ul>
 					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-namespace">
-						<a href="equatable.html#areequalbyref" class="tsd-kind-icon">are<wbr>Equal<wbr>ByRef</a>
-					</li>
-					<li class=" tsd-kind-method tsd-parent-kind-namespace">
-						<a href="equatable.html#equals" class="tsd-kind-icon">equals</a>
-					</li>
+				</ul>
+				<ul class="after-current">
 				</ul>
 			</nav>
 		</div>
