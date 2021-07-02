@@ -29,6 +29,7 @@
     "clean": "run-p clean:*",
     "clean:dist": "rimraf lib",
     "reset-hard": "git clean -f -d && git reset --hard && npm i",
+    "preversion": "npm run test:lint",
     "version": "standard-version --release-as patch",
     "prepare-release": "run-s clean:dist test doc:html version",
     "prepublishOnly": "run-s clean:dist build test"

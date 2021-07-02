@@ -43,4 +43,29 @@ describe('collections', () => {
       expect(Collections.removeSlice(['A', 'B', 'C', 'D'], { start: 2, end: -1 })).toEqual(['A', 'B', 'D']);
     });
   });
+  describe('areEqual', () => {
+    it('not equal by length to return false', () => {
+      expect(Collections.areEqual(['A'], ['A', 'A'])).toBe(false);
+    });
+    it('equal by elements', () => {
+      expect(Collections.areEqual(['A', 'B'], ['A', 'B'])).toBe(true);
+      expect(Collections.areEqual(['A', 'B'], ['A', 'D'])).toBe(false);
+    });
+    it('empty equals', () => {
+      expect(Collections.areEqual(['A', 'B'], undefined)).toBe(false);
+      expect(Collections.areEqual(undefined, ['A', 'D'])).toBe(false);
+    });
+    it('equal by objects', () => {
+      expect(Collections.areEqual(['A', { a: 'B' }], ['A', { a: 'B' }])).toBe(true);
+      expect(Collections.areEqual(['A', { a: 'B' }], ['A', { a: 'D' }])).toBe(false);
+    });
+    it('equal by equalityTest', () => {
+      expect(Collections.areEqual(
+        [{ a: 'A' }, { a: 'B' }],
+        [{ a: 'A' }, { a: 'B' }],
+        (a, b) => a.a === b.a
+        )
+      ).toBe(true);
+    });
+  });
 })

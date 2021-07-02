@@ -46,5 +46,21 @@ export namespace Collections {
         ...list.slice(end)
       ]
   }
+
+  export function areEqual<T>(
+    list1: readonly T[] = [],
+    list2: readonly T[] = [],
+    equalityTest?: (a: T, b: T) => boolean
+  ): boolean {
+    if (list1.length != list2.length) {
+      return false;
+    }
+
+    if (!equalityTest) {
+      return JSON.stringify(list1) === JSON.stringify(list2);
+    }
+
+    return !list1.some((obj, idx) => !equalityTest(obj, list2[idx]));
+  }
 }
 
