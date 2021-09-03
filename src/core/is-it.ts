@@ -36,6 +36,7 @@ export function isArrayLike(item: unknown): item is any[] {
 
 /**
  * Checks Iterable like entities whether it's empty or not.
+ * Time Complexity O(1).
  *
  * isEmpty(null) => true
  * isEmpty(undefined) => true
@@ -43,6 +44,8 @@ export function isArrayLike(item: unknown): item is any[] {
  * isEmpty([]) => true
  * isEmpty('ABC') => false
  * isEmpty('[A, B]') => false
+ * isEmpty('new Map([[1, 'one']])') => false
+ * isEmpty('new Set([[1, 'one']])') => false
  */
 export function isEmpty<T>(collection: Iterable<T> | null | undefined): boolean {
   if (collection == null) {
