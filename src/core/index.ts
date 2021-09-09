@@ -20,3 +20,4 @@ export * from './result';
 export * from './collections';
 export * from './math';
 export * from './percentage';
+export * from './alphabet';
