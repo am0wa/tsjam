@@ -1,14 +1,14 @@
-export interface Comparable<T> {
-  compare(other: T): ComparisonResult;
+export interface Comparable<T, U = ComparisonResult> {
+  compare(other: T): U;
 }
 
 export namespace Comparable {
-  export function compare<T extends Comparable<T>>(o1: T, o2: T): ComparisonResult {
+  export function compare<T extends Comparable<T, U>, U = ComparisonResult>(o1: T, o2: T): U {
     return o1.compare(o2);
   }
 }
 
-export type Comparator<T> = (first: T, second: T) => ComparisonResult;
+export type Comparator<T, U = ComparisonResult> = (first: T, second: T) => U;
 export enum ComparisonResult {
   /** (a < b) - ascending order */
   Lower = -1,
