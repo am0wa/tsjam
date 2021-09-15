@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Percentage | tsjam</title>
+	<title>Urls | tsjam</title>
 	<meta name="description" content="Documentation for tsjam">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,24 +56,16 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="percentage.html">Percentage</a>
+					<a href="urls.html">Urls</a>
 				</li>
 			</ul>
-			<h1>Namespace Percentage</h1>
+			<h1>Namespace Urls</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-comment">
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>0..100 number.
-						In math a percentage <code>(x/y * 100)</code> is a number or ratio expressed as a fraction of 100.</p>
-					</div>
-				</div>
-			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
@@ -81,9 +73,7 @@
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-namespace"><a href="percentage.html#calculate" class="tsd-kind-icon">calculate</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-namespace"><a href="percentage.html#fromnumber" class="tsd-kind-icon">from<wbr>Number</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-namespace"><a href="percentage.html#isit" class="tsd-kind-icon">is<wbr>It</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-namespace"><a href="urls.html#fillurl" class="tsd-kind-icon">fill<wbr>Url</a></li>
 							</ul>
 						</section>
 					</div>
@@ -92,88 +82,35 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-namespace">
-					<a name="calculate" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> calculate</h3>
+					<a name="fillurl" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> fill<wbr>Url</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace">
-						<li class="tsd-signature tsd-kind-icon">calculate<span class="tsd-signature-symbol">(</span>part<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, total<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, fractionDigits<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="percentage.html" class="tsd-signature-type">Percentage</a></li>
+						<li class="tsd-signature tsd-kind-icon">fill<wbr>Url<span class="tsd-signature-symbol">(</span>url<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, queryData<span class="tsd-signature-symbol">: </span><a href="../globals.html#someobject" class="tsd-signature-type">SomeObject</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/am0wa/tsjam/blob/deb019d/src/core/percentage.ts#L27">src/core/percentage.ts:27</a></li>
+									<li>Defined in <a href="https://github.com/am0wa/tsjam/blob/deb019d/src/core/urls.ts#L11">src/core/urls.ts:11</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Calculates percentage <code>(part/total * 100)</code></p>
+									<p>Adds replaces url query string with params from key-value object or another query string</p>
 								</div>
+								<pre><code>* <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Urls</span>.</span></span>fill<span class="hljs-constructor">Url(&#x27;<span class="hljs-params">https</span>:<span class="hljs-operator">/</span><span class="hljs-operator">/</span><span class="hljs-params">foo</span>.<span class="hljs-params">bar</span>?<span class="hljs-params">search</span>=<span class="hljs-params">pear</span>&#x27;, { <span class="hljs-params">search</span>: &#x27;<span class="hljs-params">apple</span>&#x27;, <span class="hljs-params">lang</span>: &#x27;<span class="hljs-params">en</span>&#x27; })</span>; <span class="hljs-comment">// &#x27;https://foo.bar?search=apple&amp;lang=en&#x27;</span><span class="hljs-operator">
+* </span><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Urls</span>.</span></span>fill<span class="hljs-constructor">Url(&#x27;<span class="hljs-params">https</span>:<span class="hljs-operator">/</span><span class="hljs-operator">/</span><span class="hljs-params">foo</span>.<span class="hljs-params">bar</span>?<span class="hljs-params">search</span>=<span class="hljs-params">pear</span>&#x27;, &#x27;<span class="hljs-params">search</span>=<span class="hljs-params">apple</span>&amp;<span class="hljs-params">lang</span>=<span class="hljs-params">en</span>&#x27;)</span>;          <span class="hljs-comment">// &#x27;https://foo.bar?search=apple&amp;lang=en&#x27;</span></code></pre>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>part: <span class="tsd-signature-type">number</span></h5>
+									<h5>url: <span class="tsd-signature-type">string</span></h5>
 								</li>
 								<li>
-									<h5>total: <span class="tsd-signature-type">number</span></h5>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> fractionDigits: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 2</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<div class="lead">
-											<p>digits after decimal place (2 by default).
-											The number is rounded if necessary. If negative - no rounding then.</p>
-										</div>
-									</div>
+									<h5>queryData: <a href="../globals.html#someobject" class="tsd-signature-type">SomeObject</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="percentage.html" class="tsd-signature-type">Percentage</a></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-namespace">
-					<a name="fromnumber" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> from<wbr>Number</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace">
-						<li class="tsd-signature tsd-kind-icon">from<wbr>Number<span class="tsd-signature-symbol">(</span>num<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="percentage.html" class="tsd-signature-type">Percentage</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/am0wa/tsjam/blob/deb019d/src/core/percentage.ts#L11">src/core/percentage.ts:11</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>num: <span class="tsd-signature-type">number</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="percentage.html" class="tsd-signature-type">Percentage</a></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-namespace">
-					<a name="isit" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> is<wbr>It</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace">
-						<li class="tsd-signature tsd-kind-icon">is<wbr>It<span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">x</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type">Percentage</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/am0wa/tsjam/blob/deb019d/src/core/percentage.ts#L16">src/core/percentage.ts:16</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>x: <span class="tsd-signature-type">unknown</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">x</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type">Percentage</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -203,7 +140,7 @@
 					<li class=" tsd-kind-namespace tsd-has-type-parameter">
 						<a href="numberid.html">Number<wbr>Id</a>
 					</li>
-					<li class="current tsd-kind-namespace">
+					<li class=" tsd-kind-namespace">
 						<a href="percentage.html">Percentage</a>
 					</li>
 					<li class=" tsd-kind-namespace tsd-has-type-parameter">
@@ -212,7 +149,7 @@
 					<li class=" tsd-kind-namespace tsd-has-type-parameter">
 						<a href="stringid.html">String<wbr>Id</a>
 					</li>
-					<li class=" tsd-kind-namespace">
+					<li class="current tsd-kind-namespace">
 						<a href="urls.html">Urls</a>
 					</li>
 					<li class=" tsd-kind-namespace">
@@ -232,13 +169,7 @@
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-function tsd-parent-kind-namespace">
-						<a href="percentage.html#calculate" class="tsd-kind-icon">calculate</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-namespace">
-						<a href="percentage.html#fromnumber" class="tsd-kind-icon">from<wbr>Number</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-namespace">
-						<a href="percentage.html#isit" class="tsd-kind-icon">is<wbr>It</a>
+						<a href="urls.html#fillurl" class="tsd-kind-icon">fill<wbr>Url</a>
 					</li>
 				</ul>
 			</nav>
