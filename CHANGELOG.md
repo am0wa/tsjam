@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.31](https://github.com/am0wa/tsjam/compare/v1.1.30...v1.1.31) (2021-09-15)
+
 ### [1.1.30](https://github.com/am0wa/tsjam/compare/v1.1.29...v1.1.30) (2021-07-02)
 
 ### [1.1.29](https://github.com/am0wa/tsjam/compare/v1.1.28...v1.1.29) (2021-06-11)
