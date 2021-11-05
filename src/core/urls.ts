@@ -25,4 +25,20 @@ export namespace Urls {
     })
     return link.toString();
   }
+
+  /**
+   * Converts all searchParams keys to lower-case.
+   * Preserves values as it is.
+   *
+   *        * Urls.caseInsensitiveParams('https://foo.bar?UserId=John').toString();     // 'userid=John'
+   *        * Urls.caseInsensitiveParams('https://foo.bar?UserId=John').has('userid');  // true
+   */
+  export const caseInsensitiveParams = (url: string): URLSearchParams => {
+    const link = new URL(url);
+    const urlParams = new URLSearchParams();
+    link.searchParams.forEach((value, key) => {
+      urlParams.set(key.toLowerCase(), `${value}`);
+    })
+    return urlParams;
+  }
 }
