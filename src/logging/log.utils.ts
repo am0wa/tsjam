@@ -28,7 +28,6 @@ export function sanitizeSensitiveData<T>(
   }
   const sanitized = { ...data };
   Object.keys(sanitized).forEach((key) => {
-    // eslint-disable-next-line @typescript-eslint/prefer-regexp-exec
     if (sensitiveFields.find((sensitive) => key.match(sensitive))) {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore

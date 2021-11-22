@@ -1,9 +1,8 @@
-/* eslint-disable functional/prefer-readonly-type */
 import { enumerable } from 'core';
 
 class NonEnumerable {
   public readonly a = 1;
-  private readonly b = 2;
+  public readonly b = 2;
 
   @enumerable(false)   // nonenumerable alias might be used
   c = 3;
