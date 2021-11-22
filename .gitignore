@@ -12,6 +12,9 @@
 /lib
 *.tsbuildinfo
 
+# docs
+/docs
+
 # logs & reports
 diff
 coverage
