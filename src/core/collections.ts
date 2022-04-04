@@ -34,6 +34,13 @@ export namespace Collections {
   }
 
   /**
+   * Returns copy of list without duplicates.
+   */
+  export function distinct<T>(list: readonly T[]): readonly T[] {
+    return [...new Set(list)];
+  }
+
+  /**
    * Returns copy of list without Slice.
    * A negative index can be used, indicating an offset from the end of the sequence.
    * removeSlice([...], { start: -2 }) removes the last two elements in the sequence.

@@ -21,6 +21,10 @@ describe('collections', () => {
     expect(Collections.removeLast(['A', 'B'])).toEqual(['A']);
     expect(Collections.removeLast([])).toEqual([]);
   });
+  it('distinct', () => {
+    expect(Collections.distinct(['A', 'B', 'B', 'A', 'C'])).toEqual(['A', 'B', 'C']);
+    expect(Collections.distinct([])).toEqual([]);
+  });
   it('removeLast N', () => {
     expect(Collections.removeLast(['A', 'B', 'C'], 2)).toEqual(['A']);
     expect(Collections.removeLast(['A', 'B', 'C'], 3)).toEqual([]);
