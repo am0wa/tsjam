@@ -10,25 +10,25 @@ export namespace Collections {
   /**
    * Returns first element from list.
    */
-  export function first<T>(list: readonly T[] | undefined | null): T | undefined {
-    return list ? list[0] : undefined;
+  export const first = <T>(list: readonly T[] | undefined | null): T | undefined => {
+    return list?.length ? list[0] : undefined;
   }
   /**
    * Returns last element from list.
    */
-  export function last<T>(list: readonly T[] | undefined | null): T | undefined {
+  export const last = <T>(list: readonly T[] | undefined | null): T | undefined => {
     return list ? list[list.length - 1] : undefined;
   }
   /**
    * Returns copy of list without the N last elements.
    */
-  export function removeLast<T>(list: readonly T[], N: Integer = 1): readonly T[] {
+  export const removeLast = <T>(list: readonly T[], N: Integer = 1): readonly T[] => {
     return list.slice(0, -1 * N);
   }
   /**
    * Returns copy of list without the first element.
    */
-  export function removeFirst<T>(list: readonly T[]): readonly T[] {
+  export const removeFirst = <T>(list: readonly T[]): readonly T[] => {
     const { length } = list;
     return list.slice(length > 0 ? 1 : 0);
   }
@@ -36,7 +36,7 @@ export namespace Collections {
   /**
    * Returns copy of list without duplicates.
    */
-  export function distinct<T>(list: readonly T[]): readonly T[] {
+  export const distinct = <T>(list: readonly T[]): readonly T[] => {
     return [...new Set(list)];
   }
 
@@ -45,7 +45,7 @@ export namespace Collections {
    * A negative index can be used, indicating an offset from the end of the sequence.
    * removeSlice([...], { start: -2 }) removes the last two elements in the sequence.
    */
-  export function removeSlice<T>(list: readonly T[], { start, end }: Slice): readonly T[] {
+  export const removeSlice = <T>(list: readonly T[], { start, end }: Slice): readonly T[] => {
     return end === undefined
       ? list.slice(0, start)
       : [
@@ -54,11 +54,11 @@ export namespace Collections {
       ]
   }
 
-  export function areEqual<T>(
+  export const areEqual = <T>(
     list1: readonly T[] = [],
     list2: readonly T[] = [],
     equalityTest?: (a: T, b: T) => boolean
-  ): boolean {
+  ): boolean => {
     if (list1.length != list2.length) {
       return false;
     }
