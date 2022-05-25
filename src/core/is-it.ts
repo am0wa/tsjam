@@ -48,7 +48,7 @@ export function isArrayLike(item: unknown): item is any[] {
  * isEmpty('new Set([[1, 'one']])') => false
  */
 export function isEmpty<T>(collection: Iterable<T> | null | undefined): boolean {
-  if (collection == null) {
+  if (!collection) {
     return true;
   }
 
