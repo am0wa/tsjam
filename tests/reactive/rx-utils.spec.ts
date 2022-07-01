@@ -35,7 +35,9 @@ describe('Rx Utils', () => {
     });
     testScheduler.run((helpers) => {
       const { hot, expectObservable } = helpers;
-      const source$ = replayLatest(hot(' -a-b-c-d-e-f-g-h|'), 1);
+      const source$ = hot(' -a-b-c-d-e-f-g-h|').pipe(
+        replayLatest(1)
+      );
       const subscription1 = '       -----^-----!';
       const expectedMarble = '      -----c-d-e-';
       const subscription2 = '       --------^--!';
