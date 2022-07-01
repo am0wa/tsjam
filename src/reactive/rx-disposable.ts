@@ -17,10 +17,10 @@ export const isUnsubscribable = (x: unknown): x is Unsubscribable => {
  */
 export class RxDisposable extends Disposable {
   protected readonly _rxBag = RxBag.create();
-  private readonly _disposed$ = new Subject<unknown>();
+  private readonly _disposed$ = new Subject<void>();
 
   /** Emits when the object was disposed */
-  get disposed$(): Observable<unknown> {
+  get disposed$(): Observable<void> {
     return this._disposed$;
   }
 

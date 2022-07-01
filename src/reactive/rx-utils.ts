@@ -1,10 +1,21 @@
-import { Observable } from 'rxjs';
-import { first, last } from 'rxjs/operators';
+import { Observable, ReplaySubject } from 'rxjs';
+import { share } from 'rxjs/operators';
 
-export const firstValueFrom = <T>(stream: Observable<T>): Promise<T> => {
-  return stream.pipe(first()).toPromise();
-}
-
-export const lastValueFrom = <T>(stream: Observable<T>): Promise<T> => {
-  return stream.pipe(last()).toPromise();
+/**
+ * Shared Connectable Observable that Replays the Latest Values from Stream.
+ * rx6 example:
+ * ```
+ *  stream$.pipe(
+ *    publishReplay(1),
+ *    refCount()
+ *  );
+ *```
+ */
+export const replayLatest = <T>(stream$: Observable<T>, bufferSize: number = Number.POSITIVE_INFINITY): Observable<T> => {
+  return stream$.pipe(
+    share({ connector: () => new ReplaySubject(bufferSize),
+    resetOnError: false,
+    resetOnComplete: false,
+    resetOnRefCountZero: false }
+  ))
 }
