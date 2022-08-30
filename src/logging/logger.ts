@@ -1,6 +1,6 @@
 import { ConsoleOutput } from './console.output';
 import { LogLevel } from './level.enum';
-import { commonSensitiveFields, sanitizeSensitiveData } from './log.utils';
+import { logs } from './log.utils';
 import { LogOutputRegistry } from './output.registry';
 import { LogContext, LogEntry, LogMessage, LogOutputChannel, LogTag, LogTranslator } from './types';
 
@@ -174,8 +174,8 @@ export const jsonStringifyTranslator: LogTranslator = {
  * For performance optimization – it's good to sanitize data ONLY in places when it's actually needed.
  */
 export const sanitizeSensitiveTranslator: LogTranslator<readonly string[]> = {
-  map({ message, optionalParams }: LogMessage, sensitive = commonSensitiveFields): LogMessage {
-    return { message, optionalParams: sanitizeSensitiveData(optionalParams, true, sensitive) };
+  map({ message, optionalParams }: LogMessage, sensitive = logs.commonSensitiveFields): LogMessage {
+    return { message, optionalParams: logs.sanitizeSensitiveData(optionalParams, true, sensitive) };
   }
 }
 
