@@ -10,11 +10,11 @@ export const CurrencyCodes = <const>[
   'GMD','GEL','GHS','GIP','GTQ','GNF','GYD','HTG','HNL','HKD','HUF','ISK','IDR','XDR',
   'IRR','IQD','ILS','JMD','JPY','JOD','KZT','KES','KPW','KRW','KWD','KGS','LAK','LBP',
   'LSL','LRD','LYD','MOP','MGA','MWK','MYR','MVR','MRU','XUA','MXN','MXV','MDL','MNT',
-  'MZN','MMK','NAD','NPR','NIO','NGN','OMR','PKR','PAB','PGK','PYG','PEN','PHP','PLN',
-  'QAR','MKD','RON','RUB','RWF','WST','STN','SAR','RSD','SCR','SLL','SGD','XSU','SBD',
-  'SOS','ZAR','SSP','LKR','SDG','SRD','SZL','SEK','CHE','CHF','CHW','SYP','TWD','TJS',
-  'TZS','THB','XOF','NZD','TOP','TTD','TND','TRY','TMT','UGX','UAH','AED','GBP','USN',
-  'UYI','UYU','UZS','VUV','VEF','VND','XPF','MAD','YER','ZMW','ZWL'
+  'MZN','MMK','MUR','NAD','NPR','NIO','NGN','OMR','PKR','PAB','PGK','PYG','PEN','PHP',
+  'PLN','QAR','MKD','RON','RUB','RWF','WST','STN','SAR','RSD','SCR','SLL','SGD','XSU',
+  'SBD','SOS','ZAR','SSP','LKR','SDG','SRD','SZL','SEK','CHE','CHF','CHW','SYP','TWD',
+  'TJS','TZS','THB','XOF','NZD','TOP','TTD','TND','TRY','TMT','UGX','UAH','AED','GBP',
+  'USN','UYI','UYU','UZS','VUV','VEF','VND','XCD','XPF','MAD','YER','ZMW','ZWL'
 ]
 
 export type CurrencyCode = typeof CurrencyCodes[number];
