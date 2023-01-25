@@ -1,37 +1,18 @@
 {
+  "extends": "@tsjam/web-config-base/tsconfig.base.json",
   "compilerOptions": {
-    "module": "commonjs",
     "target": "es2018", // ES9,
-    "strict": true /* enable all strict type-checking options. */,
-    "moduleResolution": "node",
-    "downlevelIteration": true,
-    /* Decorators support */
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    /* Build Options */
-    "incremental": true,
-    "declaration": true,
-    "sourceMap": true,
-    "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true,
-    "allowJs": false,
-     /* Code Checks */
-    "noUnusedLocals": false,
-    "noUnusedParameters": true,
-    "noImplicitReturns": true,
     /* Paths */
-    "outDir": "lib",
     "baseUrl": ".",
+    "outDir": "lib",
     "paths": {
-      "*": [
-        "*",
-        "src/*"
-      ]
+      "*": ["*", "src/*"]
     },
     "typeRoots": ["node_modules/@types"]
   },
   "exclude": [
     "lib/*",
+    "packages/*",
     "node_modules/**"
   ]
 }

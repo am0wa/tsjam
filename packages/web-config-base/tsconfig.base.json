@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es2015",
+    "jsx": "react-jsx",
+    "strict": true,
+    /* Lib to use while compiling */
+    "lib": ["es6", "dom"],
+    "moduleResolution": "node",
+    "downlevelIteration": true,
+    /* Decorators support */
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    /* Build */
+    "declaration": true,
+    "incremental": true,
+    "sourceMap": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowJs": false,
+    /* Code Checks */
+    "noUnusedLocals": false,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noImplicitOverride": true,
+    "useUnknownInCatchVariables": false
+  }
+}
