@@ -42,7 +42,7 @@
     "rxjs": "^7.0.0"
   },
   "devDependencies": {
-    "@tsjam/eslint-config-recommended": "^0.0.1",
+    "@tsjam/eslint-config-recommended": "^0.0.4",
     "@tsjam/web-config-base": "^0.0.2",
     "@types/jest": "^27.0.3",
     "cz-conventional-changelog": "^3.3.0",

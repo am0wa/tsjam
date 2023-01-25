@@ -10,10 +10,10 @@
  * @see https://www.typescriptlang.org/docs/handbook/decorators.html#property-decorators
  */
 export function enumerable(flag: boolean) {
-  return function (
+  return (
     target: any,
     propertyName: string,
-  ) {
+  ): void => {
     Object.defineProperty(target, propertyName, { // assessor descriptor
       get: function () { return undefined; },
       set: function (this: any, val: any) {

@@ -39,8 +39,8 @@ export function stringToEnum<T extends StringEnum>(
   }
 
   const alignCase = ignoreCase
-    ? (x: string) => x.toLowerCase()
-    : (x: string) => x;
+    ? (x: string): string => x.toLowerCase()
+    : (x: string): string => x;
 
   return Object.values(enumType)
     .find(enumValue => alignCase(enumValue) === alignCase(rawValue)) as T[keyof T] | undefined;

@@ -7,7 +7,7 @@ module.exports = {
   ignorePatterns: ['node_modules', 'lib', 'dist'],
   plugins: ['import', 'eslint-comments'],
   extends: [
-    'airbnb-typescript/base',
+    'eslint:recommended',
     'plugin:eslint-comments/recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
@@ -24,6 +24,10 @@ module.exports = {
         patterns: ['../lib/*', '../dist/*', '../src/*', '../../*'],
       },
     ],
+    "sort-imports": [
+      "error",
+      { ignoreDeclarationSort: true, ignoreCase: true }
+    ],
     '@typescript-eslint/no-namespace': 'off',
     'no-plusplus': 'off',
     'class-methods-use-this': 'off',
@@ -37,7 +41,11 @@ module.exports = {
     ],
     'no-underscore-dangle': 0,
     '@typescript-eslint/restrict-template-expressions': 0,
-    '@typescript-eslint/explicit-function-return-type': 'off',
+    // Makes no sense to allow type inference for expression parameters, but require typing the response
+    '@typescript-eslint/explicit-function-return-type': [
+      "error",
+      { allowExpressions: true, allowTypedFunctionExpressions: true }
+    ],
     '@typescript-eslint/no-floating-promises': 'off',
     '@typescript-eslint/no-throw-literal': 'off',
     'react/jsx-uses-react': 'off',
@@ -51,6 +59,10 @@ module.exports = {
         ts: 'never',
         tsx: 'never',
       },
+    ],
+    "import/order": [
+      "error",
+      { ["newlines-between"]: "always", alphabetize: { "order": "asc" } }
     ],
     '@typescript-eslint/array-type': ['error', { default: 'array' }],
     '@typescript-eslint/member-ordering': ['error'],
