@@ -1,0 +1,28 @@
+{
+  "name": "@tsjam/eslint-config-recommended",
+  "version": "0.0.1",
+  "description": "Shared Eslint Config Module",
+  "main": "index.js",
+  "files": [
+    "eslint-recommended.js",
+    "index.js"
+  ],
+  "keywords": [
+    "eslint-config",
+    "reccomended"
+  ],
+  "author": "am0wa",
+  "license": "ISC",
+  "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.13.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-eslint-comments": "^3.2.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-jest": "^24.7.0"
+  },
+  "peerDependencies": {
+    "eslint": "7.x"
+  }
+}
