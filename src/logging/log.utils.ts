@@ -64,7 +64,6 @@ export namespace logs {
         line += tagsLine(context[key])
       } else {
         line += key !== 'withStack' && key !== 'trimStack' && key !== 'sanitize'
-          // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
           ? stringNode(`${context[key]}`)
           : ''
       }

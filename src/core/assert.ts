@@ -19,13 +19,14 @@ export function assert(expression: unknown, message?: string): asserts expressio
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const condition = typeof expression === 'function' ? expression() : expression;
   if (!condition) {
+    // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
     throw new AssertionError(`assert: ${message ?? 'Unexpected condition'} :${'' + condition}`);
   }
 }
 
 export namespace assert {
   export function never(x: never): never {
-    throw new AssertionError('assertNever: ' + x);
+    throw new AssertionError(`assertNever: ${x}`);
   }
 
   export function exists<T>(x: T, message: string): asserts x is NonNullable<T> {

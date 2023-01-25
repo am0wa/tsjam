@@ -34,4 +34,3 @@ export namespace unwrap {
     return prop in obj ? obj[prop] : undefined;
   }
 }
-

@@ -65,4 +65,3 @@ export type PipeFn<T, U> = (data: T, info?: U) => T;
  * Identifier number used to kill the entity when necessary.
  */
 export type RipId = Opaque<'RipId', number>
-

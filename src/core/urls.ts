@@ -20,7 +20,6 @@ export namespace Urls {
     }
 
     Object.entries(queryData).forEach(([key, value]) => {
-      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
       link.searchParams.set(key, `${value}`);
     })
     return link.toString();

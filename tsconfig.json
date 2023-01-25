@@ -2,6 +2,7 @@
   "extends": "@tsjam/web-config-base/tsconfig.base.json",
   "compilerOptions": {
     "target": "es2018", // ES9,
+    "noImplicitOverride": true,
     /* Paths */
     "baseUrl": ".",
     "outDir": "lib",

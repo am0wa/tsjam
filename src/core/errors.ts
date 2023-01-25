@@ -33,6 +33,7 @@ export class NotImplementedError extends JamError {
 export class UnreachableCodeError extends Error {
   @nonenumerable
   protected readonly _UnreachableCodeError!: never;
+
   constructor(message = 'This code should be unreachable!') {
     super(message);
   }
@@ -51,6 +52,7 @@ export class ConfigurationError extends JamError {
 export class APIError<ErrorCodeT = unknown> extends JamError {
   @nonenumerable
   protected readonly _APIError!: never;
+
   constructor(readonly code: ErrorCodeT, message: string) {
     super(message);
   }

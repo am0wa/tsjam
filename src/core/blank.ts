@@ -13,16 +13,6 @@
  * <p>{`country: ${user.country ?? sameBlank}`}</p>
  */
 export namespace blank {
-  export const mask = (word: string, maskSign = star): string => {
-    // return word.replace(/./g, maskSign);
-    // Array(word.length+1).join(maskSign)
-    return maskSign.repeat(word.length);
-  }
-  export const truncate = (word: string, limit= 120, overflowSign = treeDots): string => {
-    return word.length > limit
-      ? word.slice(0, limit - overflowSign.length) + overflowSign
-      : word;
-  }
   export const empty = '';
   export const dash = '-';
   export const emDash = '–';
@@ -34,6 +24,17 @@ export namespace blank {
   export const treeDots = '...';
   export const treeStars = '***';
   export const treeDollars = '$$$';
+
+  export const mask = (word: string, maskSign = star): string => {
+    // return word.replace(/./g, maskSign);
+    // Array(word.length+1).join(maskSign)
+    return maskSign.repeat(word.length);
+  }
+  export const truncate = (word: string, limit= 120, overflowSign = treeDots): string => {
+    return word.length > limit
+      ? word.slice(0, limit - overflowSign.length) + overflowSign
+      : word;
+  }
 }
 
 /**

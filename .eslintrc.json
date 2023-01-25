@@ -1,26 +1,19 @@
 {
-  "root": true,
-  "parser": "@typescript-eslint/parser",
   "parserOptions": { "project": "./tsconfig.json" },
-  "env": { "es6": true },
   "ignorePatterns": ["node_modules", "lib", "docs", "*.js"],
-  "plugins": ["import", "eslint-comments", "functional"],
+  "plugins": ["functional"],
   "extends": [
-    "eslint:recommended",
-    "plugin:eslint-comments/recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "@tsjam/eslint-config-recommended",
     "plugin:import/typescript",
     "plugin:functional/lite"
   ],
   "globals": { "BigInt": true, "console": true, "WebAssembly": true },
   "rules": {
-    "@typescript-eslint/explicit-module-boundary-types": "off",
-    "@typescript-eslint/no-namespace": 0,
-    "@typescript-eslint/restrict-plus-operands": 0,
+    "@typescript-eslint/member-ordering": 0,
+    "@typescript-eslint/no-redeclare": 0,
+    "@typescript-eslint/naming-convention": 0,
     "@typescript-eslint/no-unsafe-member-access": 0,
     "@typescript-eslint/no-unsafe-call" : 0, // concerns on '.this' invocations((
-    "@typescript-eslint/array-type": ["warn",  {"default": "array-simple" }],
     // Makes no sense to allow type inferrence for expression parameters, but require typing the response
     "@typescript-eslint/explicit-function-return-type": [
       "error",
@@ -35,7 +28,6 @@
       "error",
       { "allowWholeFile": true }
     ],
-    "eslint-comments/no-unused-disable": "error",
     "import/order": [
       "error",
       { "newlines-between": "always", "alphabetize": { "order": "asc" } }

@@ -24,13 +24,6 @@ const write = (logEntry: LogEntry, outputChannels: LogOutputRegistry): void => {
   }
 }
 
-const createStack = (numStackLines: number | undefined): string => {
-  if (numStackLines === 0) {
-    return ''
-  }
-  return stringifyError(new Error(), numStackLines).replace('Error:', 'Stack:');
-}
-
 const stringifyError = (error: Error, numStackLines: number | undefined): string => {
   if (numStackLines === 0) {
     return `${error.name}: ${error.message}`;
@@ -41,6 +34,51 @@ const stringifyError = (error: Error, numStackLines: number | undefined): string
     .filter(line => !line.includes('logger.')); // remove logger related lines
 
   return `${out.slice(0, numStackLines ?? out.length).join("\n")}`;
+}
+
+const createStack = (numStackLines: number | undefined): string => {
+  if (numStackLines === 0) {
+    return ''
+  }
+  return stringifyError(new Error(), numStackLines).replace('Error:', 'Stack:');
+}
+
+export const emptyTranslator: LogTranslator = {
+  map(logMessage: LogMessage): LogMessage {
+    return logMessage;
+  }
+}
+
+/**
+ * Stringifies Error Stack.
+ */
+export const stringifyErrorStackTranslator: LogTranslator<number | undefined> = {
+  map({ message, optionalParams }: LogMessage, trimStack ): LogMessage {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+    return { message, optionalParams: optionalParams.map((one) => one instanceof Error ? stringifyError(one, trimStack) : one) };
+  }
+}
+
+/**
+ * Invokes JSON.stringify on log data arguments.
+ * Stringifies Errors fairly (not just {} as regular JSON.stringify(new Error('Boo')))
+ */
+export const jsonStringifyTranslator: LogTranslator = {
+  map: ( { message, optionalParams } ) => {
+    return { message, optionalParams: optionalParams.map((one) => one instanceof Error
+        ? JSON.stringify(stringifyError(one, undefined)) : JSON.stringify(one))
+    };
+  }
+}
+
+/**
+ * Sanitizes all sensitive data that should not be exposed.
+ * For performance optimization – it's good to sanitize data ONLY in places when it's actually needed.
+ */
+export const sanitizeSensitiveTranslator: LogTranslator<readonly string[]> = {
+  map({ message, optionalParams }: LogMessage, sensitive = logs.commonSensitiveFields): LogMessage {
+    return { message, optionalParams: logs.sanitizeSensitiveData(optionalParams, true, sensitive) };
+  }
 }
 
 const bakeLogWithLevel = (
@@ -139,44 +177,6 @@ export interface Logger {
    * Note: AppId and Channels are reused and remain same.
    */
   readonly tagged: (...tags: readonly LogTag[]) => Logger
-}
-
-export const emptyTranslator: LogTranslator = {
-  map(logMessage: LogMessage): LogMessage {
-    return logMessage;
-  }
-}
-
-/**
- * Stringifies Error Stack.
- */
-export const stringifyErrorStackTranslator: LogTranslator<number | undefined> = {
-  map({ message, optionalParams }: LogMessage, trimStack ): LogMessage {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-    return { message, optionalParams: optionalParams.map((one) => one instanceof Error ? stringifyError(one, trimStack) : one) };
-  }
-}
-
-/**
- * Invokes JSON.stringify on log data arguments.
- * Stringifies Errors fairly (not just {} as regular JSON.stringify(new Error('Boo')))
- */
-export const jsonStringifyTranslator: LogTranslator = {
-  map: ( { message, optionalParams } ) => {
-    return { message, optionalParams: optionalParams.map((one) => one instanceof Error
-        ? JSON.stringify(stringifyError(one, undefined)) : JSON.stringify(one))
-    };
-  }
-}
-
-/**
- * Sanitizes all sensitive data that should not be exposed.
- * For performance optimization – it's good to sanitize data ONLY in places when it's actually needed.
- */
-export const sanitizeSensitiveTranslator: LogTranslator<readonly string[]> = {
-  map({ message, optionalParams }: LogMessage, sensitive = logs.commonSensitiveFields): LogMessage {
-    return { message, optionalParams: logs.sanitizeSensitiveData(optionalParams, true, sensitive) };
-  }
 }
 
 type LoggerOptions = {

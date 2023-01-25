@@ -24,6 +24,8 @@ export const isDisposable = (x: unknown): x is DisposableLike => {
 export class Disposable implements DisposableLike {
   protected readonly _ripBag = DisposeBag.create();
 
+  get disposed(): boolean { return this._ripBag.disposed }
+
   /**
    * Kill all Disposable Objects
    * @param teardown
@@ -32,6 +34,5 @@ export class Disposable implements DisposableLike {
     return this._ripBag.add(teardown);
   }
 
-  get disposed(): boolean { return this._ripBag.disposed }
   dispose(): void { this._ripBag.dispose() }
 }

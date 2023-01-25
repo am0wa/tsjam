@@ -1,5 +1,10 @@
 import { isEmpty, isObject, isSomething, isString } from 'core/is-it';
 
+// eslint-disable-next-line @typescript-eslint/ban-types
+const getUncertainResult = (): {} | undefined | null => {
+  return undefined;
+}
+
 describe('isString', () => {
   it('should be true with strings', () => {
     expect(isString('SomeString')).toBe(true);
@@ -92,8 +97,3 @@ describe('isEmpty', () => {
     expect(isEmpty(new Set())).toBe(true);
   });
 });
-
-// eslint-disable-next-line @typescript-eslint/ban-types
-function getUncertainResult(): {} | undefined | null {
-  return undefined;
-}

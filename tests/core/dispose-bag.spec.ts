@@ -44,4 +44,3 @@ describe('DisposeBag',() => {
     expect(invocations).toBe(1);
   });
 })
-

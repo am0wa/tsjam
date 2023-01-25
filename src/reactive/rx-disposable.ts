@@ -28,7 +28,7 @@ export class RxDisposable extends Disposable {
    * Kills all Disposable objects and Subscriptions.
    * Invokes all teardown callbacks.
    */
-  dispose(): void {
+  override dispose(): void {
     this._rxBag.dispose();       // kill all subscriptions
     super.dispose();             // kill all children
     this._disposed$.next();      // emmit disposed to subscribers
@@ -40,7 +40,7 @@ export class RxDisposable extends Disposable {
    * @param teardown - any subscription or disposable like object or callback.
    * @returns same instance so you could assign it smoothly in same line.
    */
-  autoDispose<T extends Unsubscribable | DisposableLike | DisposeCallback>(teardown: T): T {
+  override autoDispose<T extends Unsubscribable | DisposableLike | DisposeCallback>(teardown: T): T {
     if (isUnsubscribable(teardown)) {
       this._rxBag.add(teardown)
       return teardown;

@@ -3,6 +3,11 @@ import { DisposableLike } from 'core';
 import { RxBag, RxDisposable } from 'reactive';
 import { Observable, Subject, Subscription } from 'rxjs';
 
+class TestDisposable implements DisposableLike {
+  disposed = false;
+  dispose() { this.disposed = true; }
+}
+
 describe('RxDisposable',() => {
 
   it('dispose - has to unsubscribe all immediately after dispose invocation', () => {
@@ -111,9 +116,3 @@ describe('RxDisposable',() => {
     expect(obj.disposed).toBe(true);
   });
 })
-
-class TestDisposable implements DisposableLike {
-  disposed = false;
-  dispose() { this.disposed = true; }
-}
-

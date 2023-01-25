@@ -44,7 +44,7 @@ describe('fromIt', () => {
       expect(stringToInteger(undefined, -1)).toBe(-1);
     });
     it('should fallback to default if Infinity', () => {
-      expect(stringToInteger('' + Infinity, -1)).toBe(-1);
+      expect(stringToInteger(`${Infinity}`, -1)).toBe(-1);
     });
   });
 

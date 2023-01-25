@@ -70,4 +70,3 @@ export namespace Collections {
     return !list1.some((obj, idx) => !equalityTest(obj, list2[idx]));
   }
 }
-

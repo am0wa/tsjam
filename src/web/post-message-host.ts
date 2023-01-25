@@ -6,6 +6,16 @@ import { mapFilterNotUndefined, MessagingProvider, replayLastMessage$ } from '..
 
 import ownProperty = unwrap.ownProperty;
 
+export const windowMessage$ = <T, U>(
+  target: Window,
+  parseFn: ParseFn<T, U>
+): Observable<U> => {
+  return fromEvent<MessageEvent>(target, 'message').pipe(
+    mapFilterNotUndefined(({ data }) => optionalMap(data, parseFn)),
+    share()
+  );
+}
+
 /**
  * Define your Inbound and Outbound message Types and get the typed streams of message$
  */
@@ -30,6 +40,24 @@ export class PostMessageHost<InboundT, OutboundT, RawT> implements MessagingProv
       rpcId,
       targetOrigin
     );
+  }
+
+  /**
+   * @param target - `window` to which post message will be send
+   * @param deserialize - parse the unknown inbound messages
+   * @param serialize - stringify the outbound messages
+   * @param rpcId - request/response matching id that guaranties their correspondence
+   * @param targetOrigin - specifies what the origin from `targetWindow` must be for the event.
+   */
+  constructor(
+    readonly target: Window,
+    deserialize: ParseFn<RawT, InboundT>,
+    serialize: ParseFn<OutboundT, RawT>,
+    readonly rpcId = 'id',
+    readonly targetOrigin = '*'
+  ) {
+    this.#serialize = serialize;
+    this.message$ = windowMessage$(window, deserialize);
   }
 
   send(message: OutboundT): void;
@@ -59,33 +87,4 @@ export class PostMessageHost<InboundT, OutboundT, RawT> implements MessagingProv
 
     return replayLastMessage$(this.message$, matcher);
   }
-
-
-  /**
-   * @param target - `window` to which post message will be send
-   * @param deserialize - parse the unknown inbound messages
-   * @param serialize - stringify the outbound messages
-   * @param rpcId - request/response matching id that guaranties their correspondence
-   * @param targetOrigin - specifies what the origin from `targetWindow` must be for the event.
-   */
-  constructor(
-    readonly target: Window,
-    deserialize: ParseFn<RawT, InboundT>,
-    serialize: ParseFn<OutboundT, RawT>,
-    readonly rpcId = 'id',
-    readonly targetOrigin = '*'
-  ) {
-    this.#serialize = serialize;
-    this.message$ = windowMessage$(window, deserialize);
-  }
-}
-
-export function windowMessage$<T, U>(
-  target: Window,
-  parseFn: ParseFn<T, U>
-): Observable<U> {
-  return fromEvent<MessageEvent>(target, 'message').pipe(
-    mapFilterNotUndefined(({ data }) => optionalMap(data, parseFn)),
-    share()
-  );
 }

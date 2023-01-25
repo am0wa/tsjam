@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/array-type */
 import { ALPHABET, isSomething, Milliseconds } from 'core';
 import { from, noop, Observable, Subscription, timer, zip } from 'rxjs';
 import { delayWhen } from 'rxjs/operators';

@@ -17,6 +17,7 @@ export interface DisposableBag<T> extends DisposableLike {
 export class DisposeBag implements DisposableBag<DisposableLike | DisposeCallback> {
 
   public static dispose(disposable: DisposableLike | DisposeCallback): void {
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     isDisposable(disposable) ? disposable.dispose() : disposable();
   }
 

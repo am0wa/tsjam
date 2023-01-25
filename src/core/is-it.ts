@@ -63,4 +63,3 @@ export function isEmpty<T>(collection: Iterable<T> | null | undefined): boolean 
   const iterator = collection[Symbol.iterator]();
   return iterator.next().done === true;
 }
-
