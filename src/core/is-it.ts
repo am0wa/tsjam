@@ -12,11 +12,11 @@ export function isInteger(x: unknown): x is Integer {
   return typeof x === 'number' && Number.isInteger(x);
 }
 
-export function isTrue(value: boolean): value is true {
-  return value;
+export function isTrue(value: unknown): value is true {
+  return !!value;
 }
 
-export function isFalse(value: boolean): value is false {
+export function isFalse(value: unknown): value is false {
   return !value;
 }
 
