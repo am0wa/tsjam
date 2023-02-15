@@ -8,9 +8,9 @@ export const isInteger = (x: unknown): x is Integer => {
   return typeof x === 'number' && Number.isInteger(x);
 }
 
-export const isTrue = (value: unknown): boolean => !!value;
+export const isTrue = <T>(value: T): boolean => !!value;
 
-export const isFalse = (value: unknown): boolean => !value;
+export const isFalse = <T>(value: T): boolean => !value;
 
 /**
  * Type guard (also great for rx `filter` operations), that restricts `undefined` or `null` values.
