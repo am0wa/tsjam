@@ -71,5 +71,57 @@ describe('collections', () => {
         )
       ).toBe(true);
     });
+    it('equal by equalityTest of order', () => {
+      expect(Collections.areEqual(
+          [{ a: 'A' }, { a: 'B' }],
+          [{ a: 'B' }, { a: 'A' }],
+          (a, b) => a.a === b.a
+        )
+      ).toBe(false);
+    });
+  });
+  describe('areEqualByContent', () => {
+    it('not equal by length to return false', () => {
+      expect(Collections.equalByContent(['A'], ['A', 'A'])).toBe(false);
+    });
+    it('equal by elements', () => {
+      expect(Collections.equalByContent(['A', 'B'], ['A', 'B'])).toBe(true);
+      expect(Collections.equalByContent(['A', 'B'], ['A', 'D'])).toBe(false);
+    });
+    it('empty equals', () => {
+      expect(Collections.equalByContent(['A', 'B'], undefined)).toBe(false);
+      expect(Collections.equalByContent(undefined, ['A', 'D'])).toBe(false);
+    });
+    it('equal by ref', () => {
+      const listA = ['A', { a: 'B' }];
+      const listB = ['A', { a: 'D' }];
+      expect(Collections.equalByContent(listA, listA)).toBe(true);
+      expect(Collections.equalByContent(listA, listB)).toBe(false);
+    });
+    it('equal by equalityTest', () => {
+      expect(Collections.equalByContent(
+          [{ a: 'A' }, { a: 'B' }],
+          [{ a: 'A' }, { a: 'B' }],
+          (a, b) => a.a === b.a
+        )
+      ).toBe(true);
+    });
+    it('equal by equalityTest regardless of order', () => {
+      expect(Collections.equalByContent(
+          [{ a: 'A' }, { a: 'B' }],
+          [{ a: 'B' }, { a: 'A' }],
+          (a, b) => a.a === b.a
+        )
+      ).toBe(true);
+    });
+    it('A contains B', () => {
+      expect(Collections.equalByContent(['A', 'B'], ['A', 'B'])).toBe(true);
+      expect(Collections.equalByContent(['B', 'A'], ['A', 'B'])).toBe(true);
+
+      expect(Collections.equalByContent(['A', 'B'], ['B'])).toBe(false);
+      expect(Collections.equalByContent(['B'],['A', 'B'] )).toBe(false);
+      expect(Collections.equalByContent(['B', 'B'],['A', 'B'] )).toBe(false);
+      expect(Collections.equalByContent(['B', 'A', 'A'], ['A', 'B'])).toBe(false);
+    });
   });
 })

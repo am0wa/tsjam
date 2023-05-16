@@ -1,6 +1,8 @@
 import { Integer } from './types';
 
 export namespace Collections {
+  const equalsByRef = <T>(a: T, b: T): boolean => a === b;
+
   export type Slice = {
     /** inclusive */
     readonly start: Integer,
@@ -68,5 +70,20 @@ export namespace Collections {
     }
 
     return !list1.some((obj, idx) => !equalityTest(obj, list2[idx]));
+  }
+
+  export const equalByContent = <T>(
+    listA: readonly T[] = [],
+    listB: readonly T[] = [],
+    equalityTest: (a: T, b: T) => boolean = equalsByRef
+  ): boolean => {
+    if (listA.length != listB.length) {
+      return false;
+    }
+
+    const someDiffA = listA.find((a) => !listB.some((b) => equalityTest(a, b)));
+    const someDiffB = listB.find((a) => !listA.some((b) => equalityTest(a, b)));
+
+    return !someDiffA && !someDiffB;
   }
 }
