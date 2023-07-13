@@ -4,6 +4,7 @@ import { RxBag, RxDisposable } from 'reactive';
 import { Observable, Subject, Subscription } from 'rxjs';
 
 class TestDisposable implements DisposableLike {
+  /* eslint-disable-next-line functional/prefer-readonly-type */
   disposed = false;
   dispose() { this.disposed = true; }
 }

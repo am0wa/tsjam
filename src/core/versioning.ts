@@ -44,7 +44,7 @@ export function compareVersions(
   const levelsVer2 = sanitizeSemantic(ver2).split('.');
   const minLength = Math.min(maxPrecision, levelsVer1.length, levelsVer2.length);
 
-  // eslint-disable-next-line functional/no-let,functional/no-loop-statement
+  // eslint-disable-next-line functional/no-let,functional/no-loop-statements
   for (let significance = 0; significance < minLength; significance++) {
     const subVer1 = parseInt(levelsVer1[significance], 10);
     const subVer2 = parseInt(levelsVer2[significance], 10);

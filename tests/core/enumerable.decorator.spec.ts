@@ -4,6 +4,7 @@ class NonEnumerable {
   public readonly a = 1;
   public readonly b = 2;
 
+  /* eslint-disable-next-line functional/prefer-readonly-type */
   @enumerable(false)   // nonenumerable alias might be used
   c = 3;
 }
@@ -13,7 +14,7 @@ describe("nonenumerable", () => {
 
   it("shouldn't iterate though nonenumerable field", () => {
     const keys = [];
-    // eslint-disable-next-line functional/no-loop-statement
+    // eslint-disable-next-line functional/no-loop-statements
     for (const k in nonEnumerable) {
       keys.push(k);
     }

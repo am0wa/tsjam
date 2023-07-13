@@ -15,7 +15,7 @@ export type StringCaseInsensitive = string;
 export type StringCaseSensitive = string;
 
 /** @see https://codemix.com/opaque-types-in-javascript/ */
-export type Opaque<K extends string, T> = T & { readonly __TYPE__: K };
+export type Opaque<TName extends string, TValue> = TValue & { readonly __TYPE__: TName };
 
 /** Typeguard for narrowing raw types for compilation-type checks */
 export type Typeguard<T extends RawT, RawT = unknown> = (obj: RawT) => obj is T;

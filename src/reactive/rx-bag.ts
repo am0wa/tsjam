@@ -34,7 +34,7 @@ export class RxBag implements DisposableBag<Unsubscribable | UnsubscribeCallback
   /**
    * Adds subscription to sink, if disposed subscription will be flushed right-away.
    */
-  add = (subscription: Unsubscribable | UnsubscribeCallback): Unsubscribable | UnsubscribeCallback => {
+  readonly add = (subscription: Unsubscribable | UnsubscribeCallback): Unsubscribable | UnsubscribeCallback => {
     this._sub$.add(subscription);
     if (subscription instanceof Subscription) {
       // we don't add closed subscriptions twice

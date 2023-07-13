@@ -14,6 +14,7 @@ export class RxVisible extends RxDisposable {
   private readonly _visible$ = new BehaviorSubject(false);
 
   /** prevents any changes on same value */
+  /* eslint-disable-next-line functional/prefer-readonly-type */
   #distinct = true
 
   constructor() {
@@ -24,12 +25,12 @@ export class RxVisible extends RxDisposable {
     this.autoDispose(() => this._visible$.complete());
   }
 
-  hide = (): void => this.setVisible(false);
+  readonly hide = (): void => this.setVisible(false);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any,@typescript-eslint/no-unused-vars
-  show = (..._args: readonly any[]): void => this.setVisible(true);
+  readonly show = (..._args: readonly any[]): void => this.setVisible(true);
 
-  setVisible = (value: boolean): void => {
+  readonly setVisible = (value: boolean): void => {
     if (value === this._visible$.value && this.#distinct) {
       return;
     }
