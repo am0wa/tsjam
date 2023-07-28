@@ -31,17 +31,20 @@ export function primitiveToBoolean(value: StringCaseInsensitive | number | boole
 export function stringToEnum<T extends StringEnum>(
   enumType: T,
   rawValue: string | undefined | null,
-  ignoreCase = true
+  ignoreCase = true,
 ): T[keyof T] | undefined {
-
   if (!isSomething(rawValue)) {
     return undefined; // No matching enum value found
   }
 
-  const alignCase = ignoreCase
-    ? (x: string): string => x.toLowerCase()
-    : (x: string): string => x;
+  const alignCase = ignoreCase ? (x: string): string => x.toLowerCase() : (x: string): string => x;
 
-  return Object.values(enumType)
-    .find(enumValue => alignCase(enumValue) === alignCase(rawValue)) as T[keyof T] | undefined;
+  return Object.values(enumType).find((enumValue) => alignCase(enumValue) === alignCase(rawValue)) as
+    | T[keyof T]
+    | undefined;
 }
+
+const camelOrPascalCase = /([a-z])([A-Z])/g;
+export const toKebabCase = (str: string): string => {
+  return str.replace(camelOrPascalCase, '$1-$2').toLowerCase();
+};
