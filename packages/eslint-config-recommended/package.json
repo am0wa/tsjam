@@ -1,6 +1,6 @@
 {
   "name": "@tsjam/eslint-config-recommended",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "description": "Shared Eslint Config Module",
   "main": "index.js",
   "files": [
@@ -19,7 +19,8 @@
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-eslint-comments": "^3.2.0",
     "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-jest": "^27.2.1"
+    "eslint-plugin-jest": "^27.2.1",
+    "eslint": "^8.28.0"
   },
   "peerDependencies": {
     "eslint": "8.x"

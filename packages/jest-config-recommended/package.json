@@ -1,0 +1,34 @@
+{
+  "name": "@tsjam/jest-config-recommended",
+  "version": "0.1.1",
+  "description": "Shared ts jest config: jest",
+  "main": "",
+  "files": [
+    "jest.config.js",
+    "jest.setup.js"
+  ],
+  "keywords": [
+    "shared jest config"
+  ],
+  "author": "am0wa",
+  "contributors": [
+    "am0wa"
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/am0wa/tsjam/issues"
+  },
+  "homepage": "https://github.com/am0wa/tsjam#readme",
+  "dependencies": {
+    "@types/jest": "29.x",
+    "jest": "29.x",
+    "jest-environment-jsdom": "^29.6.1",
+    "reflect-metadata": "^0.1.13",
+    "ts-jest": "29.x"
+  },
+  "peerDependencies": {
+    "@types/jest": "29.x",
+    "jest": "29.x",
+    "ts-jest": "29.x"
+  }
+}

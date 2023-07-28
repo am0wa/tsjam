@@ -1,36 +1,36 @@
 {
   "name": "@tsjam/web-config-base",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "Shared configurations: ts, es-lint, prettier, jest",
   "main": "",
   "files": [
-    "jest.config.js",
-    "jest.setup.js",
     "tsconfig.base.json",
     ".browserslistrc",
-    "prettier.config.json"
+    "prettier.config.js"
   ],
   "bin": {
     "sync-browsers": "cli/sync-browsers-list.js"
   },
-  "keywords": [
-    "shared config"
-  ],
+  "keywords": ["shared config"],
   "author": "am0wa",
-  "contributors": ["am0wa"],
+  "contributors": [
+    "am0wa"
+  ],
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/am0wa/tsjam/issues"
   },
   "homepage": "https://github.com/am0wa/tsjam#readme",
-  "prettier": "./prettier.config.json",
+  "prettier": "./prettier.config.js",
   "dependencies": {
-    "reflect-metadata": "^0.1.13"
+    "reflect-metadata": "^0.1.13",
+    "husky": "^8.0.2",
+    "rimraf": "^3.0.2",
+    "lint-staged": "^13.2.3",
+    "prettier": "^3.0.0"
   },
   "peerDependencies": {
-    "jest": "29.x",
-    "@types/jest": "29.x",
-    "ts-jest": "29.x",
-    "typescript": "4.x"
+    "prettier": ">=3.x",
+    "typescript": ">=4.x"
   }
 }

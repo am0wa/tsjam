@@ -16,7 +16,7 @@ const defaultConfig = {
   },
   testMatch: ['<rootDir>/tests/**/*.+(spec|test).+(ts|tsx)'],
   setupFiles: [
-    '<rootDir>/node_modules/@tsjam/web-config-base/jest.setup.js', // use default setup from here
+    '<rootDir>/node_modules/@tsjam/jest-config-recommended/jest.setup.js', // use default setup from here
   ],
 };
 
