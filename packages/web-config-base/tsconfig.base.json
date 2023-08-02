@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "target": "es2015",
+    "target": "es2016",
     "jsx": "react-jsx",
     "strict": true,
     /* Lib to use while compiling */
@@ -12,14 +12,15 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     /* Build */
-    "declaration": true,
-    "incremental": true,
-    "sourceMap": true,
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
+    "declaration": true,                                  /* Generate .d.ts files from TypeScript and JavaScript files in your project. */
+    "incremental": true,                                  /* Save .tsbuildinfo files to allow for incremental compilation of projects. */
+    "sourceMap": true,                                    /* Create source map files for emitted JavaScript files. */
+    "allowSyntheticDefaultImports": true,                 /* Allow 'import x from y' when a module doesn't have a default export. */
+    "esModuleInterop": true,                              /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility. */
+    "forceConsistentCasingInFileNames": true,             /* Ensure that casing is correct in imports. */
     "allowJs": false,
     /* Code Checks */
+    "skipLibCheck": true,                                 /* Skip type checking all .d.ts files. */
     "noUnusedLocals": false,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
