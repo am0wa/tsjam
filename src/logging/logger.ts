@@ -1,5 +1,5 @@
 import { ConsoleOutput } from './console.output';
-import { LogLevel } from './level.enum';
+import { LogLevel, LogLevels } from './level.enum';
 import { logs } from './log.utils';
 import { LogOutputRegistry } from './output.registry';
 import { LogContext, LogEntry, LogMessage, LogOutputChannel, LogTag, LogTranslator } from './types';
@@ -86,7 +86,9 @@ const bakeLogWithLevel = (
   outputChannels: LogOutputRegistry,
   tags: readonly LogTag[],
   appId?: string,
-  translator: LogTranslator = emptyTranslator
+  translator: LogTranslator = emptyTranslator,
+  // For compatibility with console default behaviour always show stack for error payload by default
+  errorPayloadStackLevel = LogLevel.Debug
 ): LogMethod => {
   // eslint-disable-next-line functional/prefer-readonly-type,@typescript-eslint/no-explicit-any
   return (...args: any[]): void => {
@@ -99,7 +101,7 @@ const bakeLogWithLevel = (
     const context = {
       ...argsContext,
       tags: argsContext.tags?.length ? argsContext.tags?.concat(tags) : tags.slice()
-    }
+    };
 
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment,functional/immutable-data
     const message: string = typeof args[0] === 'string' ? args.shift() : '';
@@ -111,7 +113,10 @@ const bakeLogWithLevel = (
     }
 
     const hasErrorPayload = logMessage.optionalParams.some((one) => one instanceof Error);
-    const trimStack = context.withStack === false ? 0 : context.trimStack;
+    const trimStack = context.withStack === false || LogLevels.severity(level) < LogLevels.severity(errorPayloadStackLevel)
+      ? 0
+      : context.trimStack;
+
     if (hasErrorPayload) {
       logMessage = stringifyErrorStackTranslator.map(logMessage, trimStack);
     }
@@ -187,7 +192,9 @@ type LoggerOptions = {
   /** Tag your logger, so it would be easily to filter logs */
   readonly tags?: readonly LogTag[]
   /** Implement your custom transformation of your log data before write, e.g sanitize */
-  readonly translator?: LogTranslator
+  readonly translator?: LogTranslator,
+  /** Show Error payload stack for level not less than specified. LogLevel.Error by default */
+  readonly errorPayloadStackLevel?: LogLevel
 }
 
 export const generateAppId = (): string => `app${Date.now()}`;
@@ -199,7 +206,7 @@ export const generateAppId = (): string => `app${Date.now()}`;
  * @see `LoggerOptions` to customize.
  */
 export const createLogger = (
-  { appId, channels, tags, translator }: LoggerOptions = {}
+  { appId, channels, tags, translator, errorPayloadStackLevel }: LoggerOptions = {}
 ): Logger => {
   const sortedTags = tags?.slice() ?? [];
   // eslint-disable-next-line functional/immutable-data
@@ -207,17 +214,18 @@ export const createLogger = (
   const id = appId ?? generateAppId();
   const logChannels = new LogOutputRegistry(channels ?? Logger.getDefaultChannels());
   return  {
-    error: bakeLogWithLevel(LogLevel.Error, logChannels, sortedTags, id, translator),
-    warn: bakeLogWithLevel(LogLevel.Warn, logChannels, sortedTags, id, translator),
-    info: bakeLogWithLevel(LogLevel.Info, logChannels, sortedTags, id, translator),
-    debug: bakeLogWithLevel(LogLevel.Debug, logChannels, sortedTags, id, translator),
+    error: bakeLogWithLevel(LogLevel.Error, logChannels, sortedTags, id, translator, errorPayloadStackLevel),
+    warn: bakeLogWithLevel(LogLevel.Warn, logChannels, sortedTags, id, translator, errorPayloadStackLevel),
+    info: bakeLogWithLevel(LogLevel.Info, logChannels, sortedTags, id, translator, errorPayloadStackLevel),
+    debug: bakeLogWithLevel(LogLevel.Debug, logChannels, sortedTags, id, translator, errorPayloadStackLevel),
     channels: logChannels,
     tags: sortedTags,
     tagged: (...newTags): Logger => createLogger( {
       appId,
       channels,
       tags: sortedTags.concat(newTags),
-      translator
+      translator,
+      errorPayloadStackLevel
     }),
     appId: id
   };
