@@ -26,7 +26,7 @@
 <h5><span class="tsd-kind-parameter">x</span>: <span class="tsd-signature-type">unknown</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-kind-parameter">x</span><span class="tsd-signature-symbol"> is </span><a href="../types/Callback.html" class="tsd-signature-type tsd-kind-type-alias">Callback</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/am0wa/tsjam/blob/ade2819/src/core/is-it.ts#L27">src/core/is-it.ts:27</a></li></ul></aside></li></ul></section></div>
+<li>Defined in <a href="https://github.com/am0wa/tsjam/blob/5c7559e/src/core/is-it.ts#L27">src/core/is-it.ts:27</a></li></ul></aside></li></ul></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
@@ -52,6 +52,7 @@
 <li><a href="../modules/Logger.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg><span>Logger</span></a></li>
 <li><a href="../modules/Percentage.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg><span>Percentage</span></a></li>
 <li><a href="../modules/Result.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg><span>Result</span></a></li>
+<li><a href="../modules/SafeJSON.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg><span>SafeJSON</span></a></li>
 <li><a href="../modules/Urls.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg><span>Urls</span></a></li>
 <li><a href="../modules/assert.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg><span>assert</span></a></li>
 <li><a href="../modules/blank.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg><span>blank</span></a></li>
@@ -75,7 +76,6 @@
 <li><a href="../classes/JamError.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg><span>Jam<wbr/>Error</span></a></li>
 <li><a href="../classes/NotImplementedError.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg><span>Not<wbr/>Implemented<wbr/>Error</span></a></li>
 <li><a href="../classes/Ok.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg><span>Ok</span></a></li>
-<li><a href="../classes/PostMessageHost.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg><span>Post<wbr/>Message<wbr/>Host</span></a></li>
 <li><a href="../classes/RxBag.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg><span>Rx<wbr/>Bag</span></a></li>
 <li><a href="../classes/RxDisposable.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg><span>Rx<wbr/>Disposable</span></a></li>
 <li><a href="../classes/UnreachableCodeError.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg><span>Unreachable<wbr/>Code<wbr/>Error</span></a></li>
@@ -135,18 +135,14 @@
 <li><a href="../variables/stringifyErrorStackTranslator.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-32"></use></svg><span>stringify<wbr/>Error<wbr/>Stack<wbr/>Translator</span></a></li>
 <li><a href="../variables/worldCurrencies.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-32"></use></svg><span>world<wbr/>Currencies</span></a></li>
 <li><a href="../variables/worldCurrencyMap.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-32"></use></svg><span>world<wbr/>Currency<wbr/>Map</span></a></li>
-<li><a href="JSONParseAsync.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><g id="icon-64"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-function)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6"></rect><path d="M9.39 16V7.24H14.55V8.224H10.446V11.128H14.238V12.112H10.47V16H9.39Z" fill="var(--color-text)"></path></g></svg><span>JSONParse<wbr/>Async</span></a></li>
-<li><a href="JSONParseSafely.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>JSONParse<wbr/>Safely</span></a></li>
-<li><a href="assert-1.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>assert</span></a></li>
+<li><a href="assert-1.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><g id="icon-64"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-function)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6"></rect><path d="M9.39 16V7.24H14.55V8.224H10.446V11.128H14.238V12.112H10.47V16H9.39Z" fill="var(--color-text)"></path></g></svg><span>assert</span></a></li>
 <li><a href="comparePrimitives.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>compare<wbr/>Primitives</span></a></li>
 <li><a href="compareStrings.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>compare<wbr/>Strings</span></a></li>
 <li><a href="compareVersions.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>compare<wbr/>Versions</span></a></li>
 <li><a href="compareVersionsSemantically.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>compare<wbr/>Versions<wbr/>Semantically</span></a></li>
-<li><a href="connectablePublishReplay.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>connectable<wbr/>Publish<wbr/>Replay</span></a></li>
 <li><a href="createLogger.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>create<wbr/>Logger</span></a></li>
 <li><a href="enumerable.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>enumerable</span></a></li>
 <li><a href="fetchData.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>fetch<wbr/>Data</span></a></li>
-<li><a href="filterMessage_.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>filter<wbr/>Message$</span></a></li>
 <li><a href="generateAppId.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>generate<wbr/>App<wbr/>Id</span></a></li>
 <li><a href="isArrayLike.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>is<wbr/>Array<wbr/>Like</span></a></li>
 <li><a href="isCallback.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>is<wbr/>Callback</span></a></li>
@@ -164,7 +160,6 @@
 <li><a href="isString.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>is<wbr/>String</span></a></li>
 <li><a href="isTrue.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>is<wbr/>True</span></a></li>
 <li><a href="isUnsubscribable.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>is<wbr/>Unsubscribable</span></a></li>
-<li><a href="mapFilterNotUndefined.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>map<wbr/>Filter<wbr/>Not<wbr/>Undefined</span></a></li>
 <li><a href="nonenumerable.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>nonenumerable</span></a></li>
 <li><a href="noop.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>noop</span></a></li>
 <li><a href="optionalMap.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>optional<wbr/>Map</span></a></li>
@@ -176,8 +171,8 @@
 <li><a href="shareReplayRefCount.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>share<wbr/>Replay<wbr/>Ref<wbr/>Count</span></a></li>
 <li><a href="stringToEnum.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>string<wbr/>To<wbr/>Enum</span></a></li>
 <li><a href="stringToInteger.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>string<wbr/>To<wbr/>Integer</span></a></li>
-<li><a href="toKebabCase.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>to<wbr/>Kebab<wbr/>Case</span></a></li>
-<li><a href="windowMessage_.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>window<wbr/>Message$</span></a></li></ul></nav></div></div></div>
+<li><a href="toErrorMessage.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>to<wbr/>Error<wbr/>Message</span></a></li>
+<li><a href="toKebabCase.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>to<wbr/>Kebab<wbr/>Case</span></a></li></ul></nav></div></div></div>
 <div class="tsd-generator">
 <p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div>
 <div class="overlay"></div></body></html>

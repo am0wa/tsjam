@@ -22,7 +22,7 @@
 <h4>See</h4><p><a href="https://www.iban.com/currency-codes">https://www.iban.com/currency-codes</a></p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/am0wa/tsjam/blob/ade2819/src/money/currency.ts#L5">src/money/currency.ts:5</a></li></ul></aside></div>
+<li>Defined in <a href="https://github.com/am0wa/tsjam/blob/5c7559e/src/money/currency.ts#L5">src/money/currency.ts:5</a></li></ul></aside></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
@@ -48,6 +48,7 @@
 <li><a href="../modules/Logger.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg><span>Logger</span></a></li>
 <li><a href="../modules/Percentage.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg><span>Percentage</span></a></li>
 <li><a href="../modules/Result.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg><span>Result</span></a></li>
+<li><a href="../modules/SafeJSON.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg><span>SafeJSON</span></a></li>
 <li><a href="../modules/Urls.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg><span>Urls</span></a></li>
 <li><a href="../modules/assert.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg><span>assert</span></a></li>
 <li><a href="../modules/blank.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-4"></use></svg><span>blank</span></a></li>
@@ -71,7 +72,6 @@
 <li><a href="../classes/JamError.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg><span>Jam<wbr/>Error</span></a></li>
 <li><a href="../classes/NotImplementedError.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg><span>Not<wbr/>Implemented<wbr/>Error</span></a></li>
 <li><a href="../classes/Ok.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg><span>Ok</span></a></li>
-<li><a href="../classes/PostMessageHost.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg><span>Post<wbr/>Message<wbr/>Host</span></a></li>
 <li><a href="../classes/RxBag.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg><span>Rx<wbr/>Bag</span></a></li>
 <li><a href="../classes/RxDisposable.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg><span>Rx<wbr/>Disposable</span></a></li>
 <li><a href="../classes/UnreachableCodeError.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-128"></use></svg><span>Unreachable<wbr/>Code<wbr/>Error</span></a></li>
@@ -131,18 +131,14 @@
 <li><a href="stringifyErrorStackTranslator.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-32"></use></svg><span>stringify<wbr/>Error<wbr/>Stack<wbr/>Translator</span></a></li>
 <li><a href="worldCurrencies.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-32"></use></svg><span>world<wbr/>Currencies</span></a></li>
 <li><a href="worldCurrencyMap.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-32"></use></svg><span>world<wbr/>Currency<wbr/>Map</span></a></li>
-<li><a href="../functions/JSONParseAsync.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><g id="icon-64"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-function)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6"></rect><path d="M9.39 16V7.24H14.55V8.224H10.446V11.128H14.238V12.112H10.47V16H9.39Z" fill="var(--color-text)"></path></g></svg><span>JSONParse<wbr/>Async</span></a></li>
-<li><a href="../functions/JSONParseSafely.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>JSONParse<wbr/>Safely</span></a></li>
-<li><a href="../functions/assert-1.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>assert</span></a></li>
+<li><a href="../functions/assert-1.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><g id="icon-64"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-function)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6"></rect><path d="M9.39 16V7.24H14.55V8.224H10.446V11.128H14.238V12.112H10.47V16H9.39Z" fill="var(--color-text)"></path></g></svg><span>assert</span></a></li>
 <li><a href="../functions/comparePrimitives.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>compare<wbr/>Primitives</span></a></li>
 <li><a href="../functions/compareStrings.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>compare<wbr/>Strings</span></a></li>
 <li><a href="../functions/compareVersions.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>compare<wbr/>Versions</span></a></li>
 <li><a href="../functions/compareVersionsSemantically.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>compare<wbr/>Versions<wbr/>Semantically</span></a></li>
-<li><a href="../functions/connectablePublishReplay.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>connectable<wbr/>Publish<wbr/>Replay</span></a></li>
 <li><a href="../functions/createLogger.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>create<wbr/>Logger</span></a></li>
 <li><a href="../functions/enumerable.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>enumerable</span></a></li>
 <li><a href="../functions/fetchData.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>fetch<wbr/>Data</span></a></li>
-<li><a href="../functions/filterMessage_.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>filter<wbr/>Message$</span></a></li>
 <li><a href="../functions/generateAppId.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>generate<wbr/>App<wbr/>Id</span></a></li>
 <li><a href="../functions/isArrayLike.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>is<wbr/>Array<wbr/>Like</span></a></li>
 <li><a href="../functions/isCallback.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>is<wbr/>Callback</span></a></li>
@@ -160,7 +156,6 @@
 <li><a href="../functions/isString.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>is<wbr/>String</span></a></li>
 <li><a href="../functions/isTrue.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>is<wbr/>True</span></a></li>
 <li><a href="../functions/isUnsubscribable.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>is<wbr/>Unsubscribable</span></a></li>
-<li><a href="../functions/mapFilterNotUndefined.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>map<wbr/>Filter<wbr/>Not<wbr/>Undefined</span></a></li>
 <li><a href="../functions/nonenumerable.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>nonenumerable</span></a></li>
 <li><a href="../functions/noop.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>noop</span></a></li>
 <li><a href="../functions/optionalMap.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>optional<wbr/>Map</span></a></li>
@@ -172,8 +167,8 @@
 <li><a href="../functions/shareReplayRefCount.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>share<wbr/>Replay<wbr/>Ref<wbr/>Count</span></a></li>
 <li><a href="../functions/stringToEnum.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>string<wbr/>To<wbr/>Enum</span></a></li>
 <li><a href="../functions/stringToInteger.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>string<wbr/>To<wbr/>Integer</span></a></li>
-<li><a href="../functions/toKebabCase.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>to<wbr/>Kebab<wbr/>Case</span></a></li>
-<li><a href="../functions/windowMessage_.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>window<wbr/>Message$</span></a></li></ul></nav></div></div></div>
+<li><a href="../functions/toErrorMessage.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>to<wbr/>Error<wbr/>Message</span></a></li>
+<li><a href="../functions/toKebabCase.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-64"></use></svg><span>to<wbr/>Kebab<wbr/>Case</span></a></li></ul></nav></div></div></div>
 <div class="tsd-generator">
 <p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div>
 <div class="overlay"></div></body></html>
