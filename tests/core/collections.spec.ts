@@ -64,20 +64,14 @@ describe('collections', () => {
       expect(Collections.areEqual(['A', { a: 'B' }], ['A', { a: 'D' }])).toBe(false);
     });
     it('equal by equalityTest', () => {
-      expect(Collections.areEqual(
-        [{ a: 'A' }, { a: 'B' }],
-        [{ a: 'A' }, { a: 'B' }],
-        (a, b) => a.a === b.a
-        )
-      ).toBe(true);
+      expect(Collections.areEqual([{ a: 'A' }, { a: 'B' }], [{ a: 'A' }, { a: 'B' }], (a, b) => a.a === b.a)).toBe(
+        true,
+      );
     });
     it('equal by equalityTest of order', () => {
-      expect(Collections.areEqual(
-          [{ a: 'A' }, { a: 'B' }],
-          [{ a: 'B' }, { a: 'A' }],
-          (a, b) => a.a === b.a
-        )
-      ).toBe(false);
+      expect(Collections.areEqual([{ a: 'A' }, { a: 'B' }], [{ a: 'B' }, { a: 'A' }], (a, b) => a.a === b.a)).toBe(
+        false,
+      );
     });
   });
   describe('areEqualByContent', () => {
@@ -99,19 +93,13 @@ describe('collections', () => {
       expect(Collections.equalByContent(listA, listB)).toBe(false);
     });
     it('equal by equalityTest', () => {
-      expect(Collections.equalByContent(
-          [{ a: 'A' }, { a: 'B' }],
-          [{ a: 'A' }, { a: 'B' }],
-          (a, b) => a.a === b.a
-        )
+      expect(
+        Collections.equalByContent([{ a: 'A' }, { a: 'B' }], [{ a: 'A' }, { a: 'B' }], (a, b) => a.a === b.a),
       ).toBe(true);
     });
     it('equal by equalityTest regardless of order', () => {
-      expect(Collections.equalByContent(
-          [{ a: 'A' }, { a: 'B' }],
-          [{ a: 'B' }, { a: 'A' }],
-          (a, b) => a.a === b.a
-        )
+      expect(
+        Collections.equalByContent([{ a: 'A' }, { a: 'B' }], [{ a: 'B' }, { a: 'A' }], (a, b) => a.a === b.a),
       ).toBe(true);
     });
     it('A contains B', () => {
@@ -119,9 +107,20 @@ describe('collections', () => {
       expect(Collections.equalByContent(['B', 'A'], ['A', 'B'])).toBe(true);
 
       expect(Collections.equalByContent(['A', 'B'], ['B'])).toBe(false);
-      expect(Collections.equalByContent(['B'],['A', 'B'] )).toBe(false);
-      expect(Collections.equalByContent(['B', 'B'],['A', 'B'] )).toBe(false);
+      expect(Collections.equalByContent(['B'], ['A', 'B'])).toBe(false);
+      expect(Collections.equalByContent(['B', 'B'], ['A', 'B'])).toBe(false);
       expect(Collections.equalByContent(['B', 'A', 'A'], ['A', 'B'])).toBe(false);
     });
   });
-})
+  describe('invertMap', () => {
+    it('Map B has inverted key values of map A', () => {
+      const mapA = new Map([
+        ['keyA', 'A'],
+        ['keyB', 'B'],
+      ]);
+      const mapB = Collections.invertMap(mapA);
+      expect(mapB.get('A')).toBe('keyA');
+      expect(mapB.get('B')).toBe('keyB');
+    });
+  });
+});

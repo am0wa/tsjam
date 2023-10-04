@@ -5,42 +5,42 @@ export namespace Collections {
 
   export type Slice = {
     /** inclusive */
-    readonly start: Integer,
+    readonly start: Integer;
     /** exclusive */
-    readonly end?: Integer
-  }
+    readonly end?: Integer;
+  };
   /**
    * Returns first element from list.
    */
   export const first = <T>(list: readonly T[] | undefined | null): T | undefined => {
     return list?.length ? list[0] : undefined;
-  }
+  };
   /**
    * Returns last element from list.
    */
   export const last = <T>(list: readonly T[] | undefined | null): T | undefined => {
     return list ? list[list.length - 1] : undefined;
-  }
+  };
   /**
    * Returns copy of list without the N last elements.
    */
   export const removeLast = <T>(list: readonly T[], N: Integer = 1): readonly T[] => {
     return list.slice(0, -1 * N);
-  }
+  };
   /**
    * Returns copy of list without the first element.
    */
   export const removeFirst = <T>(list: readonly T[]): readonly T[] => {
     const { length } = list;
     return list.slice(length > 0 ? 1 : 0);
-  }
+  };
 
   /**
    * Returns copy of list without duplicates.
    */
   export const distinct = <T>(list: readonly T[]): readonly T[] => {
     return [...new Set(list)];
-  }
+  };
 
   /**
    * Returns copy of list without Slice.
@@ -48,18 +48,13 @@ export namespace Collections {
    * removeSlice([...], { start: -2 }) removes the last two elements in the sequence.
    */
   export const removeSlice = <T>(list: readonly T[], { start, end }: Slice): readonly T[] => {
-    return end === undefined
-      ? list.slice(0, start)
-      : [
-        ...list.slice(0, start),
-        ...list.slice(end)
-      ]
-  }
+    return end === undefined ? list.slice(0, start) : [...list.slice(0, start), ...list.slice(end)];
+  };
 
   export const areEqual = <T>(
     list1: readonly T[] = [],
     list2: readonly T[] = [],
-    equalityTest?: (a: T, b: T) => boolean
+    equalityTest?: (a: T, b: T) => boolean,
   ): boolean => {
     if (list1.length != list2.length) {
       return false;
@@ -70,12 +65,12 @@ export namespace Collections {
     }
 
     return !list1.some((obj, idx) => !equalityTest(obj, list2[idx]));
-  }
+  };
 
   export const equalByContent = <T>(
     listA: readonly T[] = [],
     listB: readonly T[] = [],
-    equalityTest: (a: T, b: T) => boolean = equalsByRef
+    equalityTest: (a: T, b: T) => boolean = equalsByRef,
   ): boolean => {
     if (listA.length != listB.length) {
       return false;
@@ -85,5 +80,9 @@ export namespace Collections {
     const someDiffB = listB.find((a) => !listA.some((b) => equalityTest(a, b)));
 
     return !someDiffA && !someDiffB;
-  }
+  };
+
+  // eslint-disable-next-line functional/prefer-readonly-type
+  export const invertMap = <K, V>(map: Map<K, V>): Map<V, K> =>
+    new Map(Array.from(map, (entry) => [entry[1], entry[0]]));
 }
