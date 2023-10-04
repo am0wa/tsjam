@@ -1,20 +1,18 @@
 import { fromEvent, Observable } from 'rxjs';
-import { share } from 'rxjs/operators';
+import { filter, map, share } from 'rxjs/operators';
 
 import { isObject, isSomething, Json, JSONParseSafely, optionalMap, ParseFn, Typeguard, unwrap } from '../core';
-import { mapFilterNotUndefined, MessagingProvider, replayLastMessage$ } from '../reactive';
+import { MessagingProvider, replayLastMessage$ } from '../reactive';
 
 import ownProperty = unwrap.ownProperty;
 
-export const windowMessage$ = <T, U>(
-  target: Window,
-  parseFn: ParseFn<T, U>
-): Observable<U> => {
+export const windowMessage$ = <T, U>(target: Window, parseFn: ParseFn<T, U>): Observable<U> => {
   return fromEvent<MessageEvent>(target, 'message').pipe(
-    mapFilterNotUndefined(({ data }) => optionalMap(data, parseFn)),
-    share()
+    map(({ data }) => optionalMap(data, parseFn)),
+    filter(isSomething),
+    share(),
   );
-}
+};
 
 /**
  * Define your Inbound and Outbound message Types and get the typed streams of message$
@@ -31,14 +29,14 @@ export class PostMessageHost<InboundT, OutboundT, RawT> implements MessagingProv
     target: Window,
     typeMatcher: ParseFn<Json, I>,
     rpcId = 'id',
-    targetOrigin = '*'
+    targetOrigin = '*',
   ): PostMessageHost<I, O, string> {
     return new PostMessageHost<I, O, string>(
       target,
       (value) => optionalMap(JSONParseSafely(value), typeMatcher),
       JSON.stringify,
       rpcId,
-      targetOrigin
+      targetOrigin,
     );
   }
 
@@ -54,7 +52,7 @@ export class PostMessageHost<InboundT, OutboundT, RawT> implements MessagingProv
     deserialize: ParseFn<RawT, InboundT>,
     serialize: ParseFn<OutboundT, RawT>,
     readonly rpcId = 'id',
-    readonly targetOrigin = '*'
+    readonly targetOrigin = '*',
   ) {
     this.#serialize = serialize;
     this.message$ = windowMessage$(window, deserialize);
@@ -63,10 +61,12 @@ export class PostMessageHost<InboundT, OutboundT, RawT> implements MessagingProv
   send(message: OutboundT): void;
   send<ResponseT extends InboundT>(
     message: OutboundT,
-    responseMatcher: Typeguard<ResponseT, InboundT>): Observable<ResponseT>
+    responseMatcher: Typeguard<ResponseT, InboundT>,
+  ): Observable<ResponseT>;
   send<ResponseT extends InboundT>(
     message: OutboundT,
-    responseMatcher?: Typeguard<ResponseT, InboundT>): Observable<ResponseT> | undefined{
+    responseMatcher?: Typeguard<ResponseT, InboundT>,
+  ): Observable<ResponseT> | undefined {
     this.target.postMessage(this.#serialize(message), this.targetOrigin);
     if (!isSomething(responseMatcher)) {
       return undefined;
@@ -83,7 +83,7 @@ export class PostMessageHost<InboundT, OutboundT, RawT> implements MessagingProv
         return false; // not our response
       }
       return responseMatcher(response); // much by type now
-    }
+    };
 
     return replayLastMessage$(this.message$, matcher);
   }

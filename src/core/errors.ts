@@ -1,4 +1,5 @@
 import { nonenumerable } from './enumerable.decorator';
+import { isObject } from './is-it';
 
 export abstract class JamError extends Error {
   /**
@@ -53,7 +54,13 @@ export class APIError<ErrorCodeT = unknown> extends JamError {
   @nonenumerable
   protected readonly _APIError!: never;
 
-  constructor(readonly code: ErrorCodeT, message: string) {
+  constructor(
+    readonly code: ErrorCodeT,
+    message: string,
+  ) {
     super(message);
   }
 }
+
+const isErrorWithMessage = (err: unknown): err is { readonly message: string } => isObject(err) && 'message' in err;
+export const toErrorMessage = (err: unknown): string => (isErrorWithMessage(err) ? err.message : `${err}`);
