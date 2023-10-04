@@ -1,5 +1,3 @@
-import { Json } from './types';
-
 /**
  * Input Output Utils for working with loading, serialization and file system.
  * Handy for fetching the *.json from REST APIs and files.
@@ -53,13 +51,13 @@ export enum CacheControl {
    *  If a matching entry is not found in the cache, the browser will make a normal request,
    *  and will update the HTTP cache with the downloaded response.
    */
-  ForceCache = 'force-cache'
+  ForceCache = 'force-cache',
 }
 
 export const enum OriginControl {
   SameOrigin = 'same-origin',
   Cors = 'cors',
-  NoCors = 'no-cors'
+  NoCors = 'no-cors',
 }
 
 /**
@@ -69,27 +67,11 @@ export const enum OriginControl {
 export function fetchData(
   path: string,
   cache: CacheControl = CacheControl.ForceCache,
-  mode?: OriginControl
+  mode?: OriginControl,
 ): Promise<Response> {
   return new Promise<Response>((resolve, reject) => {
     fetch(path, { cache, mode })
-      .then((response) => response.ok ? resolve(response) : reject(response))
+      .then((response) => (response.ok ? resolve(response) : reject(response)))
       .catch((reason) => reject(reason));
   });
-}
-
-export function JSONParseAsync(data: string): Promise<Json> {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-  return Promise.resolve(JSON.parse(data));
-}
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function JSONParseSafely(data: string, logCb?: (err: any) => void): Json | undefined {
-  try {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-    return JSON.parse(data);
-  } catch (err) {
-    logCb?.call(null, err);
-    return undefined;
-  }
 }
