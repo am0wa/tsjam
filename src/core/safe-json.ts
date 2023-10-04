@@ -38,5 +38,3 @@ export namespace SafeJSON {
     }
   }
 }
-
-SafeJSON.parse('a', console.error);
