@@ -1,8 +1,8 @@
 import { fromEvent, Observable } from 'rxjs';
 import { filter, map, share } from 'rxjs/operators';
 
-import { isObject, isSomething, Json, JSONParseSafely, optionalMap, ParseFn, Typeguard, unwrap } from '../core';
-import { MessagingProvider, replayLastMessage$ } from '../reactive';
+import { isObject, isSomething, Json, JSONParseSafely, optionalMap, ParseFn, Typeguard, unwrap } from 'core';
+import { MessagingProvider, replayLastMessage$ } from 'reactive';
 
 import ownProperty = unwrap.ownProperty;
 

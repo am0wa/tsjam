@@ -1,0 +1,16 @@
+{
+  "name": "@tsjam/web-messaging",
+  "version": "0.0.1",
+  "description": "Shared configurations: ts, es-lint, prettier, jest",
+  "main": "",
+  "files": ["lib"],
+  "keywords": ["post message host"],
+  "author": "am0wa",
+  "contributors": ["am0wa"],
+  "license": "ISC",
+  "homepage": "https://github.com/am0wa/tsjam#readme",
+  "prettier": "./prettier.config.js",
+  "devDependencies": {
+    "typescript": ">=4.x"
+  }
+}
