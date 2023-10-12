@@ -49,7 +49,7 @@ export type NumericEnum = { readonly [id: number]: string };
 export type OneOrMany<T> = T | readonly T[];
 
 /** Helper type to retrieve `message` content from any type */
-export type MessageOf<T extends { readonly message: unknown }> = T["message"];
+export type MessageOf<T extends { readonly message: unknown }> = T['message'];
 
 /** Helper for data parsing modifiers */
 export type ParseFn<T, U> = (data: T) => U | undefined;
@@ -60,8 +60,12 @@ export type MapFn<T, U> = (info: T) => U;
 /** Helper for pipeline like modifiers */
 export type PipeFn<T, U> = (data: T, info?: U) => T;
 
+/** Class Constructor agnostic type */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type Clazz<T> = new (...args: readonly any[]) => T;
+
 /**
  * Rest in Peace Process Identifier.
  * Identifier number used to kill the entity when necessary.
  */
-export type RipId = Opaque<'RipId', number>
+export type RipId = Opaque<'RipId', number>;
