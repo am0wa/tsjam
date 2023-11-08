@@ -4,10 +4,8 @@ import { LogContext } from './types';
 
 export namespace logs {
   export const tagsLine = (tags: readonly string[] | undefined): string => {
-    return tags?.length
-      ? `[${tags.map(tag => `#${tag}`).join()}]`
-      : ''
-  }
+    return tags?.length ? `[${tags.map((tag) => `#${tag}`).join()}]` : '';
+  };
 
   export const commonSensitiveFields = ['password', 'token', 'secret', 'sessionId'];
 
@@ -15,17 +13,17 @@ export namespace logs {
    * Sanitizes sensitive Data.
    * Supports primitives, objects and arrays.
    */
-  export function sanitizeSensitiveData<T>(
+  export const sanitizeSensitiveData = <T>(
     data: T,
     deep = false,
     sensitiveFields: readonly string[] = commonSensitiveFields,
-  ): T {
+  ): T => {
     if (!isObject(data)) {
       return data;
     }
     if (isArrayLike(data)) {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-return,@typescript-eslint/no-explicit-any
-      return data.map(one => sanitizeSensitiveData(one, deep, sensitiveFields)) as any;
+      return data.map((one) => sanitizeSensitiveData(one, deep, sensitiveFields)) as any;
     }
     const sanitized = { ...data };
     Object.keys(sanitized).forEach((key) => {
@@ -33,24 +31,22 @@ export namespace logs {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         // eslint-disable-next-line functional/immutable-data
-        sanitized[key] = "***";
+        sanitized[key] = '***';
       }
       const value = sanitized[key];
       if (isObject(value)) {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         // eslint-disable-next-line functional/immutable-data
-        sanitized[key] = sanitizeSensitiveData(value, deep, sensitiveFields)
+        sanitized[key] = sanitizeSensitiveData(value, deep, sensitiveFields);
       }
     });
     return sanitized;
-  }
+  };
 
   export const stringNode = (value: string | undefined): string => {
-    return value?.length
-      ? `[${value}]`
-      : ''
-  }
+    return value?.length ? `[${value}]` : '';
+  };
 
   export const contextLine = (context: LogContext | undefined): string => {
     if (!context) {
@@ -58,16 +54,14 @@ export namespace logs {
     }
 
     // eslint-disable-next-line functional/no-let
-    let line = ''
-    Object.keys(context).forEach(key => {
+    let line = '';
+    Object.keys(context).forEach((key) => {
       if (key == 'tags') {
-        line += tagsLine(context[key])
+        line += tagsLine(context[key]);
       } else {
-        line += key !== 'withStack' && key !== 'trimStack' && key !== 'sanitize'
-          ? stringNode(`${context[key]}`)
-          : ''
+        line += key !== 'withStack' && key !== 'trimStack' && key !== 'sanitize' ? stringNode(`${context[key]}`) : '';
       }
     });
-    return line
-  }
+    return line;
+  };
 }

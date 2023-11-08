@@ -1,8 +1,10 @@
 import { ComparisonResult } from 'core/comparison';
-import { compareVersions, compareVersionsSemantically, SemanticRange } from 'core/versioning';
+import { jamver, SemanticRange } from 'core/versioning';
+
+import compareVersions = jamver.compareVersions;
+import compareVersionsSemantically = jamver.compareVersionsSemantically;
 
 describe('Versioning', () => {
-
   describe('compareVersions', () => {
     it('Should be same', () => {
       expect(compareVersions('77.7', '77.7')).toBe(ComparisonResult.Same);

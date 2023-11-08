@@ -21,11 +21,11 @@ export const isEquatable = (x: unknown): x is Equatable => {
 };
 
 export namespace Equatable {
-  export function areEqualByRef(o1: unknown, o2: unknown): boolean {
+  export const areEqualByRef = (o1: unknown, o2: unknown): boolean => {
     return o1 === o2;
-  }
-  
-  export function areEqual<T extends Equatable>(o1: T, o2: T): boolean {
+  };
+
+  export const areEqual = <T extends Equatable>(o1: T, o2: T): boolean => {
     return o1.equals(o2);
-  }
+  };
 }

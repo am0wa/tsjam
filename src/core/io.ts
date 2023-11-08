@@ -64,14 +64,14 @@ export const enum OriginControl {
  * Fetch does not fire reject event when external resources was not found.
  * So here is wrapper around it with handling not valid response
  */
-export function fetchData(
+export const fetchData = (
   path: string,
   cache: CacheControl = CacheControl.ForceCache,
   mode?: OriginControl,
-): Promise<Response> {
+): Promise<Response> => {
   return new Promise<Response>((resolve, reject) => {
     fetch(path, { cache, mode })
       .then((response) => (response.ok ? resolve(response) : reject(response)))
       .catch((reason) => reject(reason));
   });
-}
+};

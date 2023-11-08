@@ -19,18 +19,15 @@ export namespace unwrap {
    * respective part of protocol message based on <code>undefined</code> result of parsing.
    */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  export function normalizeUnsupported(_x: never): undefined {
+  export const normalizeUnsupported = (_x: never): undefined => {
     return undefined;
-  }
+  };
 
   /**
    * Checks whether property is on object and returns its value.
    * Gives compilation-time check for the existence of key in the specified type.
    */
-  export function ownProperty<T extends SomeObject, K extends keyof T>(
-    obj: T,
-    prop: K
-  ): T[K] | undefined {
+  export const ownProperty = <T extends SomeObject, K extends keyof T>(obj: T, prop: K): T[K] | undefined => {
     return prop in obj ? obj[prop] : undefined;
-  }
+  };
 }

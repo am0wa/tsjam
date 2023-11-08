@@ -25,9 +25,9 @@ export function assert(expression: unknown, message?: string): asserts expressio
 }
 
 export namespace assert {
-  export function never(x: never): never {
+  export const never = (x: never): never => {
     throw new AssertionError(`assertNever: ${x}`);
-  }
+  };
 
   export function exists<T>(x: T, message: string): asserts x is NonNullable<T> {
     if (x == null) {
@@ -35,9 +35,9 @@ export namespace assert {
     }
   }
 
-  export function dev(expression: boolean | (() => boolean), message?: string): asserts expression {
+  export const dev = (expression: boolean | (() => boolean), message?: string): asserts expression => {
     if (__DEVELOPMENT__) {
       assert(expression, message);
     }
-  }
+  };
 }

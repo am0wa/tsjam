@@ -9,13 +9,13 @@
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty
  * @see https://www.typescriptlang.org/docs/handbook/decorators.html#property-decorators
  */
-export function enumerable(flag: boolean) {
-  return (
-    target: any,
-    propertyName: string,
-  ): void => {
-    Object.defineProperty(target, propertyName, { // assessor descriptor
-      get: function () { return undefined; },
+export const enumerable = (flag: boolean) => {
+  return (target: any, propertyName: string): void => {
+    Object.defineProperty(target, propertyName, {
+      // assessor descriptor
+      get: function () {
+        return undefined;
+      },
       set: function (this: any, val: any) {
         Object.defineProperty(this, propertyName, {
           value: val,
@@ -28,6 +28,6 @@ export function enumerable(flag: boolean) {
       configurable: true,
     });
   };
-}
+};
 
 export const nonenumerable = enumerable(false);

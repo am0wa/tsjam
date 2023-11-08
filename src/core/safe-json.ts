@@ -25,16 +25,16 @@ export namespace SafeJSON {
   /**
    * JSON.stringify as its. Silently Returns undefined in case of serialisation err
    */
-  export function stringify(
+  export const stringify = (
     data: unknown,
     // eslint-disable-next-line functional/prefer-readonly-type
     replacer?: (number | string)[] | null,
     space?: string | number,
-  ): string | undefined {
+  ): string | undefined => {
     try {
       return JSON.stringify(data, replacer, space);
     } catch (err) {
       return undefined;
     }
-  }
+  };
 }
