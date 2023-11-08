@@ -35,9 +35,9 @@ export namespace assert {
     }
   }
 
-  export const dev = (expression: boolean | (() => boolean), message?: string): asserts expression => {
+  export function dev(expression: boolean | (() => boolean), message?: string): asserts expression {
     if (__DEVELOPMENT__) {
       assert(expression, message);
     }
-  };
+  }
 }

@@ -43,13 +43,13 @@
   "devDependencies": {
     "@tsjam/eslint-config-recommended": "^0.1.0",
     "@tsjam/jest-config-recommended": "^0.1.1",
-    "@tsjam/web-config-base": "^0.1.0",
-    "eslint-plugin-functional": "^5.0.8",
+    "@tsjam/web-config-base": "^0.1.1",
+    "eslint-plugin-functional": "^6.0.0",
     "gh-pages": "^3.2.3",
     "npm-run-all": "^4.1.5",
     "rxjs": "^7.8.0",
     "typedoc": "^0.24.8",
-    "typescript": "^4.9.5"
+    "typescript": "^5.1.6"
   },
   "files": [
     "lib",

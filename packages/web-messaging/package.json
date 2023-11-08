@@ -3,14 +3,21 @@
   "version": "0.0.1",
   "description": "Shared configurations: ts, es-lint, prettier, jest",
   "main": "",
-  "files": ["lib"],
-  "keywords": ["post message host"],
+  "files": [
+    "lib"
+  ],
+  "keywords": [
+    "post message host"
+  ],
   "author": "am0wa",
-  "contributors": ["am0wa"],
+  "contributors": [
+    "am0wa"
+  ],
   "license": "ISC",
   "homepage": "https://github.com/am0wa/tsjam#readme",
   "prettier": "./prettier.config.js",
   "devDependencies": {
+    "tsjam": "^1.4.1",
     "typescript": ">=4.x"
   }
 }

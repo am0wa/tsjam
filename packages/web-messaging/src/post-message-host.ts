@@ -1,8 +1,16 @@
 import { fromEvent, Observable } from 'rxjs';
 import { filter, map, share } from 'rxjs/operators';
 
-import { isObject, isSomething, Json, JSONParseSafely, optionalMap, ParseFn, Typeguard, unwrap } from 'core';
-import { MessagingProvider, replayLastMessage$ } from 'reactive';
+import {
+  isObject,
+  isSomething,
+  Json,
+  MessagingProvider,
+  optionalMap,
+  ParseFn, replayLastMessage$, SafeJSON,
+  Typeguard,
+  unwrap
+} from 'tsjam';
 
 import ownProperty = unwrap.ownProperty;
 
@@ -33,7 +41,7 @@ export class PostMessageHost<InboundT, OutboundT, RawT> implements MessagingProv
   ): PostMessageHost<I, O, string> {
     return new PostMessageHost<I, O, string>(
       target,
-      (value) => optionalMap(JSONParseSafely(value), typeMatcher),
+      (value) => optionalMap(SafeJSON.parse(value), typeMatcher),
       JSON.stringify,
       rpcId,
       targetOrigin,
