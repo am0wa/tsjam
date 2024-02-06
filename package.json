@@ -1,6 +1,6 @@
 {
   "name": "tsjam",
-  "version": "1.4.2",
+  "version": "1.5.0",
   "description": "vanilla typescript sweets",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -36,6 +36,9 @@
   },
   "engines": {
     "node": ">=10"
+  },
+  "optionalDependencies": {
+    "@tsjam/logger": "^1.0.3"
   },
   "peerDependencies": {
     "rxjs": "^7.x"

@@ -9,9 +9,9 @@
  *
  * - core/    Cool stuff can be found here.
  * - reactive/    Awesome reactive stuff can be found here
- * - logging/    Flexible logger with multiple output channels
+ * - money/    ALL ISO Currency Codes
+ * - logging/    @tsjam/logger package
  */
 export * from './core';
-export * from './reactive';
-export * from './logging';
 export * from './money';
+export * from './reactive';
