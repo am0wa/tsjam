@@ -51,6 +51,12 @@ export type OneOrMany<T> = T | readonly T[];
 /** Helper type to retrieve `message` content from any type */
 export type MessageOf<T extends { readonly message: unknown }> = T['message'];
 
+/** Helper type to track of old & new values */
+export type Update<T> = Readonly<{ readonly prev: T; readonly next: T }>;
+
+/** Helper type to track of old & new partial values */
+export type IncrementalUpdate<T> = Readonly<{ readonly prev: T; readonly next: Partial<T> }>;
+
 /** Helper for data parsing modifiers */
 export type ParseFn<T, U> = (data: T) => U | undefined;
 
