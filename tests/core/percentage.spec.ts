@@ -23,7 +23,7 @@ describe('percentage', () => {
     expect(Percentage.fromNumber(0.5)).toBe(0.5);
   });
   it('Factory method assert', () => {
-    expect(() => Percentage.fromNumber(115)).toThrow();
+    expect(() => Percentage.within100(115)).toThrow();
   });
   it('Typeguard', () => {
     expect(Percentage.isIt(115)).toBe(false);
