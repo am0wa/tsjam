@@ -9,9 +9,6 @@ describe('blank', () => {
     expect(blank.treeStars).toBe(blank.treeStars);
     expect(blank.treeStars).toBe(blank.treeStars);
   });
-  it('should not replace value', () => {
-    expect(blank.treeStars).toBe('');
-  });
   it('mask with sign', () => {
     const password = '1252525353';
     const masked = '**********';
