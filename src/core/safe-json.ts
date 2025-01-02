@@ -7,6 +7,7 @@ import { Json } from './types';
 export namespace SafeJSON {
   export const parse = (data: string, logCb?: (err: unknown) => void): Json | undefined => {
     try {
+      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
       return JSON.parse(data) as Json;
     } catch (err) {
       logCb?.call(null, err);
@@ -19,6 +20,7 @@ export namespace SafeJSON {
    * Handy if u need to handle error or chain and type guard result
    */
   export const parsePromise = (data: string): Promise<Json> => {
+    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
     return Promise.resolve(JSON.parse(data) as Json);
   };
 
@@ -27,12 +29,12 @@ export namespace SafeJSON {
    */
   export const stringify = (
     data: unknown,
-    // eslint-disable-next-line functional/prefer-readonly-type
     replacer?: (number | string)[] | null,
     space?: string | number,
   ): string | undefined => {
     try {
       return JSON.stringify(data, replacer, space);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (err) {
       return undefined;
     }

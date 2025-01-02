@@ -39,6 +39,7 @@ export const stringToEnum = <T extends StringEnum>(
 
   const alignCase = ignoreCase ? (x: string): string => x.toLowerCase() : (x: string): string => x;
 
+  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
   return Object.values(enumType).find((enumValue) => alignCase(enumValue) === alignCase(rawValue)) as
     | T[keyof T]
     | undefined;

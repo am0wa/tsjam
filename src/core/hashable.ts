@@ -16,7 +16,6 @@ import { Equatable, isEquatable } from './equatable';
  *    - If o1.hashCode() == o2.hashCode is true, it doesn’t mean that o1.equals(o2) will be true.
  */
 export interface Hashable extends Equatable {
-
   /**
    * Returns a hash code value for the object
    */
@@ -24,6 +23,6 @@ export interface Hashable extends Equatable {
 }
 
 export const isHashable = (x: unknown): x is Hashable => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any,@typescript-eslint/no-unsafe-member-access,@typescript-eslint/consistent-type-assertions
   return isEquatable(x) && typeof (x as any).hashCode === 'function';
 };

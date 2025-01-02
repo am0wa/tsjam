@@ -1,5 +1,4 @@
-/* eslint-disable functional/immutable-data, @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* @typescript-eslint/no-explicit-any */
 /* @typescript-eslint/no-explicit-any */
 /* @typescript-eslint/explicit-function-return-type */
 
@@ -10,13 +9,13 @@
  * @see https://www.typescriptlang.org/docs/handbook/decorators.html#property-decorators
  */
 export const enumerable = (flag: boolean) => {
-  return (target: any, propertyName: string): void => {
+  return (target: unknown, propertyName: string): void => {
     Object.defineProperty(target, propertyName, {
       // assessor descriptor
       get: function () {
         return undefined;
       },
-      set: function (this: any, val: any) {
+      set: function (this: unknown, val: unknown) {
         Object.defineProperty(this, propertyName, {
           value: val,
           writable: true, // not immutable

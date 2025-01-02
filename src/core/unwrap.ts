@@ -18,7 +18,6 @@ export namespace unwrap {
    * unexpected values in case third party goes ahead in protocol implementation -- in this case we should ignore
    * respective part of protocol message based on <code>undefined</code> result of parsing.
    */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   export const normalizeUnsupported = (_x: never): undefined => {
     return undefined;
   };

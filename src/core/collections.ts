@@ -82,7 +82,6 @@ export namespace Collections {
     return !someDiffA && !someDiffB;
   };
 
-  // eslint-disable-next-line functional/prefer-readonly-type
   export const invertMap = <K, V>(map: Map<K, V>): Map<V, K> =>
     new Map(Array.from(map, (entry) => [entry[1], entry[0]]));
 }

@@ -31,7 +31,6 @@ export type SomeObject = Record<string, unknown>;
  * Fair JSON type.
  * @see https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#more-recursive-type-aliases
  */
-// eslint-disable-next-line functional/prefer-readonly-type
 export type Json = number | string | null | boolean | Json[] | { [key: string]: Json };
 
 /** Semantic Marker for the Callback function. */

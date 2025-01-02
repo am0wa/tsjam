@@ -29,8 +29,7 @@ export const isCallback = (x: unknown): x is Callback => {
 };
 
 /** Shorthand for `Array.isArray(item)`. */
-// eslint-disable-next-line functional/prefer-readonly-type, @typescript-eslint/no-explicit-any
-export const isArrayLike = (item: unknown): item is any[] => {
+export const isArrayLike = (item: unknown): item is unknown[] => {
   return Array.isArray(item);
 };
 

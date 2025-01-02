@@ -71,7 +71,9 @@ export const fetchData = (
 ): Promise<Response> => {
   return new Promise<Response>((resolve, reject) => {
     fetch(path, { cache, mode })
+      // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors
       .then((response) => (response.ok ? resolve(response) : reject(response)))
+      // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors
       .catch((reason) => reject(reason));
   });
 };

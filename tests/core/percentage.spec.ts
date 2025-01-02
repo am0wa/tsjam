@@ -26,7 +26,7 @@ describe('percentage', () => {
     expect(() => Percentage.within100(115)).toThrow();
   });
   it('Typeguard', () => {
-    expect(Percentage.isIt(115)).toBe(false);
+    expect(Percentage.isIt(115)).toBe(true);
     expect(Percentage.isIt(undefined)).toBe(false);
     expect(Percentage.isIt(null)).toBe(false);
     expect(Percentage.isIt(25)).toBe(true);

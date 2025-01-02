@@ -18,6 +18,7 @@ export enum ComparisonResult {
 }
 
 export const comparePrimitives = <T extends number | string>(a: T, b: T): ComparisonResult => {
+  // eslint-disable-next-line no-nested-ternary
   return a > b ? ComparisonResult.Higher : a < b ? ComparisonResult.Lower : ComparisonResult.Same;
 };
 

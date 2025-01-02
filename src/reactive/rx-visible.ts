@@ -7,27 +7,28 @@ import { RxDisposable } from './rx-disposable';
  * Reactive Disposable Entity with build-in Visibility state.
  */
 export class RxVisible extends RxDisposable {
-
   readonly shown$: Observable<'shown'>;
   readonly visible$: Observable<boolean>;
 
   private readonly _visible$ = new BehaviorSubject(false);
 
   /** prevents any changes on same value */
-  /* eslint-disable-next-line functional/prefer-readonly-type */
-  #distinct = true
+  #distinct = true;
 
   constructor() {
     super();
     this.visible$ = this._visible$.asObservable();
-    this.shown$ = this.visible$.pipe(filter(Boolean), map(() => 'shown'));
+    this.shown$ = this.visible$.pipe(
+      filter(Boolean),
+      map(() => 'shown'),
+    );
 
     this.autoDispose(() => this._visible$.complete());
   }
 
   readonly hide = (): void => this.setVisible(false);
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any,@typescript-eslint/no-unused-vars
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   readonly show = (..._args: readonly any[]): void => this.setVisible(true);
 
   readonly setVisible = (value: boolean): void => {
@@ -35,7 +36,7 @@ export class RxVisible extends RxDisposable {
       return;
     }
     this._visible$.next(value);
-  }
+  };
 
   get isVisible(): boolean {
     return this._visible$.value;

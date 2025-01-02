@@ -12,7 +12,7 @@ export interface DisposableLike {
 export type DisposeCallback = (...args: readonly any[]) => void;
 
 export const isDisposable = (x: unknown): x is DisposableLike => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any,@typescript-eslint/no-unsafe-member-access,@typescript-eslint/consistent-type-assertions
   return !!x && typeof (x as any).dispose === 'function';
 };
 
@@ -24,7 +24,9 @@ export const isDisposable = (x: unknown): x is DisposableLike => {
 export class Disposable implements DisposableLike {
   protected readonly _ripBag = DisposeBag.create();
 
-  get disposed(): boolean { return this._ripBag.disposed }
+  get disposed(): boolean {
+    return this._ripBag.disposed;
+  }
 
   /**
    * Kill all Disposable Objects
@@ -34,5 +36,7 @@ export class Disposable implements DisposableLike {
     return this._ripBag.add(teardown);
   }
 
-  dispose(): void { this._ripBag.dispose() }
+  dispose(): void {
+    this._ripBag.dispose();
+  }
 }

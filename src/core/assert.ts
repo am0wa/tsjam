@@ -1,5 +1,6 @@
 import { AssertionError } from './errors';
 
+// eslint-disable-next-line @typescript-eslint/naming-convention
 declare const __DEVELOPMENT__: boolean;
 
 // Given JavaScript's flexibility, it can be a good idea to add
@@ -16,10 +17,9 @@ declare const __DEVELOPMENT__: boolean;
 // value is true:
 
 export function assert(expression: unknown, message?: string): asserts expression {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-assignment
   const condition = typeof expression === 'function' ? expression() : expression;
   if (!condition) {
-    // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
     throw new AssertionError(`assert: ${message ?? 'Unexpected condition'} :${'' + condition}`);
   }
 }

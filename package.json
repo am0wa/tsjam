@@ -18,7 +18,7 @@
   },
   "scripts": {
     "build": "tsc -b src/tsconfig.json",
-    "lint": "eslint . --ext .ts --fix",
+    "lint": "eslint src",
     "test": "node ./node_modules/jest/bin/jest.js --config jest.config.js",
     "watch:build": "tsc -b tsconfig.json -w",
     "watch:test": "node ./node_modules/jest/bin/jest.js --config jest.config.js --watchAll",
@@ -32,10 +32,10 @@
     "prepare-release": "run-s clean:dist lint test patch-version doc:html",
     "prepublishOnly": "run-s clean:dist build test",
     "postpublish": "git push --tags origin master",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "engines": {
-    "node": ">=10"
+    "node": ">=20"
   },
   "optionalDependencies": {
     "@tsjam/logger": "^1.0.3"
@@ -44,15 +44,16 @@
     "rxjs": "^7.x"
   },
   "devDependencies": {
-    "@tsjam/eslint-config-recommended": "^0.1.0",
-    "@tsjam/jest-config-recommended": "^0.1.1",
-    "@tsjam/web-config-base": "^0.1.1",
-    "eslint-plugin-functional": "^6.0.0",
+    "@tsjam/eslint-config-recommended": "^0.2.1",
+    "@tsjam/jest-config-recommended": "^0.1.2",
+    "@tsjam/web-config-base": "^0.2.0",
+    "eslint": "^9.17.0",
     "gh-pages": "^3.2.3",
     "npm-run-all": "^4.1.5",
-    "rxjs": "^7.8.0",
-    "typedoc": "^0.25.3",
-    "typescript": "^5.1.6"
+    "rimraf": "^6.0.1",
+    "rxjs": "^7.8.1",
+    "typedoc": "^0.27.6",
+    "typescript": "^5.7.2"
   },
   "files": [
     "lib",
@@ -60,11 +61,6 @@
     "!**/tsconfig.tsbuildinfo"
   ],
   "prettier": "@tsjam/web-config-base/prettier.config.js",
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "lint-staged": {
     "*.{ts,tsx,js}": "eslint --cache --fix",
     "*.{ts,tsx,js,css,md}": "prettier --write"

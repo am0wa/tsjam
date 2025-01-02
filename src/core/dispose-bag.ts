@@ -10,14 +10,12 @@ export interface DisposableBag<T> extends DisposableLike {
   readonly id: RipId;
   readonly size: number;
   readonly disposed: boolean;
-  add(disposable: T): T
+  add(disposable: T): T;
   dispose(): void;
 }
 
 export class DisposeBag implements DisposableBag<DisposableLike | DisposeCallback> {
-
   public static dispose(disposable: DisposableLike | DisposeCallback): void {
-    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     isDisposable(disposable) ? disposable.dispose() : disposable();
   }
 
@@ -27,17 +25,24 @@ export class DisposeBag implements DisposableBag<DisposableLike | DisposeCallbac
 
   private static _counter = 0;
   private static generateId(): RipId {
-    return DisposeBag._counter++ as RipId
+    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+    return DisposeBag._counter++ as RipId;
   }
 
   private readonly _disposables = new Array<DisposableLike | DisposeCallback>();
   private _registry: WeakSet<DisposableLike | DisposeCallback> | undefined; // registry erased after dispose
   private _disposed = false;
 
-  protected constructor(readonly id: RipId) { this._registry = new WeakSet<DisposableLike | DisposeCallback>() }
+  protected constructor(readonly id: RipId) {
+    this._registry = new WeakSet<DisposableLike | DisposeCallback>();
+  }
 
-  get size(): number { return this._disposables.length; }
-  get disposed(): boolean { return this._disposed; }
+  get size(): number {
+    return this._disposables.length;
+  }
+  get disposed(): boolean {
+    return this._disposed;
+  }
 
   /**
    * If disposed - dispose adding object immediately
@@ -64,9 +69,9 @@ export class DisposeBag implements DisposableBag<DisposableLike | DisposeCallbac
     this._disposables.forEach((disposable) => {
       DisposeBag.dispose(disposable);
       this._registry?.delete(disposable);
-    })
+    });
     this._disposables.length = 0; // erase
-    this._registry = undefined;   // erase
-    this._disposed = true;        // finalize
+    this._registry = undefined; // erase
+    this._disposed = true; // finalize
   }
 }

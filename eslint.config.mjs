@@ -25,7 +25,20 @@ export default [
       'no-param-reassign': 'error',
       '@typescript-eslint/unbound-method': 'error',
       '@typescript-eslint/default-param-last': 'warn',
+      '@typescript-eslint/restrict-plus-operands': 'warn',
       '@typescript-eslint/no-base-to-string': 'off',
+      "@typescript-eslint/naming-convention": [
+        "error",
+        {
+          "selector": "variable",
+          "format": ["camelCase", "PascalCase", "UPPER_CASE"],
+          "leadingUnderscore": "allow",
+          "filter": {
+            "regex": "^_",
+            "match": true
+          }
+        }
+      ]
     },
   },
 ];

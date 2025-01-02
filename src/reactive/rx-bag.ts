@@ -13,23 +13,30 @@ export class RxBag implements DisposableBag<Unsubscribable | UnsubscribeCallback
   private static _counter = 0;
 
   public static create(): RxBag {
-    const one = new RxBag(RxBag.generateId())
+    const one = new RxBag(RxBag.generateId());
     RxBag.all.set(one.id, one);
     return one;
   }
 
   private static generateId(): RipId {
-    return RxBag._counter++ as RipId
+    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+    return RxBag._counter++ as RipId;
   }
 
   private readonly _sub$ = new Subscription();
   private _size = 0;
   private _closed = false;
 
-  protected constructor(readonly id: RipId) { /* empty */ }
+  protected constructor(readonly id: RipId) {
+    /* empty */
+  }
 
-  get size(): number { return this._size; }
-  get disposed(): boolean { return this._closed; }
+  get size(): number {
+    return this._size;
+  }
+  get disposed(): boolean {
+    return this._closed;
+  }
 
   /**
    * Adds subscription to sink, if disposed subscription will be flushed right-away.
@@ -44,7 +51,7 @@ export class RxBag implements DisposableBag<Unsubscribable | UnsubscribeCallback
     }
     this._size++;
     return subscription;
-  }
+  };
 
   /**
    * Unsubscribe from all subscriptions,

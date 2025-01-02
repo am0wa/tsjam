@@ -6,14 +6,14 @@ import { Disposable, DisposableLike, DisposeCallback, isCallback, isDisposable }
 import { RxBag } from './rx-bag';
 
 export const isUnsubscribable = (x: unknown): x is Unsubscribable => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any,@typescript-eslint/no-unsafe-member-access,@typescript-eslint/consistent-type-assertions
   return !!x && typeof (x as any).unsubscribe === 'function';
 };
 
 /**
  * Reactive Disposable Entity to avoid memory Leaks.
  * Base reactive abstraction with the instance of RxBag for life-cycle management of resources.
- * RIP any Disposable or Subscription on the instance dispose.  
+ * RIP any Disposable or Subscription on the instance dispose.
  */
 export class RxDisposable extends Disposable {
   protected readonly _rxBag = RxBag.create();
@@ -29,10 +29,10 @@ export class RxDisposable extends Disposable {
    * Invokes all teardown callbacks.
    */
   override dispose(): void {
-    this._rxBag.dispose();       // kill all subscriptions
-    super.dispose();             // kill all children
-    this._disposed$.next();      // emmit disposed to subscribers
-    this._disposed$.complete();  // finalize
+    this._rxBag.dispose(); // kill all subscriptions
+    super.dispose(); // kill all children
+    this._disposed$.next(); // emmit disposed to subscribers
+    this._disposed$.complete(); // finalize
   }
 
   /**
@@ -42,10 +42,10 @@ export class RxDisposable extends Disposable {
    */
   override autoDispose<T extends Unsubscribable | DisposableLike | DisposeCallback>(teardown: T): T {
     if (isUnsubscribable(teardown)) {
-      this._rxBag.add(teardown)
+      this._rxBag.add(teardown);
       return teardown;
     }
-    if (isDisposable(teardown) || isCallback(teardown)){
+    if (isDisposable(teardown) || isCallback(teardown)) {
       return super.autoDispose(teardown);
     }
     return teardown;
