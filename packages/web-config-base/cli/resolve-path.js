@@ -6,7 +6,10 @@ const path = require('path');
  * @example
  * resolveToPath('src/assets') => /absolute/path/to/root/directory/src/assets
  */
-const resolveToPath = (toPath) => (...args) => path.join(toPath, ...args);
+const resolveToPath =
+  (toPath) =>
+  (...args) =>
+    path.join(toPath, ...args);
 const resolveToRoot = resolveToPath(process.cwd());
 
 const resolveToNodeModules = resolveToPath(resolveToRoot('./node_modules'));

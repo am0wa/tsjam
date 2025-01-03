@@ -7,9 +7,11 @@ import {
   Json,
   MessagingProvider,
   optionalMap,
-  ParseFn, replayLastMessage$, SafeJSON,
+  ParseFn,
+  replayLastMessage$,
+  SafeJSON,
   Typeguard,
-  unwrap
+  unwrap,
 } from 'tsjam';
 
 import ownProperty = unwrap.ownProperty;
@@ -83,9 +85,10 @@ export class PostMessageHost<InboundT, OutboundT, RawT> implements MessagingProv
     const matcher = (response: InboundT): response is ResponseT => {
       const request = message; // literal name narrowing
       if (
-        isObject(response)
-        && isObject(request) // if objects check property
-        && ownProperty(response, this.rpcId) !== ownProperty(request, this.rpcId)
+        isObject(response) &&
+        isObject(request) && // if objects check property
+        // @ts-expect-error - we know it's a same string
+        ownProperty(response, this.rpcId) !== ownProperty(request, this.rpcId)
       ) {
         // if no property we pass through to the actual matcher
         return false; // not our response

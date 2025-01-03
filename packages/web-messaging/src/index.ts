@@ -1,1 +1,1 @@
-export * from './post-message-host'
+export * from './post-message-host';
