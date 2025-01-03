@@ -1,6 +1,6 @@
 {
   "name": "@tsjam/jest-config-recommended",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Shared ts jest config: jest",
   "main": "",
   "files": [
@@ -11,14 +11,7 @@
     "shared jest config"
   ],
   "author": "am0wa",
-  "contributors": [
-    "am0wa"
-  ],
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/am0wa/tsjam/issues"
-  },
-  "homepage": "https://github.com/am0wa/tsjam#readme",
+  "license": "MIT",
   "dependencies": {
     "@types/jest": "29.x",
     "jest": "29.x",
@@ -27,7 +20,6 @@
     "ts-jest": "29.x"
   },
   "peerDependencies": {
-    "@types/jest": "29.x",
     "jest": "29.x",
     "ts-jest": "29.x"
   }

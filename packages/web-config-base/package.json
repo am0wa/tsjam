@@ -25,14 +25,10 @@
   "homepage": "https://github.com/am0wa/tsjam#readme",
   "prettier": "./prettier.config.js",
   "dependencies": {
-    "husky": "^9.1.7",
-    "lint-staged": "^15.3.0",
-    "reflect-metadata": "^0.2.2",
-    "prettier": "^3.4.2",
-    "rimraf": "^6.0.1"
-  },
-  "peerDependencies": {
+    "husky": "^9",
+    "rimraf": "^6",
     "prettier": ">=3.x",
-    "typescript": ">=5.x"
+    "typescript": ">=5.x",
+    "lint-staged": "^15"
   }
 }

@@ -15,9 +15,11 @@
   ],
   "license": "ISC",
   "homepage": "https://github.com/am0wa/tsjam#readme",
-  "prettier": "./prettier.config.js",
   "devDependencies": {
-    "tsjam": "^1.4.1",
-    "typescript": ">=4.x"
+    "typescript": "catalog:"
+  },
+  "peerDependencies": {
+    "rxjs": "^7.x",
+    "tsjam": ">=1.5"
   }
 }

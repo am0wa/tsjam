@@ -3,7 +3,7 @@ import {
   recommended,
   recommendedTypeChecked,
   recommendedImport,
-  recommendedJSX
+  recommendedJSX,
 } from './eslint-recommended.mjs';
 
 export default {
@@ -11,5 +11,5 @@ export default {
   recommended,
   recommendedTypeChecked,
   recommendedImport,
-  recommendedJSX
+  recommendedJSX,
 };
