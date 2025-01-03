@@ -16,15 +16,15 @@ const recommended = {
       },
     ],
     'no-underscore-dangle': 'off',
-  }
-}
+  },
+};
 
 const recommendedImport = {
   rules: {
     // this rule dramatically increases lint time
     'import/extensions': 'off',
     // don't process import order - too heavy and not flexible enough (use prettier)
-    "import/order": "off",
+    'import/order': 'off',
     'import/prefer-default-export': 'off',
     'import/no-default-export': 'error',
     'no-restricted-imports': [
@@ -34,8 +34,8 @@ const recommendedImport = {
         patterns: ['../lib/*', '../dist/*', '../src/*', '../../*'],
       },
     ],
-  }
-}
+  },
+};
 
 const recommendedTypeChecked = {
   rules: {
@@ -45,7 +45,7 @@ const recommendedTypeChecked = {
     '@typescript-eslint/array-type': ['error', { default: 'array' }],
     '@typescript-eslint/no-unused-expressions': ['error', { allowTernary: true, allowShortCircuit: true }],
     '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
-    '@typescript-eslint/unbound-method': ["error", { "ignoreStatic": true }],
+    '@typescript-eslint/unbound-method': ['error', { ignoreStatic: true }],
     // do not allow as T type casting
     '@typescript-eslint/consistent-type-assertions': ['error', { assertionStyle: 'never' }],
     '@typescript-eslint/explicit-function-return-type': ['error'],
@@ -63,18 +63,18 @@ const recommendedTypeChecked = {
       },
     ],
     // with default arrays its more convenient to off
-    "@typescript-eslint/default-param-last": "off",
+    '@typescript-eslint/default-param-last': 'off',
     // rather off - very misbehaving rule
-    "@typescript-eslint/member-ordering": "off",
-  }
-}
+    '@typescript-eslint/member-ordering': 'off',
+  },
+};
 
 const recommendedJSX = {
   rules: {
     'react/jsx-uses-react': 'off',
     'react/react-in-jsx-scope': 'off',
-  }
-}
+  },
+};
 
 const recommendedTS = [
   // inclues 'typescript-eslint/base'
@@ -87,18 +87,12 @@ const recommendedTS = [
     rules: {
       ...recommended.rules,
       ...recommendedTypeChecked.rules,
-    }
-  }
-]
+    },
+  },
+];
 
 const configs = {
   recommendedTS,
-}
-
-export {
-  configs,
-  recommended,
-  recommendedTypeChecked,
-  recommendedImport,
-  recommendedJSX
 };
+
+export { configs, recommended, recommendedTypeChecked, recommendedImport, recommendedJSX };

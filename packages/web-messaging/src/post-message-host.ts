@@ -7,9 +7,11 @@ import {
   Json,
   MessagingProvider,
   optionalMap,
-  ParseFn, replayLastMessage$, SafeJSON,
+  ParseFn,
+  replayLastMessage$,
+  SafeJSON,
   Typeguard,
-  unwrap
+  unwrap,
 } from 'tsjam';
 
 import ownProperty = unwrap.ownProperty;
@@ -22,6 +24,17 @@ export const windowMessage$ = <T, U>(target: Window, parseFn: ParseFn<T, U>): Ob
   );
 };
 
+export type PostMessageHostParams<InboundT, OutboundT, RawT> = Readonly<{
+  /** Window to which post message will be sent */
+  target: Window;
+  /** Parse the unknown inbound messages */
+  deserialize: ParseFn<RawT, InboundT>;
+  /** Stringify the outbound messages */
+  serialize: ParseFn<OutboundT, RawT>;
+  /** Origin of window to which post message will be sent */
+  targetOrigin?: string;
+}>;
+
 /**
  * Define your Inbound and Outbound message Types and get the typed streams of message$
  */
@@ -32,6 +45,10 @@ export class PostMessageHost<InboundT, OutboundT, RawT> implements MessagingProv
 
   /**
    * Creates JSON based PostMessage Host with JSON.parse / JSON.stringify under hood.
+   * @param target - `window` to which post message will be sent
+   * @param typeMatcher - deserialize the unknown inbound messages
+   * @param rpcId - request/response matching id that guaranties their correspondence
+   * @param targetOrigin - specifies what the origin from `targetWindow` must be for the event
    */
   static bakeWithJSON<I, O>(
     target: Window,
@@ -49,11 +66,12 @@ export class PostMessageHost<InboundT, OutboundT, RawT> implements MessagingProv
   }
 
   /**
-   * @param target - `window` to which post message will be send
+   * Post Message Host constructor.
+   * @param target - `window` to which post message will be sent
    * @param deserialize - parse the unknown inbound messages
    * @param serialize - stringify the outbound messages
    * @param rpcId - request/response matching id that guaranties their correspondence
-   * @param targetOrigin - specifies what the origin from `targetWindow` must be for the event.
+   * @param targetOrigin - specifies what the origin from `targetWindow` must be for the event
    */
   constructor(
     readonly target: Window,
@@ -83,9 +101,10 @@ export class PostMessageHost<InboundT, OutboundT, RawT> implements MessagingProv
     const matcher = (response: InboundT): response is ResponseT => {
       const request = message; // literal name narrowing
       if (
-        isObject(response)
-        && isObject(request) // if objects check property
-        && ownProperty(response, this.rpcId) !== ownProperty(request, this.rpcId)
+        isObject(response) &&
+        isObject(request) && // if objects check property
+        // @ts-expect-error - we know it's a same string
+        ownProperty(response, this.rpcId) !== ownProperty(request, this.rpcId)
       ) {
         // if no property we pass through to the actual matcher
         return false; // not our response

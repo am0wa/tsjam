@@ -1,13 +1,13 @@
-import ourEslint from '@tsjam/eslint-config-recommended';
+import jamEslint from '@tsjam/eslint-config-recommended';
 
-console.info('Linting..🕵️', ourEslint.configs.recommendedTS);
+console.info('Linting..🕵️', jamEslint.configs.recommendedTS);
 
 /**
  * @see https://typescript-eslint.io/users/configs/#recommended
  */
 export default [
   {
-    ignores: ['node_modules', 'lib', 'dist', '*.config.js'],
+    ignores: ['node_modules', 'lib', 'dist', '**/*.config.js'],
     languageOptions: {
       parserOptions: {
         projectService: true,
@@ -18,8 +18,8 @@ export default [
   // inclues 'typescript-eslint/base'
   // inclues 'typescript-eslint/eslint-recommended'
   // inclues 'typescript-eslint/recommended-type-checked'
-  // ...tsEslint.configs.recommendedTypeChecked, // + our TS rules
-  ...ourEslint.configs.recommendedTS,
+  // ...tsEslint.configs.recommendedTypeChecked, // + jam TS rules
+  ...jamEslint.configs.recommendedTS,
   {
     rules: {
       'no-param-reassign': 'error',
@@ -27,18 +27,19 @@ export default [
       '@typescript-eslint/default-param-last': 'warn',
       '@typescript-eslint/restrict-plus-operands': 'warn',
       '@typescript-eslint/no-base-to-string': 'off',
-      "@typescript-eslint/naming-convention": [
-        "error",
+      '@typescript-eslint/explicit-function-return-type': ['error', { allowExpressions: true }],
+      '@typescript-eslint/naming-convention': [
+        'error',
         {
-          "selector": "variable",
-          "format": ["camelCase", "PascalCase", "UPPER_CASE"],
-          "leadingUnderscore": "allow",
-          "filter": {
-            "regex": "^_",
-            "match": true
-          }
-        }
-      ]
+          selector: 'variable',
+          format: ['camelCase', 'PascalCase', 'UPPER_CASE'],
+          leadingUnderscore: 'allow',
+          filter: {
+            regex: '^_',
+            match: true,
+          },
+        },
+      ],
     },
   },
 ];

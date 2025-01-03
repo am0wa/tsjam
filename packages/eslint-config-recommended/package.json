@@ -1,6 +1,6 @@
 {
   "name": "@tsjam/eslint-config-recommended",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Shared Eslint Config Module",
   "main": "index.mjs",
   "files": [
@@ -10,15 +10,16 @@
   "keywords": [
     "eslint-config",
     "flat-eslint-config",
-    "reccomended"
+    "recommended"
   ],
   "author": "am0wa",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@eslint/js": "^9.13.0",
     "@types/eslint__js": "^8.42.3",
+    "eslint": "^9",
     "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-jest": "^28.10.0",
+    "globals": "^15.14.0",
     "typescript-eslint": "^8.19.0"
   },
   "peerDependencies": {

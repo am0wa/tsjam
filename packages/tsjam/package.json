@@ -1,0 +1,62 @@
+{
+  "name": "tsjam",
+  "version": "1.6.0",
+  "description": "vanilla typescript sweets",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "repository": "https://github.com/am0wa/tsjam",
+  "license": "MIT",
+  "keywords": [
+    "typescript",
+    "utils",
+    "disposable",
+    "rx-disposable",
+    "rx-tools"
+  ],
+  "publishConfig": {
+    "registry:": "https://registry.npmjs.org/"
+  },
+  "scripts": {
+    "build": "tsc -b src/tsconfig.json",
+    "lint": "eslint src",
+    "test": "jest tests",
+    "watch:build": "tsc -b tsconfig.json -w",
+    "watch:test": "node ./node_modules/jest/bin/jest.js --config jest.config.js --watchAll",
+    "doc": "run-s doc:html",
+    "doc:html": "typedoc src/ --exclude **/*.spec.ts --out docs",
+    "doc:publish": "gh-pages -m \"[ci skip] Updates\" -d docs",
+    "clean": "run-p clean:*",
+    "clean:dist": "rimraf lib",
+    "reset-hard": "git clean -f -d && git reset --hard && pnpm i",
+    "patch-version": "pnpm version patch",
+    "prepare-release": "run-s clean:dist lint test patch-version doc:html",
+    "prepublishOnly": "run-s clean:dist build test",
+    "postpublish": "git push --tags origin master"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "optionalDependencies": {
+    "@tsjam/logger": "^1.0.3"
+  },
+  "peerDependencies": {
+    "rxjs": "^7.x"
+  },
+  "devDependencies": {
+    "@tsjam/jest-config-recommended": "workspace:*",
+    "@types/jest": "catalog:jest29",
+    "jest": "catalog:jest29",
+    "ts-jest": "catalog:jest29",
+    "gh-pages": "^3.2.3",
+    "npm-run-all": "catalog:",
+    "rxjs": "^7.8.1",
+    "typedoc": "^0.27.6",
+    "typescript": "catalog:"
+  },
+  "files": [
+    "lib",
+    "tsconfig.json",
+    "!**/tsconfig.tsbuildinfo"
+  ],
+  "prettier": "@tsjam/web-config-base/prettier.config.js"
+}
