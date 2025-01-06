@@ -9,16 +9,14 @@
     "format": "prettier . --write",
     "prepare": "husky"
   },
-  "keywords": [
-    "pnpm-monorepo"
-  ],
+  "keywords": ["pnpm-monorepo"],
   "author": "am0wa",
   "license": "ISC",
   "engines": {
     "node": ">=20",
     "pnpm": ">=9.15"
   },
-  "packageManager": "pnpm@9.15.2",
+  "packageManager": "pnpm@9.15.3",
   "devDependencies": {
     "@tsjam/eslint-config-recommended": "workspace:*",
     "@tsjam/web-config-base": "workspace:*",
