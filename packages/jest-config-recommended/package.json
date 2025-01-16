@@ -1,6 +1,6 @@
 {
   "name": "@tsjam/jest-config-recommended",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Shared ts jest config: jest",
   "main": "",
   "files": [

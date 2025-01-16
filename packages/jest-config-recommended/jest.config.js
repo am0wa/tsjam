@@ -7,11 +7,16 @@ const defaultConfig = {
   preset: 'ts-jest',
   transformIgnorePatterns: ['\\.(css|sass|scss)$'],
   testEnvironment: 'jsdom', // default
+  transform: {
+    '^.+\\.tsx?$': [
+      'ts-jest',
+      {
+        tsconfig: '<rootDir>/tests/tsconfig.json',
+        isolatedModules: true, // speeds up tests at the expense of type-checking
+      },
+    ]
+  },
   globals: {
-    'ts-jest': {
-      tsconfig: '<rootDir>/tests/tsconfig.json',
-      isolatedModules: true, // @see https://github.com/kulshekhar/ts-jest/issues/805#issuecomment-456055213
-    },
     __DEVELOPMENT__: false,
   },
   testMatch: ['<rootDir>/tests/**/*.+(spec|test).+(ts|tsx)'],
