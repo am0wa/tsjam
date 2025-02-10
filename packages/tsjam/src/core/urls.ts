@@ -40,4 +40,7 @@ export namespace Urls {
     });
     return urlParams;
   };
+
+  const urlPattern = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?.*/;
+  export const isValidUrl = (url: string): boolean => urlPattern.test(url);
 }
