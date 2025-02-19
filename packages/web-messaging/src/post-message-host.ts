@@ -103,7 +103,6 @@ export class PostMessageHost<InboundT, OutboundT, RawT> implements MessagingProv
       if (
         isObject(response) &&
         isObject(request) && // if objects check property
-        // @ts-expect-error - we know it's a same string
         ownProperty(response, this.rpcId) !== ownProperty(request, this.rpcId)
       ) {
         // if no property we pass through to the actual matcher

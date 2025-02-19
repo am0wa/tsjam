@@ -1,18 +1,25 @@
 {
   "name": "@tsjam/web-messaging",
   "version": "0.0.1",
-  "description": "Shared configurations: ts, es-lint, prettier, jest",
-  "main": "",
+  "description": "Reactive Post message host",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "scripts": {
+    "build": "tsc -b src/tsconfig.json",
+    "lint": "eslint src",
+    "test": "echo tests",
+    "clean:dist": "rimraf lib",
+    "prepublishOnly": "run-s clean:dist build test"
+  },
   "files": [
-    "lib"
+    "lib",
+    "tsconfig.json",
+    "!**/tsconfig.tsbuildinfo"
   ],
   "keywords": [
     "post message host"
   ],
   "author": "am0wa",
-  "contributors": [
-    "am0wa"
-  ],
   "license": "ISC",
   "homepage": "https://github.com/am0wa/tsjam#readme",
   "devDependencies": {

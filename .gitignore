@@ -9,7 +9,7 @@ node_modules
 # production (added to git in order to distribute this folder)
 /build
 /dist
-/lib
+lib
 *.tsbuildinfo
 
 # docs
