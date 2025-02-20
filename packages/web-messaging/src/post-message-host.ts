@@ -40,7 +40,7 @@ export type JsonPostMessageHostParams<InboundT extends Json, OutboundT = string>
   PostMessageHostParams<InboundT, OutboundT, string>,
   'serialize' | 'deserialize'
 > & {
-  deserialize?: ParseFn<string, InboundT>;
+  deserialize?: ParseFn<Json, InboundT>;
 };
 
 /**
@@ -62,11 +62,12 @@ export class PostMessageHost<InboundT, OutboundT, RawT> implements MessagingProv
     rpcId,
     target,
     targetOrigin,
-    deserialize,
+    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+    deserialize = (jsonValue) => jsonValue as I,
   }: JsonPostMessageHostParams<I, O>): PostMessageHost<Json, O, string> {
     return new PostMessageHost<Json, O, string>({
       target,
-      deserialize: deserialize ?? SafeJSON.parse,
+      deserialize: (value) => optionalMap(SafeJSON.parse(value), deserialize),
       serialize: SafeJSON.stringify,
       targetOrigin,
       rpcId,
