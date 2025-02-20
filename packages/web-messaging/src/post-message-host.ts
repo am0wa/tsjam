@@ -36,14 +36,11 @@ export type PostMessageHostParams<InboundT, OutboundT, RawT> = Readonly<{
   rpcId?: string;
 }>;
 
-export type JsonPostMessageHostParams<InboundT> = {
-  typeMatcher: ParseFn<Json, InboundT>;
-  /** Window to which post message will be sent */
-  target: Window;
-  /** Origin of window to which post message will be sent */
-  targetOrigin?: string;
-  /** Unique transport instance id to match messages related to this transport */
-  rpcId?: string;
+export type JsonPostMessageHostParams<InboundT extends Json, OutboundT = string> = Omit<
+  PostMessageHostParams<InboundT, OutboundT, string>,
+  'serialize' | 'deserialize'
+> & {
+  deserialize?: ParseFn<string, InboundT>;
 };
 
 /**
@@ -61,16 +58,16 @@ export class PostMessageHost<InboundT, OutboundT, RawT> implements MessagingProv
    * @param targetOrigin - specifies what the origin from `targetWindow` must be for the event
    * @param rpcId - request/response matching id that guaranties their correspondence
    */
-  static jsonHost<I, O>({
-    target,
-    typeMatcher,
-    targetOrigin,
+  static jsonHost<I extends Json = Json, O = unknown>({
     rpcId,
-  }: JsonPostMessageHostParams<I>): PostMessageHost<I, O, string> {
-    return new PostMessageHost<I, O, string>({
+    target,
+    targetOrigin,
+    deserialize,
+  }: JsonPostMessageHostParams<I, O>): PostMessageHost<Json, O, string> {
+    return new PostMessageHost<Json, O, string>({
       target,
-      deserialize: (value) => optionalMap(SafeJSON.parse(value), typeMatcher),
-      serialize: JSON.stringify,
+      deserialize: deserialize ?? SafeJSON.parse,
+      serialize: SafeJSON.stringify,
       targetOrigin,
       rpcId,
     });
