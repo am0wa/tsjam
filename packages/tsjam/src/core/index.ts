@@ -23,3 +23,4 @@ export * from './percentage';
 export * from './alphabet';
 export * from './urls';
 export * from './safe-json';
+export * from './interpolation';
