@@ -1,4 +1,4 @@
-import { primitiveToBoolean, stringToEnum, stringToInteger } from 'core/from-it';
+import { primitiveToBoolean, stringToEnum, stringToInteger, toKebabCase } from 'core/from-it';
 
 describe('fromIt', () => {
   describe('primitiveToBoolean', () => {
@@ -81,6 +81,32 @@ describe('fromIt', () => {
       expect(stringToEnum(TestEnum, '')).toBeUndefined();
       expect(stringToEnum(TestEnum, undefined)).toBeUndefined();
       expect(stringToEnum(TestEnum, null)).toBeUndefined();
+    });
+  });
+  describe('snake_case toKebabCase', () => {
+    it('snake_case to kebab-case', () => {
+      const input = 'snake_case_string';
+      const expectedOutput = 'snake-case-string';
+      const result = toKebabCase(input);
+      expect(result).toEqual(expectedOutput);
+    });
+    it('cameCale to kebab-case', () => {
+      const input = 'camelCaseString';
+      const expectedOutput = 'camel-case-string';
+      const result = toKebabCase(input);
+      expect(result).toEqual(expectedOutput);
+    });
+    it('PascalCase to kebab-case', () => {
+      const input = 'PascalCaseString';
+      const expectedOutput = 'pascal-case-string';
+      const result = toKebabCase(input);
+      expect(result).toEqual(expectedOutput);
+    });
+    it('camel_SnakeMix to kebab-case', () => {
+      const input = 'camel_SnakeMixString';
+      const expectedOutput = 'camel-snake-mix-string';
+      const result = toKebabCase(input);
+      expect(result).toEqual(expectedOutput);
     });
   });
 });

@@ -45,7 +45,7 @@ export const stringToEnum = <T extends StringEnum>(
     | undefined;
 };
 
-const camelOrPascalCase = /([a-z])([A-Z])/g;
+const camelOrPascalOrSnakeCase = /([a-z])([A-Z])|_/g;
 export const toKebabCase = (str: string): string => {
-  return str.replace(camelOrPascalCase, '$1-$2').toLowerCase();
+  return str.replace(camelOrPascalOrSnakeCase, (_, p1, p2) => (p2 ? `${p1}-${p2}` : '-')).toLowerCase();
 };
