@@ -1,4 +1,4 @@
-import { fromEvent, Observable } from 'rxjs';
+import { EMPTY, fromEvent, Observable } from 'rxjs';
 import { filter, map, share } from 'rxjs/operators';
 
 import {
@@ -63,11 +63,11 @@ export class PostMessageHost<InboundT, OutboundT, RawT> implements MessagingProv
     target,
     targetOrigin,
     // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-    deserialize = (jsonValue) => jsonValue as I,
+    deserialize = (jsonValue: unknown) => jsonValue as I,
   }: JsonPostMessageHostParams<I, O>): PostMessageHost<Json, O, string> {
     return new PostMessageHost<Json, O, string>({
       target,
-      deserialize: (value) => optionalMap(SafeJSON.parse(value), deserialize),
+      deserialize: (value: unknown) => optionalMap(SafeJSON.parse(`${value}`), deserialize),
       serialize: SafeJSON.stringify,
       targetOrigin,
       rpcId,
@@ -102,18 +102,13 @@ export class PostMessageHost<InboundT, OutboundT, RawT> implements MessagingProv
     this.message$ = windowMessage$(window, deserialize);
   }
 
-  send(message: OutboundT): void;
-  send<ResponseT extends InboundT>(
-    message: OutboundT,
-    responseMatcher: Typeguard<ResponseT, InboundT>,
-  ): Observable<ResponseT>;
-  send<ResponseT extends InboundT>(
+  send = <ResponseT extends InboundT>(
     message: OutboundT,
     responseMatcher?: Typeguard<ResponseT, InboundT>,
-  ): Observable<ResponseT> | undefined {
+  ): Observable<ResponseT> => {
     this.target.postMessage(this.#serialize(message), this.targetOrigin);
     if (!isSomething(responseMatcher)) {
-      return undefined;
+      return EMPTY;
     }
 
     const matcher = (response: InboundT): response is ResponseT => {
@@ -127,9 +122,9 @@ export class PostMessageHost<InboundT, OutboundT, RawT> implements MessagingProv
         // if no property we pass through to the actual matcher
         return false; // not our response
       }
-      return responseMatcher(response); // much by type now
+      return responseMatcher && responseMatcher(response); // much by type now
     };
 
     return replayLastMessage$(this.message$, matcher);
-  }
+  };
 }
