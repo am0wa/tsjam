@@ -5,23 +5,26 @@ import { Typeguard } from '../core';
 
 import { replayLatest } from './rx-operators';
 
-export type MessagingProvider<InboundT, OutboundT> = {
-  readonly message$: Observable<InboundT>;
+export type NotificationProvider<OutboundT> = {
   /**
    * Send one way Notification.
    * @param message - notification message
    */
-  send(message: OutboundT): void;
+  send: (notification: OutboundT) => void;
+};
+
+export type MessagingProvider<InboundT, OutboundT> = {
+  readonly message$: Observable<InboundT>;
   /**
    * Send Request, pick corresponding Response.
    * @param message - outbound notification / request
    * @param responseMatcher - picks the corresponding response
    * @returns last response that replays for later subscriptions
    */
-  send<ResponseT extends InboundT>(
+  send: <ResponseT extends InboundT>(
     message: OutboundT,
-    responseMatcher: Typeguard<ResponseT, InboundT>,
-  ): Observable<ResponseT>;
+    responseMatcher?: Typeguard<ResponseT, InboundT>,
+  ) => Observable<ResponseT>;
 };
 
 export type RPCFn<ResponseT, RequestT> = (request: RequestT) => Observable<ResponseT>;
