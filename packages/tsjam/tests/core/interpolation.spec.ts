@@ -1,4 +1,4 @@
-import { getPlaceholders, interpolatePlaceholders } from 'core/interpolation';
+import { getPlaceholders, interpolateConditionalPlaceholders, interpolatePlaceholders } from 'core/interpolation';
 
 describe('String template interpolation', () => {
   it('returns an empty array when template contains no interpolation tokens', () => {
@@ -15,5 +15,18 @@ describe('String template interpolation', () => {
     const template = 'Hello, {{name}}! Your order {{orderId}} is ready.';
     const result = interpolatePlaceholders(template, { name: 'world', orderId: 123 });
     expect(result).toEqual('Hello, world! Your order 123 is ready.');
+  });
+});
+
+describe('Conditional template interpolation', () => {
+  it('returns content within truthy section', () => {
+    const template = 'Hello, {{#isBro}}Brother in Hood, {{/isBro}}Man!';
+    const result = interpolateConditionalPlaceholders(template, { isBro: true });
+    expect(result).toEqual('Hello, Brother in Hood, Man!');
+  });
+  it('returns an empty section when condition is falsy', () => {
+    const template = 'Hello, {{#isBro}}Brother in Hood, {{/isBro}}Man!';
+    const result = interpolateConditionalPlaceholders(template, { isBro: false });
+    expect(result).toEqual('Hello, Man!');
   });
 });

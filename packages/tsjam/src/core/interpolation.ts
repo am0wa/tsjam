@@ -23,3 +23,22 @@ export const interpolatePlaceholders = (
     return values[key]?.toString() ?? '';
   });
 };
+
+/**
+ * Template {{#key}}Conditional text{{/key}} placeholders (key is case-insensitive)
+ * Group 1: key, Group 2: content
+ */
+export const conditionalPlaceholderPattern = /\{\{#(\w+)\}\}([\s\S]*?)\{\{\/\1\}\}/g;
+
+/**
+ * Conditionally `{{#key}}Conditional text{{/key}}` drops sections between `{{#key}}` and `{{/key}}` if the value is falsy.
+ */
+export const interpolateConditionalPlaceholders = (
+  template: string,
+  values: Record<string, boolean>,
+  pattern = conditionalPlaceholderPattern,
+): string => {
+  return template.replace(pattern, (_match: string, key: string, content: string) => {
+    return values[key] ? content : '';
+  });
+};
