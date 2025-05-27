@@ -20,12 +20,12 @@ describe('String template interpolation', () => {
 
 describe('Conditional template interpolation', () => {
   it('returns content within truthy section', () => {
-    const template = 'Hello, {{#isBro}}Brother in Hood, {{/isBro}}Man!';
+    const template = 'Hello, {{%isBro}}Brother in Hood, {{/isBro}}Man!';
     const result = interpolateConditionalPlaceholders(template, { isBro: true });
     expect(result).toEqual('Hello, Brother in Hood, Man!');
   });
   it('returns an empty section when condition is falsy', () => {
-    const template = 'Hello, {{#isBro}}Brother in Hood, {{/isBro}}Man!';
+    const template = 'Hello, {{%isBro}}Brother in Hood, {{/isBro}}Man!';
     const result = interpolateConditionalPlaceholders(template, { isBro: false });
     expect(result).toEqual('Hello, Man!');
   });
