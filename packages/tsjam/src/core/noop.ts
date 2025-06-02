@@ -2,8 +2,10 @@ export const noop = (): void => {
   /* noop */
 };
 
-/** Returns exactly same value - acts as null object patter for dynamic mappings */
-export const passThrough = <T>(value: T): T => value;
+/**
+ * Known _null object_ pattern for filter/map like functions
+ * @returns exactly the same value passed the first parameter. */
+export const identity = <T>(x: T): T => x;
 
 /**
  * void 0 is effectively a compile time bulletproof constant for undefined with no look-up requirements.
