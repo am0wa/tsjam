@@ -7,7 +7,9 @@ import { RxDisposable } from './rx-disposable';
  * Reactive Disposable Entity with build-in Visibility state.
  */
 export class RxVisible extends RxDisposable {
+  /** Emits 'shown' when the entity is visible */
   readonly shown$: Observable<'shown'>;
+  /** Emits true/false on visibility change */
   readonly visible$: Observable<boolean>;
 
   private readonly _visible$ = new BehaviorSubject(false);
