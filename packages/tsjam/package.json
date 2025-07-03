@@ -31,7 +31,7 @@
     "patch-version": "pnpm version patch",
     "prepare-release": "run-s clean:dist lint test patch-version doc:html",
     "prepublishOnly": "run-s clean:dist build test",
-    "publish": "pnpm publish --access=public",
+    "publish-public": "pnpm publish --access=public",
     "postpublish": "git push --tags origin master"
   },
   "engines": {
