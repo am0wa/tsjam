@@ -1,4 +1,9 @@
-import { getPlaceholders, interpolateConditionalPlaceholders, interpolatePlaceholders } from 'core/interpolation';
+import {
+  getPlaceholders,
+  interpolateConditionalPlaceholders,
+  interpolatePlaceholders,
+  placeholderPattern,
+} from 'core/interpolation';
 
 describe('String template interpolation', () => {
   it('returns an empty array when template contains no interpolation tokens', () => {
@@ -15,6 +20,18 @@ describe('String template interpolation', () => {
     const template = 'Hello, {{name}}! Your order {{orderId}} is ready.';
     const result = interpolatePlaceholders(template, { name: 'world', orderId: 123 });
     expect(result).toEqual('Hello, world! Your order 123 is ready.');
+  });
+  it('should throw err in strict mode when NO value is not provided', () => {
+    const template = 'Hello, {{name}}! Your order {{orderId}} is ready.';
+    const interpolationError = new Error(`Interpolation Error: no value provided for '{{orderId}}'`);
+    expect(() => interpolatePlaceholders(template, { name: 'world' }, placeholderPattern, true)).toThrow(
+      interpolationError,
+    );
+  });
+  it('should be able to assign empty string even in strict mode', () => {
+    const template = 'Hello, {{name}}! Your order {{orderId}} is ready.';
+    const result = interpolatePlaceholders(template, { name: 'world', orderId: '' }, placeholderPattern, true);
+    expect(result).toEqual('Hello, world! Your order  is ready.');
   });
 });
 

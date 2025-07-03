@@ -17,10 +17,15 @@ export const interpolatePlaceholders = (
   template: string,
   values: Record<string, unknown>,
   pattern = placeholderPattern,
+  strict = false,
 ): string => {
   return template.replace(pattern, (placeholder: string) => {
     const key = placeholder.match(wordPattern)?.[0] ?? ''; // {{key}} -> key
-    return values[key]?.toString() ?? '';
+    const withValue = values[key]?.toString();
+    if (withValue === undefined && strict) {
+      throw new Error(`Interpolation Error: no value provided for '${placeholder}'`);
+    }
+    return withValue ?? '';
   });
 };
 
