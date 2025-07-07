@@ -74,3 +74,11 @@ export type Clazz<T> = new (...args: readonly any[]) => T;
  * Identifier number used to kill the entity when necessary.
  */
 export type RipId = Opaque<'RipId', number>;
+
+/**
+ * Recursively makes all properties of a type optional.
+ * Useful for patch/update operations, form states, or partial configs.
+ */
+export type DeepPartial<T> = {
+  [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];
+};
