@@ -1,13 +1,17 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "es2016",
+    "module": "ES2020",
+    "target": "ESNext",
     "jsx": "react-jsx",
     "strict": true,
     /* Lib to use while compiling */
-    "lib": ["es6", "esnext", "dom"],
-    "moduleResolution": "node",
+    "lib": ["ES2020", "esnext", "dom"],
+    "moduleResolution": "bundler",
     "downlevelIteration": true,
+    /* Module import configuration */
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
     /* Decorators support */
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
