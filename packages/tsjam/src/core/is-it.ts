@@ -46,11 +46,19 @@ export const isArrayLike = (item: unknown): item is unknown[] => {
  * isEmpty('new Map([[1, 'one']])') => false
  * isEmpty('new Set([[1, 'one']])') => false
  */
-export const isEmpty = <T>(collection: Iterable<T> | null | undefined): boolean => {
+export const isEmpty = (collection: Iterable<unknown> | string | null | undefined): boolean => {
   if (collection == null) {
     return true;
   }
-
+  // Fast path for Array
+  if (Array.isArray(collection)) {
+    return collection.length === 0;
+  }
+  // Fast path for string
+  if (typeof collection === 'string') {
+    return collection.length === 0;
+  }
+  // Fallback for generic Iterable
   const iterator = collection[Symbol.iterator]();
   return iterator.next().done === true;
 };
