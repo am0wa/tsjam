@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 
-import { Typeguard } from '../core';
+import type { Typeguard } from '../core';
 
 import { replayLatest } from './rx-operators';
 

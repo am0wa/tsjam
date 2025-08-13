@@ -1,5 +1,5 @@
 import { isSomething } from './is-it';
-import { Integer, StringCaseInsensitive, StringEnum } from './types';
+import type { Integer, StringCaseInsensitive, StringEnum } from './types';
 
 /**
  * @return Returns integer from numeric string. Otherwise default value (0 by default).

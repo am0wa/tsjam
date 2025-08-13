@@ -1,5 +1,5 @@
-import { DisposableLike, DisposeCallback, isDisposable } from './disposable';
-import { RipId } from './types';
+import { type DisposableLike, type DisposeCallback, isDisposable } from './disposable';
+import type { RipId } from './types';
 
 /**
  * Sink Like Entity for auto dispose.

@@ -1,4 +1,4 @@
-import { Callback, Integer, SomeObject } from './types';
+import type { Callback, Integer, SomeObject } from './types';
 
 export const isString = (x: unknown): x is string => typeof x === 'string';
 

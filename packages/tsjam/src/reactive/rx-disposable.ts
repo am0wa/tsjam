@@ -1,7 +1,7 @@
-import { Observable, Subject, Unsubscribable } from 'rxjs';
+import { Observable, Subject, type Unsubscribable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { Disposable, DisposableLike, DisposeCallback, isCallback, isDisposable } from '../core';
+import { Disposable, type DisposableLike, type DisposeCallback, isCallback, isDisposable } from '../core';
 
 import { RxBag } from './rx-bag';
 

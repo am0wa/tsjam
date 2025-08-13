@@ -1,4 +1,4 @@
-import { Integer } from './types';
+import type { Integer } from './types';
 
 export namespace Collections {
   const equalsByRef = <T>(a: T, b: T): boolean => a === b;

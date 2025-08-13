@@ -1,5 +1,5 @@
 import { assert } from './assert';
-import { SomeObject } from './types';
+import type { SomeObject } from './types';
 
 /**
  * Util to Narrow types of incoming Data, handy for usage for incoming data handling.

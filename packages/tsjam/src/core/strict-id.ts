@@ -1,4 +1,4 @@
-import { MapFn, Opaque } from './types';
+import type { MapFn, Opaque } from './types';
 
 type IdFactory<TValue, TResult> = {
   readonly create: MapFn<TValue | undefined, TResult>;

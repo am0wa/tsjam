@@ -1,5 +1,5 @@
 import { assert } from './assert';
-import { Opaque } from './types';
+import type { Opaque } from './types';
 
 /**
  * % 0..100...N number.

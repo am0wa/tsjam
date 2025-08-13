@@ -1,5 +1,5 @@
 import { isString } from './is-it';
-import { SomeObject } from './types';
+import type { SomeObject } from './types';
 
 export namespace Urls {
   /**
