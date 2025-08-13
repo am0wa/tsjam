@@ -16,3 +16,8 @@ catalogs:
     jest: 29.x
     ts-jest: 29.x
     jest-environment-jsdom: ^29
+  jest30:
+    '@types/jest': 30.x
+    jest: 30.x
+    ts-jest: 29.4.1
+    jest-environment-jsdom: ^30

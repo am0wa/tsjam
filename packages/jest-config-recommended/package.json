@@ -1,9 +1,10 @@
 {
   "name": "@tsjam/jest-config-recommended",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Shared ts jest config: jest",
   "main": "",
   "files": [
+    "jest.config.mjs",
     "jest.config.js",
     "jest.setup.js"
   ],
@@ -15,9 +16,11 @@
   "dependencies": {
     "@types/jest": "29.x",
     "jest": "29.x",
-    "jest-environment-jsdom": "^29.6.1",
+    "jest-environment-jsdom": "^29.7.0",
     "reflect-metadata": "^0.2.2",
-    "ts-jest": "29.x"
+    "ts-jest": "29.x",
+    "jest-config": "^29.7.0",
+    "ts-jest-resolver": "^2.0.1"
   },
   "peerDependencies": {
     "jest": "29.x",
