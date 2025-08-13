@@ -9,7 +9,9 @@
     "format": "prettier . --write",
     "prepare": "husky"
   },
-  "keywords": ["pnpm-monorepo"],
+  "keywords": [
+    "pnpm-monorepo"
+  ],
   "author": "am0wa",
   "license": "ISC",
   "engines": {
@@ -17,19 +19,18 @@
     "pnpm": ">=10.3.0"
   },
   "devDependencies": {
+    "@eslint/js": "catalog:eslint19",
     "@tsjam/eslint-config-recommended": "workspace:*",
     "@tsjam/web-config-base": "workspace:*",
     "eslint": "catalog:eslint19",
-    "@eslint/js": "catalog:eslint19",
-    "@types/eslint__js": "catalog:eslint19",
     "eslint-config-prettier": "catalog:eslint19",
-    "typescript-eslint": "catalog:eslint19",
     "husky": "^9.1.7",
-    "lint-staged": "^15.3.0",
-    "prettier": "^3.4.2",
+    "lint-staged": "^16.1.5",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^3.6.2",
     "reflect-metadata": "^0.2.2",
     "rimraf": "^6.0.1",
-    "npm-run-all": "^4.1.5"
+    "typescript-eslint": "catalog:eslint19"
   },
   "prettier": "@tsjam/web-config-base/prettier.config.js",
   "lint-staged": {

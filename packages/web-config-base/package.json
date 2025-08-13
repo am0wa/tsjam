@@ -29,6 +29,6 @@
     "rimraf": "^6",
     "prettier": ">=3.x",
     "typescript": ">=5.x",
-    "lint-staged": "^15"
+    "lint-staged": "^16"
   }
 }

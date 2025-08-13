@@ -4,6 +4,8 @@
   "description": "vanilla typescript sweets",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
+  "type": "module",
+  "sideEffects": false,
   "repository": "https://github.com/am0wa/tsjam",
   "license": "MIT",
   "keywords": [
