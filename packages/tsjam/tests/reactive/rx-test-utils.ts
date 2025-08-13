@@ -1,4 +1,4 @@
-import { ALPHABET, isSomething, Milliseconds } from 'core';
+import { ALPHABET, isSomething, type Milliseconds } from 'core';
 import { from, noop, Observable, Subscription, timer, zip } from 'rxjs';
 import { delayWhen } from 'rxjs/operators';
 
