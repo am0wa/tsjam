@@ -82,3 +82,10 @@ export type RipId = Opaque<'RipId', number>;
 export type DeepPartial<T> = {
   [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];
 };
+
+/**
+ * Recursively makes all properties of a type mutable.
+ */
+export type Mutable<T> = {
+  -readonly [P in keyof T]: T[P];
+};
