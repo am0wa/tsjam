@@ -34,6 +34,18 @@ export namespace Collections {
     const { length } = list;
     return list.slice(length > 0 ? 1 : 0);
   };
+  /**
+   * Return a random element from the list.
+   */
+  export function random<T>(list: readonly T[]): T | undefined;
+  export function random<T>(list: readonly T[], fallback: T): T;
+  export function random<T>(list: readonly T[], fallback?: T): T | undefined {
+    if (list.length === 0) {
+      return fallback;
+    }
+    const randomIndex = Math.floor(Math.random() * list.length);
+    return list[randomIndex];
+  }
 
   /**
    * Returns copy of list without duplicates.
