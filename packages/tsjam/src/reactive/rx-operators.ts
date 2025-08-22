@@ -5,7 +5,7 @@ import { share, shareReplay } from 'rxjs/operators';
  * shareReplay operator with internal refCount.
  * When the reference count drops to zero,
  * the replay-able notifications are flushed if the subject has not completed.
- * @usage Useful to replay last message to subscriber e.g. `refCountShareReplay(1)`.
+ * @example Useful to replay last message to subscriber e.g. `refCountShareReplay(1)`.
  *        For example in the stream of some setting values you're interested only in the latest one.
  * @see https://github.com/ReactiveX/rxjs/pull/4059#issuecomment-416783538
  */

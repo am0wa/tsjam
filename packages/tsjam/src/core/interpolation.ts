@@ -10,7 +10,7 @@ export const getPlaceholders = (template: string, pattern = placeholderPattern):
 
 /**
  * Interpolates `{{key}}` placeholders with values from the provided object
- * @Example
+ * @example
  *   interpolatePlaceholders('Hello, {{name}}!', { name: 'World' }); // 'Hello, World!'
  */
 export const interpolatePlaceholders = (

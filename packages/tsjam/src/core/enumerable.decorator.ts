@@ -1,5 +1,5 @@
 /**
- * @enumerable decorator that sets the enumerable property of a class field to false|true.
+ * Provides `@enumerable` decorator that sets the enumerable property of a class field to false|true.
  * @param flag false|true
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty
  * @see https://www.typescriptlang.org/docs/handbook/decorators.html#property-decorators
