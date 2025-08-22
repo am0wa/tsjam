@@ -45,12 +45,12 @@
   "devDependencies": {
     "@tsjam/jest-config-recommended": "workspace:*",
     "@types/jest": "catalog:jest30",
-    "jest": "catalog:jest30",
-    "ts-jest": "catalog:jest30",
     "gh-pages": "^3.2.3",
+    "jest": "catalog:jest30",
     "npm-run-all": "catalog:",
-    "rxjs": "^7.8.1",
-    "typedoc": "^0.27.6",
+    "rxjs": "^7.8.2",
+    "ts-jest": "catalog:jest30",
+    "typedoc": "^0.27.9",
     "typescript": "catalog:"
   },
   "files": [
