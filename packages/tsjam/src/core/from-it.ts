@@ -49,3 +49,22 @@ const camelOrPascalOrSnakeCase = /([a-z])([A-Z])|_/g;
 export const toKebabCase = (str: string): string => {
   return str.replace(camelOrPascalOrSnakeCase, (_, p1, p2) => (p2 ? `${p1}-${p2}` : '-')).toLowerCase();
 };
+
+export const toUpperCaseFirst = (str: string): string => {
+  return str ? str.charAt(0).toUpperCase() + str.slice(1) : '';
+};
+
+const pascalCasePattern = /^[A-Z][a-zA-Z0-9]*$/;
+const camelCasePattern = /^[a-z][a-zA-Z0-9]*$/;
+export const toCamelCase = (str: string): string => {
+  // If already camelCase, return as is
+  if (camelCasePattern.test(str)) {
+    return str;
+  }
+  // If PascalCase, convert to camelCase
+  if (pascalCasePattern.test(str)) {
+    return str.charAt(0).toLowerCase() + str.slice(1);
+  }
+  // Handle snake_case, kebab-case, and space separated words
+  return str.toLowerCase().replace(/[_\-\s](\w)/g, (_, char: string) => char.toUpperCase());
+};

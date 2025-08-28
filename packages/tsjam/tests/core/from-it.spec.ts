@@ -1,4 +1,11 @@
-import { primitiveToBoolean, stringToEnum, stringToInteger, toKebabCase } from 'core/from-it';
+import {
+  primitiveToBoolean,
+  stringToEnum,
+  stringToInteger,
+  toCamelCase,
+  toKebabCase,
+  toUpperCaseFirst,
+} from 'core/from-it';
 
 describe('fromIt', () => {
   describe('primitiveToBoolean', () => {
@@ -107,6 +114,25 @@ describe('fromIt', () => {
       const expectedOutput = 'camel-snake-mix-string';
       const result = toKebabCase(input);
       expect(result).toEqual(expectedOutput);
+    });
+  });
+  describe('toUpperCaseFirst', () => {
+    it('should uppercase first letter', () => {
+      expect(toUpperCaseFirst('hello')).toBe('Hello');
+      expect(toUpperCaseFirst('Hello')).toBe('Hello');
+      expect(toUpperCaseFirst('hELLO')).toBe('HELLO');
+      expect(toUpperCaseFirst('')).toBe('');
+    });
+  });
+  describe('toCamelCase', () => {
+    it('should convert to camelCase', () => {
+      expect(toCamelCase('hello world')).toBe('helloWorld');
+      expect(toCamelCase('Hello World')).toBe('helloWorld');
+      expect(toCamelCase('hello_world')).toBe('helloWorld');
+      expect(toCamelCase('hello-world')).toBe('helloWorld');
+      expect(toCamelCase('helloWorld')).toBe('helloWorld');
+      expect(toCamelCase('HelloWorld')).toBe('helloWorld');
+      expect(toCamelCase('')).toBe('');
     });
   });
 });
