@@ -1,6 +1,6 @@
 {
   "name": "@tsjam/jest-config-recommended",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Shared ts jest config: jest",
   "main": "",
   "files": [
@@ -14,16 +14,16 @@
   "author": "am0wa",
   "license": "MIT",
   "dependencies": {
-    "@types/jest": "29.x",
-    "jest": "29.x",
-    "jest-environment-jsdom": "^29.7.0",
+    "@types/jest": "30.x",
+    "jest": "30.x",
+    "jest-environment-jsdom": "^30.x",
     "reflect-metadata": "^0.2.2",
-    "ts-jest": "29.x",
-    "jest-config": "^29.7.0",
+    "ts-jest": "^29.4.1",
+    "jest-config": "^30.x",
     "ts-jest-resolver": "^2.0.1"
   },
   "peerDependencies": {
-    "jest": "29.x",
-    "ts-jest": "29.x"
+    "jest": "30.x",
+    "ts-jest": ">29.x"
   }
 }
