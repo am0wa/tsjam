@@ -1,4 +1,5 @@
 import { Result } from 'core/result';
+
 type TestResult = Result<string, Error>;
 
 describe('Result', () => {

@@ -2,7 +2,6 @@ import { Observable } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 
 import type { Typeguard } from '../core';
-
 import { replayLatest } from './rx-operators';
 
 export type NotificationProvider<OutboundT> = {

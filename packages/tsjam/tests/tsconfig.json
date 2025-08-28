@@ -8,6 +8,6 @@
     "noImplicitReturns": false,
     "noUnusedParameters": false,
     "isolatedModules": true,
-    "allowJs": true,
+    "allowJs": true
   }
 }

@@ -1,12 +1,13 @@
 {
   "name": "@tsjam/web-config-base",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Shared configurations: ts, es-lint, prettier, jest",
   "main": "",
+  "type": "module",
   "files": [
     "tsconfig.base.json",
     ".browserslistrc",
-    "prettier.config.js"
+    "prettier.config.mjs"
   ],
   "bin": {
     "sync-browsers": "cli/sync-browsers-list.js"
@@ -23,12 +24,15 @@
     "url": "https://github.com/am0wa/tsjam/issues"
   },
   "homepage": "https://github.com/am0wa/tsjam#readme",
-  "prettier": "./prettier.config.js",
+  "prettier": "./prettier.config.mjs",
   "dependencies": {
     "husky": "^9",
     "rimraf": "^6",
     "prettier": ">=3.x",
     "typescript": ">=5.x",
     "lint-staged": "^16"
+  },
+  "peerDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^5"
   }
 }

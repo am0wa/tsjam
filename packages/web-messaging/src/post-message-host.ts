@@ -1,6 +1,5 @@
 import { EMPTY, fromEvent, Observable } from 'rxjs';
 import { filter, map, share } from 'rxjs/operators';
-
 import {
   isObject,
   isSomething,
@@ -13,6 +12,7 @@ import {
   Typeguard,
   unwrap,
 } from 'tsjam';
+
 import ownProperty = unwrap.ownProperty;
 
 export const windowMessage$ = <T, U>(target: Window, parseFn: ParseFn<T, U>): Observable<U> => {

@@ -1,6 +1,7 @@
-import { Disposable } from 'core';
 import { RxBag } from 'reactive';
 import { Subject } from 'rxjs';
+
+import { Disposable } from 'core';
 
 describe('RxBag', () => {
   it('dispose - has to unsubscribe from all - dispose added afterwards', () => {

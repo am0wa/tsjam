@@ -1,4 +1,5 @@
 import { assert } from 'core/assert';
+
 describe('Assert', () => {
   it('true with truthy condition', () => {
     assert(true);

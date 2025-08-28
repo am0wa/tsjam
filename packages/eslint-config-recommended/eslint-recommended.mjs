@@ -1,5 +1,5 @@
-import tsEslint from 'typescript-eslint';
 import globals from 'globals';
+import tsEslint from 'typescript-eslint';
 
 const recommended = {
   rules: {

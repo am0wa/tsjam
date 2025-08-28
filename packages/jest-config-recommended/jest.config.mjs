@@ -18,14 +18,12 @@ const config = {
       'ts-jest',
       {
         tsconfig: '<rootDir>/tests/tsconfig.json',
-        useESM: true
+        useESM: true,
       },
-    ]
+    ],
   },
   testMatch: ['<rootDir>/tests/**/*.+(spec|test).+(ts|tsx)'],
-  setupFiles: [
-    '<rootDir>/jest.setup.js'
-  ],
+  setupFiles: ['<rootDir>/jest.setup.js'],
   globals: { __DEVELOPMENT__: false, APP_VERSION: 'test.app.version' },
 };
 

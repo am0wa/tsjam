@@ -2,7 +2,7 @@
  * ALL ISO Currency Codes.
  * @see https://www.iban.com/currency-codes
  */
-export const CurrencyCodes = <const>[
+export const CurrencyCodes = [
   'AFN',
   'ALL',
   'DZD',
@@ -170,7 +170,7 @@ export const CurrencyCodes = <const>[
   'YER',
   'ZMW',
   'ZWL',
-];
+] as const;
 
 export type CurrencyCode = (typeof CurrencyCodes)[number];
 
@@ -183,7 +183,7 @@ export type Currency = {
   readonly symbol: string;
 };
 
-export const worldCurrencies = <const>[
+export const worldCurrencies = [
   { code: 'USD', symbol: '$' /** name: 'US Dollar*/ },
   { code: 'EUR', symbol: '€' /** name: 'Euro*/ },
   { code: 'GBP', symbol: '£' /** name: 'British Pound*/ },
@@ -328,7 +328,7 @@ export const worldCurrencies = <const>[
   { code: 'ZAR', symbol: 'R' /** name: 'Rand*/ },
   { code: 'ZMW', symbol: 'ZK' /** name: 'Zambian Kwacha*/ },
   { code: 'ZWL', symbol: 'Z$' /** name: 'Zimbabwe Dollar*/ },
-];
+] as const;
 
 export const worldCurrencyMap: ReadonlyMap<CurrencyCode, Currency> = new Map(
   worldCurrencies.map((currency) => [currency.code, currency]),

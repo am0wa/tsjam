@@ -58,5 +58,5 @@
     "tsconfig.json",
     "!**/tsconfig.tsbuildinfo"
   ],
-  "prettier": "@tsjam/web-config-base/prettier.config.js"
+  "prettier": "@tsjam/web-config-base/prettier.config.mjs"
 }

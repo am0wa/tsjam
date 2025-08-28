@@ -1,6 +1,7 @@
-import { ALPHABET, isSomething, type Milliseconds } from 'core';
 import { from, noop, Observable, Subscription, timer, zip } from 'rxjs';
 import { delayWhen } from 'rxjs/operators';
+
+import { ALPHABET, isSomething, type Milliseconds } from 'core';
 
 export namespace RxTestUtils {
   // like .from, but items are delayed by their value

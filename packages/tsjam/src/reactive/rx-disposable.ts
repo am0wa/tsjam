@@ -2,7 +2,6 @@ import { Observable, Subject, type Unsubscribable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { Disposable, type DisposableLike, type DisposeCallback, isCallback, isDisposable } from '../core';
-
 import { RxBag } from './rx-bag';
 
 export const isUnsubscribable = (x: unknown): x is Unsubscribable => {

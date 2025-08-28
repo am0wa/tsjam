@@ -6,5 +6,7 @@ dist
 build
 docs
 
+.browserslistrc
+
 *config.js
 *.yaml
