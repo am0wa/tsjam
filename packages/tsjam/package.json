@@ -7,14 +7,26 @@
   "type": "module",
   "exports": {
     ".": {
+      "node": {
+        "import": "./lib/index.js",
+        "types": "./lib/index.d.ts"
+      },
       "import": "./lib/index.js",
       "types": "./lib/index.d.ts"
     },
     "./money": {
+      "node": {
+        "import": "./lib/money/index.js",
+        "types": "./lib/money/index.d.ts"
+      },
       "import": "./lib/money/index.js",
       "types": "./lib/money/index.d.ts"
     },
     "./reactive": {
+      "node": {
+        "import": "./lib/reactive/index.js",
+        "types": "./lib/reactive/index.d.ts"
+      },
       "import": "./lib/reactive/index.js",
       "types": "./lib/reactive/index.d.ts"
     }
@@ -51,7 +63,7 @@
     "postpublish": "git push --tags origin master"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   },
   "peerDependencies": {
     "rxjs": "^7.x"
