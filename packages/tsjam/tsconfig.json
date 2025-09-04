@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "module": "ES2020",
-    "target": "ESNext",
+    "module": "ESNext",
+    "target": "ES2020",
     /* @tsjam/web-config-base/tsconfig.base.json */
     "jsx": "react-jsx",
     "strict": true,
