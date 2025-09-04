@@ -5,6 +5,20 @@
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "type": "module",
+  "exports": {
+    ".": {
+      "import": "./lib/index.js",
+      "types": "./lib/index.d.ts"
+    },
+    "./money": {
+      "import": "./lib/money/index.js",
+      "types": "./lib/money/index.d.ts"
+    },
+    "./reactive": {
+      "import": "./lib/reactive/index.js",
+      "types": "./lib/reactive/index.d.ts"
+    }
+  },
   "sideEffects": false,
   "repository": "https://github.com/am0wa/tsjam",
   "license": "MIT",
