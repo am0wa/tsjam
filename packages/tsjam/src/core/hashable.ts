@@ -1,4 +1,4 @@
-import { Equatable, isEquatable } from './equatable';
+import { type Equatable, isEquatable } from './equatable';
 
 /**
  * Hashable mimics Java native Object.hashCode implementation, which benefits hash tables such as those provided by HashMap

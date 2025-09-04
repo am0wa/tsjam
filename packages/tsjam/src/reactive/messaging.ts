@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs';
+import type { Observable } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 
 import type { Typeguard } from '../core';

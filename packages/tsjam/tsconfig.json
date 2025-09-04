@@ -6,7 +6,7 @@
     "jsx": "react-jsx",
     "strict": true,
     /* Lib to use while compiling */
-    "lib": ["ES2020", "esnext", "dom"],
+    "lib": ["ES2020", "ESNext", "dom"],
     "moduleResolution": "bundler",
     "downlevelIteration": true,
     /* Module import configuration */

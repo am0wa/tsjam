@@ -1,4 +1,4 @@
-import { Observable, ReplaySubject } from 'rxjs';
+import { type Observable, ReplaySubject } from 'rxjs';
 import { share, shareReplay } from 'rxjs/operators';
 
 /**

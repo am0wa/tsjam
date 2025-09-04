@@ -28,6 +28,7 @@ export default [
       '@typescript-eslint/restrict-plus-operands': 'warn',
       '@typescript-eslint/no-base-to-string': 'off',
       '@typescript-eslint/explicit-function-return-type': ['error', { allowExpressions: true }],
+      '@typescript-eslint/consistent-type-imports': 'error',
       '@typescript-eslint/naming-convention': [
         'error',
         {

@@ -1,4 +1,4 @@
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, type Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 
 import { RxDisposable } from './rx-disposable';
