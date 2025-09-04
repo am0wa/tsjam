@@ -1,7 +1,35 @@
 {
-  "extends": "@tsjam/web-config-base/tsconfig.base.json",
   "compilerOptions": {
-    "target": "ES2020",
+    "module": "ES2020",
+    "target": "ESNext",
+    /* @tsjam/web-config-base/tsconfig.base.json */
+    "jsx": "react-jsx",
+    "strict": true,
+    /* Lib to use while compiling */
+    "lib": ["ES2020", "esnext", "dom"],
+    "moduleResolution": "bundler",
+    "downlevelIteration": true,
+    /* Module import configuration */
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    /* Decorators support */
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    /* Build */
+    "declaration": true /* Generate .d.ts files from TypeScript and JavaScript files in your project. */,
+    "incremental": true /* Save .tsbuildinfo files to allow for incremental compilation of projects. */,
+    "sourceMap": true /* Create source map files for emitted JavaScript files. */,
+    "allowSyntheticDefaultImports": true /* Allow 'import x from y' when a module doesn't have a default export. */,
+    "esModuleInterop": true /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility. */,
+    "forceConsistentCasingInFileNames": true /* Ensure that casing is correct in imports. */,
+    "allowJs": false,
+    /* Code Checks */
+    "skipLibCheck": true /* Skip type checking all .d.ts files. */,
+    "noUnusedLocals": false,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "useUnknownInCatchVariables": false,
     "noImplicitOverride": true,
     /* Paths */
     "baseUrl": ".",
