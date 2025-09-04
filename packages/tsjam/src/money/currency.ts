@@ -174,8 +174,12 @@ export const CurrencyCodes = [
 
 export type CurrencyCode = (typeof CurrencyCodes)[number];
 
+// Create a Set for O(1) lookup performance
+const currencyCodeSet = new Set(CurrencyCodes);
+
 export const isCurrencyCode = (isoCode: string): isoCode is CurrencyCode => {
-  return !!CurrencyCodes.find((code) => code === isoCode);
+  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+  return currencyCodeSet.has(isoCode as CurrencyCode);
 };
 
 export type Currency = {
