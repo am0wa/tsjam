@@ -7,6 +7,7 @@ console.log('Jest ESM Windmills...', baseConfig);
 const config = {
   ...baseConfig,
   rootDir: './',
+  setupFiles: [],
 };
 
 export default config;
