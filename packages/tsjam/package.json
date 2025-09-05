@@ -46,10 +46,10 @@
   },
   "scripts": {
     "build": "tsc -b src/tsconfig.json",
+    "build:watch": "tsc -b tsconfig.json -w",
     "lint": "eslint src",
     "test": "jest tests",
-    "watch:build": "tsc -b tsconfig.json -w",
-    "watch:test": "node ./node_modules/jest/bin/jest.js --config jest.config.js --watchAll",
+    "test:watch": "jest tests --watchAll",
     "doc": "run-s doc:html",
     "doc:html": "typedoc src/ --exclude **/*.spec.ts --out docs",
     "doc:publish": "gh-pages -m \"[ci skip] Updates\" -d docs",

@@ -1,4 +1,4 @@
-import { enumerable } from 'core';
+import { enumerable } from 'core/enumerable.decorator.js';
 
 class NonEnumerable {
   public readonly a = 1;

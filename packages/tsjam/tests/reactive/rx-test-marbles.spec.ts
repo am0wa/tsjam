@@ -1,4 +1,4 @@
-import { from, interval, Observable, timer, zip } from 'rxjs';
+import { from, interval, type Observable, timer, zip } from 'rxjs';
 import { concatMap, delayWhen, distinctUntilChanged, ignoreElements, map, startWith } from 'rxjs/operators';
 import { TestScheduler } from 'rxjs/testing';
 

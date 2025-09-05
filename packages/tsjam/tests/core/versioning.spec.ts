@@ -1,5 +1,5 @@
-import { ComparisonResult } from 'core/comparison';
-import { jamver, SemanticRange } from 'core/versioning';
+import { ComparisonResult } from 'core/comparison.js';
+import { jamver, SemanticRange } from 'core/versioning.js';
 
 import compareVersions = jamver.compareVersions;
 import compareVersionsSemantically = jamver.compareVersionsSemantically;

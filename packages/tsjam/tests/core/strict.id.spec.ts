@@ -1,4 +1,4 @@
-import { NumberId, StringId } from 'core/strict-id';
+import { NumberId, StringId } from 'core/strict-id.js';
 
 describe('Strict-id', () => {
   it('StringId – should be assignable to string, not vice-versa', () => {

@@ -5,7 +5,7 @@ import {
   toCamelCase,
   toKebabCase,
   toUpperCaseFirst,
-} from 'core/from-it';
+} from 'core/from-it.js';
 
 describe('fromIt', () => {
   describe('primitiveToBoolean', () => {

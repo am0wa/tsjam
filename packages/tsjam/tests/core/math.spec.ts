@@ -1,4 +1,4 @@
-import { math } from 'core';
+import { math } from 'core/math.js';
 
 describe('math', () => {
   it('closest', () => {

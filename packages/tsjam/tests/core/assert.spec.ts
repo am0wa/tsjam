@@ -1,4 +1,4 @@
-import { assert } from 'core/assert';
+import { assert } from 'core/assert.js';
 
 describe('Assert', () => {
   it('true with truthy condition', () => {

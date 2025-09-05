@@ -1,4 +1,4 @@
-import { identity } from 'core';
+import { identity } from 'core/noop.js';
 
 describe('noop', () => {
   it('same should return same value', () => {

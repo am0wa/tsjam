@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { DisposeBag } from 'core';
+import { DisposeBag } from 'core/dispose-bag.js';
 
 describe('DisposeBag', () => {
   it('dispose - has to dispose all immediately after dispose invocation', () => {

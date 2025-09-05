@@ -1,4 +1,4 @@
-import { blank, jamBlank } from 'core/blank';
+import { blank, jamBlank } from 'core/blank.js';
 
 describe('blank', () => {
   it('should be replace nullable with blank', () => {

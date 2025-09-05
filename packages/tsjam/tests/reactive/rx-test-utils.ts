@@ -1,7 +1,7 @@
-import { from, noop, Observable, Subscription, timer, zip } from 'rxjs';
+import { from, noop, type Observable, type Subscription, timer, zip } from 'rxjs';
 import { delayWhen } from 'rxjs/operators';
 
-import { ALPHABET, isSomething, type Milliseconds } from 'core';
+import { ALPHABET, isSomething, type Milliseconds } from 'core/index.js';
 
 export namespace RxTestUtils {
   // like .from, but items are delayed by their value

@@ -1,13 +1,13 @@
 {
   "compilerOptions": {
-    "module": "ESNext",
+    "module": "NodeNext",
     "target": "ES2020",
     /* @tsjam/web-config-base/tsconfig.base.json */
     "jsx": "react-jsx",
     "strict": true,
     /* Lib to use while compiling */
     "lib": ["ES2020", "ESNext", "dom"],
-    "moduleResolution": "bundler",
+    "moduleResolution": "nodenext",
     "downlevelIteration": true,
     /* Module import configuration */
     "resolveJsonModule": true,
@@ -23,7 +23,7 @@
     "allowSyntheticDefaultImports": true /* Allow 'import x from y' when a module doesn't have a default export. */,
     "esModuleInterop": true /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility. */,
     "forceConsistentCasingInFileNames": true /* Ensure that casing is correct in imports. */,
-    "allowJs": false,
+    "allowJs": true,
     /* Code Checks */
     "skipLibCheck": true /* Skip type checking all .d.ts files. */,
     "noUnusedLocals": false,
@@ -37,7 +37,5 @@
     "paths": {
       "*": ["*", "src/*"]
     },
-    "typeRoots": ["node_modules/@types"]
   },
-  "exclude": ["lib/*", "packages/*", "node_modules/**"]
 }

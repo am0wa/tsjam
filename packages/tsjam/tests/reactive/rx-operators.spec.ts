@@ -1,4 +1,4 @@
-import { replayLatest } from 'reactive/rx-operators';
+import { replayLatest } from 'reactive/rx-operators.js';
 import { firstValueFrom, lastValueFrom, of, ReplaySubject } from 'rxjs';
 import { TestScheduler } from 'rxjs/testing';
 

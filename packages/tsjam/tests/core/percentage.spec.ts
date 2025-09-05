@@ -1,4 +1,4 @@
-import { Percentage } from 'core';
+import { Percentage } from 'core/percentage.js';
 
 describe('percentage', () => {
   it('default round', () => {

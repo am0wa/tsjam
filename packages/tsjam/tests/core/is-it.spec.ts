@@ -1,4 +1,4 @@
-import { isEmpty, isObject, isSomething, isString } from 'core/is-it';
+import { isEmpty, isObject, isSomething, isString } from 'core/is-it.js';
 
 const getUncertainResult = (): object | undefined | null => {
   return undefined;

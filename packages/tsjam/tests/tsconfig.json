@@ -1,9 +1,9 @@
 {
   "extends": "../tsconfig.json",
-  "include": ["./**/*.ts"], // if in root = [tests/**/*.ts]
   "compilerOptions": {
     "target": "ES2020",
-    "module": "ESNext",
+    "module": "ESNext", // important: jest crashes to resolve module: NodeNext!
+    "moduleResolution": "nodenext",
     "types": ["node", "jest"],
     "noImplicitReturns": false,
     "noUnusedParameters": false,

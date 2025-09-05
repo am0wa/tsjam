@@ -1,6 +1,6 @@
-import { Subscription, type Unsubscribable } from 'rxjs';
-
-import type { DisposableBag, DisposableLike, DisposeCallback, RipId } from '../core';
+import { Subscription } from 'rxjs';
+import type { Unsubscribable } from 'rxjs/internal/types';
+import type { DisposableBag, DisposableLike, DisposeCallback, RipId } from '../core/index.js';
 
 export type UnsubscribeCallback = DisposeCallback;
 

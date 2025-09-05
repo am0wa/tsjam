@@ -1,6 +1,6 @@
-import { RxVisible } from 'reactive/rx-visible';
+import { RxVisible } from 'reactive/rx-visible.js';
 
-import { RxTestUtils } from './rx-test-utils';
+import { RxTestUtils } from './rx-test-utils.js';
 
 describe('Rx-Visible', () => {
   it('should emit on changes', () => {

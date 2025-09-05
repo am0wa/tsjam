@@ -1,4 +1,4 @@
-import { JamError } from 'core/errors';
+import { JamError } from 'core/errors.js';
 
 describe('Errors', () => {
   describe('subclassing', () => {

@@ -1,4 +1,4 @@
-import { Urls } from 'core/urls';
+import { Urls } from 'core/urls.js';
 
 const TEST_URL = 'https://google.com/';
 

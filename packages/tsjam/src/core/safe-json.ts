@@ -1,4 +1,4 @@
-import type { Json } from './types';
+import type { Json } from './types.js';
 
 /**
  * Basic JSON parse & stringify

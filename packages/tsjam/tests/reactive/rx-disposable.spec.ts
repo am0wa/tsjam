@@ -1,8 +1,8 @@
+import { type Observable, Subject, type Subscription } from 'rxjs';
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { RxBag, RxDisposable } from 'reactive';
-import { Observable, Subject, Subscription } from 'rxjs';
+import { RxBag, RxDisposable } from 'reactive/index.js';
 
-import type { DisposableLike } from 'core';
+import type { DisposableLike } from 'core/disposable.js';
 
 class TestDisposable implements DisposableLike {
   disposed = false;

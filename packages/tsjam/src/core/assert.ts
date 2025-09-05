@@ -1,4 +1,4 @@
-import { AssertionError } from './errors';
+import { AssertionError } from './errors.js';
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 declare const __DEVELOPMENT__: boolean;

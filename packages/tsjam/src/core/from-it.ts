@@ -1,5 +1,5 @@
-import { isSomething } from './is-it';
-import type { Integer, StringCaseInsensitive, StringEnum } from './types';
+import { isSomething } from './is-it.js';
+import type { Integer, StringCaseInsensitive, StringEnum } from './types.js';
 
 /**
  * @return Returns integer from numeric string. Otherwise default value (0 by default).

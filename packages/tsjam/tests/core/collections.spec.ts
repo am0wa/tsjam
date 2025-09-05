@@ -1,4 +1,4 @@
-import { Collections } from 'core/collections';
+import { Collections } from 'core/collections.js';
 
 describe('collections', () => {
   it('first', () => {

@@ -1,4 +1,4 @@
-import { Result } from 'core/result';
+import { Result } from 'core/result.js';
 
 type TestResult = Result<string, Error>;
 

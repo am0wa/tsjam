@@ -1,6 +1,6 @@
-import { assert } from './assert';
-import { ComparisonResult } from './comparison';
-import { stringToEnum } from './from-it';
+import { assert } from './assert.js';
+import { ComparisonResult } from './comparison.js';
+import { stringToEnum } from './from-it.js';
 
 const semver = /^$|^([v=~^><*]?(\d+[a-z-]*\.?)+)|(\*)/; // empty or numeric or semantic version or star(*)
 const validateVersion = (ver: string): void => {

@@ -1,5 +1,5 @@
 /** Disposable interface to explicitly cleanup in order to avoid memory leaks. */
-import { DisposeBag } from './dispose-bag';
+import { DisposeBag } from './dispose-bag.js';
 
 /** Functional interface. */
 export interface DisposableLike {

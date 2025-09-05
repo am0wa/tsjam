@@ -1,8 +1,9 @@
-import { type Observable, Subject, type Unsubscribable } from 'rxjs';
+import { type Observable, Subject } from 'rxjs';
+import type { Unsubscribable } from 'rxjs/internal/types';
 import { takeUntil } from 'rxjs/operators';
 
-import { Disposable, type DisposableLike, type DisposeCallback, isCallback, isDisposable } from '../core';
-import { RxBag } from './rx-bag';
+import { Disposable, type DisposableLike, type DisposeCallback, isCallback, isDisposable } from '../core/index.js';
+import { RxBag } from './rx-bag.js';
 
 export const isUnsubscribable = (x: unknown): x is Unsubscribable => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any,@typescript-eslint/no-unsafe-member-access,@typescript-eslint/consistent-type-assertions

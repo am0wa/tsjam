@@ -1,4 +1,4 @@
-import { Equatable, isEquatable } from 'core/equatable';
+import { Equatable, isEquatable } from 'core/equatable.js';
 
 describe('Equatable', () => {
   it('false with primitives', () => {

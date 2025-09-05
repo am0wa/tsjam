@@ -1,4 +1,4 @@
-import { comparePrimitives, ComparisonResult } from 'core/comparison';
+import { comparePrimitives, ComparisonResult } from 'core/comparison.js';
 
 describe('comparison', () => {
   describe('comparePrimitives util', () => {

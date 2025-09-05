@@ -1,7 +1,7 @@
 import { BehaviorSubject, type Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 
-import { RxDisposable } from './rx-disposable';
+import { RxDisposable } from './rx-disposable.js';
 
 /**
  * Reactive Disposable Entity with build-in Visibility state.

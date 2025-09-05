@@ -1,5 +1,5 @@
-import { assert } from './assert';
-import type { SomeObject } from './types';
+import { assert } from './assert.js';
+import type { SomeObject } from './types.js';
 
 /**
  * Util to Narrow types of incoming Data, handy for usage for incoming data handling.

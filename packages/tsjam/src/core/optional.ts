@@ -1,4 +1,4 @@
-import { isSomething } from './is-it';
+import { isSomething } from './is-it.js';
 
 /**
  * Applies map function to `optionalValue` if it contains value, otherwise returns undefined

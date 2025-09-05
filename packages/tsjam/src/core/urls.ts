@@ -1,5 +1,5 @@
-import { isString } from './is-it';
-import type { SomeObject } from './types';
+import { isString } from './is-it.js';
+import type { SomeObject } from './types.js';
 
 export namespace Urls {
   /**

@@ -3,7 +3,7 @@ import {
   interpolateConditionalPlaceholders,
   interpolatePlaceholders,
   placeholderPattern,
-} from 'core/interpolation';
+} from 'core/interpolation.js';
 
 describe('String template interpolation', () => {
   it('returns an empty array when template contains no interpolation tokens', () => {

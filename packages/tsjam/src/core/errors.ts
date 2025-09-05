@@ -1,5 +1,5 @@
-import { nonenumerable } from './enumerable.decorator';
-import { isObject } from './is-it';
+import { nonenumerable } from './enumerable.decorator.js';
+import { isObject } from './is-it.js';
 
 export abstract class JamError extends Error {
   /**
