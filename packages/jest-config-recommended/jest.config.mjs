@@ -23,7 +23,7 @@ const config = {
     ],
   },
   testMatch: ['<rootDir>/tests/**/*.+(spec|test).+(ts|tsx)'],
-  setupFiles: ['<rootDir>/jest.setup.js'],
+  setupFiles: ['<rootDir>/jest.setup.mjs'],
   globals: { __DEVELOPMENT__: false, APP_VERSION: 'test.app.version' },
 };
 
