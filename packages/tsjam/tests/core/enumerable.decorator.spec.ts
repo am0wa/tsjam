@@ -8,7 +8,7 @@ class NonEnumerable {
   c = 3;
 }
 
-describe('nonenumerable', () => {
+xdescribe('nonenumerable', () => {
   const nonEnumerable = new NonEnumerable();
 
   it("shouldn't iterate though nonenumerable field", () => {

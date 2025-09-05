@@ -1,9 +1,9 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
-    "target": "ES2020",
+    "target": "ESNext",
     "module": "ESNext", // important: jest crashes to resolve module: NodeNext!
-    "moduleResolution": "nodenext",
+    "moduleResolution": "bundler",
     "types": ["node", "jest"],
     "noImplicitReturns": false,
     "noUnusedParameters": false,
