@@ -7,6 +7,8 @@ console.log('Jest ESM Windmills...', baseConfig);
 const config = {
   ...baseConfig,
   rootDir: './',
+  // @see https://jestjs.io/docs/configuration#transformignorepatterns-arraystring
+  transformIgnorePatterns: [], // transform esm
   setupFiles: [],
 };
 

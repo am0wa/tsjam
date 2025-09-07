@@ -5,6 +5,12 @@ Not opinionated types, assertions, minimalistic utils, reactive tools
 
 [TSJam API Documentation](https://am0wa.github.io/tsjam/modules.html)
 
+## v1.7 Breaking Changes
+
+- ESM only, no more CJS
+
+_Note:_ Latest v6 stable CJS version is `v1.6.10`
+
 ## Usage Examples
 
 ### IsIt
