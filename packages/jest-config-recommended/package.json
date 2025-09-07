@@ -1,11 +1,12 @@
 {
   "name": "@tsjam/jest-config-recommended",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Shared ts jest config: jest",
   "main": "",
   "files": [
     "jest.config.mjs",
     "jest.config.js",
+    "jest.setup.js",
     "jest.setup.mjs"
   ],
   "keywords": [
