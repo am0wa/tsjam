@@ -1,34 +1,29 @@
 {
   "name": "tsjam",
-  "version": "1.7.7",
+  "version": "1.8.0",
   "description": "vanilla typescript sweets",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "type": "module",
   "exports": {
     ".": {
-      "node": {
-        "import": "./lib/index.js",
-        "types": "./lib/index.d.ts"
-      },
       "import": "./lib/index.js",
-      "types": "./lib/index.d.ts"
+      "require": "./lib/index.js",
+      "types": "./lib/index.d.ts",
+      "default": "./lib/index.js"
     },
+    "./package.json": "./package.json",
     "./money": {
-      "node": {
-        "import": "./lib/money/index.js",
-        "types": "./lib/money/index.d.ts"
-      },
+      "require": "./lib/money/index.js",
       "import": "./lib/money/index.js",
-      "types": "./lib/money/index.d.ts"
+      "types": "./lib/money/index.d.ts",
+      "default": "./lib/money/index.d.ts"
     },
     "./reactive": {
-      "node": {
-        "import": "./lib/reactive/index.js",
-        "types": "./lib/reactive/index.d.ts"
-      },
+      "require": "./lib/reactive/index.js",
       "import": "./lib/reactive/index.js",
-      "types": "./lib/reactive/index.d.ts"
+      "types": "./lib/reactive/index.d.ts",
+      "default": "./lib/reactive/index.js"
     }
   },
   "sideEffects": false,
