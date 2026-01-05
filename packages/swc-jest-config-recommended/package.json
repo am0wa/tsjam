@@ -1,11 +1,12 @@
 {
   "name": "@tsjam/swc-jest-config-recommended",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Shared swc jest config: jest",
   "main": "",
   "files": [
     "jest.config.mjs",
-    "jest.setup.mjs"
+    "jest.setup.mjs",
+    ".swcrc"
   ],
   "keywords": [
     "shared swc-jest config"
