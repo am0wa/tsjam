@@ -13,7 +13,7 @@
   "author": "am0wa",
   "license": "MIT",
   "scripts": {
-    "publish:npm": "dotenv -e .env -- pnpm publish"
+    "publish:npm": "pnpm publish --access public"
   },
   "dependencies": {
     "@types/jest": "catalog:jest30",

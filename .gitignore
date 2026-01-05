@@ -25,6 +25,7 @@ coverage
 .env.*
 .env
 
+.npmrc
 
 # ide
 .idea/*
