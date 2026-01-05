@@ -23,6 +23,7 @@ coverage
 # misc
 .DS_Store
 .env.*
+.env
 
 
 # ide
