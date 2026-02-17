@@ -72,6 +72,10 @@ describe('isEmpty', () => {
     expect(isEmpty(rList)).toBe(true);
   });
 
+  it('should be false if there is some char', () => {
+    expect(isEmpty('  ')).toBe(false);
+  });
+
   it('should be true for null and undefined', () => {
     expect(isEmpty(null)).toBe(true);
     expect(isEmpty(undefined)).toBe(true);

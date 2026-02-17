@@ -1,4 +1,5 @@
 import { AssertionError } from './errors.js';
+import type { NonEmptyString } from './types.js';
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 declare const __DEVELOPMENT__: boolean;
@@ -32,6 +33,13 @@ export namespace assert {
   export function exists<T>(x: T, message: string): asserts x is NonNullable<T> {
     if (x == null) {
       throw new AssertionError(`assertExists: ${message}`);
+    }
+  }
+
+  /** throws AssertionError If value doesn't exist or is empty string (trim outside if needed) */
+  export function nonEmptyString(x: string | null | undefined, assertion: string): asserts x is NonEmptyString {
+    if (x == null || x.length === 0) {
+      throw new AssertionError(`assertNonEmptyString: ${assertion}`);
     }
   }
 

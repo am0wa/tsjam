@@ -26,4 +26,12 @@ describe('Assert', () => {
     assert.dev(obj.fail);
     // should not throw as we test towards prod by default
   });
+  it('nonEmptyString to throw', () => {
+    expect(() => {
+      assert.nonEmptyString('', 'Id should be present');
+    }).toThrow();
+    expect(() => {
+      assert.nonEmptyString(null, 'Id is expected');
+    }).toThrow();
+  });
 });

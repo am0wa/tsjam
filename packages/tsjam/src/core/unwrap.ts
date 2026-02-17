@@ -1,5 +1,5 @@
 import { assert } from './assert.js';
-import type { SomeObject } from './types.js';
+import type { NonEmptyString, SomeObject } from './types.js';
 
 /**
  * Util to Narrow types of incoming Data, handy for usage for incoming data handling.
@@ -8,6 +8,12 @@ export namespace unwrap {
   /** @returns NonNullable value - if value doesn't exist throws assertExist AssertionError */
   export const expected = <T>(value: T | undefined | null, assertion: string): NonNullable<T> => {
     assert.exists(value, assertion);
+    return value;
+  };
+
+  /** @returns NonEmptyString - if value doesn't exist or isEmpty throws AssertionError */
+  export const id = (value: string | null | undefined, assertion: string): NonEmptyString => {
+    assert.nonEmptyString(value, assertion);
     return value;
   };
 

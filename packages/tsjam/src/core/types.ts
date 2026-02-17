@@ -89,3 +89,6 @@ export type DeepPartial<T> = {
 export type Mutable<T> = {
   -readonly [P in keyof T]: T[P];
 };
+
+/** Lightweight Compile-time check for String containing At least one character */
+export type NonEmptyString = `${string}${string & {}}`;
