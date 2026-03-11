@@ -92,3 +92,6 @@ export type Mutable<T> = {
 
 /** Lightweight Compile-time check for String containing At least one character */
 export type NonEmptyString = `${string}${string & {}}`;
+
+/** Helper type to get the Union of all values of an object type */
+export type ValuesOf<T> = T[keyof T];
