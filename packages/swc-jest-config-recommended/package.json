@@ -17,9 +17,9 @@
     "publish:npm": "pnpm publish --access public"
   },
   "dependencies": {
-    "@types/jest": "catalog:jest30",
-    "jest-config": "catalog:jest30",
-    "jest-environment-jsdom": "catalog:jest30",
+    "@types/jest": "catalog:jest",
+    "jest-config": "catalog:jest",
+    "jest-environment-jsdom": "catalog:jest",
     "reflect-metadata": "^0.2.2",
     "ts-jest-resolver": "^2.0.1"
   },

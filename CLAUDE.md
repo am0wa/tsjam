@@ -12,8 +12,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `packages/web-messaging` — `@tsjam/web-messaging`, a reactive `postMessage` host built on top of `tsjam` + rxjs.
 - `packages/web-config-base` — `@tsjam/web-config-base`: shared `tsconfig.base.json`, prettier config, browserslist, and a `sync-browsers` CLI.
 - `packages/eslint-config-recommended` — flat ESLint 9 config (`jamEslint.configs.recommendedTS`).
-- `packages/jest-config-recommended` — shared ts-jest (ESM) Jest 30 config.
-- `packages/swc-jest-config-recommended` — alternative swc-based Jest config.
+- `packages/swc-jest-config-recommended` — shared swc-based (ESM) Jest 30 config used by `tsjam`. (The former `@tsjam/jest-config-recommended` ts-jest config was deprecated and removed in favour of this.)
 
 Dependency versions are pinned centrally via pnpm **catalogs** in `pnpm-workspace.yaml` (`catalog:eslint19`, `catalog:jest30`, `catalog:`, etc.). When bumping a shared dep, edit the catalog, not individual package.json files.
 
@@ -65,6 +64,6 @@ The shared config runs typescript-eslint `recommendedTypeChecked`. Notable enfor
 
 ## Build & publish
 
-- TS builds emit to `lib/` (gitignored) via project references; `src/tsconfig.json` is the build entry, `tests/tsconfig.json` (used by ts-jest) overrides module settings for Jest ESM. Both extend the root `tsconfig.json` which extends `@tsjam/web-config-base/tsconfig.base.json`.
+- TS builds emit to `lib/` (gitignored) via project references; `src/tsconfig.json` is the build entry. Tests are transformed by `@swc/jest` (config in `@tsjam/swc-jest-config-recommended`'s `.swcrc`), so `tests/tsconfig.json` is now only for editor/type-checking, not the test transform. All tsconfigs extend the root `tsconfig.json` which extends `@tsjam/web-config-base/tsconfig.base.json`.
 - Husky + lint-staged run `eslint --fix` and `prettier` on commit.
 - Release flow for `tsjam`: `prepare-release` (clean → lint → test → version patch → docs) then `publish-public`; `postpublish` pushes tags to `origin master`.

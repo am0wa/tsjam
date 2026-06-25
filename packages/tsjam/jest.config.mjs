@@ -1,15 +1,10 @@
-/**@see https://kulshekhar.github.io/ts-jest/docs/guides/esm-support*/
-import baseConfig from '@tsjam/jest-config-recommended/jest.config.mjs';
-
-console.log('Jest ESM Windmills...', baseConfig);
+/**@see https://github.com/swc-project/jest*/
+import baseConfig from '@tsjam/swc-jest-config-recommended/jest.config.mjs';
 
 /** @type {import('jest').Config} */
 const config = {
   ...baseConfig,
   rootDir: './',
-  // @see https://jestjs.io/docs/configuration#transformignorepatterns-arraystring
-  transformIgnorePatterns: [], // transform esm
-  setupFiles: [],
 };
 
 export default config;
