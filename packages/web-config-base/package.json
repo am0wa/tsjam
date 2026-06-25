@@ -30,7 +30,7 @@
     "rimraf": "^6",
     "prettier": ">=3.x",
     "typescript": ">=5.x",
-    "lint-staged": "^16"
+    "lint-staged": "^16 || ^17"
   },
   "peerDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^5"

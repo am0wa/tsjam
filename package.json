@@ -15,21 +15,21 @@
   "author": "am0wa",
   "license": "ISC",
   "engines": {
-    "node": ">=20",
-    "pnpm": ">=10.3.0"
+    "node": ">=24",
+    "pnpm": ">=10.30"
   },
   "devDependencies": {
-    "@eslint/js": "catalog:eslint19",
+    "@eslint/js": "catalog:lint",
     "@tsjam/eslint-config-recommended": "workspace:*",
     "@tsjam/web-config-base": "workspace:*",
-    "eslint": "catalog:eslint19",
-    "eslint-config-prettier": "catalog:eslint19",
-    "husky": "^9.1.7",
-    "lint-staged": "^16.1.5",
-    "prettier": "^3.6.2",
+    "eslint": "catalog:lint",
+    "eslint-config-prettier": "catalog:lint",
+    "husky": "catalog:lint",
+    "lint-staged": "catalog:lint",
+    "prettier": "catalog:lint",
     "reflect-metadata": "^0.2.2",
-    "rimraf": "^6.0.1",
-    "typescript-eslint": "catalog:eslint19"
+    "rimraf": "catalog:tools",
+    "typescript-eslint": "catalog:lint"
   },
   "prettier": "@tsjam/web-config-base/prettier.config.mjs",
   "lint-staged": {

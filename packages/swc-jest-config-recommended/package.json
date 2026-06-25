@@ -21,7 +21,7 @@
     "jest-config": "catalog:jest",
     "jest-environment-jsdom": "catalog:jest",
     "reflect-metadata": "^0.2.2",
-    "ts-jest-resolver": "^2.0.1"
+    "ts-jest-resolver": "catalog:jest"
   },
   "peerDependencies": {
     "jest": "30.x",

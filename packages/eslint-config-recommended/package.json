@@ -15,13 +15,13 @@
   "author": "am0wa",
   "license": "MIT",
   "dependencies": {
-    "@eslint/js": "catalog:eslint19",
-    "eslint": "catalog:eslint19",
-    "eslint-config-prettier": "catalog:eslint19",
+    "@eslint/js": "catalog:lint",
+    "eslint": "catalog:lint",
+    "eslint-config-prettier": "catalog:lint",
     "globals": "^16.3.0",
-    "typescript-eslint": "catalog:eslint19"
+    "typescript-eslint": "catalog:lint"
   },
   "peerDependencies": {
-    "eslint": "^9"
+    "eslint": "^9 || ^10"
   }
 }

@@ -1,6 +1,7 @@
 import jamEslint from '@tsjam/eslint-config-recommended';
+import { Linter } from 'eslint';
 
-console.info('Linting..🕵️', jamEslint.configs.recommendedTS);
+console.info('Linting..🕵️', { eslint: Linter.version });
 
 /**
  * @see https://typescript-eslint.io/users/configs/#recommended
