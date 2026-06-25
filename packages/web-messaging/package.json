@@ -9,7 +9,7 @@
     "lint": "eslint src",
     "test": "echo tests",
     "clean:dist": "rimraf lib",
-    "prepublishOnly": "run-s clean:dist build test"
+    "prepublishOnly": "pnpm run clean:dist && pnpm run build && pnpm run test"
   },
   "files": [
     "lib",
