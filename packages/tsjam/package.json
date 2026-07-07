@@ -5,6 +5,7 @@
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "type": "module",
+  "sideEffects": false,
   "exports": {
     ".": {
       "import": "./lib/index.js",
@@ -26,7 +27,6 @@
       "default": "./lib/reactive/index.js"
     }
   },
-  "sideEffects": false,
   "repository": "https://github.com/am0wa/tsjam",
   "license": "MIT",
   "keywords": [
@@ -67,18 +67,18 @@
     "@swc/core": "catalog:swc",
     "@swc/jest": "catalog:jest",
     "@tsjam/swc-jest-config-recommended": "workspace:*",
+    "@tsjam/lint-config": "workspace:*",
     "@types/jest": "catalog:jest",
     "gh-pages": "^3.2.3",
     "jest": "catalog:jest",
     "rxjs": "^7.8.2",
     "ts-jest-resolver": "catalog:jest",
-    "typedoc": "^0.27.9",
-    "typescript": "catalog:"
+    "typedoc": "^0.27.9"
   },
   "files": [
     "lib",
     "tsconfig.json",
     "!**/tsconfig.tsbuildinfo"
   ],
-  "prettier": "@tsjam/web-config-base/prettier.config.mjs"
+  "prettier": "@tsjam/lint-config/prettier.config.mjs"
 }

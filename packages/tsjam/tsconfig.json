@@ -1,5 +1,5 @@
 {
-  "extends": "@tsjam/web-config-base/tsconfig.base.json",
+  "extends": "@tsjam/tsconfig-bases/tsconfig.base.json",
   "compilerOptions": {
     "module": "NodeNext",
     "target": "ES2024",

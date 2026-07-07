@@ -1,6 +1,6 @@
 {
   "name": "@tsjam/eslint-config-recommended",
-  "version": "0.2.4",
+  "version": "0.3.0",
   "description": "Shared Eslint Config Module",
   "main": "index.mjs",
   "files": [
@@ -15,13 +15,11 @@
   "author": "am0wa",
   "license": "MIT",
   "dependencies": {
-    "@eslint/js": "catalog:lint",
-    "eslint": "catalog:lint",
     "eslint-config-prettier": "catalog:lint",
-    "globals": "^16.3.0",
+    "globals": "^17.6.0",
     "typescript-eslint": "catalog:lint"
   },
   "peerDependencies": {
-    "eslint": "^9 || ^10"
+    "eslint": "^10"
   }
 }

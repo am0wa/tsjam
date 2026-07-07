@@ -1,0 +1,15 @@
+{
+  "name": "@tsjam/web-dev-utils",
+  "version": "0.0.1",
+  "description": "Web dev utils",
+  "type": "module",
+  "files": ["cli"],
+  "keywords": ["dev-utils"],
+  "author": "am0wa",
+  "license": "ISC",
+  "homepage": "https://github.com/am0wa/tsjam#readme",
+  "devDependencies": {
+    
+  },
+  "prettier": "@tsjam/lint-config/prettier.config.mjs"
+}

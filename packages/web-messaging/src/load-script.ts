@@ -1,4 +1,4 @@
-import { DisposableLike } from 'tsjam';
+import type { DisposableLike } from 'tsjam';
 
 type LoadScriptParams = Readonly<{
   src: string;

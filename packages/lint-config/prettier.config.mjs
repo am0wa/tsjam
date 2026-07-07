@@ -5,7 +5,7 @@ const config = {
   semi: true,
   singleQuote: true,
   printWidth: 120,
-  importOrderParserPlugins: ['typescript', 'jsx', 'decorators-legacy'],
+  importOrderParserPlugins: ['typescript', 'decorators-legacy'],
   plugins: ['@trivago/prettier-plugin-sort-imports'],
   importOrder: [
     '^(inversify)|(mobx)|(mobx-react-lite)|(rxjs)|(tsjam)|(i18next)|(react)(.*)$',

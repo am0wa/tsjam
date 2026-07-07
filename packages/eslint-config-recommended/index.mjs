@@ -1,15 +1,10 @@
-import {
-  configs,
-  recommended,
-  recommendedTypeChecked,
-  recommendedImport,
-  recommendedJSX,
-} from './eslint-recommended.mjs';
+import { configs, recommended, recommendedTypeChecked, restrictedImports, restrictedImportPatterns, restrictedImportsRule } from './eslint-recommended.mjs';
 
 export default {
   configs,
   recommended,
   recommendedTypeChecked,
-  recommendedImport,
-  recommendedJSX,
+  restrictedImports,
+  restrictedImportPatterns,
+  restrictedImportsRule,
 };

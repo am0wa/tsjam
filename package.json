@@ -16,12 +16,12 @@
   "license": "ISC",
   "engines": {
     "node": ">=24",
-    "pnpm": ">=10.30"
+    "pnpm": ">=11"
   },
   "devDependencies": {
-    "@eslint/js": "catalog:lint",
     "@tsjam/eslint-config-recommended": "workspace:*",
-    "@tsjam/web-config-base": "workspace:*",
+    "@tsjam/lint-config": "workspace:*",
+    "@tsjam/tsconfig-bases": "workspace:*",
     "eslint": "catalog:lint",
     "eslint-config-prettier": "catalog:lint",
     "husky": "catalog:lint",
@@ -29,14 +29,15 @@
     "prettier": "catalog:lint",
     "reflect-metadata": "^0.2.2",
     "rimraf": "catalog:tools",
-    "typescript-eslint": "catalog:lint"
+    "typescript-eslint": "catalog:lint",
+    "typescript": "catalog:"
   },
-  "prettier": "@tsjam/web-config-base/prettier.config.mjs",
+  "prettier": "@tsjam/lint-config/prettier.config.mjs",
   "lint-staged": {
     "*.{ts,tsx}": "eslint --cache --fix",
     "*.{ts,tsx,js,css,md}": "prettier --write"
   },
-  "packageManager": "pnpm@10.30.0+sha512.2b5753de015d480eeb88f5b5b61e0051f05b4301808a82ec8b840c9d2adf7748eb352c83f5c1593ca703ff1017295bc3fdd3119abb9686efc96b9fcb18200937",
+  "packageManager": "pnpm@11.10.0+sha512.0b7f8b98060031904c017e3a41eb187a16d40eeb829b95c4f8cb03681761fc4ab53dd219115b9b447f4dce1a05a214764461e7d3703392a9f32f9511ce8c86c8",
   "dependencies": {
     "@trivago/prettier-plugin-sort-imports": "^5.2.2"
   }

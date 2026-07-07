@@ -19,23 +19,33 @@ const recommended = {
   },
 };
 
-const recommendedImport = {
-  rules: {
-    // this rule dramatically increases lint time
-    'import/extensions': 'off',
-    // don't process import order - too heavy and not flexible enough (use prettier)
-    'import/order': 'off',
-    'import/prefer-default-export': 'off',
-    'import/no-default-export': 'error',
-    'no-restricted-imports': [
-      'error',
-      {
-        // don't import from dist / use absolute imports / avoid parent imports
-        patterns: ['../lib/*', '../dist/*', '../src/*', '../../*'],
-      },
-    ],
+const restrictedImportPatterns = [
+  {
+    // use absolute imports / avoid far parent imports
+    group: ['../../../*'],
+    message: 'Deep relative imports are not allowed. Use path aliases @/* instead',
   },
-};
+  // Ban self-barrel imports: a module must not import from its own directory's
+  // `./index.js`. It re-exports the importer, creating a circular dependency.
+  // Import the concrete sibling module directly instead.
+  {
+    regex: '^\\.\\.?\/?(index(\\.js)?)?$',
+    message:
+      "Do not import own ('./index') or parent ('../index') — it causes circular dependency. Import the concrete sibling module directly.",
+  },
+];
+
+/**
+ * Builds a complete 'no-restricted-imports' rules fragment: shared patterns + project extras.
+ * Flat config replaces rule entries wholesale on override (no pattern merging),
+ * so every scoped block must be rebuilt from the full set — this factory does that.
+ */
+const restrictedImportsRule = (...extraPatterns) => ({
+  'no-restricted-imports': ['error', { patterns: [...restrictedImportPatterns, ...extraPatterns] }],
+});
+
+// kept for zero-config consumers / backwards compat — now derived, not duplicated                                                                                                                       
+const restrictedImports = { rules: restrictedImportsRule() };
 
 const recommendedTypeChecked = {
   rules: {
@@ -69,13 +79,6 @@ const recommendedTypeChecked = {
   },
 };
 
-const recommendedJSX = {
-  rules: {
-    'react/jsx-uses-react': 'off',
-    'react/react-in-jsx-scope': 'off',
-  },
-};
-
 const recommendedTS = [
   // inclues 'typescript-eslint/base'
   // inclues 'typescript-eslint/eslint-recommended'
@@ -95,4 +98,11 @@ const configs = {
   recommendedTS,
 };
 
-export { configs, recommended, recommendedTypeChecked, recommendedImport, recommendedJSX };
+export { 
+  configs, 
+  recommended, 
+  recommendedTypeChecked,  
+  restrictedImports,
+  restrictedImportPatterns,
+  restrictedImportsRule, 
+};

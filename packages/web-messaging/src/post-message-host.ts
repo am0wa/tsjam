@@ -1,15 +1,16 @@
-import { EMPTY, fromEvent, Observable } from 'rxjs';
+import type { Observable } from 'rxjs';
+import { EMPTY, fromEvent } from 'rxjs';
 import { filter, map, share } from 'rxjs/operators';
 import {
   isObject,
   isSomething,
-  Json,
-  MessagingProvider,
+  type Json,
+  type MessagingProvider,
   optionalMap,
-  ParseFn,
+  type ParseFn,
   replayLastMessage$,
   SafeJSON,
-  Typeguard,
+  type Typeguard,
   unwrap,
 } from 'tsjam';
 

@@ -4,12 +4,22 @@
   "description": "Reactive Post message host",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
+  "type": "module",
+  "sideEffects": false,
   "scripts": {
     "build": "tsc -b src/tsconfig.json",
     "lint": "eslint src",
     "test": "echo tests",
     "clean:dist": "rimraf lib",
     "prepublishOnly": "pnpm run clean:dist && pnpm run build && pnpm run test"
+  },
+  "exports": {
+    ".": {
+      "import": "./lib/index.js",
+      "require": "./lib/index.js",
+      "types": "./lib/index.d.ts",
+      "default": "./lib/index.js"
+    }
   },
   "files": [
     "lib",
@@ -22,9 +32,6 @@
   "author": "am0wa",
   "license": "ISC",
   "homepage": "https://github.com/am0wa/tsjam#readme",
-  "devDependencies": {
-    "typescript": "catalog:"
-  },
   "peerDependencies": {
     "rxjs": "^7.x",
     "tsjam": ">=1.6.4"

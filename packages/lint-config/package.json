@@ -1,0 +1,37 @@
+{
+  "name": "@tsjam/lint-config",
+  "version": "1.0.0",
+  "description": "Shared Eslint + Prettier Config module",
+  "main": "index.mjs",
+  "type": "module",
+  "sideEffects": false,
+  "files": [
+    "index.mjs",
+    "prettier.config.mjs"
+  ],
+  "keywords": [
+    "eslint-config",
+    "prettier-config",
+    "recommended"
+  ],
+  "author": "am0wa",
+  "license": "ISC",
+  "repository": "https://github.com/am0wa/tsjam/tree/master/packages/lint-config",
+  "engines": {
+    "node": "^22.13 || >=24"
+  },
+  "dependencies": {
+    "@tsjam/eslint-config-recommended": "workspace:^"
+  },
+  "peerDependencies": {
+    "eslint": "^10",
+    "prettier": "^3.8",
+    "@trivago/prettier-plugin-sort-imports": "^6",
+    "husky": "^9",
+    "lint-staged": "^16"
+  },
+  "peerDependenciesMeta": {
+    "husky": { "optional": true },
+    "lint-staged": { "optional": true }
+  }
+}

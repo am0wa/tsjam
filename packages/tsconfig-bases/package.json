@@ -1,0 +1,19 @@
+{
+  "name": "@tsjam/tsconfig-bases",
+  "version": "1.1.0",
+  "description": "Shared tsconfig base configurations: typescript",
+  "files": [
+    "tsconfig.base.json",
+    "tsconfig.node.json"
+  ],
+  "keywords": [
+    "shared config",
+    "typescript"
+  ],
+  "author": "am0wa",
+  "contributors": ["am0wa"],
+  "license": "ISC",
+  "peerDependencies": {
+    "typescript": "^5.8"
+  }
+}
