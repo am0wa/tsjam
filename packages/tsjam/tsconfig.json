@@ -5,11 +5,10 @@
     "target": "ES2024",
     "moduleResolution": "nodenext",
     "allowJs": true,
-    /* Paths */
-    "baseUrl": ".",
+    /* Paths (relative to this tsconfig, baseUrl is removed in TS 6) */
     "outDir": "lib",
     "paths": {
-      "*": ["*", "src/*"]
+      "*": ["./*", "./src/*"]
     },
   },
 }

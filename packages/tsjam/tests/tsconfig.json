@@ -5,6 +5,8 @@
     "module": "ESNext", // important: jest crashes to resolve module: NodeNext!
     "moduleResolution": "bundler",
     "types": ["node", "jest"],
+    "rootDir": ".." /* TS 6 defaults rootDir to this dir; specs also pull in ../src */,
+    "noEmit": true,
     "noImplicitReturns": false,
     "noUnusedParameters": false,
     "isolatedModules": true,
