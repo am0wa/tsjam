@@ -7,7 +7,6 @@
     "lib": ["ES2024", "ESNext", "dom"] /* Lib to used while compiling into target */,
     "jsx": "react-jsx",
     "strict": true,
-    "downlevelIteration": true,
     "verbatimModuleSyntax": true,
     /* Decorators support */
     "emitDecoratorMetadata": true,
