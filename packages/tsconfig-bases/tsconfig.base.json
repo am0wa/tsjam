@@ -4,7 +4,7 @@
     "target": "ES2024",
     "module": "ESNext",
     "moduleResolution": "bundler",
-    "lib": ["ES2024", "ESNext", "dom"] /* Lib to used while compiling into target */,
+    "lib": ["ES2024", "ESNext", "dom"] /* runtime APIs may the type-checker assume exist */,
     "jsx": "react-jsx",
     "strict": true,
     "verbatimModuleSyntax": true,
