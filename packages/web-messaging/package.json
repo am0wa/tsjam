@@ -32,6 +32,9 @@
   "author": "am0wa",
   "license": "ISC",
   "homepage": "https://github.com/am0wa/tsjam#readme",
+  "devDependencies": {
+    "typescript7": "catalog:"
+  },
   "peerDependencies": {
     "rxjs": "^7.x",
     "tsjam": ">=1.6.4"
