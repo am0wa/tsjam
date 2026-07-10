@@ -6,7 +6,10 @@ allowBuilds:
   unrs-resolver: true
 
 catalog:
+  # tooling API (typescript-eslint, typedoc) — they don't support TS 7 native yet
   typescript: ^6.0.3
+  # TS 7 native compiler, aliased as `typescript7` so it doesn't hijack the tooling's `typescript` peer resolution
+  typescript7: npm:typescript@~7.0.2
   tslib: 2.8.1
 
 catalogs:

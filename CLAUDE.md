@@ -10,11 +10,24 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 - `packages/tsjam` — the main published library (`tsjam` on npm). This is where ~all feature work happens.
 - `packages/web-messaging` — `@tsjam/web-messaging`, a reactive `postMessage` host built on top of `tsjam` + rxjs.
-- `packages/web-config-base` — `@tsjam/web-config-base`: shared `tsconfig.base.json`, prettier config, browserslist, and a `sync-browsers` CLI.
-- `packages/eslint-config-recommended` — flat ESLint 9 config (`jamEslint.configs.recommendedTS`).
-- `packages/swc-jest-config-recommended` — shared swc-based (ESM) Jest 30 config used by `tsjam`. (The former `@tsjam/jest-config-recommended` ts-jest config was deprecated and removed in favour of this.)
+- `packages/tsconfig-bases` — `@tsjam/tsconfig-bases`: shared `tsconfig.base.json` / `tsconfig.node.json` that all tsconfigs extend.
+- `packages/lint-config` — `@tsjam/lint-config`: umbrella lint/format config (prettier config + re-export of the eslint config below).
+- `packages/eslint-config-recommended` — flat ESLint 10 config (`jamEslint.configs.recommendedTS`).
+- `packages/swc-jest-config-recommended` — shared swc-based (ESM) Jest 30 config used by `tsjam`.
+- `packages/web-dev-utils` — tiny CLI helpers (`open-browser.mjs`, `resolve-path.mjs`).
 
-Dependency versions are pinned centrally via pnpm **catalogs** in `pnpm-workspace.yaml` (`catalog:eslint19`, `catalog:jest30`, `catalog:`, etc.). When bumping a shared dep, edit the catalog, not individual package.json files.
+Dependency versions are pinned centrally via pnpm **catalogs** in `pnpm-workspace.yaml` (default `catalog:` plus named `catalog:lint`, `catalog:jest`, `catalog:swc`, `catalog:tools`). When bumping a shared dep, edit the catalog, not individual package.json files.
+
+## TypeScript setup (dual compiler — read before touching TS versions)
+
+The repo intentionally carries **two** TypeScript versions via the default catalog:
+
+- `typescript` (**6.x**) — resolved by tooling that needs the classic JS compiler API: typescript-eslint and typedoc. Neither supports TS 7 yet (typescript-eslint caps at `<6.1.0`, typedoc at `6.0.x`).
+- `typescript7` (**alias for `npm:typescript@7`, the native Go compiler**) — a devDependency of `tsjam` and `web-messaging`; its `tsc` binary wins on PATH in those packages, so **builds compile with TS 7** while lint/docs run on TS 6.
+
+The alias name is load-bearing: peer resolution matches by the name `typescript` and climbs the dependents chain, so declaring `typescript@7` directly in `tsjam` would feed TS 7 to typescript-eslint and crash lint (`typescript@7` no longer ships the JS API). Don't "simplify" this to a single version until typescript-eslint/typedoc support TS 7 — then drop the alias and point `typescript` at `^7`.
+
+TS 6/7 also removed config options; the tsconfigs are already migrated. Keep new tsconfigs free of `baseUrl` (use tsconfig-relative `paths` like `./src/*`), set `rootDir` explicitly (it now defaults to the tsconfig's own directory), and remember `types` defaults to `[]` (no auto-inclusion of `@types/*` — list what you need, as `tests/tsconfig.json` does).
 
 ## Commands
 
@@ -35,11 +48,11 @@ pnpm test:watch                # jest --watchAll
 pnpm test -- tests/core/result.spec.ts        # single test file
 pnpm test -- -t "expect to infer types"       # single test by name
 pnpm build:watch               # tsc -b -w
-pnpm doc                       # typedoc -> docs/
+pnpm doc                       # typedoc --tsconfig src/tsconfig.json -> docs/
 pnpm clean                     # rimraf lib
 ```
 
-Node `>=22` and pnpm `>=10.3` are required (the library is ESM-only, `"type": "module"`).
+Node `>=24` and pnpm `>=11` are required at the repo root (the published library itself supports Node `>=22`; everything is ESM-only, `"type": "module"`).
 
 ## Architecture & conventions
 
@@ -64,6 +77,6 @@ The shared config runs typescript-eslint `recommendedTypeChecked`. Notable enfor
 
 ## Build & publish
 
-- TS builds emit to `lib/` (gitignored) via project references; `src/tsconfig.json` is the build entry. Tests are transformed by `@swc/jest` (config in `@tsjam/swc-jest-config-recommended`'s `.swcrc`), so `tests/tsconfig.json` is now only for editor/type-checking, not the test transform. All tsconfigs extend the root `tsconfig.json` which extends `@tsjam/web-config-base/tsconfig.base.json`.
+- TS builds emit to `lib/` (gitignored) via project references; `src/tsconfig.json` is the build entry (compiled by the native TS 7 `tsc` — see the TypeScript setup section). Tests are transformed by `@swc/jest` (config in `@tsjam/swc-jest-config-recommended`'s `.swcrc`), so `tests/tsconfig.json` is now only for editor/type-checking (`noEmit`), not the test transform. All tsconfigs extend the package `tsconfig.json` which extends `@tsjam/tsconfig-bases/tsconfig.base.json`.
 - Husky + lint-staged run `eslint --fix` and `prettier` on commit.
 - Release flow for `tsjam`: `prepare-release` (clean → lint → test → version patch → docs) then `publish-public`; `postpublish` pushes tags to `origin master`.
