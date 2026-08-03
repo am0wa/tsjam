@@ -41,6 +41,9 @@ export namespace Urls {
     return urlParams;
   };
 
+  const localhostPattern = /^(https?:\/\/)?localhost(:\d+)?([/\w .-]*)*\/?.*/i;
+  export const isLocalhost = (url: string): boolean => localhostPattern.test(url);
+
   const urlPattern = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?.*/;
-  export const isValidUrl = (url: string): boolean => urlPattern.test(url);
+  export const isValidUrl = (url: string): boolean => urlPattern.test(url) || localhostPattern.test(url);
 }
