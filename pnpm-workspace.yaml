@@ -33,7 +33,7 @@ catalogs:
     jest-environment-jsdom: ^30.4.1
     ts-jest-resolver: ^2.0.1
   swc:
-    '@swc/core': ^1.15.33
+    '@swc/core': ^1.15.47
 
 ignoredBuiltDependencies:
   - '@swc/core'
