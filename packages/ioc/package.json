@@ -1,0 +1,57 @@
+{
+  "name": "@tsjam/ioc",
+  "version": "0.1.0",
+  "description": "InversifyJS utilities: sid, disposable-aware iocModule, container bootstrap",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "default": "./lib/index.js"
+    }
+  },
+  "files": [
+    "lib",
+    "!**/tsconfig.tsbuildinfo"
+  ],
+  "scripts": {
+    "build": "tsc -b src/tsconfig.json",
+    "build:watch": "tsc -b src/tsconfig.json -w",
+    "lint": "eslint src",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js tests",
+    "clean:dist": "rimraf lib",
+    "prepublishOnly": "pnpm run clean:dist && pnpm run build && pnpm run test",
+    "publish-public": "pnpm publish --access=public",
+    "postpublish": "git tag $npm_package_name@$npm_package_version && git push origin $npm_package_name@$npm_package_version"
+  },
+  "keywords": [
+    "inversify",
+    "ioc",
+    "di",
+    "disposable"
+  ],
+  "author": "am0wa",
+  "license": "MIT",
+  "repository": "https://github.com/am0wa/tsjam",
+  "homepage": "https://github.com/am0wa/tsjam/tree/master/packages/ioc#readme",
+  "engines": {
+    "node": ">=22"
+  },
+  "peerDependencies": {
+    "inversify": "^8.0.0"
+  },
+  "devDependencies": {
+    "@swc/core": "catalog:swc",
+    "@jest/globals": "catalog:jest",
+    "@swc/jest": "catalog:jest",
+    "@tsjam/swc-jest-config-recommended": "workspace:*",
+    "@types/jest": "catalog:jest",
+    "inversify": "catalog:lib",
+    "jest": "catalog:jest",
+    "rxjs": "catalog:lib",
+    "ts-jest-resolver": "catalog:jest",
+    "tsjam": "workspace:^",
+    "typescript7": "catalog:"
+  },
+  "prettier": "@tsjam/lint-config/prettier.config.mjs"
+}
