@@ -1,8 +1,14 @@
 {
   "name": "@tsjam/eslint-config-recommended",
-  "version": "0.3.0",
-  "description": "Shared Eslint Config Module",
+  "version": "0.4.0",
+  "description": "Eslint Config with split of Syntactic & Type aware rules",
   "main": "index.mjs",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": "./index.mjs",
+    "./package.json": "./package.json"
+  },
   "files": [
     "eslint-recommended.mjs",
     "index.mjs"
@@ -16,7 +22,7 @@
   "license": "MIT",
   "dependencies": {
     "eslint-config-prettier": "catalog:lint",
-    "globals": "^17.6.0",
+    "globals": "catalog:lint",
     "typescript-eslint": "catalog:lint"
   },
   "peerDependencies": {

@@ -1,4 +1,5 @@
 import jamEslint from '@tsjam/eslint-config-recommended';
+
 import { Linter } from 'eslint';
 
 console.info('Linting..🕵️', { eslint: Linter.version });
@@ -16,14 +17,9 @@ export default [
       },
     },
   },
-  // inclues 'typescript-eslint/base'
-  // inclues 'typescript-eslint/eslint-recommended'
-  // inclues 'typescript-eslint/recommended-type-checked'
-  // ...tsEslint.configs.recommendedTypeChecked, // + jam TS rules
-  ...jamEslint.configs.recommendedTS,
+  ...jamEslint.configs.recommendedTsTypeChecked,
   {
     rules: {
-      'no-param-reassign': 'error',
       '@typescript-eslint/unbound-method': 'error',
       '@typescript-eslint/default-param-last': 'warn',
       '@typescript-eslint/restrict-plus-operands': 'warn',

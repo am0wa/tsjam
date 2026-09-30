@@ -1,8 +1,13 @@
 {
   "name": "@tsjam/lint-config",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Shared Eslint + Prettier Config module",
   "main": "index.mjs",
+  "exports": {
+    ".": "./index.mjs",
+    "./prettier.config.mjs": "./prettier.config.mjs",
+    "./package.json": "./package.json"
+  },
   "type": "module",
   "sideEffects": false,
   "files": [
@@ -18,7 +23,7 @@
   "license": "ISC",
   "repository": "https://github.com/am0wa/tsjam/tree/master/packages/lint-config",
   "engines": {
-    "node": "^22.13 || >=24"
+    "node": ">=24"
   },
   "dependencies": {
     "@tsjam/eslint-config-recommended": "workspace:^"

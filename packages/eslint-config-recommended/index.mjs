@@ -1,10 +1,6 @@
-import { configs, recommended, recommendedTypeChecked, restrictedImports, restrictedImportPatterns, restrictedImportsRule } from './eslint-recommended.mjs';
+import * as eslintRecommended from './eslint-recommended.mjs';
 
-export default {
-  configs,
-  recommended,
-  recommendedTypeChecked,
-  restrictedImports,
-  restrictedImportPatterns,
-  restrictedImportsRule,
-};
+export * from './eslint-recommended.mjs';
+
+// kept for backwards compat with `import jamEslint from '@tsjam/eslint-config-recommended'`
+export default eslintRecommended;

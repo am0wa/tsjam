@@ -1,7 +1,7 @@
 import globals from 'globals';
 import tsEslint from 'typescript-eslint';
 
-const recommended = {
+const recommendedOverrides = {
   rules: {
     'no-param-reassign': 'error',
     'no-nested-ternary': 'warn',
@@ -44,34 +44,36 @@ const restrictedImportsRule = (...extraPatterns) => ({
   'no-restricted-imports': ['error', { patterns: [...restrictedImportPatterns, ...extraPatterns] }],
 });
 
-// kept for zero-config consumers / backwards compat — now derived, not duplicated                                                                                                                       
+// kept for zero-config consumers / backwards compat — now derived, not duplicated
 const restrictedImports = { rules: restrictedImportsRule() };
 
-const recommendedTypeChecked = {
+const namingConventionRule = {
+  '@typescript-eslint/naming-convention': [
+    'error',
+    {
+      selector: 'memberLike',
+      modifiers: ['private'],
+      format: ['camelCase'],
+      leadingUnderscore: 'forbid',
+    },
+  ],
+};
+
+/**
+ * TypeScript overrides that need NO type information.
+ * Safe on plain `.js`/`.mjs` files, and untouched by `tsEslint.configs.disableTypeChecked`.
+ */
+const recommendedTsSyntacticOverrides = {
   rules: {
     '@typescript-eslint/no-namespace': 'off',
-    '@typescript-eslint/no-unsafe-enum-comparison': 'off',
-    '@typescript-eslint/restrict-template-expressions': 'off',
     '@typescript-eslint/array-type': ['error', { default: 'array' }],
     '@typescript-eslint/no-unused-expressions': ['error', { allowTernary: true, allowShortCircuit: true }],
     '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
-    '@typescript-eslint/unbound-method': ['error', { ignoreStatic: true }],
     // do not allow as T type casting
+    // (assertionStyle 'never' short-circuits before the rule ever touches the type map)
     '@typescript-eslint/consistent-type-assertions': ['error', { assertionStyle: 'never' }],
     '@typescript-eslint/explicit-function-return-type': ['error'],
     '@typescript-eslint/explicit-module-boundary-types': 'off',
-    '@typescript-eslint/no-floating-promises': 'off',
-    '@typescript-eslint/no-misused-promises': 'off',
-    '@typescript-eslint/no-throw-literal': 'off',
-    '@typescript-eslint/naming-convention': [
-      'error',
-      {
-        selector: 'memberLike',
-        modifiers: ['private'],
-        format: ['camelCase'],
-        leadingUnderscore: 'forbid',
-      },
-    ],
     // with default arrays its more convenient to off
     '@typescript-eslint/default-param-last': 'off',
     // rather off - very misbehaving rule
@@ -79,30 +81,62 @@ const recommendedTypeChecked = {
   },
 };
 
-const recommendedTS = [
-  // inclues 'typescript-eslint/base'
-  // inclues 'typescript-eslint/eslint-recommended'
-  // inclues 'typescript-eslint/recommended-type-checked'
+/**
+ * TypeScript overrides the plugin flags `requiresTypeChecking` — these only run when the consumer
+ * enables `languageOptions.parserOptions.projectService` (or `project`), and are all switched off by
+ * `tsEslint.configs.disableTypeChecked`.
+ */
+const recommendedTsTypeAwareOverrides = {
+  rules: {
+    '@typescript-eslint/no-unsafe-enum-comparison': 'off',
+    '@typescript-eslint/restrict-template-expressions': 'off',
+    '@typescript-eslint/unbound-method': ['error', { ignoreStatic: true }],
+    '@typescript-eslint/no-floating-promises': 'off',
+    '@typescript-eslint/no-misused-promises': 'off',
+    // flagged type-aware by the plugin, but these options only read compilerOptions -
+    // it still degrades gracefully without a program
+    ...namingConventionRule,
+  },
+};
+
+/** Flat config without type information — every rule here runs off the syntax tree alone. */
+const recommendedTsSyntacticConfig = [
+  // includes 'typescript-eslint/base'
+  // includes 'typescript-eslint/eslint-recommended'
+  // includes 'typescript-eslint/recommended'
+  ...tsEslint.configs.recommended,
+  {
+    ignores: ['node_modules', 'lib', 'dist'],
+    languageOptions: { globals: globals.browser },
+    rules: {
+      ...recommendedOverrides.rules,
+      ...recommendedTsSyntacticOverrides.rules,
+    },
+  },
+];
+
+/** Flat config with type information — needs `parserOptions.projectService` on the consumer side. */
+const recommendedTsTypeCheckedConfig = [
+  // includes 'typescript-eslint/base'
+  // includes 'typescript-eslint/eslint-recommended'
+  // includes 'typescript-eslint/recommended-type-checked'
   ...tsEslint.configs.recommendedTypeChecked,
   {
     ignores: ['node_modules', 'lib', 'dist'],
     languageOptions: { globals: globals.browser },
     rules: {
-      ...recommended.rules,
-      ...recommendedTypeChecked.rules,
+      ...recommendedOverrides.rules,
+      ...recommendedTsSyntacticOverrides.rules,
+      ...recommendedTsTypeAwareOverrides.rules,
     },
   },
 ];
 
 const configs = {
-  recommendedTS,
+  recommendedTsTypeChecked: recommendedTsTypeCheckedConfig,
+  recommendedTsSyntactic: recommendedTsSyntacticConfig,
+  /** @deprecated use `recommendedTsTypeChecked` */
+  recommendedTS: recommendedTsTypeCheckedConfig,
 };
 
-export { 
-  configs, 
-  recommended, 
-  recommendedTypeChecked,  
-  restrictedImports,
-  restrictedImportPatterns,
-  restrictedImportsRule, 
-};
+export { configs, restrictedImports, restrictedImportPatterns, restrictedImportsRule, namingConventionRule };

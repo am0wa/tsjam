@@ -4,6 +4,8 @@ packages:
 allowBuilds:
   '@swc/core': true
   unrs-resolver: true
+  # jest-haste-map optional watcher; ships prebuilt binaries, install script is only a source-build fallback
+  '@parcel/watcher': false
 
 catalog:
   # tooling API (typescript-eslint, typedoc) — they don't support TS 7 native yet
@@ -24,9 +26,10 @@ catalogs:
     rimraf: 6.1.3
   # Linting, formatting & the commit-time quality gate
   lint:
-    eslint: ^10.6.0
+    eslint: ^10.11.0
     eslint-config-prettier: ^10.1.8
-    typescript-eslint: ^8.63.0
+    typescript-eslint: ^8.71.0
+    globals: ^17.12.0
     husky: ^9.1.7
     lint-staged: ^17.0.8
     prettier: ^3.8.4
@@ -41,6 +44,3 @@ catalogs:
     ts-jest-resolver: ^2.0.1
   swc:
     '@swc/core': ^1.15.47
-
-ignoredBuiltDependencies:
-  - '@swc/core'

@@ -11,8 +11,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `packages/tsjam` — the main published library (`tsjam` on npm). This is where ~all feature work happens.
 - `packages/web-messaging` — `@tsjam/web-messaging`, a reactive `postMessage` host built on top of `tsjam` + rxjs.
 - `packages/tsconfig-bases` — `@tsjam/tsconfig-bases`: shared `tsconfig.base.json` / `tsconfig.node.json` that all tsconfigs extend.
-- `packages/lint-config` — `@tsjam/lint-config`: umbrella lint/format config (prettier config + re-export of the eslint config below).
-- `packages/eslint-config-recommended` — flat ESLint 10 config (`jamEslint.configs.recommendedTS`).
+- `packages/lint-config` — `@tsjam/lint-config`: umbrella lint/format config. Re-exports everything from the ESLint config below (named + default) and ships the Prettier config. `exports` map: `.`, `./prettier.config.mjs` (what every package's `"prettier"` field points at), `./package.json`.
+- `packages/eslint-config-recommended` — `@tsjam/eslint-config-recommended`: flat ESLint 10 config. Named exports (the module namespace is also the default export): `configs.recommendedTsTypeChecked` (needs `projectService`), `configs.recommendedTsSyntactic` (no type info), `configs.recommendedTS` (deprecated alias of the type-checked config), and rule helpers `restrictedImportsRule`, `restrictedImportPatterns`, `restrictedImports`, `namingConventionRule`. Overrides are split into syntactic vs type-aware fragments. `exports` map: `.` and `./package.json` only.
 - `packages/swc-jest-config-recommended` — shared swc-based (ESM) Jest 30 config used by `tsjam`.
 - `packages/web-dev-utils` — tiny CLI helpers (`open-browser.mjs`, `resolve-path.mjs`).
 
@@ -73,7 +73,11 @@ Key patterns to follow when adding code:
 
 ## ESLint specifics (strict, type-checked)
 
-The shared config runs typescript-eslint `recommendedTypeChecked`. Notable enforced rules: `consistent-type-imports` (use `import type`), `explicit-function-return-type`, `no-param-reassign`, and a `naming-convention` rule (camelCase/PascalCase/UPPER*CASE; leading `*`allowed). Inline`// eslint-disable-next-line`is the accepted escape hatch for unavoidable`any`/unsafe casts — follow the existing style rather than loosening config.
+The root `eslint.config.mjs` layers repo overrides on top of `configs.recommendedTsTypeChecked`. Notable enforced rules: `consistent-type-imports` (use `import type`), `explicit-function-return-type`, `no-param-reassign`, and a `naming-convention` rule (variables `camelCase`/`PascalCase`/`UPPER_CASE`; a leading `_` is allowed). Inline `// eslint-disable-next-line` is the accepted escape hatch for unavoidable `any`/unsafe casts — follow the existing style rather than loosening config.
+
+Flat config replaces a rule entry wholesale on override (no merging of options or patterns). The root `naming-convention` entry therefore replaces the shared private-member rule, and that's intentional: the codebase uses `_`-prefixed private fields. To extend a shared rule instead of replacing it, build the entry from the exported helpers (`restrictedImportsRule(...extra)`, spread `namingConventionRule`).
+
+Both config packages are sealed by `exports` maps. Deep imports such as `@tsjam/eslint-config-recommended/eslint-recommended.mjs` fail with `ERR_PACKAGE_PATH_NOT_EXPORTED`. When adding a new public file to either package, add it to both `files` and `exports`.
 
 ## Build & publish
 
