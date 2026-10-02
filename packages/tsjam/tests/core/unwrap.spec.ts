@@ -15,6 +15,14 @@ describe('Unwrap', () => {
     expect(unwrap.expected(testObj.c, 'C is expected')).toBe('');
   });
 
+  it('ownProperty - returns own values only, ignores inherited', () => {
+    expect(unwrap.ownProperty(testObj, 'a')).toBe('A');
+    const child: { inherited?: number } = {};
+    Object.setPrototypeOf(child, { inherited: 1 });
+    expect(child.inherited).toBe(1);
+    expect(unwrap.ownProperty(child, 'inherited')).toBeUndefined();
+  });
+
   it('should throw error if empty string', () => {
     expect(() => unwrap.id(testObj.c, 'C is expected')).toThrow('assertNonEmptyString: C is expected');
   });

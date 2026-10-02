@@ -1,8 +1,14 @@
-import { type Observable, Subject } from 'rxjs';
-import type { Unsubscribable } from 'rxjs/internal/types';
+import { type Observable, Subject, type Unsubscribable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { Disposable, type DisposableLike, type DisposeCallback, isCallback, isDisposable } from '../core/index.js';
+import {
+  Disposable,
+  type DisposableLike,
+  DisposeBag,
+  type DisposeCallback,
+  isCallback,
+  isDisposable,
+} from '../core/index.js';
 import { RxBag } from './rx-bag.js';
 
 export const isUnsubscribable = (x: unknown): x is Unsubscribable => {
@@ -27,12 +33,18 @@ export class RxDisposable extends Disposable {
   /**
    * Kills all Disposable objects and Subscriptions.
    * Invokes all teardown callbacks.
+   * Teardown errors are rethrown once everything is disposed and `disposed$` has emitted.
    */
   override dispose(): void {
-    this._rxBag.dispose(); // kill all subscriptions
-    super.dispose(); // kill all children
-    this._disposed$.next(); // emmit disposed to subscribers
-    this._disposed$.complete(); // finalize
+    try {
+      DisposeBag.disposeAll([
+        this._rxBag, // kill all subscriptions
+        () => super.dispose(), // kill all children
+      ]);
+    } finally {
+      this._disposed$.next(); // emmit disposed to subscribers
+      this._disposed$.complete(); // finalize
+    }
   }
 
   /**

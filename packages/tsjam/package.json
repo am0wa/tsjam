@@ -8,24 +8,18 @@
   "sideEffects": false,
   "exports": {
     ".": {
-      "import": "./lib/index.js",
-      "require": "./lib/index.js",
       "types": "./lib/index.d.ts",
       "default": "./lib/index.js"
     },
-    "./package.json": "./package.json",
     "./money": {
-      "require": "./lib/money/index.js",
-      "import": "./lib/money/index.js",
       "types": "./lib/money/index.d.ts",
-      "default": "./lib/money/index.d.ts"
+      "default": "./lib/money/index.js"
     },
     "./reactive": {
-      "require": "./lib/reactive/index.js",
-      "import": "./lib/reactive/index.js",
       "types": "./lib/reactive/index.d.ts",
       "default": "./lib/reactive/index.js"
-    }
+    },
+    "./package.json": "./package.json"
   },
   "repository": "https://github.com/am0wa/tsjam",
   "license": "MIT",

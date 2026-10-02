@@ -44,7 +44,8 @@ export namespace assert {
   }
 
   export function dev(expression: boolean | (() => boolean), message?: string): asserts expression {
-    if (__DEVELOPMENT__) {
+    // `typeof` guard: consumers that don't define the global must not crash with ReferenceError
+    if (typeof __DEVELOPMENT__ !== 'undefined' && __DEVELOPMENT__) {
       assert(expression, message);
     }
   }

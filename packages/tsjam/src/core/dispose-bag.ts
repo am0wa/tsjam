@@ -19,6 +19,27 @@ export class DisposeBag implements DisposableBag<DisposableLike | DisposeCallbac
     isDisposable(disposable) ? disposable.dispose() : disposable();
   }
 
+  /**
+   * Disposes every item, even if some of them throw.
+   * Rethrows the single error as is, or an `AggregateError` of all of them.
+   */
+  public static disposeAll(disposables: Iterable<DisposableLike | DisposeCallback>): void {
+    const errors: unknown[] = [];
+    for (const disposable of disposables) {
+      try {
+        DisposeBag.dispose(disposable);
+      } catch (err) {
+        errors.push(err);
+      }
+    }
+    if (errors.length === 1) {
+      throw errors[0];
+    }
+    if (errors.length > 1) {
+      throw new AggregateError(errors, `DisposeBag: ${errors.length} teardowns failed`);
+    }
+  }
+
   public static create(): DisposeBag {
     return new DisposeBag(DisposeBag.generateId());
   }
@@ -62,16 +83,20 @@ export class DisposeBag implements DisposableBag<DisposableLike | DisposeCallbac
     return disposable;
   }
 
+  /**
+   * Disposes all added items, even if some of them throw (errors are rethrown afterwards).
+   * Items added during disposal are disposed immediately.
+   */
   dispose(): void {
     if (this._disposed) {
       return; // already disposed.
     }
-    this._disposables.forEach((disposable) => {
-      DisposeBag.dispose(disposable);
-      this._registry?.delete(disposable);
-    });
-    this._disposables.length = 0; // erase
+    this._disposed = true; // finalize first: re-entrant `add` disposes right away
     this._registry = undefined; // erase
-    this._disposed = true; // finalize
+    try {
+      DisposeBag.disposeAll(this._disposables);
+    } finally {
+      this._disposables.length = 0; // erase, even if some teardown threw
+    }
   }
 }

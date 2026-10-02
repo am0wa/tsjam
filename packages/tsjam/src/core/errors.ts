@@ -31,7 +31,7 @@ export class NotImplementedError extends JamError {
   protected readonly _NotImplementedError!: never;
 }
 
-export class UnreachableCodeError extends Error {
+export class UnreachableCodeError extends JamError {
   @nonenumerable
   protected readonly _UnreachableCodeError!: never;
 

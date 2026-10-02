@@ -1,4 +1,4 @@
-import { JamError } from 'core/errors.js';
+import { JamError, UnreachableCodeError } from 'core/errors.js';
 
 describe('Errors', () => {
   describe('subclassing', () => {
@@ -23,6 +23,16 @@ describe('Errors', () => {
 
     it('should have stack', () => {
       expect(myErr.stack).toBeDefined();
+    });
+  });
+
+  describe('UnreachableCodeError', () => {
+    it('should be a JamError with its own name', () => {
+      const err = new UnreachableCodeError();
+      expect(err).toBeInstanceOf(JamError);
+      expect(err).toBeInstanceOf(UnreachableCodeError);
+      expect(err.name).toBe('UnreachableCodeError');
+      expect(err.message).toBe('This code should be unreachable!');
     });
   });
 });

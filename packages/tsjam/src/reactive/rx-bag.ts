@@ -1,6 +1,7 @@
 import { Subscription } from 'rxjs';
-import type { Unsubscribable } from 'rxjs/internal/types';
-import type { DisposableBag, DisposableLike, DisposeCallback, RipId } from '../core/index.js';
+import type { Unsubscribable } from 'rxjs';
+
+import type { DisposableBag, DisposeCallback, RipId } from '../core/index.js';
 
 export type UnsubscribeCallback = DisposeCallback;
 
@@ -9,13 +10,10 @@ export type UnsubscribeCallback = DisposeCallback;
  * to unsubscribe from existing subscriptions and avoid Memory Leaks.
  */
 export class RxBag implements DisposableBag<Unsubscribable | UnsubscribeCallback> {
-  private static readonly all = new Map<RipId, DisposableLike>();
   private static _counter = 0;
 
   public static create(): RxBag {
-    const one = new RxBag(RxBag.generateId());
-    RxBag.all.set(one.id, one);
-    return one;
+    return new RxBag(RxBag.generateId());
   }
 
   private static generateId(): RipId {
@@ -61,6 +59,5 @@ export class RxBag implements DisposableBag<Unsubscribable | UnsubscribeCallback
     this._sub$.unsubscribe();
     this._size = 0;
     this._closed = true;
-    RxBag.all.delete(this.id); // cleans up its reference
   }
 }

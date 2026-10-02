@@ -50,4 +50,50 @@ describe('DisposeBag', () => {
     expect(bag.size).toBe(0);
     expect(invocations).toBe(1);
   });
+  it('dispose - disposes all even if a teardown throws, then rethrows', () => {
+    const bag = DisposeBag.create();
+    const boom = new Error('boom');
+    let afterCalls = 0;
+    const after = () => afterCalls++;
+
+    bag.add(() => {
+      throw boom;
+    });
+    bag.add(after);
+
+    expect(() => bag.dispose()).toThrow(boom);
+    expect(afterCalls).toBe(1);
+    expect(bag.disposed).toBe(true);
+    expect(bag.size).toBe(0);
+  });
+  it('dispose - aggregates multiple teardown errors', () => {
+    const bag = DisposeBag.create();
+    const errA = new Error('A');
+    const errB = new Error('B');
+    bag.add(() => {
+      throw errA;
+    });
+    bag.add(() => {
+      throw errB;
+    });
+
+    let caught: unknown;
+    try {
+      bag.dispose();
+    } catch (err) {
+      caught = err;
+    }
+    expect(caught).toBeInstanceOf(AggregateError);
+    expect(caught instanceof AggregateError && caught.errors).toEqual([errA, errB]);
+  });
+  it('dispose - items added during disposal are disposed immediately', () => {
+    const bag = DisposeBag.create();
+    let lateCalls = 0;
+    const late = () => lateCalls++;
+    bag.add(() => bag.add(late));
+
+    bag.dispose();
+    expect(lateCalls).toBe(1);
+    expect(bag.size).toBe(0);
+  });
 });

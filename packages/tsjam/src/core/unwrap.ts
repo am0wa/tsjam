@@ -29,10 +29,10 @@ export namespace unwrap {
   };
 
   /**
-   * Checks whether property is on object and returns its value.
+   * Checks whether property is own (not inherited) on object and returns its value.
    * Gives compilation-time check for the existence of key in the specified type.
    */
   export const ownProperty = <T extends SomeObject, K extends keyof T>(obj: T, prop: K): T[K] | undefined => {
-    return prop in obj ? obj[prop] : undefined;
+    return Object.hasOwn(obj, prop) ? obj[prop] : undefined;
   };
 }

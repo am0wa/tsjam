@@ -1,6 +1,6 @@
-import { type Observable, Subject, type Subscription } from 'rxjs';
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { RxBag, RxDisposable } from 'reactive/index.js';
+import { type Observable, Subject, type Subscription } from 'rxjs';
 
 import type { DisposableLike } from 'core/disposable.js';
 
@@ -120,5 +120,24 @@ describe('RxDisposable', () => {
     expect(valueE).toBe('E');
     expect(valueH).toBe('H');
     expect(obj.disposed).toBe(true);
+  });
+  it('dispose - a throwing teardown does not block unsubscribe nor disposed$', () => {
+    const entity = new RxDisposable();
+    const boom = new Error('boom');
+    const subject$ = new Subject<string>();
+    const sub = entity.autoDispose(subject$.subscribe());
+    const after = entity.autoDispose(new TestDisposable());
+    let disposedEmitted = false;
+    entity.disposed$.subscribe(() => (disposedEmitted = true));
+
+    entity.autoDispose(() => {
+      throw boom;
+    });
+
+    expect(() => entity.dispose()).toThrow(boom);
+    expect(sub.closed).toBe(true);
+    expect(after.disposed).toBe(true);
+    expect(entity.disposed).toBe(true);
+    expect(disposedEmitted).toBe(true);
   });
 });
