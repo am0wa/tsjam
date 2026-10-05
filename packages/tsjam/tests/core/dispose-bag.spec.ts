@@ -96,4 +96,37 @@ describe('DisposeBag', () => {
     expect(lateCalls).toBe(1);
     expect(bag.size).toBe(0);
   });
+  it('add - same item twice is kept and disposed once', () => {
+    const bag = DisposeBag.create();
+    let calls = 0;
+    const teardown = () => calls++;
+
+    bag.add(teardown);
+    bag.add(teardown);
+    expect(bag.size).toBe(1);
+
+    bag.dispose();
+    expect(calls).toBe(1);
+  });
+  it('delete - releases the item without disposing it', () => {
+    const bag = DisposeBag.create();
+    let calls = 0;
+    const teardown = () => calls++;
+    bag.add(teardown);
+
+    expect(bag.delete(teardown)).toBe(true);
+    expect(bag.size).toBe(0);
+
+    bag.dispose();
+    expect(calls).toBe(0);
+  });
+  it('delete - returns false for an unknown item and after dispose', () => {
+    const bag = DisposeBag.create();
+    const teardown = () => undefined;
+    expect(bag.delete(teardown)).toBe(false);
+
+    bag.add(teardown);
+    bag.dispose();
+    expect(bag.delete(teardown)).toBe(false);
+  });
 });

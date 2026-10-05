@@ -141,3 +141,33 @@ describe('RxDisposable', () => {
     expect(disposedEmitted).toBe(true);
   });
 });
+
+describe('RxDisposable - standard ES disposal interop', () => {
+  it('autoDispose - accepts SymbolDisposable; using disposes subscriptions and emits disposed$', () => {
+    const subject$ = new Subject<string>();
+    let symbolDisposed = false;
+    let disposedEmitted = false;
+    let sub: Subscription | undefined;
+
+    {
+      using entity = new RxDisposable();
+      entity.disposed$.subscribe(() => (disposedEmitted = true));
+      sub = entity.autoDispose(subject$.subscribe());
+      entity.autoDispose({ [Symbol.dispose]: () => (symbolDisposed = true) });
+    }
+
+    expect(sub.closed).toBe(true);
+    expect(symbolDisposed).toBe(true);
+    expect(disposedEmitted).toBe(true);
+  });
+
+  it('RxBag - [Symbol.dispose]() unsubscribes all', () => {
+    const bag = RxBag.create();
+    const sub = new Subject<string>().subscribe();
+    bag.add(sub);
+
+    bag[Symbol.dispose]();
+    expect(sub.closed).toBe(true);
+    expect(bag.disposed).toBe(true);
+  });
+});

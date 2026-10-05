@@ -1,15 +1,16 @@
 import { Subscription } from 'rxjs';
 import type { Unsubscribable } from 'rxjs';
 
-import type { DisposableBag, DisposeCallback, RipId } from '../core/index.js';
+import type { DisposableBag, DisposeCallback, RipId, SymbolDisposable } from '../core/index.js';
 
 export type UnsubscribeCallback = DisposeCallback;
 
 /**
  * Reactive Subscriptions Management
  * to unsubscribe from existing subscriptions and avoid Memory Leaks.
+ * @deprecated Use `DisposeBag` – it tears down Subscriptions (anything with `unsubscribe()`) too. Removed in 2.0.
  */
-export class RxBag implements DisposableBag<Unsubscribable | UnsubscribeCallback> {
+export class RxBag implements DisposableBag<Unsubscribable | UnsubscribeCallback>, SymbolDisposable {
   private static _counter = 0;
 
   public static create(): RxBag {
@@ -59,5 +60,10 @@ export class RxBag implements DisposableBag<Unsubscribable | UnsubscribeCallback
     this._sub$.unsubscribe();
     this._size = 0;
     this._closed = true;
+  }
+
+  /** Standard ES disposal (`using`), same as `dispose()`. */
+  [Symbol.dispose](): void {
+    this.dispose();
   }
 }

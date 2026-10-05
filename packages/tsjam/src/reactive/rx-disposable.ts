@@ -3,18 +3,17 @@ import { takeUntil } from 'rxjs/operators';
 
 import {
   Disposable,
-  type DisposableLike,
   DisposeBag,
-  type DisposeCallback,
   isCallback,
   isDisposable,
+  isSymbolDisposable,
+  isUnsubscribable,
+  type Teardown,
 } from '../core/index.js';
 import { RxBag } from './rx-bag.js';
 
-export const isUnsubscribable = (x: unknown): x is Unsubscribable => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any,@typescript-eslint/no-unsafe-member-access,@typescript-eslint/consistent-type-assertions
-  return !!x && typeof (x as any).unsubscribe === 'function';
-};
+/** Moved to core – re-exported to keep `tsjam/reactive` imports working. */
+export { isUnsubscribable } from '../core/index.js';
 
 /**
  * Reactive Disposable Entity to avoid memory Leaks.
@@ -49,15 +48,15 @@ export class RxDisposable extends Disposable {
 
   /**
    * Automatically teardown any Disposable or Subscription on the instance dispose.
-   * @param teardown - any subscription or disposable like object or callback.
+   * @param teardown - any subscription, DisposableLike or SymbolDisposable object, or callback.
    * @returns same instance so you could assign it smoothly in same line.
    */
-  override autoDispose<T extends Unsubscribable | DisposableLike | DisposeCallback>(teardown: T): T {
+  override autoDispose<T extends Unsubscribable | Teardown>(teardown: T): T {
     if (isUnsubscribable(teardown)) {
       this._rxBag.add(teardown);
       return teardown;
     }
-    if (isDisposable(teardown) || isCallback(teardown)) {
+    if (isDisposable(teardown) || isSymbolDisposable(teardown) || isCallback(teardown)) {
       return super.autoDispose(teardown);
     }
     return teardown;

@@ -1,4 +1,4 @@
-import { type DisposableLike, type DisposeCallback, isDisposable } from './disposable.js';
+import type { DisposableLike, SymbolDisposable, Teardown } from './disposable.js';
 import type { RipId } from './types.js';
 
 /**
@@ -14,16 +14,35 @@ export interface DisposableBag<T> extends DisposableLike {
   dispose(): void;
 }
 
-export class DisposeBag implements DisposableBag<DisposableLike | DisposeCallback> {
-  public static dispose(disposable: DisposableLike | DisposeCallback): void {
-    isDisposable(disposable) ? disposable.dispose() : disposable();
+export class DisposeBag implements DisposableBag<Teardown>, SymbolDisposable {
+  /**
+   * Prefers `dispose()`, then `[Symbol.dispose]()`, then `unsubscribe()`, otherwise invokes the callback.
+   * Input is already a `Teardown`, so a plain `in` check narrows it – no runtime guards needed.
+   */
+  public static dispose(disposable: Teardown): void {
+    if ('dispose' in disposable) {
+      disposable.dispose();
+      return;
+    }
+
+    if (Symbol.dispose in disposable) {
+      disposable[Symbol.dispose]();
+      return;
+    }
+
+    if ('unsubscribe' in disposable) {
+      disposable.unsubscribe();
+      return;
+    }
+
+    disposable();
   }
 
   /**
    * Disposes every item, even if some of them throw.
    * Rethrows the single error as is, or an `AggregateError` of all of them.
    */
-  public static disposeAll(disposables: Iterable<DisposableLike | DisposeCallback>): void {
+  public static disposeAll(disposables: Iterable<Teardown>): void {
     const errors: unknown[] = [];
     for (const disposable of disposables) {
       try {
@@ -50,16 +69,16 @@ export class DisposeBag implements DisposableBag<DisposableLike | DisposeCallbac
     return DisposeBag._counter++ as RipId;
   }
 
-  private readonly _disposables = new Array<DisposableLike | DisposeCallback>();
-  private _registry: WeakSet<DisposableLike | DisposeCallback> | undefined; // registry erased after dispose
+  /** Insertion ordered (FIFO teardown), duplicates ignored. */
+  private readonly _disposables = new Set<Teardown>();
   private _disposed = false;
 
   protected constructor(readonly id: RipId) {
-    this._registry = new WeakSet<DisposableLike | DisposeCallback>();
+    /* empty */
   }
 
   get size(): number {
-    return this._disposables.length;
+    return this._disposables.size;
   }
   get disposed(): boolean {
     return this._disposed;
@@ -67,20 +86,25 @@ export class DisposeBag implements DisposableBag<DisposableLike | DisposeCallbac
 
   /**
    * If disposed - dispose adding object immediately
-   * @param disposable - DisposableLike | DisposeCallback
+   * @param disposable - DisposableLike | SymbolDisposable | UnsubscribableLike | DisposeCallback
    * @returns same disposable instance - convenient for one line declarations
    */
-  add<T extends DisposableLike | DisposeCallback>(disposable: T): T {
+  add<T extends Teardown>(disposable: T): T {
     if (this._disposed) {
       DisposeBag.dispose(disposable);
       return disposable;
     }
-    if (this._registry?.has(disposable)) {
-      return disposable;
-    }
-    this._registry?.add(disposable);
-    this._disposables.push(disposable);
+    this._disposables.add(disposable); // no-op if already added
     return disposable;
+  }
+
+  /**
+   * Releases the item from the bag without disposing it,
+   * e.g. when it was torn down early, so a long-lived bag doesn't keep holding it.
+   * @returns true if the item was in the bag
+   */
+  delete(disposable: Teardown): boolean {
+    return this._disposables.delete(disposable);
   }
 
   /**
@@ -92,11 +116,15 @@ export class DisposeBag implements DisposableBag<DisposableLike | DisposeCallbac
       return; // already disposed.
     }
     this._disposed = true; // finalize first: re-entrant `add` disposes right away
-    this._registry = undefined; // erase
     try {
       DisposeBag.disposeAll(this._disposables);
     } finally {
-      this._disposables.length = 0; // erase, even if some teardown threw
+      this._disposables.clear(); // erase, even if some teardown threw
     }
+  }
+
+  /** Standard ES disposal (`using`), same as `dispose()`. */
+  [Symbol.dispose](): void {
+    this.dispose();
   }
 }
