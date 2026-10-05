@@ -1,22 +1,14 @@
 import { type Observable, Subject, type Unsubscribable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import {
-  Disposable,
-  DisposeBag,
-  isCallback,
-  isDisposable,
-  isSymbolDisposable,
-  isUnsubscribable,
-  type Teardown,
-} from '../core/index.js';
+import { Disposable, DisposeBag, isUnsubscribable, type Teardown } from '../core/index.js';
 import { RxBag } from './rx-bag.js';
 
 /** Moved to core – re-exported to keep `tsjam/reactive` imports working. */
 export { isUnsubscribable } from '../core/index.js';
 
 /**
- * Reactive Disposable Entity to avoid memory Leaks.
+ * Reactive Disposable Entity to avoid memory Leaks (self-pruning subs).
  * Base reactive abstraction with the instance of RxBag for life-cycle management of resources.
  * RIP any Disposable or Subscription on the instance dispose.
  */
@@ -30,8 +22,7 @@ export class RxDisposable extends Disposable {
   }
 
   /**
-   * Kills all Disposable objects and Subscriptions.
-   * Invokes all teardown callbacks.
+   * Kills all Disposable objects and Subscriptions. Invokes all teardown callbacks.
    * Teardown errors are rethrown once everything is disposed and `disposed$` has emitted.
    */
   override dispose(): void {
@@ -56,10 +47,7 @@ export class RxDisposable extends Disposable {
       this._rxBag.add(teardown);
       return teardown;
     }
-    if (isDisposable(teardown) || isSymbolDisposable(teardown) || isCallback(teardown)) {
-      return super.autoDispose(teardown);
-    }
-    return teardown;
+    return super.autoDispose(teardown);
   }
 
   /**

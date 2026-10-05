@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { RxBag, RxDisposable } from 'reactive/index.js';
-import { type Observable, Subject, type Subscription } from 'rxjs';
+import { type Observable, of, Subject, type Subscription } from 'rxjs';
 
 import type { DisposableLike } from 'core/disposable.js';
 
@@ -139,6 +139,55 @@ describe('RxDisposable', () => {
     expect(after.disposed).toBe(true);
     expect(entity.disposed).toBe(true);
     expect(disposedEmitted).toBe(true);
+  });
+});
+
+describe('RxDisposable - self-pruning', () => {
+  /** Exposes how many teardowns the entity still holds for subscriptions (probes rxjs internals). */
+  class RxDisposableProbe extends RxDisposable {
+    get retained(): number {
+      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      const sink = this._rxBag as unknown as { _sub$: { _finalizers: unknown[] | null } };
+      return sink._sub$._finalizers?.length ?? 0;
+    }
+  }
+
+  it('releases a subscription that ended before the entity was disposed', () => {
+    const entity = new RxDisposableProbe();
+    const subject$ = new Subject<string>();
+    const longLived = entity.autoDispose(new Subject<string>().subscribe());
+    const completes = entity.autoDispose(subject$.subscribe());
+    const unsubscribed = entity.autoDispose(new Subject<string>().subscribe());
+    expect(entity.retained).toBe(3);
+
+    subject$.complete();
+    unsubscribed.unsubscribe();
+
+    expect(completes.closed).toBe(true);
+    expect(entity.retained).toBe(1);
+
+    entity.dispose();
+    expect(longLived.closed).toBe(true);
+    expect(entity.retained).toBe(0);
+  });
+
+  it('does not retain an already closed subscription', () => {
+    const entity = new RxDisposableProbe();
+    const sub = entity.autoDispose(of(1).subscribe());
+
+    expect(sub.closed).toBe(true);
+    expect(entity.retained).toBe(0);
+  });
+
+  it('does not grow with many short-lived subscriptions', () => {
+    const entity = new RxDisposableProbe();
+    for (let i = 0; i < 1000; i++) {
+      const subject$ = new Subject<number>();
+      entity.autoDispose(subject$.subscribe());
+      subject$.complete();
+    }
+
+    expect(entity.retained).toBe(0);
   });
 });
 

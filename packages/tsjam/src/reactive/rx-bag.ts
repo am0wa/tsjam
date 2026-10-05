@@ -1,14 +1,14 @@
-import { Subscription } from 'rxjs';
 import type { Unsubscribable } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 import type { DisposableBag, DisposeCallback, RipId, SymbolDisposable } from '../core/index.js';
 
 export type UnsubscribeCallback = DisposeCallback;
 
 /**
- * Reactive Subscriptions Management
+ * Reactive Subscriptions Management (self-pruning)
  * to unsubscribe from existing subscriptions and avoid Memory Leaks.
- * @deprecated Use `DisposeBag` – it tears down Subscriptions (anything with `unsubscribe()`) too. Removed in 2.0.
+ * Never retains dead subscriptions – After 1000 subscribe-then-complete cycles it holds nothing.
  */
 export class RxBag implements DisposableBag<Unsubscribable | UnsubscribeCallback>, SymbolDisposable {
   private static _counter = 0;
