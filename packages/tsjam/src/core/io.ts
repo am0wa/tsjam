@@ -54,7 +54,8 @@ export enum CacheControl {
   ForceCache = 'force-cache',
 }
 
-export const enum OriginControl {
+/** Request mode used in fetch() data methods (a regular enum, so it works under `isolatedModules`). */
+export enum OriginControl {
   SameOrigin = 'same-origin',
   Cors = 'cors',
   NoCors = 'no-cors',
@@ -62,18 +63,19 @@ export const enum OriginControl {
 
 /**
  * Fetch does not fire reject event when external resources was not found.
- * So here is wrapper around it with handling not valid response
+ * So here is wrapper around it with handling not valid response: rejects with the `Response` when it's not `ok`.
+ * Uses the browser's default HTTP caching (`CacheControl.Default`) unless `cache` is given.
  */
-export const fetchData = (
+export const fetchData = async (
   path: string,
-  cache: CacheControl = CacheControl.ForceCache,
+  cache: CacheControl = CacheControl.Default,
   mode?: OriginControl,
 ): Promise<Response> => {
-  return new Promise<Response>((resolve, reject) => {
-    fetch(path, { cache, mode })
-      // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors
-      .then((response) => (response.ok ? resolve(response) : reject(response)))
-      // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors
-      .catch((reason) => reject(reason));
-  });
+  const response = await fetch(path, { cache, mode });
+  if (!response.ok) {
+    // rejects with the Response itself – kept for compatibility
+    // eslint-disable-next-line @typescript-eslint/only-throw-error
+    throw response;
+  }
+  return response;
 };
