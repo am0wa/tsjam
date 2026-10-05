@@ -111,4 +111,17 @@ describe('isEmpty', () => {
     expect(isEmpty(new Map())).toBe(true);
     expect(isEmpty(new Set())).toBe(true);
   });
+  it('uses a numeric size without iterating', () => {
+    let iterated = false;
+    const sized = (size: number): Iterable<number> & { size: number } => ({
+      size,
+      [Symbol.iterator]: () => {
+        iterated = true;
+        return [][Symbol.iterator]();
+      },
+    });
+    expect(isEmpty(sized(0))).toBe(true);
+    expect(isEmpty(sized(2))).toBe(false);
+    expect(iterated).toBe(false);
+  });
 });

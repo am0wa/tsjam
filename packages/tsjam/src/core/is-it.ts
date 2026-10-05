@@ -35,7 +35,8 @@ export const isArrayLike = (item: unknown): item is unknown[] => {
 
 /**
  * Checks Iterable like entities whether it's empty or not.
- * Time Complexity O(1).
+ * Collections exposing a numeric `size` (Map, Set, …) are checked by it.
+ * Complexity: O(1).
  *
  * isEmpty(null) => true
  * isEmpty(undefined) => true
@@ -57,6 +58,12 @@ export const isEmpty = (collection: Iterable<unknown> | string | null | undefine
   // Fast path for string
   if (typeof collection === 'string') {
     return collection.length === 0;
+  }
+  // Fast path for sized collections (Map, Set, …): no iterator allocation
+  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+  const { size } = collection as { readonly size?: unknown };
+  if (typeof size === 'number') {
+    return size === 0;
   }
   // Fallback for generic Iterable
   const iterator = collection[Symbol.iterator]();
