@@ -109,6 +109,14 @@ describe('fromIt', () => {
       const result = toKebabCase(input);
       expect(result).toEqual(expectedOutput);
     });
+    it('acronyms, spaces, edge separators and digits to kebab-case', () => {
+      expect(toKebabCase('XMLHttpRequest')).toBe('xml-http-request');
+      expect(toKebabCase('hello  world')).toBe('hello-world');
+      expect(toKebabCase('_private')).toBe('private');
+      expect(toKebabCase('snake__double')).toBe('snake-double');
+      expect(toKebabCase('v2Api')).toBe('v2-api');
+      expect(toKebabCase('html5Parser')).toBe('html5-parser');
+    });
     it('camel_SnakeMix to kebab-case', () => {
       const input = 'camel_SnakeMixString';
       const expectedOutput = 'camel-snake-mix-string';
@@ -133,6 +141,25 @@ describe('fromIt', () => {
       expect(toCamelCase('helloWorld')).toBe('helloWorld');
       expect(toCamelCase('HelloWorld')).toBe('helloWorld');
       expect(toCamelCase('')).toBe('');
+    });
+    it('acronyms, edge separators and digits to camelCase', () => {
+      expect(toCamelCase('XMLParser')).toBe('xmlParser');
+      expect(toCamelCase('XMLHttpRequest')).toBe('xmlHttpRequest');
+      expect(toCamelCase('ID')).toBe('id');
+      expect(toCamelCase('_private')).toBe('private');
+      expect(toCamelCase('hello  world')).toBe('helloWorld');
+      expect(toCamelCase('kebab-case-2x')).toBe('kebabCase2x');
+      expect(toCamelCase('v2Api')).toBe('v2Api');
+    });
+    it('is stable when applied twice', () => {
+      for (const input of ['kebab-case-2x', 'XMLHttpRequest', 'hello_world_again', 'userID', 'html5-parser']) {
+        const once = toCamelCase(input);
+        expect(toCamelCase(once)).toBe(once);
+      }
+    });
+    it('already camelCase is returned as is, userID is still normalized', () => {
+      expect(toCamelCase('kebabCase2x')).toBe('kebabCase2x');
+      expect(toCamelCase('userID')).toBe('userId');
     });
   });
 });

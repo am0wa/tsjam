@@ -45,26 +45,33 @@ export const stringToEnum = <T extends StringEnum>(
     | undefined;
 };
 
-const camelOrPascalOrSnakeCase = /([a-z])([A-Z])|_/g;
-export const toKebabCase = (str: string): string => {
-  return str.replace(camelOrPascalOrSnakeCase, (_, p1, p2) => (p2 ? `${p1}-${p2}` : '-')).toLowerCase();
-};
+/** Words of any casing: acronyms (`XML`), capitalised/lower words, digit runs kept inside their word (`v2`, `case2x`). */
+const wordPattern = /[A-Z]+(?![a-z])(?:\d+[a-z]*)*|[A-Z]?[a-z]+(?:\d+[a-z]*)*|\d+[a-z]*/g;
+const wordsOf = (str: string): string[] => str.match(wordPattern) ?? [];
 
+/**
+ * Any casing to kebab-case: `XMLHttpRequest` -> `xml-http-request`, `hello world` -> `hello-world`.
+ * Complexity: O(n) in the string length.
+ */
+export const toKebabCase = (str: string): string => wordsOf(str).join('-').toLowerCase();
+
+/** Complexity: O(n) in the string length. */
 export const toUpperCaseFirst = (str: string): string => {
   return str ? str.charAt(0).toUpperCase() + str.slice(1) : '';
 };
 
-const pascalCasePattern = /^[A-Z][a-zA-Z0-9]*$/;
-const camelCasePattern = /^[a-z][a-zA-Z0-9]*$/;
+/** Already canonical camelCase – each later word is one capital + lowercase/digits (so not `userID`). */
+const camelCasePattern = /^[a-z][a-z0-9]*(?:[A-Z][a-z0-9]+)*$/;
+
+/**
+ * Any casing to camelCase: `XMLParser` -> `xmlParser`, `_private` -> `private`, `hello_world` -> `helloWorld`.
+ * Complexity: O(n) in the string length.
+ */
 export const toCamelCase = (str: string): string => {
-  // If already camelCase, return as is
   if (camelCasePattern.test(str)) {
-    return str;
+    return str; // already canonical camelCase
   }
-  // If PascalCase, convert to camelCase
-  if (pascalCasePattern.test(str)) {
-    return str.charAt(0).toLowerCase() + str.slice(1);
-  }
-  // Handle snake_case, kebab-case, and space separated words
-  return str.toLowerCase().replace(/[_\-\s](\w)/g, (_, char: string) => char.toUpperCase());
+  return wordsOf(str)
+    .map((word, i) => (i === 0 ? word.toLowerCase() : toUpperCaseFirst(word.toLowerCase())))
+    .join('');
 };
