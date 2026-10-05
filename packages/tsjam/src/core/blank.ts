@@ -15,7 +15,10 @@
 export namespace blank {
   export const empty = '';
   export const dash = '-';
-  export const emDash = '–';
+  /** Em dash `—` (U+2014) */
+  export const emDash = '—';
+  /** En dash `–` (U+2013) */
+  export const enDash = '–';
   /** Hash sign or Number sign, also used as hashtags prefix */
   export const hash = '#';
   export const star = '*';
@@ -25,14 +28,23 @@ export namespace blank {
   export const treeStars = '***';
   export const treeDollars = '$$$';
 
+  /** Replaces every character with `maskSign`. Complexity: O(n). */
   export const mask = (word: string, maskSign = star): string => {
-    // return word.replace(/./g, maskSign);
-    // Array(word.length+1).join(maskSign)
     return maskSign.repeat(word.length);
   };
 
+  /**
+   * Cuts `word` to at most `limit` characters, ending with `overflowSign` when cut
+   * (the sign itself is cut too when it does not fit the limit).
+   * Complexity: O(n).
+   */
   export const truncate = (word: string, limit = 120, overflowSign = treeDots): string => {
-    return word.length > limit ? word.slice(0, limit - overflowSign.length) + overflowSign : word;
+    if (word.length <= limit) {
+      return word;
+    }
+    const max = Math.max(0, limit);
+    const keep = Math.max(0, max - overflowSign.length);
+    return (word.slice(0, keep) + overflowSign).slice(0, max);
   };
 }
 

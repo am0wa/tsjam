@@ -1,24 +1,26 @@
 import { blank, jamBlank } from 'core/blank.js';
 
 describe('blank', () => {
-  it('should be replace nullable with blank', () => {
-    expect(jamBlank).toBe(blank.dash);
-    expect(jamBlank).toBe(blank.dash);
+  it('jamBlank is the dash', () => {
+    expect(jamBlank).toBe('-');
   });
-  it('should be customizable', () => {
-    expect(blank.treeStars).toBe(blank.treeStars);
-    expect(blank.treeStars).toBe(blank.treeStars);
+  it('emDash / enDash are the right characters', () => {
+    expect(blank.emDash).toBe('—');
+    expect(blank.enDash).toBe('–');
   });
   it('mask with sign', () => {
     const password = '1252525353';
-    const masked = '**********';
-    expect(blank.mask(password).length).toBe(password.length);
-    expect(blank.mask(password)).toBe(masked);
+    expect(blank.mask(password)).toBe('**********');
+    expect(blank.mask('abc', '#')).toBe('###');
   });
   it('truncate overflow with sign', () => {
-    const boringText = 'text is boring';
-    expect(blank.truncate(boringText, 7)).toBe('text...');
-    const coolText = 'text is';
-    expect(blank.truncate(coolText, 7)).toBe('text is');
+    expect(blank.truncate('text is boring', 7)).toBe('text...');
+    expect(blank.truncate('text is', 7)).toBe('text is');
+  });
+  it('truncate never exceeds the limit, even below the sign length', () => {
+    expect(blank.truncate('hello world', 3)).toBe('...');
+    expect(blank.truncate('hello world', 2)).toBe('..');
+    expect(blank.truncate('hello world', 0)).toBe('');
+    expect(blank.truncate('hello world', -1)).toBe('');
   });
 });
