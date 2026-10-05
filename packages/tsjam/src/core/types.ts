@@ -76,15 +76,15 @@ export type Clazz<T> = new (...args: readonly any[]) => T;
 export type RipId = Opaque<'RipId', number>;
 
 /**
- * Recursively makes all properties of a type optional.
+ * Recursively makes all properties of a type optional; functions are kept as they are (callable).
  * Useful for patch/update operations, form states, or partial configs.
  */
 export type DeepPartial<T> = {
-  [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];
+  [P in keyof T]?: T[P] extends (...args: never) => unknown ? T[P] : T[P] extends object ? DeepPartial<T[P]> : T[P];
 };
 
 /**
- * Recursively makes all properties of a type mutable.
+ * Makes all properties of a type mutable – shallow, the counterpart of the built-in `Readonly`.
  */
 export type Mutable<T> = {
   -readonly [P in keyof T]: T[P];
