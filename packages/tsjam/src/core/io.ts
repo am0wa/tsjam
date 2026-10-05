@@ -54,13 +54,6 @@ export enum CacheControl {
   ForceCache = 'force-cache',
 }
 
-/** Request mode used in fetch() data methods (a regular enum, so it works under `isolatedModules`). */
-export enum OriginControl {
-  SameOrigin = 'same-origin',
-  Cors = 'cors',
-  NoCors = 'no-cors',
-}
-
 /**
  * Fetch does not fire reject event when external resources was not found.
  * So here is wrapper around it with handling not valid response: rejects with the `Response` when it's not `ok`.
@@ -69,7 +62,7 @@ export enum OriginControl {
 export const fetchData = async (
   path: string,
   cache: CacheControl = CacheControl.Default,
-  mode?: OriginControl,
+  mode?: RequestMode,
 ): Promise<Response> => {
   const response = await fetch(path, { cache, mode });
   if (!response.ok) {

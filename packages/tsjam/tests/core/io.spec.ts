@@ -1,4 +1,4 @@
-import { CacheControl, fetchData, OriginControl } from 'core/io.js';
+import { CacheControl, fetchData } from 'core/io.js';
 
 describe('fetchData', () => {
   const originalFetch = globalThis.fetch;
@@ -18,7 +18,7 @@ describe('fetchData', () => {
 
   it('resolves with an ok response, passing cache and mode', async () => {
     stubFetch(() => Promise.resolve(new Response('{"a":1}', { status: 200 })));
-    const response = await fetchData('/data.json', CacheControl.NoStore, OriginControl.Cors);
+    const response = await fetchData('/data.json', CacheControl.NoStore, 'cors');
     expect(await response.json()).toEqual({ a: 1 });
     expect(lastInit).toEqual({ cache: 'no-store', mode: 'cors' });
   });
@@ -38,9 +38,5 @@ describe('fetchData', () => {
     const networkError = new TypeError('Failed to fetch');
     stubFetch(() => Promise.reject(networkError));
     await expect(fetchData('/data.json')).rejects.toBe(networkError);
-  });
-
-  it('OriginControl is a runtime object', () => {
-    expect(OriginControl.SameOrigin).toBe('same-origin');
   });
 });

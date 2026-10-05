@@ -3,9 +3,6 @@ import { takeUntil } from 'rxjs/operators';
 
 import { Disposable, DisposeBag, isUnsubscribable, type Teardown } from '../core/index.js';
 
-/** Moved to core – re-exported to keep `tsjam/reactive` imports working. */
-export { isUnsubscribable } from '../core/index.js';
-
 /**
  * Reactive Disposable Entity to avoid memory Leaks (self-pruning subs).
  * Base reactive abstraction with a dedicated subscriptions bag for life-cycle management of resources.
