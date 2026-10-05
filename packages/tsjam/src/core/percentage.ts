@@ -1,4 +1,5 @@
 import { assert } from './assert.js';
+import { roundTo } from './math.js';
 import type { Opaque } from './types.js';
 
 /**
@@ -40,8 +41,6 @@ export const calculatePercentage = (part: number, total: number, fractionDigits 
     // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
     return percentage as Percentage;
   }
-  const factor = 10 ** fractionDigits;
-  // round half away from zero, like `toFixed`, without the string round-trip
   // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-  return ((Math.sign(percentage) * Math.round(Math.abs(percentage) * factor)) / factor) as Percentage;
+  return roundTo(percentage, fractionDigits) as Percentage;
 };
