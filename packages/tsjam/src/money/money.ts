@@ -14,5 +14,5 @@ export type Cents = number;
  */
 export type MonetaryUnits = string;
 
-/** Formated Money representing string aka '$ 100,000.00' */
+/** Formatted Money representing string aka '$ 100,000.00' */
 export type MonetaryString = string;

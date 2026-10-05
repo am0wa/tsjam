@@ -44,8 +44,6 @@ export const CurrencyCodes = [
   'KMF',
   'CDF',
   'CRC',
-  'HRK',
-  'CUC',
   'CUP',
   'ANG',
   'CZK',
@@ -126,7 +124,6 @@ export const CurrencyCodes = [
   'SAR',
   'RSD',
   'SCR',
-  'SLL',
   'SGD',
   'XSU',
   'SBD',
@@ -162,25 +159,25 @@ export const CurrencyCodes = [
   'UYU',
   'UZS',
   'VUV',
-  'VEF',
   'VND',
   'XCD',
   'XPF',
   'MAD',
   'YER',
   'ZMW',
-  'ZWL',
+  // current replacements: SLL→SLE, VEF→VES, ZWL→ZWG; XCG – Caribbean guilder (2025)
+  'SLE',
+  'VES',
+  'ZWG',
+  'XCG',
 ] as const;
 
 export type CurrencyCode = (typeof CurrencyCodes)[number];
 
-// Create a Set for O(1) lookup performance
-const currencyCodeSet = new Set(CurrencyCodes);
+const currencyCodeSet: ReadonlySet<string> = new Set(CurrencyCodes);
 
-export const isCurrencyCode = (isoCode: string): isoCode is CurrencyCode => {
-  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-  return currencyCodeSet.has(isoCode as CurrencyCode);
-};
+/** Complexity: O(1). */
+export const isCurrencyCode = (isoCode: string): isoCode is CurrencyCode => currencyCodeSet.has(isoCode);
 
 export type Currency = {
   readonly code: CurrencyCode;
@@ -210,7 +207,6 @@ export const worldCurrencies = [
   { code: 'BDT', symbol: '৳' /** name: 'Taka*/ },
   { code: 'BGN', symbol: 'Лв.' /** name: 'Bulgarian Lev*/ },
   { code: 'BMD', symbol: '$' /** name: 'Bermudian Dollar*/ },
-  { code: 'BOB', symbol: '$b' /** name: 'Boliviano*/ },
   { code: 'BND', symbol: '$' /** name: 'Brunei Dollar*/ },
   { code: 'BRL', symbol: 'R$' /** name: 'Brazilian Real*/ },
   { code: 'BSD', symbol: 'B$' /** name: 'Bahamian Dollar*/ },
@@ -223,10 +219,8 @@ export const worldCurrencies = [
   { code: 'CHF', symbol: 'F' /** name: 'Swiss Franc*/ },
   { code: 'CNY', symbol: '¥' /** name: 'Yuan Renminbi*/ },
   { code: 'CLP', symbol: '$' /** name: 'Chilean Peso*/ },
-  { code: 'CNY', symbol: '¥' /** name: 'Yuan Renminbi*/ },
   { code: 'COP', symbol: '$' /** name: 'Colombian Peso*/ },
   { code: 'CRC', symbol: '₡' /** name: 'Costa Rican Colon*/ },
-  { code: 'CUC', symbol: 'CUC$' /** name: 'Peso Convertible*/ },
   { code: 'CUP', symbol: '$MN' /** name: 'Cuban Peso*/ },
   { code: 'CVE', symbol: '$' /** name: 'Cabo Verde Escudo*/ },
   { code: 'CZK', symbol: 'Kč' /** name: 'Czech Koruna*/ },
@@ -246,7 +240,6 @@ export const worldCurrencies = [
   { code: 'GYD', symbol: 'G$' /** name: 'Guyana Dollar*/ },
   { code: 'HNL', symbol: 'L' /** name: 'Lempira*/ },
   { code: 'HKD', symbol: '$' /** name: 'Hong Kong Dollar*/ },
-  { code: 'HRK', symbol: 'kn' /** name: 'Kuna*/ },
   { code: 'HUF', symbol: 'Ft' /** name: 'Forint*/ },
   { code: 'HTG', symbol: 'G' /** name: 'Gourde*/ },
   { code: 'IDR', symbol: 'Rp' /** name: 'Rupiah*/ },
@@ -304,7 +297,6 @@ export const worldCurrencies = [
   { code: 'SGD', symbol: '$' /** name: 'Singapore Dollar*/ },
   { code: 'SCR', symbol: 'SR' /** name: 'Seychelles Rupee*/ },
   { code: 'SDG', symbol: 'ج.س.' /** name: 'Sudanese Pound*/ },
-  { code: 'SLL', symbol: 'Le' /** name: 'Leone*/ },
   { code: 'SOS', symbol: 'Sh.so.' /** name: 'Somali Shilling*/ },
   { code: 'SRD', symbol: '$' /** name: 'Surinam Dollar*/ },
   { code: 'SSP', symbol: '£' /** name: 'South Sudanese Pound*/ },
@@ -329,9 +321,26 @@ export const worldCurrencies = [
   { code: 'XOF', symbol: 'CFA' /** name: 'CFA Franc*/ },
   { code: 'XCD', symbol: '$' /** name: 'East Caribbean Dollar*/ },
   { code: 'YER', symbol: '﷼' /** name: 'Yemeni Rial*/ },
-  { code: 'ZAR', symbol: 'R' /** name: 'Rand*/ },
   { code: 'ZMW', symbol: 'ZK' /** name: 'Zambian Kwacha*/ },
-  { code: 'ZWL', symbol: 'Z$' /** name: 'Zimbabwe Dollar*/ },
+  { code: 'SLE', symbol: 'Le' /** name: 'Leone*/ },
+  { code: 'VES', symbol: 'Bs.' /** name: 'Bolívar Soberano*/ },
+  { code: 'ZWG', symbol: 'ZiG' /** name: 'Zimbabwe Gold*/ },
+  { code: 'XCG', symbol: 'Cg' /** name: 'Caribbean Guilder*/ },
+  { code: 'BHD', symbol: 'BD' /** name: 'Bahraini Dinar*/ },
+  { code: 'BIF', symbol: 'FBu' /** name: 'Burundi Franc*/ },
+  { code: 'KMF', symbol: 'CF' /** name: 'Comorian Franc*/ },
+  { code: 'DJF', symbol: 'Fdj' /** name: 'Djibouti Franc*/ },
+  { code: 'XAF', symbol: 'FCFA' /** name: 'CFA Franc BEAC*/ },
+  { code: 'GNF', symbol: 'FG' /** name: 'Guinean Franc*/ },
+  { code: 'IQD', symbol: 'ع.د' /** name: 'Iraqi Dinar*/ },
+  { code: 'JOD', symbol: 'JD' /** name: 'Jordanian Dinar*/ },
+  { code: 'KWD', symbol: 'KD' /** name: 'Kuwaiti Dinar*/ },
+  { code: 'LYD', symbol: 'LD' /** name: 'Libyan Dinar*/ },
+  { code: 'OMR', symbol: 'ر.ع.' /** name: 'Rial Omani*/ },
+  { code: 'RWF', symbol: 'FRw' /** name: 'Rwanda Franc*/ },
+  { code: 'UGX', symbol: 'USh' /** name: 'Uganda Shilling*/ },
+  { code: 'VUV', symbol: 'VT' /** name: 'Vatu*/ },
+  { code: 'XPF', symbol: '₣' /** name: 'CFP Franc*/ },
 ] as const;
 
 export const worldCurrencyMap: ReadonlyMap<CurrencyCode, Currency> = new Map(
