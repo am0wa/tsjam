@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { RxBag, RxDisposable } from 'reactive/index.js';
-import { type Observable, of, Subject, type Subscription } from 'rxjs';
+import { RxDisposable } from 'reactive/index.js';
+import { type Observable, Subject, type Subscription } from 'rxjs';
 
 import type { DisposableLike } from 'core/disposable.js';
 
@@ -12,54 +12,6 @@ class TestDisposable implements DisposableLike {
 }
 
 describe('RxDisposable', () => {
-  it('dispose - has to unsubscribe all immediately after dispose invocation', () => {
-    const bag = RxBag.create();
-
-    let a: string | undefined;
-    let b: string | undefined;
-    let c: string | undefined;
-    const cbA = {
-      unsubscribe: () => {
-        a = 'A';
-      },
-    };
-    const cbB = () => (b = 'B');
-    const cbC = () => (c = 'C');
-
-    bag.add(cbA);
-    bag.add(cbB);
-    expect(bag.size).toBe(2);
-
-    expect(a).toBeUndefined();
-    expect(b).toBeUndefined();
-
-    bag.dispose();
-    expect(bag.disposed).toBe(true);
-
-    expect(a).toBe('A');
-    expect(b).toBe('B');
-
-    expect(c).toBeUndefined();
-    bag.add(cbC);
-    expect(c).toBe('C');
-  });
-  it('dispose - to avoid extra invocations when disposed', () => {
-    const bag = RxBag.create();
-
-    let invocations = 0;
-    const cbD = {
-      unsubscribe: () => {
-        invocations++;
-      },
-    };
-
-    bag.add(cbD);
-    bag.dispose();
-    bag.dispose();
-    expect(bag.size).toBe(0);
-    expect(invocations).toBe(1);
-  });
-
   it('autoDispose to support rx and functional teardown', () => {
     const subjA$ = new Subject<string>();
     const streamA$ = subjA$.asObservable();
@@ -142,50 +94,47 @@ describe('RxDisposable', () => {
   });
 });
 
-describe('RxDisposable - self-pruning', () => {
-  /** Exposes how many subscriptions the entity still holds. */
-  class RxDisposableProbe extends RxDisposable {
-    get retained(): number {
-      return this._rxBag.size;
+describe('RxDisposable - teardown order', () => {
+  /** Child that notifies on its own disposal, like a service completing its public streams. */
+  class NotifyingChild implements DisposableLike {
+    readonly changed$ = new Subject<string>();
+    dispose() {
+      this.changed$.next('disposing');
+      this.changed$.complete();
     }
   }
 
-  it('releases a subscription that ended before the entity was disposed', () => {
-    const entity = new RxDisposableProbe();
-    const subject$ = new Subject<string>();
-    const longLived = entity.autoDispose(new Subject<string>().subscribe());
-    const completes = entity.autoDispose(subject$.subscribe());
-    const unsubscribed = entity.autoDispose(new Subject<string>().subscribe());
-    expect(entity.retained).toBe(3);
+  it('unsubscribes before disposing children, so no subscription sees a half-disposed child', () => {
+    const reactions: string[] = [];
 
-    subject$.complete();
-    unsubscribed.unsubscribe();
-
-    expect(completes.closed).toBe(true);
-    expect(entity.retained).toBe(1);
-
-    entity.dispose();
-    expect(longLived.closed).toBe(true);
-    expect(entity.retained).toBe(0);
-  });
-
-  it('does not retain an already closed subscription', () => {
-    const entity = new RxDisposableProbe();
-    const sub = entity.autoDispose(of(1).subscribe());
-
-    expect(sub.closed).toBe(true);
-    expect(entity.retained).toBe(0);
-  });
-
-  it('does not grow with many short-lived subscriptions', () => {
-    const entity = new RxDisposableProbe();
-    for (let i = 0; i < 1000; i++) {
-      const subject$ = new Subject<number>();
-      entity.autoDispose(subject$.subscribe());
-      subject$.complete();
+    class Entity extends RxDisposable {
+      readonly child = this.autoDispose(new NotifyingChild()); // registered first
+      constructor() {
+        super();
+        this.autoDispose(this.child.changed$.subscribe((v) => reactions.push(v)));
+      }
     }
 
-    expect(entity.retained).toBe(0);
+    const entity = new Entity();
+    entity.child.changed$.next('alive');
+    entity.dispose();
+
+    expect(reactions).toEqual(['alive']);
+  });
+
+  it('subscriptions → children & callbacks → disposed$, regardless of registration order', () => {
+    const log: string[] = [];
+    const entity = new RxDisposable();
+
+    entity.disposed$.subscribe(() => log.push('disposed$'));
+    entity.autoDispose(() => log.push('callback'));
+    entity.autoDispose({ dispose: () => log.push('child') });
+    entity.autoDispose(new Subject<string>().subscribe()).add(() => log.push('subscription'));
+    entity.autoDispose({ unsubscribe: () => log.push('unsubscribable') });
+
+    entity.dispose();
+
+    expect(log).toEqual(['subscription', 'unsubscribable', 'callback', 'child', 'disposed$']);
   });
 });
 
@@ -206,15 +155,5 @@ describe('RxDisposable - standard ES disposal interop', () => {
     expect(sub.closed).toBe(true);
     expect(symbolDisposed).toBe(true);
     expect(disposedEmitted).toBe(true);
-  });
-
-  it('RxBag - [Symbol.dispose]() unsubscribes all', () => {
-    const bag = RxBag.create();
-    const sub = new Subject<string>().subscribe();
-    bag.add(sub);
-
-    bag[Symbol.dispose]();
-    expect(sub.closed).toBe(true);
-    expect(bag.disposed).toBe(true);
   });
 });

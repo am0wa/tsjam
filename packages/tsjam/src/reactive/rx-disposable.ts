@@ -12,8 +12,12 @@ export { isUnsubscribable } from '../core/index.js';
  * RIP any Disposable or Subscription on the instance dispose.
  */
 export class RxDisposable extends Disposable {
-  /** Subscriptions – torn down before the children in `_ripBag`. */
-  protected readonly _rxBag = DisposeBag.create();
+  /**
+   * Subscriptions – torn down before the children in `_ripBag`.
+   * Self-pruning: rxjs drops a child Subscription once it ends on its own,
+   * aka `teardown.add(() => bag.delete(teardown))`
+   */
+  protected readonly _rxBag = new Subscription();
   private readonly _disposed$ = new Subject<void>();
 
   /** Emits when the object was disposed */
@@ -45,18 +49,8 @@ export class RxDisposable extends Disposable {
    * @returns same instance so you could assign it smoothly in same line.
    */
   override autoDispose<T extends Unsubscribable | Teardown>(teardown: T): T {
-    if (teardown instanceof Subscription) {
-      if (teardown.closed) {
-        return teardown; // nothing to hold
-      }
-
-      this._rxBag.add(teardown);
-      teardown.add(() => this._rxBag.delete(teardown)); // self-prune on early end
-      return teardown;
-    }
-
     if (isUnsubscribable(teardown)) {
-      this._rxBag.add(teardown); // can't end on its own – held until dispose
+      this._rxBag.add(teardown);
       return teardown;
     }
 

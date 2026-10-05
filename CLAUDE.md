@@ -59,14 +59,14 @@ Node `>=24` and pnpm `>=11` are required at the repo root (the published library
 The library is organized into three export surfaces, all re-exported from `src/index.ts` and also published as subpath exports (`tsjam`, `tsjam/money`, `tsjam/reactive`):
 
 - `src/core/` — pure utilities: type helpers (`types.ts`), assertions (`assert.ts`), type-narrowing unwrappers (`unwrap.ts`), `Result`, `Disposable`/`DisposeBag`, collections, math, etc.
-- `src/reactive/` — rxjs-based tools: `RxDisposable`, `RxBag`, operators, messaging. Depends on `core/`. `rxjs ^7` is a **peer dependency**.
+- `src/reactive/` — rxjs-based tools: `RxDisposable`, operators, messaging. Depends on `core/`. `rxjs ^7` is a **peer dependency**.
 - `src/money/` — ISO currency codes and money helpers.
 
 Key patterns to follow when adding code:
 
 - **Namespace + type pairing.** The dominant idiom is a type/class paired with a same-named `namespace` holding its factory/helper functions — e.g. `Result.ok()`/`Result.fail()`, `assert.exists()`/`assert.never()`, `StringId.create()`/`StringId.factoryOf()`, `unwrap.expected()`. Match this when extending.
 - **Assertions narrow types.** `assert`/`unwrap` functions use `asserts x is T` signatures and throw `AssertionError` (from `errors.ts`). `assert` also short-circuits at runtime via the `__DEVELOPMENT__` global.
-- **Disposable lifecycle.** Resource cleanup goes through `Disposable`/`DisposeBag` (core) and `RxDisposable`/`RxBag` (reactive, auto-unsubscribes via `takeUntil(disposed$)`). Prefer `autoDispose(...)` over manual teardown.
+- **Disposable lifecycle.** Resource cleanup goes through `Disposable`/`DisposeBag` (core) and `RxDisposable` (reactive). `RxDisposable` keeps subscriptions in a plain rxjs `Subscription` (`_rxBag`, self-pruning) and tears down in order: subscriptions → children & callbacks → `disposed$`; `autoComplete$` completes public streams via `takeUntil(disposed$)`. Prefer `autoDispose(...)` over manual teardown.
 - **ESM import extensions.** All relative imports use explicit `.js` extensions (e.g. `import { assert } from './assert.js'`) even in `.ts` source — required by NodeNext ESM resolution. New files must follow this.
 - **`export *` barrels.** Each folder has an `index.ts` that `export *`s every module. Add new modules to the relevant barrel.
 - New features need a matching `tests/<area>/<name>.spec.ts`. Tests import the library by **bare path from `src/`** (e.g. `import { Result } from 'core/result.js'`), enabled by `moduleDirectories: ['node_modules', 'src']` + `ts-jest-resolver` — not by relative path.
