@@ -19,6 +19,7 @@ export * from './blank.js';
 export * from './result.js';
 export * as Collections from './collections.js';
 export * from './math.js';
+export * from './pipe.js';
 export * from './percentage.js';
 export * from './alphabet.js';
 export * from './urls.js';
