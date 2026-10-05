@@ -39,15 +39,20 @@ export class RxBag implements DisposableBag<Unsubscribable | UnsubscribeCallback
 
   /**
    * Adds subscription to sink, if disposed subscription will be flushed right-away.
+   * A Subscription that ends early (complete / unsubscribe) is no longer counted in `size`.
    */
   readonly add = (subscription: Unsubscribable | UnsubscribeCallback): Unsubscribable | UnsubscribeCallback => {
-    this._sub$.add(subscription);
-    if (subscription instanceof Subscription) {
-      // we don't add closed subscriptions twice
-      if (subscription.closed) {
-        return subscription;
-      }
+    if (this._closed) {
+      this._sub$.add(subscription); // flushed right-away, not counted
+      return subscription;
     }
+    if (subscription instanceof Subscription) {
+      if (subscription.closed) {
+        return subscription; // nothing to hold; must precede the wrapper – add() on a closed sub runs it at once
+      }
+      subscription.add(() => this._size--); // uncount when it ends, early or on dispose
+    }
+    this._sub$.add(subscription);
     this._size++;
     return subscription;
   };

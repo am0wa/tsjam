@@ -1,19 +1,19 @@
-import { type Observable, Subject, type Unsubscribable } from 'rxjs';
+import { type Observable, Subject, Subscription, type Unsubscribable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { Disposable, DisposeBag, isUnsubscribable, type Teardown } from '../core/index.js';
-import { RxBag } from './rx-bag.js';
 
 /** Moved to core – re-exported to keep `tsjam/reactive` imports working. */
 export { isUnsubscribable } from '../core/index.js';
 
 /**
  * Reactive Disposable Entity to avoid memory Leaks (self-pruning subs).
- * Base reactive abstraction with the instance of RxBag for life-cycle management of resources.
+ * Base reactive abstraction with a dedicated subscriptions bag for life-cycle management of resources.
  * RIP any Disposable or Subscription on the instance dispose.
  */
 export class RxDisposable extends Disposable {
-  protected readonly _rxBag = RxBag.create();
+  /** Subscriptions – torn down before the children in `_ripBag`. */
+  protected readonly _rxBag = DisposeBag.create();
   private readonly _disposed$ = new Subject<void>();
 
   /** Emits when the object was disposed */
@@ -23,6 +23,8 @@ export class RxDisposable extends Disposable {
 
   /**
    * Kills all Disposable objects and Subscriptions. Invokes all teardown callbacks.
+   * Order: subscriptions first, then children & callbacks, then `disposed$` emits –
+   * so no subscription reacts to a half-disposed child.
    * Teardown errors are rethrown once everything is disposed and `disposed$` has emitted.
    */
   override dispose(): void {
@@ -32,7 +34,7 @@ export class RxDisposable extends Disposable {
         () => super.dispose(), // kill all children
       ]);
     } finally {
-      this._disposed$.next(); // emmit disposed to subscribers
+      this._disposed$.next(); // emit disposed to subscribers
       this._disposed$.complete(); // finalize
     }
   }
@@ -43,10 +45,21 @@ export class RxDisposable extends Disposable {
    * @returns same instance so you could assign it smoothly in same line.
    */
   override autoDispose<T extends Unsubscribable | Teardown>(teardown: T): T {
-    if (isUnsubscribable(teardown)) {
+    if (teardown instanceof Subscription) {
+      if (teardown.closed) {
+        return teardown; // nothing to hold
+      }
+
       this._rxBag.add(teardown);
+      teardown.add(() => this._rxBag.delete(teardown)); // self-prune on early end
       return teardown;
     }
+
+    if (isUnsubscribable(teardown)) {
+      this._rxBag.add(teardown); // can't end on its own – held until dispose
+      return teardown;
+    }
+
     return super.autoDispose(teardown);
   }
 

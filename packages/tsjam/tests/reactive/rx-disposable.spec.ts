@@ -143,12 +143,10 @@ describe('RxDisposable', () => {
 });
 
 describe('RxDisposable - self-pruning', () => {
-  /** Exposes how many teardowns the entity still holds for subscriptions (probes rxjs internals). */
+  /** Exposes how many subscriptions the entity still holds. */
   class RxDisposableProbe extends RxDisposable {
     get retained(): number {
-      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-      const sink = this._rxBag as unknown as { _sub$: { _finalizers: unknown[] | null } };
-      return sink._sub$._finalizers?.length ?? 0;
+      return this._rxBag.size;
     }
   }
 

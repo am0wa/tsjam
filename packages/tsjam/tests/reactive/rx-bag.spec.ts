@@ -1,7 +1,7 @@
 import { RxBag } from 'reactive/index.js';
+import { of, Subject, type Subscription } from 'rxjs';
 
 import { Disposable } from 'core/disposable.js';
-import { Subject } from 'rxjs';
 
 describe('RxBag', () => {
   it('dispose - has to unsubscribe from all - dispose added afterwards', () => {
@@ -44,6 +44,58 @@ describe('RxBag', () => {
 
     subjC$.next('C1');
     expect(c).toBeUndefined();
+  });
+
+  it('size - shrinks when a subscription ends early', () => {
+    const rxBag = RxBag.create();
+    const subjA$ = new Subject<string>();
+    const subA = rxBag.add(subjA$.subscribe());
+    const subB = new Subject<string>().subscribe();
+    rxBag.add(subB);
+    rxBag.add(() => undefined);
+    expect(rxBag.size).toBe(3);
+
+    subjA$.complete();
+    subB.unsubscribe();
+    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+    expect((subA as Subscription).closed).toBe(true);
+    expect(rxBag.size).toBe(1);
+  });
+
+  it('size - ignores closed subscriptions', () => {
+    const rxBag = RxBag.create();
+    const sub = rxBag.add(of(1).subscribe());
+
+    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+    expect((sub as Subscription).closed).toBe(true);
+    expect(rxBag.size).toBe(0);
+  });
+
+  it('size - counts a duplicate callback twice, as rxjs invokes it twice', () => {
+    const rxBag = RxBag.create();
+    let calls = 0;
+    const cb = (): void => {
+      calls++;
+    };
+
+    rxBag.add(cb);
+    rxBag.add(cb);
+    expect(rxBag.size).toBe(2);
+
+    rxBag.dispose();
+    expect(calls).toBe(2);
+    expect(rxBag.size).toBe(0);
+  });
+
+  it('size - stays 0 when adding any teardown after dispose', () => {
+    const rxBag = RxBag.create();
+    rxBag.dispose();
+    let flushed = 0;
+
+    rxBag.add(() => flushed++);
+    rxBag.add({ unsubscribe: () => flushed++ });
+    expect(flushed).toBe(2);
+    expect(rxBag.size).toBe(0);
   });
 });
 
