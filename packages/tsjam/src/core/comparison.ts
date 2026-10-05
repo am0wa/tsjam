@@ -1,20 +1,26 @@
-export interface Comparable<T, U = ComparisonResult> {
-  compare(other: T): U;
+/** Normalized comparison outcome. */
+export const ComparisonResult = {
+  /** (a < b) - ascending order */
+  Lower: -1,
+  Same: 0,
+  /** (a > b) - descending order */
+  Higher: 1,
+} as const;
+export type ComparisonResult = (typeof ComparisonResult)[keyof typeof ComparisonResult];
+
+/** Standard JS comparator contract (`Array.prototype.sort`, `Intl.Collator`): negative, zero or positive. */
+export type Comparator<T> = (first: T, second: T) => number;
+
+export interface Comparable<T> {
+  /** Negative if `this` sorts before `other`, zero if equal, positive if after. */
+  compare(other: T): number;
 }
 
 export namespace Comparable {
-  export const compare = <T extends Comparable<T, U>, U = ComparisonResult>(o1: T, o2: T): U => {
+  /** Comparator over `Comparable` items – e.g. `items.sort(Comparable.compare)`. */
+  export const compare = <T extends Comparable<T>>(o1: T, o2: T): number => {
     return o1.compare(o2);
   };
-}
-
-export type Comparator<T, U = ComparisonResult> = (first: T, second: T) => U;
-export enum ComparisonResult {
-  /** (a < b) - ascending order */
-  Lower = -1,
-  Same = 0,
-  /** (a > b) - descending order */
-  Higher = 1,
 }
 
 export const comparePrimitives = <T extends number | string>(a: T, b: T): ComparisonResult => {
