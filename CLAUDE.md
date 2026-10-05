@@ -56,9 +56,9 @@ Node `>=24` and pnpm `>=11` are required at the repo root (the published library
 
 ## Architecture & conventions
 
-The library is organized into three export surfaces, all re-exported from `src/index.ts` and also published as subpath exports (`tsjam`, `tsjam/money`, `tsjam/reactive`):
+The library is organized into three export surfaces, all re-exported from `src/index.ts` and also published as subpath exports (`tsjam`, `tsjam/money`, `tsjam/reactive`, `tsjam/collections`):
 
-- `src/core/` — pure utilities: type helpers (`types.ts`), assertions (`assert.ts`), type-narrowing unwrappers (`unwrap.ts`), `Result`, `Disposable`/`DisposeBag`, collections, math, etc.
+- `src/core/` — pure utilities: type helpers (`types.ts`), assertions (`assert.ts`), type-narrowing unwrappers (`unwrap.ts`), `Result`, `Disposable`/`DisposeBag`, collections, math, etc. `collections.ts` is plain module exports (no `namespace`), grouped by the barrel as `export * as Collections` and published as `tsjam/collections` – the pilot for tree-shakable modules (a `namespace` compiles to an IIFE no bundler can shake; esbuild only shakes a direct `import * as`, hence the subpath).
 - `src/reactive/` — rxjs-based tools: `RxDisposable`, operators, messaging. Depends on `core/`. `rxjs ^7` is a **peer dependency**.
 - `src/money/` — ISO currency codes and money helpers.
 

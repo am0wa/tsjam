@@ -19,6 +19,10 @@
       "types": "./lib/reactive/index.d.ts",
       "default": "./lib/reactive/index.js"
     },
+    "./collections": {
+      "types": "./lib/core/collections.d.ts",
+      "default": "./lib/core/collections.js"
+    },
     "./package.json": "./package.json"
   },
   "repository": "https://github.com/am0wa/tsjam",

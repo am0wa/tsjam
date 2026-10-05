@@ -1,6 +1,11 @@
-import { Collections } from 'core/collections.js';
+import * as Collections from 'core/collections.js';
+import { Collections as CollectionsFromBarrel } from 'core/index.js';
 
 describe('collections', () => {
+  it('is exported from the barrel as the Collections group', () => {
+    expect(CollectionsFromBarrel.first).toBe(Collections.first);
+    expect(Object.keys(CollectionsFromBarrel)).toContain('equalByContent');
+  });
   it('first', () => {
     expect(Collections.first(['A', 'B'])).toBe('A');
     expect(Collections.first([])).toBe(undefined);
@@ -56,6 +61,20 @@ describe('collections', () => {
     it('remove with negative End', () => {
       expect(Collections.removeSlice(['A', 'B', 'C', 'D'], { start: 2, end: -1 })).toEqual(['A', 'B', 'D']);
     });
+    it('inverted or empty slice removes nothing', () => {
+      expect(Collections.removeSlice(['A', 'B', 'C', 'D'], { start: 3, end: 1 })).toEqual(['A', 'B', 'C', 'D']);
+      expect(Collections.removeSlice(['A', 'B', 'C', 'D'], { start: 2, end: 2 })).toEqual(['A', 'B', 'C', 'D']);
+      expect(Collections.removeSlice(['A', 'B', 'C', 'D'], { start: -1, end: -3 })).toEqual(['A', 'B', 'C', 'D']);
+    });
+    it('out of range bounds are clamped', () => {
+      expect(Collections.removeSlice(['A', 'B', 'C', 'D'], { start: -9, end: 2 })).toEqual(['C', 'D']);
+      expect(Collections.removeSlice(['A', 'B', 'C', 'D'], { start: 1, end: 9 })).toEqual(['A']);
+      expect(Collections.removeSlice(['A', 'B', 'C', 'D'], { start: 9 })).toEqual(['A', 'B', 'C', 'D']);
+    });
+    it('returns a copy', () => {
+      const list = ['A', 'B'];
+      expect(Collections.removeSlice(list, { start: 2 })).not.toBe(list);
+    });
   });
   describe('areEqual', () => {
     it('not equal by length to return false', () => {
@@ -69,9 +88,22 @@ describe('collections', () => {
       expect(Collections.areEqual(['A', 'B'], undefined)).toBe(false);
       expect(Collections.areEqual(undefined, ['A', 'D'])).toBe(false);
     });
-    it('equal by objects', () => {
-      expect(Collections.areEqual(['A', { a: 'B' }], ['A', { a: 'B' }])).toBe(true);
-      expect(Collections.areEqual(['A', { a: 'B' }], ['A', { a: 'D' }])).toBe(false);
+    it('compares objects by reference by default', () => {
+      const obj = { a: 'B' };
+      expect(Collections.areEqual(['A', obj], ['A', obj])).toBe(true);
+      expect(Collections.areEqual(['A', { a: 'B' }], ['A', { a: 'B' }])).toBe(false);
+    });
+    it('NaN equals NaN by default', () => {
+      expect(Collections.areEqual([NaN, 1], [NaN, 1])).toBe(true);
+    });
+    it('stops at the first mismatch', () => {
+      let calls = 0;
+      const eq = (a: number, b: number): boolean => {
+        calls++;
+        return a === b;
+      };
+      expect(Collections.areEqual([1, 2, 3, 4], [9, 2, 3, 4], eq)).toBe(false);
+      expect(calls).toBe(1);
     });
     it('equal by equalityTest', () => {
       expect(Collections.areEqual([{ a: 'A' }, { a: 'B' }], [{ a: 'A' }, { a: 'B' }], (a, b) => a.a === b.a)).toBe(
