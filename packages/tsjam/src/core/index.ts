@@ -14,7 +14,6 @@ export * from './assert.js';
 export * from './errors.js';
 export * from './io.js';
 export * from './optional.js';
-export * from './enumerable.decorator.js';
 export * from './blank.js';
 export * from './result.js';
 export * as Collections from './collections.js';

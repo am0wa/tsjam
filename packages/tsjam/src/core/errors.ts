@@ -1,66 +1,63 @@
-import { nonenumerable } from './enumerable.decorator.js';
 import { isObject } from './is-it.js';
 
+/**
+ * Base of tsjam errors – check them with `instanceof`.
+ *
+ * Each class carries a `declare`d brand field: a type-only nominal marker (emits nothing at runtime),
+ * so structurally identical errors (e.g. `AssertionError` / `ValidationError`) are not assignable to each other.
+ * Supports standard ES2022 `cause` chaining via `options`.
+ */
 export abstract class JamError extends Error {
-  /**
-   * Workaround for TypeScript duck-typing.
-   * Working with classes we often needed to prevent A to be assigned to subtype B.
-   *
-   * - field is non-enumerable for clean logs and usage in IDE
-   * - `!` is for `strictPropertyInitialization` TypeScript flag
-   * - `never` must not have a reachable end point - never be used.
-   */
-  @nonenumerable
-  protected readonly _JamError!: never;
+  declare protected readonly _JamError: never;
 
-  constructor(message: string) {
-    // @see https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-2.html
-    super(message); // 'Error' breaks prototype chain here
-    Object.setPrototypeOf(this, new.target.prototype); // restore prototype chain
-    this.name = this.constructor.name; // define the name
+  constructor(message: string, options?: ErrorOptions) {
+    super(message, options);
+    // non-enumerable like native Error#name, so logs / spreads show only real data
+    Object.defineProperty(this, 'name', { value: new.target.name, writable: true, configurable: true });
   }
 }
 
 export class AssertionError extends JamError {
-  @nonenumerable
-  protected readonly _AssertionError!: never;
+  declare protected readonly _AssertionError: never;
 }
 
 export class NotImplementedError extends JamError {
-  @nonenumerable
-  protected readonly _NotImplementedError!: never;
+  declare protected readonly _NotImplementedError: never;
 }
 
 export class UnreachableCodeError extends JamError {
-  @nonenumerable
-  protected readonly _UnreachableCodeError!: never;
+  declare protected readonly _UnreachableCodeError: never;
 
-  constructor(message = 'This code should be unreachable!') {
-    super(message);
+  constructor(message = 'This code should be unreachable!', options?: ErrorOptions) {
+    super(message, options);
   }
 }
 
 export class ValidationError extends JamError {
-  @nonenumerable
-  protected readonly _ValidationError!: never;
+  declare protected readonly _ValidationError: never;
 }
 
 export class ConfigurationError extends JamError {
-  @nonenumerable
-  protected readonly _ConfigurationError!: never;
+  declare protected readonly _ConfigurationError: never;
 }
 
 export class APIError<ErrorCodeT = unknown> extends JamError {
-  @nonenumerable
-  protected readonly _APIError!: never;
+  declare protected readonly _APIError: never;
 
   constructor(
     readonly code: ErrorCodeT,
     message: string,
+    options?: ErrorOptions,
   ) {
-    super(message);
+    super(message, options);
   }
 }
 
-const isErrorWithMessage = (err: unknown): err is { readonly message: string } => isObject(err) && 'message' in err;
-export const toErrorMessage = (err: unknown): string => (isErrorWithMessage(err) ? err.message : `${err}`);
+const isErrorWithMessage = (err: unknown): err is { readonly message: string } =>
+  isObject(err) && typeof err.message === 'string';
+
+/**
+ * Message of anything thrown: `message` when it is a string, otherwise `String(err)` (safe for Symbols).
+ * Complexity: O(1).
+ */
+export const toErrorMessage = (err: unknown): string => (isErrorWithMessage(err) ? err.message : String(err));
