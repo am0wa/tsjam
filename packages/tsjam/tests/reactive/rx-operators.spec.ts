@@ -1,48 +1,60 @@
 import { replayLatest } from 'reactive/rx-operators.js';
-import { firstValueFrom, lastValueFrom, of, ReplaySubject } from 'rxjs';
+import { defer, type Observable, of, Subject } from 'rxjs';
 import { TestScheduler } from 'rxjs/testing';
 
 describe('Rx Operators', () => {
-  it('Observable to promise has to emit once', async () => {
-    const sample$ = of('A');
-    // note: rx7 - to be replaced with lastValueFrom
-    const promiseLikeResult = await firstValueFrom(sample$);
-    expect(promiseLikeResult).toBe('A');
-  });
-  it('Subject to promise has to emit once', async () => {
-    const sample$$ = new ReplaySubject(1);
-    // @see https://github.com/Reactive-Extensions/RxJS/issues/1088
-    const samplePromise = firstValueFrom(sample$$);
-    sample$$.next('A');
-    // note: rx7 - to be replaced with lastValueFrom
-    const promiseLikeResult = await samplePromise;
-    expect(promiseLikeResult).toBe('A');
-  });
-  it('firstValueFrom', async () => {
-    const sample$$ = new ReplaySubject<string>(1);
-    sample$$.next('A');
-    const result = await firstValueFrom(sample$$);
-    expect(result).toBe('A');
-  });
-  it('lastValueFrom', async () => {
-    const sample$ = of('A', 'B', 'C');
-    const result = await lastValueFrom(sample$);
-    expect(result).toBe('C');
-  });
-  it('replayLatest', () => {
-    const testScheduler = new TestScheduler((actual, expected) => {
-      expect(actual).toEqual(expected);
-    });
-    testScheduler.run((helpers) => {
-      const { hot, expectObservable } = helpers;
-      const source$ = hot(' -a-b-c-d-e-f-g-h|').pipe(replayLatest(1));
-      const subscription1 = '       -----^-----!';
-      const expectedMarble = '      -----c-d-e-';
-      const subscription2 = '       --------^--!';
-      const expectedMarble2 = '     --------de-';
+  describe('replayLatest', () => {
+    it('replays the latest bufferSize values to late subscribers (marbles)', () => {
+      const testScheduler = new TestScheduler((actual, expected) => {
+        expect(actual).toEqual(expected);
+      });
+      testScheduler.run((helpers) => {
+        const { hot, expectObservable } = helpers;
+        const source$ = hot(' -a-b-c-d-e-f-g-h|').pipe(replayLatest(1));
+        const subscription1 = '       -----^-----!';
+        const expectedMarble = '      -----c-d-e-';
+        const subscription2 = '       --------^--!';
+        const expectedMarble2 = '     --------de-';
 
-      expectObservable(source$, subscription1).toBe(expectedMarble);
-      expectObservable(source$, subscription2).toBe(expectedMarble2);
+        expectObservable(source$, subscription1).toBe(expectedMarble);
+        expectObservable(source$, subscription2).toBe(expectedMarble2);
+      });
+    });
+
+    it('replays only the latest value by default', () => {
+      const source$ = new Subject<number>();
+      const shared$ = source$.pipe(replayLatest());
+      const connection = shared$.subscribe();
+      [1, 2, 3].forEach((v) => source$.next(v));
+
+      const late: number[] = [];
+      shared$.subscribe((v) => late.push(v)).unsubscribe();
+      expect(late).toEqual([3]);
+      connection.unsubscribe();
+    });
+
+    it('stays connected when all subscribers leave', () => {
+      let sourceSubscriptions = 0;
+      const source$ = new Subject<number>();
+      const shared$ = defer(() => {
+        sourceSubscriptions++;
+        return source$;
+      }).pipe(replayLatest());
+
+      shared$.subscribe().unsubscribe();
+      source$.next(7);
+      const late: number[] = [];
+      shared$.subscribe((v) => late.push(v));
+
+      expect(sourceSubscriptions).toBe(1);
+      expect(late).toEqual([7]);
+    });
+
+    it('keeps the stream type', () => {
+      const n$: Observable<number> = of(1).pipe(replayLatest());
+      const values: number[] = [];
+      n$.subscribe((v) => values.push(v));
+      expect(values).toEqual([1]);
     });
   });
 });
