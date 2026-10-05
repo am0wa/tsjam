@@ -16,12 +16,14 @@ export namespace SafeJSON {
   };
 
   /**
-   * JSON.parse wrapped in Promise
+   * JSON.parse wrapped in Promise – invalid JSON rejects (never throws synchronously).
    * Handy if u need to handle error or chain and type guard result
+   * Complexity: O(n) in the data length.
    */
   export const parsePromise = (data: string): Promise<Json> => {
+    // a throw inside the executor becomes a rejection
     // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-    return Promise.resolve(JSON.parse(data) as Json);
+    return new Promise((resolve) => resolve(JSON.parse(data) as Json));
   };
 
   export type Replacer = ((this: unknown, key: string, value: unknown) => unknown) | (number | string)[] | null;

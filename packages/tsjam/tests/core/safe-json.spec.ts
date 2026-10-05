@@ -41,4 +41,18 @@ describe('SafeJSON.stringify', () => {
     data.self = data;
     expect(SafeJSON.stringify(data)).toBeUndefined();
   });
+
+  describe('parsePromise', () => {
+    it('resolves with parsed JSON', async () => {
+      await expect(SafeJSON.parsePromise('{"a":1}')).resolves.toEqual({ a: 1 });
+    });
+
+    it('rejects on invalid JSON instead of throwing synchronously', async () => {
+      let promise: Promise<unknown> | undefined;
+      expect(() => {
+        promise = SafeJSON.parsePromise('{not json');
+      }).not.toThrow();
+      await expect(promise).rejects.toThrow(SyntaxError);
+    });
+  });
 });
