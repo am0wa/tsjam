@@ -1,6 +1,11 @@
-import { unwrap } from 'core/unwrap.js';
+import * as unwrap from 'core/unwrap.js';
+import { unwrap as unwrapFromBarrel } from 'core/index.js';
 
 describe('Unwrap', () => {
+  it('is exported from the barrel as the unwrap group', () => {
+    expect(unwrapFromBarrel.expected).toBe(unwrap.expected);
+    expect(Object.keys(unwrapFromBarrel).sort()).toEqual(['expected', 'id', 'normalizeUnsupported', 'ownProperty']);
+  });
   const testObj = { a: 'A', b: undefined, c: '' };
 
   it('should return value if exists', () => {

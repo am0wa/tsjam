@@ -1,10 +1,17 @@
 import { ComparisonResult } from 'core/comparison.js';
 import { jamver, SemanticRange } from 'core/versioning.js';
 
-import compareVersions = jamver.compareVersions;
-import compareVersionsSemantically = jamver.compareVersionsSemantically;
+const { compareVersions, compareVersionsSemantically } = jamver;
 
 describe('Versioning', () => {
+  it('jamver holds the functions only, enums are root exports', () => {
+    expect(Object.keys(jamver).sort()).toEqual([
+      'compareVersions',
+      'compareVersionsSemantically',
+      'semanticRangeFromVersion',
+    ]);
+    expect(SemanticRange.Compatible).toBe('^');
+  });
   describe('compareVersions', () => {
     it('Should be same', () => {
       expect(compareVersions('77.7', '77.7')).toBe(ComparisonResult.Same);

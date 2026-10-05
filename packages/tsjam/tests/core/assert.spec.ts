@@ -1,4 +1,4 @@
-import { assert } from 'core/assert.js';
+import { assert, assertDev, assertExists, assertNever, assertNonEmptyString } from 'core/assert.js';
 import { AssertionError } from 'core/errors.js';
 
 describe('Assert', () => {
@@ -24,7 +24,7 @@ describe('Assert', () => {
   });
   it('forgotten dev expression should be invoked only in dev', () => {
     const obj = { ok: () => true, fail: () => false };
-    assert.dev(obj.fail);
+    assertDev(obj.fail);
     // should not throw as we test towards prod by default
   });
   describe('dev', () => {
@@ -35,34 +35,34 @@ describe('Assert', () => {
 
     it('should not crash when __DEVELOPMENT__ is not defined', () => {
       Reflect.deleteProperty(globalThis, '__DEVELOPMENT__');
-      expect(() => assert.dev(false)).not.toThrow();
+      expect(() => assertDev(false)).not.toThrow();
     });
     it('should assert when __DEVELOPMENT__ is true', () => {
       Reflect.set(globalThis, '__DEVELOPMENT__', true);
-      expect(() => assert.dev(false)).toThrow();
-      expect(() => assert.dev(() => true)).not.toThrow();
+      expect(() => assertDev(false)).toThrow();
+      expect(() => assertDev(() => true)).not.toThrow();
     });
   });
   it('exists - throws only for null / undefined', () => {
-    expect(() => assert.exists(null, 'x')).toThrow('assertExists: x');
-    expect(() => assert.exists(undefined, 'x')).toThrow('assertExists: x');
-    expect(() => assert.exists(0, 'x')).not.toThrow();
-    expect(() => assert.exists('', 'x')).not.toThrow();
+    expect(() => assertExists(null, 'x')).toThrow('assertExists: x');
+    expect(() => assertExists(undefined, 'x')).toThrow('assertExists: x');
+    expect(() => assertExists(0, 'x')).not.toThrow();
+    expect(() => assertExists('', 'x')).not.toThrow();
   });
   it('never - throws AssertionError with the unexpected value, even a Symbol', () => {
     // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-    expect(() => assert.never('surprise' as never)).toThrow('assertNever: surprise');
+    expect(() => assertNever('surprise' as never)).toThrow('assertNever: surprise');
     // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-    expect(() => assert.never(Symbol('odd') as never)).toThrow(AssertionError);
+    expect(() => assertNever(Symbol('odd') as never)).toThrow(AssertionError);
     // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-    expect(() => assert.never(Symbol('odd') as never)).toThrow('assertNever: Symbol(odd)');
+    expect(() => assertNever(Symbol('odd') as never)).toThrow('assertNever: Symbol(odd)');
   });
   it('nonEmptyString to throw', () => {
     expect(() => {
-      assert.nonEmptyString('', 'Id should be present');
+      assertNonEmptyString('', 'Id should be present');
     }).toThrow();
     expect(() => {
-      assert.nonEmptyString(null, 'Id is expected');
+      assertNonEmptyString(null, 'Id is expected');
     }).toThrow();
   });
 });

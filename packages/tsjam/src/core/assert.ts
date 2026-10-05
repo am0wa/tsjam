@@ -17,35 +17,32 @@ export function assert(expression: unknown, message?: string): asserts expressio
   }
 }
 
-export namespace assert {
-  /** For exhaustive switches: compile-time check via `never`, throws if reached at runtime. Complexity: O(1). */
-  export const never = (x: never): never => {
-    throw new AssertionError(`assertNever: ${String(x)}`); // String() – a template literal throws on Symbols
-  };
+/** For exhaustive switches: compile-time check via `never`, throws if reached at runtime. */
+export function assertNever(x: never): never {
+  throw new AssertionError(`assertNever: ${String(x)}`); // String() – a template literal throws on Symbols
+}
 
-  /** Throws AssertionError if value is `null` or `undefined`. Complexity: O(1). */
-  export function exists<T>(x: T, message: string): asserts x is NonNullable<T> {
-    if (x == null) {
-      throw new AssertionError(`assertExists: ${message}`);
-    }
+/** Throws AssertionError if value is `null` or `undefined`. */
+export function assertExists<T>(x: T, message: string): asserts x is NonNullable<T> {
+  if (x == null) {
+    throw new AssertionError(`assertExists: ${message}`);
   }
+}
 
-  /** throws AssertionError If value doesn't exist or is empty string (trim outside if needed). Complexity: O(1). */
-  export function nonEmptyString(x: string | null | undefined, assertion: string): asserts x is NonEmptyString {
-    if (x == null || x.length === 0) {
-      throw new AssertionError(`assertNonEmptyString: ${assertion}`);
-    }
+/** Throws AssertionError if value doesn't exist or is an empty string (trim outside if needed). */
+export function assertNonEmptyString(x: string | null | undefined, assertion: string): asserts x is NonEmptyString {
+  if (x == null || x.length === 0) {
+    throw new AssertionError(`assertNonEmptyString: ${assertion}`);
   }
+}
 
-  /**
-   * Asserts only when the `__DEVELOPMENT__` global is `true`; pass a function to skip evaluating it in production.
-   * Note: TypeScript narrows the type even in production, where the check does not run.
-   * Complexity: O(1) plus the cost of a function `expression` (dev only).
-   */
-  export function dev(expression: boolean | (() => boolean), message?: string): asserts expression {
-    // `typeof` guard: consumers that don't define the global must not crash with ReferenceError
-    if (typeof __DEVELOPMENT__ !== 'undefined' && __DEVELOPMENT__) {
-      assert(expression, message);
-    }
+/**
+ * Asserts only when the `__DEVELOPMENT__` global is `true`; pass a function to skip evaluating it in production.
+ * Note: TypeScript narrows the type even in production, where the check does not run.
+ */
+export function assertDev(expression: boolean | (() => boolean), message?: string): asserts expression {
+  // `typeof` guard: consumers that don't define the global must not crash with ReferenceError
+  if (typeof __DEVELOPMENT__ !== 'undefined' && __DEVELOPMENT__) {
+    assert(expression, message);
   }
 }

@@ -20,12 +20,8 @@ export const isEquatable = (x: unknown): x is Equatable => {
   return !!x && typeof (x as any).equals === 'function';
 };
 
-export namespace Equatable {
-  export const areEqualByRef = (o1: unknown, o2: unknown): boolean => {
-    return o1 === o2;
-  };
+/** Same reference (`===`). */
+export const areEqualByRef = (o1: unknown, o2: unknown): boolean => o1 === o2;
 
-  export const areEqual = <T extends Equatable>(o1: T, o2: T): boolean => {
-    return o1.equals(o2);
-  };
-}
+/** Equal by the items' own `equals()`. */
+export const areEqualByEquals = <T extends Equatable>(o1: T, o2: T): boolean => o1.equals(o2);

@@ -16,12 +16,8 @@ export interface Comparable<T> {
   compare(other: T): number;
 }
 
-export namespace Comparable {
-  /** Comparator over `Comparable` items – e.g. `items.sort(Comparable.compare)`. */
-  export const compare = <T extends Comparable<T>>(o1: T, o2: T): number => {
-    return o1.compare(o2);
-  };
-}
+/** Comparator over `Comparable` items, e.g. `items.sort(compareComparables)`. */
+export const compareComparables = <T extends Comparable<T>>(o1: T, o2: T): number => o1.compare(o2);
 
 export const comparePrimitives = <T extends number | string>(a: T, b: T): ComparisonResult => {
   // eslint-disable-next-line no-nested-ternary

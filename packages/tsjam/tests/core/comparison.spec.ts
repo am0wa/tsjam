@@ -1,4 +1,11 @@
-import { Comparable, type Comparator, comparePrimitives, compareStrings, ComparisonResult } from 'core/comparison.js';
+import {
+  type Comparable,
+  compareComparables,
+  type Comparator,
+  comparePrimitives,
+  compareStrings,
+  ComparisonResult,
+} from 'core/comparison.js';
 
 describe('comparison', () => {
   describe('ComparisonResult', () => {
@@ -55,10 +62,10 @@ describe('comparison', () => {
 
     it('compare - delegates to the item, usable as a sort comparator', () => {
       const [low, high] = [new Money(100), new Money(250)];
-      expect(Comparable.compare(low, high)).toBeLessThan(0);
-      expect(Comparable.compare(high, low)).toBeGreaterThan(0);
-      expect(Comparable.compare(low, new Money(100))).toBe(0);
-      expect([high, low].sort(Comparable.compare)).toEqual([low, high]);
+      expect(compareComparables(low, high)).toBeLessThan(0);
+      expect(compareComparables(high, low)).toBeGreaterThan(0);
+      expect(compareComparables(low, new Money(100))).toBe(0);
+      expect([high, low].sort(compareComparables)).toEqual([low, high]);
     });
   });
 });

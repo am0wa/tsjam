@@ -12,41 +12,41 @@
  * <p>{`username: ${user.name ?? sameBlank}`}</p>
  * <p>{`country: ${user.country ?? sameBlank}`}</p>
  */
-export namespace blank {
-  export const empty = '';
-  export const dash = '-';
+export const blank = {
+  empty: '',
+  dash: '-',
   /** Em dash `—` (U+2014) */
-  export const emDash = '—';
+  emDash: '—',
   /** En dash `–` (U+2013) */
-  export const enDash = '–';
+  enDash: '–',
   /** Hash sign or Number sign, also used as hashtags prefix */
-  export const hash = '#';
-  export const star = '*';
-  export const dollar = '$';
+  hash: '#',
+  star: '*',
+  dollar: '$',
   /** Known as Rest sign, literally to be Continued... */
-  export const treeDots = '...';
-  export const treeStars = '***';
-  export const treeDollars = '$$$';
+  treeDots: '...',
+  treeStars: '***',
+  treeDollars: '$$$',
+} as const;
 
-  /** Replaces every character with `maskSign`. Complexity: O(n). */
-  export const mask = (word: string, maskSign = star): string => {
-    return maskSign.repeat(word.length);
-  };
+/** Replaces every character with `maskSign`. Complexity: O(n). */
+export const mask = (word: string, maskSign: string = blank.star): string => {
+  return maskSign.repeat(word.length);
+};
 
-  /**
-   * Cuts `word` to at most `limit` characters, ending with `overflowSign` when cut
-   * (the sign itself is cut too when it does not fit the limit).
-   * Complexity: O(n).
-   */
-  export const truncate = (word: string, limit = 120, overflowSign = treeDots): string => {
-    if (word.length <= limit) {
-      return word;
-    }
-    const max = Math.max(0, limit);
-    const keep = Math.max(0, max - overflowSign.length);
-    return (word.slice(0, keep) + overflowSign).slice(0, max);
-  };
-}
+/**
+ * Cuts `word` to at most `limit` characters, ending with `overflowSign` when cut
+ * (the sign itself is cut too when it does not fit the limit).
+ * Complexity: O(n).
+ */
+export const truncate = (word: string, limit = 120, overflowSign: string = blank.treeDots): string => {
+  if (word.length <= limit) {
+    return word;
+  }
+  const max = Math.max(0, limit);
+  const keep = Math.max(0, max - overflowSign.length);
+  return (word.slice(0, keep) + overflowSign).slice(0, max);
+};
 
 /**
  * Ready-made blank '-'
@@ -54,6 +54,6 @@ export namespace blank {
  *
  * @example:
  *  <p>{`username: ${user.name ?? jamBlank}`}</p>
- *  <p>{`password: ${blank.mask(user.password)}`}</p>
+ *  <p>{`password: ${mask(user.password)}`}</p>
  */
 export const jamBlank = blank.dash;

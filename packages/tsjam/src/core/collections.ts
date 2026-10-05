@@ -94,7 +94,7 @@ export const areEqual = <T>(
 /**
  * Same items regardless of order, duplicates count: ['A', 'A', 'B'] != ['A', 'B', 'B'].
  * Complexity: O(n) time and space – one `Map` count per key (plus the cost of `keyOf`).
- * @param keyOf - identity of an item, compared by SameValueZero (NaN equals NaN); defaults to the item itself.
+ * @param keyOf - what makes two items "the same", e.g. `(user) => user.id`; by default the item itself.
  * @usage:
  *    Collections.equalByContent(usersA, usersB, (user) => user.id);
  */

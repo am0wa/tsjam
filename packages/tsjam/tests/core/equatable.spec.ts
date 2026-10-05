@@ -1,4 +1,4 @@
-import { Equatable, isEquatable } from 'core/equatable.js';
+import { areEqualByEquals, areEqualByRef, isEquatable } from 'core/equatable.js';
 
 describe('Equatable', () => {
   it('false with primitives', () => {
@@ -13,12 +13,12 @@ describe('Equatable', () => {
     it('false on objects with different refs', () => {
       const a = { foo: () => false };
       const b = { foo: () => false };
-      expect(Equatable.areEqualByRef(a, b)).toBe(false);
+      expect(areEqualByRef(a, b)).toBe(false);
     });
     it('true on objects with same refs', () => {
       const a = { foo: () => false };
       const b = a;
-      expect(Equatable.areEqualByRef(a, b)).toBe(true);
+      expect(areEqualByRef(a, b)).toBe(true);
     });
   });
 
@@ -26,7 +26,7 @@ describe('Equatable', () => {
     it('checks objects by equals, not refs', () => {
       const a = { equals: (x: unknown) => !!x };
       const b = { equals: (x: unknown) => !!x };
-      expect(Equatable.areEqual(a, b)).toBe(true);
+      expect(areEqualByEquals(a, b)).toBe(true);
     });
   });
 });

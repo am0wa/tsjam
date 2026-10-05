@@ -1,6 +1,11 @@
-import { SafeJSON } from 'core/safe-json.js';
+import * as SafeJSON from 'core/safe-json.js';
+import { SafeJSON as SafeJSONFromBarrel } from 'core/index.js';
 
 describe('SafeJSON.stringify', () => {
+  it('is exported from the barrel as the SafeJSON group', () => {
+    expect(SafeJSONFromBarrel.parse).toBe(SafeJSON.parse);
+    expect(Object.keys(SafeJSONFromBarrel).sort()).toEqual(['parse', 'parsePromise', 'stringify']);
+  });
   it('matches JSON.stringify for plain data', () => {
     const data = { a: 1, b: 'x', c: [true, null], d: { e: 2 } };
     expect(SafeJSON.stringify(data)).toBe(JSON.stringify(data));

@@ -1,6 +1,12 @@
-import { blank, jamBlank } from 'core/blank.js';
+import * as root from 'core/index.js';
+import { blank, jamBlank, mask, truncate } from 'core/blank.js';
 
 describe('blank', () => {
+  it('mask / truncate are flat root exports, blank holds only the signs', () => {
+    expect(root.mask).toBe(mask);
+    expect(root.truncate).toBe(truncate);
+    expect(Object.values(blank).every((sign) => typeof sign === 'string')).toBe(true);
+  });
   it('jamBlank is the dash', () => {
     expect(jamBlank).toBe('-');
   });
@@ -10,17 +16,17 @@ describe('blank', () => {
   });
   it('mask with sign', () => {
     const password = '1252525353';
-    expect(blank.mask(password)).toBe('**********');
-    expect(blank.mask('abc', '#')).toBe('###');
+    expect(mask(password)).toBe('**********');
+    expect(mask('abc', '#')).toBe('###');
   });
   it('truncate overflow with sign', () => {
-    expect(blank.truncate('text is boring', 7)).toBe('text...');
-    expect(blank.truncate('text is', 7)).toBe('text is');
+    expect(truncate('text is boring', 7)).toBe('text...');
+    expect(truncate('text is', 7)).toBe('text is');
   });
   it('truncate never exceeds the limit, even below the sign length', () => {
-    expect(blank.truncate('hello world', 3)).toBe('...');
-    expect(blank.truncate('hello world', 2)).toBe('..');
-    expect(blank.truncate('hello world', 0)).toBe('');
-    expect(blank.truncate('hello world', -1)).toBe('');
+    expect(truncate('hello world', 3)).toBe('...');
+    expect(truncate('hello world', 2)).toBe('..');
+    expect(truncate('hello world', 0)).toBe('');
+    expect(truncate('hello world', -1)).toBe('');
   });
 });

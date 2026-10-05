@@ -4,8 +4,6 @@ import { filter, map, share } from 'rxjs/operators';
 import { isObject, isSomething, type Json, optionalMap, type ParseFn, SafeJSON, type Typeguard, unwrap } from 'tsjam';
 import { type MessagingProvider, replayLastMessage$ } from 'tsjam/reactive';
 
-import ownProperty = unwrap.ownProperty;
-
 export const windowMessage$ = <T, U>(target: Window, parseFn: ParseFn<T, U>): Observable<U> => {
   return fromEvent<MessageEvent>(target, 'message').pipe(
     map(({ data }) => optionalMap(data, parseFn)),
@@ -108,7 +106,7 @@ export class PostMessageHost<InboundT, OutboundT, RawT> implements MessagingProv
       if (
         isObject(response) &&
         isObject(request) && // if objects check property
-        ownProperty(response, signature) !== ownProperty(request, signature)
+        unwrap.ownProperty(response, signature) !== unwrap.ownProperty(request, signature)
       ) {
         // if no property we pass through to the actual matcher
         return false; // not our response
