@@ -34,6 +34,12 @@ describe('collections', () => {
     expect(Collections.removeLast(['A', 'B', 'C'], 3)).toEqual([]);
     expect(Collections.removeLast(['A', 'B', 'C'], 7)).toEqual([]);
   });
+  it('removeLast N <= 0 removes nothing, returns a copy', () => {
+    const list = ['A', 'B', 'C'];
+    expect(Collections.removeLast(list, 0)).toEqual(['A', 'B', 'C']);
+    expect(Collections.removeLast(list, -2)).toEqual(['A', 'B', 'C']);
+    expect(Collections.removeLast(list, 0)).not.toBe(list);
+  });
   describe('removeSlice', () => {
     it('remove Middle part', () => {
       expect(Collections.removeSlice(['A', 'B', 'C', 'D'], { start: 1, end: 3 })).toEqual(['A', 'D']);
@@ -96,15 +102,11 @@ describe('collections', () => {
       expect(Collections.equalByContent(listA, listA)).toBe(true);
       expect(Collections.equalByContent(listA, listB)).toBe(false);
     });
-    it('equal by equalityTest', () => {
-      expect(
-        Collections.equalByContent([{ a: 'A' }, { a: 'B' }], [{ a: 'A' }, { a: 'B' }], (a, b) => a.a === b.a),
-      ).toBe(true);
+    it('equal by keyOf', () => {
+      expect(Collections.equalByContent([{ a: 'A' }, { a: 'B' }], [{ a: 'A' }, { a: 'B' }], (x) => x.a)).toBe(true);
     });
-    it('equal by equalityTest regardless of order', () => {
-      expect(
-        Collections.equalByContent([{ a: 'A' }, { a: 'B' }], [{ a: 'B' }, { a: 'A' }], (a, b) => a.a === b.a),
-      ).toBe(true);
+    it('equal by keyOf regardless of order', () => {
+      expect(Collections.equalByContent([{ a: 'A' }, { a: 'B' }], [{ a: 'B' }, { a: 'A' }], (x) => x.a)).toBe(true);
     });
     it('A contains B', () => {
       expect(Collections.equalByContent(['A', 'B'], ['A', 'B'])).toBe(true);
@@ -114,6 +116,19 @@ describe('collections', () => {
       expect(Collections.equalByContent(['B'], ['A', 'B'])).toBe(false);
       expect(Collections.equalByContent(['B', 'B'], ['A', 'B'])).toBe(false);
       expect(Collections.equalByContent(['B', 'A', 'A'], ['A', 'B'])).toBe(false);
+    });
+    it('duplicates count', () => {
+      expect(Collections.equalByContent(['A', 'A', 'B'], ['A', 'B', 'B'])).toBe(false);
+      expect(Collections.equalByContent(['A', 'B', 'B'], ['A', 'A', 'B'])).toBe(false);
+      expect(Collections.equalByContent(['A', 'B', 'A'], ['A', 'A', 'B'])).toBe(true);
+    });
+    it('NaN equals NaN by default', () => {
+      expect(Collections.equalByContent([NaN, 1], [1, NaN])).toBe(true);
+    });
+    it('duplicates count with keyOf', () => {
+      const keyOfA = (x: { a: string }): string => x.a;
+      expect(Collections.equalByContent([{ a: 'A' }, { a: 'A' }], [{ a: 'A' }, { a: 'B' }], keyOfA)).toBe(false);
+      expect(Collections.equalByContent([{ a: 'A' }, { a: 'B' }], [{ a: 'B' }, { a: 'A' }], keyOfA)).toBe(true);
     });
   });
   describe('invertMap', () => {
