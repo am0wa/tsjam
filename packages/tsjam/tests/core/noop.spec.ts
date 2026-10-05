@@ -1,18 +1,21 @@
-import { identity } from 'core/noop.js';
+import { identity, noop, noValue } from 'core/noop.js';
 
 describe('noop', () => {
-  it('same should return same value', () => {
+  it('identity - returns the same value', () => {
     const value = { a: 1, b: 2 };
     expect(identity(value)).toBe(value);
   });
-  it('same should pass through the map', () => {
+  it('identity - passes through filter / map', () => {
     const list = [{ a: 1 }, { b: 2 }];
     expect(list.filter(identity)).toEqual(list);
     expect(list.map(identity)).toEqual(list);
   });
-  it('same should be possible to use as interface stub', () => {
+  it('noop - stubs a void method', () => {
     type Wheel = { move: (distance: number, speed: number) => void };
-    const wheelStub: Wheel = { move: identity };
-    wheelStub.move(25, 10);
+    const wheelStub: Wheel = { move: noop };
+    expect(wheelStub.move(25, 10)).toBeUndefined();
+  });
+  it('noValue - is undefined', () => {
+    expect(noValue).toBeUndefined();
   });
 });

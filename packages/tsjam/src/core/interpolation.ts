@@ -1,15 +1,19 @@
-/** Template {{key}} placeholders (case-insensitive) */
-export const placeholderPattern = /\{\{\w+\}\}/gi;
+/** Template {{key}} placeholders, key is case-sensitive. Group 1: key */
+export const placeholderPattern = /\{\{(\w+)\}\}/g;
 
 export const wordPattern = /\w+/;
 
-/** Extracts list of `{{key}}` token names */
+/**
+ * Extracts list of `{{key}}` tokens.
+ * Complexity: O(n) in the template length.
+ */
 export const getPlaceholders = (template: string, pattern = placeholderPattern): string[] => {
   return template.match(pattern) ?? [];
 };
 
 /**
- * Interpolates `{{key}}` placeholders with values from the provided object
+ * Interpolates `{{key}}` placeholders with own values of the provided object (inherited keys like `constructor` are ignored).
+ * Complexity: O(n) in the template length.
  * @example
  *   interpolatePlaceholders('Hello, {{name}}!', { name: 'World' }); // 'Hello, World!'
  */
@@ -19,9 +23,10 @@ export const interpolatePlaceholders = (
   pattern = placeholderPattern,
   strict = false,
 ): string => {
-  return template.replace(pattern, (placeholder: string) => {
-    const key = placeholder.match(wordPattern)?.[0] ?? ''; // {{key}} -> key
-    const withValue = values[key]?.toString();
+  return template.replace(pattern, (placeholder: string, group?: unknown) => {
+    // key from the capture group; custom patterns without one fall back to the first word
+    const key = typeof group === 'string' ? group : (placeholder.match(wordPattern)?.[0] ?? '');
+    const withValue = Object.hasOwn(values, key) ? values[key]?.toString() : undefined;
     if (withValue === undefined && strict) {
       throw new Error(`Interpolation Error: no value provided for '${placeholder}'`);
     }
@@ -30,13 +35,15 @@ export const interpolatePlaceholders = (
 };
 
 /**
- * Template {{%key}}Conditional text{{/key}} placeholders (key is case-insensitive)
+ * Template {{%key}}Conditional text{{/key}} placeholders, key is case-sensitive.
  * Group 1: key, Group 2: content
  */
 export const conditionalPlaceholderPattern = /\{\{%(\w+)\}\}([\s\S]*?)\{\{\/\1\}\}/g;
 
 /**
- * Conditionally `{{%key}}Conditional text{{/key}}` drops sections between `{{%key}}` and `{{/key}}` if the value is falsy.
+ * Conditionally `{{%key}}Conditional text{{/key}}` drops sections between `{{%key}}` and `{{/key}}`
+ * if the own value is falsy or missing.
+ * Complexity: O(n) in the template length; O(n·k) worst case with k unclosed `{{%key}}` openers.
  */
 export const interpolateConditionalPlaceholders = (
   template: string,
@@ -44,6 +51,6 @@ export const interpolateConditionalPlaceholders = (
   pattern = conditionalPlaceholderPattern,
 ): string => {
   return template.replace(pattern, (_match: string, key: string, content: string) => {
-    return values[key] ? content : '';
+    return Object.hasOwn(values, key) && values[key] ? content : '';
   });
 };

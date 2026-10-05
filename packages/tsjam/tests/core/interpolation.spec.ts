@@ -16,7 +16,7 @@ describe('String template interpolation', () => {
     const result = getPlaceholders(template);
     expect(result).toEqual(['{{name}}', '{{orderId}}']);
   });
-  it('returns an empty array when template is an empty string', () => {
+  it('interpolates multiple values', () => {
     const template = 'Hello, {{name}}! Your order {{orderId}} is ready.';
     const result = interpolatePlaceholders(template, { name: 'world', orderId: 123 });
     expect(result).toEqual('Hello, world! Your order 123 is ready.');
@@ -27,6 +27,18 @@ describe('String template interpolation', () => {
     expect(() => interpolatePlaceholders(template, { name: 'world' }, placeholderPattern, true)).toThrow(
       interpolationError,
     );
+  });
+  it('ignores inherited keys like constructor / toString', () => {
+    expect(interpolatePlaceholders('[{{constructor}}][{{toString}}]', {})).toBe('[][]');
+    expect(() => interpolatePlaceholders('{{constructor}}', {}, placeholderPattern, true)).toThrow(
+      `Interpolation Error: no value provided for '{{constructor}}'`,
+    );
+  });
+  it('keys are case-sensitive', () => {
+    expect(interpolatePlaceholders('{{Name}}/{{name}}', { name: 'x' })).toBe('/x');
+  });
+  it('supports a custom pattern without a capture group', () => {
+    expect(interpolatePlaceholders('Hi <name>!', { name: 'Bob' }, /<\w+>/g)).toBe('Hi Bob!');
   });
   it('should be able to assign empty string even in strict mode', () => {
     const template = 'Hello, {{name}}! Your order {{orderId}} is ready.';
@@ -45,5 +57,8 @@ describe('Conditional template interpolation', () => {
     const template = 'Hello, {{%isBro}}Brother in Hood, {{/isBro}}Man!';
     const result = interpolateConditionalPlaceholders(template, { isBro: false });
     expect(result).toEqual('Hello, Man!');
+  });
+  it('drops sections for inherited keys like toString', () => {
+    expect(interpolateConditionalPlaceholders('a{{%toString}}b{{/toString}}c', {})).toBe('ac');
   });
 });

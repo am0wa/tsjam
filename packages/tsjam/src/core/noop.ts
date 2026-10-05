@@ -1,20 +1,19 @@
+/** Does nothing – a stub for optional callbacks. Complexity: O(1). */
 export const noop = (): void => {
   /* noop */
 };
 
 /**
  * Known _null object_ pattern for filter/map like functions
- * @returns exactly the same value passed the first parameter. */
+ * @returns exactly the same value passed the first parameter.
+ * Complexity: O(1)
+ */
 export const identity = <T>(x: T): T => x;
 
 /**
- * void 0 is effectively a compile time bulletproof constant for undefined with no look-up requirements.
- * difference is that some browsers allow to overwrite undefined, yet not void 0
- @example:
- readonly notification$: Observable<void>;
- ...
- notification$ = source$.pipe(
- mapTo(noValue)
- );
+ * Explicit "no value" – literally `undefined`, named to state intent.
+ * @example
+ *   readonly notification$: Observable<void>;
+ *   notification$ = source$.pipe(map(() => noValue));
  */
-export const noValue = void 0; // void(0) - literally undefined
+export const noValue = void 0;
