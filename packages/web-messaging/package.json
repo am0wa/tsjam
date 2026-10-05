@@ -1,6 +1,6 @@
 {
   "name": "@tsjam/web-messaging",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "description": "Reactive Post message host",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -33,10 +33,11 @@
   "license": "ISC",
   "homepage": "https://github.com/am0wa/tsjam#readme",
   "devDependencies": {
+    "tsjam": "workspace:^",
     "typescript7": "catalog:"
   },
   "peerDependencies": {
     "rxjs": "^7.x",
-    "tsjam": ">=1.6.4"
+    "tsjam": ">=1.9.2"
   }
 }

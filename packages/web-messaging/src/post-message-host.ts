@@ -1,18 +1,8 @@
 import type { Observable } from 'rxjs';
 import { EMPTY, fromEvent } from 'rxjs';
 import { filter, map, share } from 'rxjs/operators';
-import {
-  isObject,
-  isSomething,
-  type Json,
-  type MessagingProvider,
-  optionalMap,
-  type ParseFn,
-  replayLastMessage$,
-  SafeJSON,
-  type Typeguard,
-  unwrap,
-} from 'tsjam';
+import { isObject, isSomething, type Json, optionalMap, type ParseFn, SafeJSON, type Typeguard, unwrap } from 'tsjam';
+import { type MessagingProvider, replayLastMessage$ } from 'tsjam/reactive';
 
 import ownProperty = unwrap.ownProperty;
 

@@ -1,5 +1,5 @@
 import { bindingScopeValues, Container, ContainerModule, inject, injectable } from 'inversify';
-import { RxDisposable } from 'tsjam';
+import { RxDisposable } from 'tsjam/reactive';
 
 import { jest } from '@jest/globals';
 

@@ -61,6 +61,11 @@
   "peerDependencies": {
     "rxjs": "^7.x"
   },
+  "peerDependenciesMeta": {
+    "rxjs": {
+      "optional": true
+    }
+  },
   "devDependencies": {
     "@swc/core": "catalog:swc",
     "@swc/jest": "catalog:jest",
@@ -73,6 +78,7 @@
     "rxjs": "catalog:lib",
     "ts-jest-resolver": "catalog:jest",
     "typedoc": "^0.28.20",
+    "typescript": "catalog:",
     "typescript7": "catalog:"
   },
   "files": [

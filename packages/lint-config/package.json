@@ -33,7 +33,7 @@
     "prettier": "^3.8",
     "@trivago/prettier-plugin-sort-imports": "^6",
     "husky": "^9",
-    "lint-staged": "^16"
+    "lint-staged": "^17"
   },
   "peerDependenciesMeta": {
     "husky": { "optional": true },

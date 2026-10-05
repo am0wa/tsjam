@@ -1,12 +1,5 @@
-import type {
-  ValidationError} from 'core/errors.js';
-import {
-  APIError,
-  AssertionError,
-  JamError,
-  toErrorMessage,
-  UnreachableCodeError
-} from 'core/errors.js';
+import type { ValidationError } from 'core/errors.js';
+import { APIError, AssertionError, JamError, toErrorMessage, UnreachableCodeError } from 'core/errors.js';
 
 describe('Errors', () => {
   describe('subclassing', () => {

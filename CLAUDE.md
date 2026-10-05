@@ -9,7 +9,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Repo layout
 
 - `packages/tsjam` — the main published library (`tsjam` on npm). This is where ~all feature work happens.
-- `packages/web-messaging` — `@tsjam/web-messaging`, a reactive `postMessage` host built on top of `tsjam` + rxjs.
+- `packages/web-messaging` — `@tsjam/web-messaging`, a reactive `postMessage` host built on top of `tsjam` + rxjs. Builds against the workspace `tsjam` (`workspace:^` devDependency); peer `tsjam >=1.9.2` – the first release with the `tsjam/reactive` subpath it imports from.
 - `packages/ioc` — `@tsjam/ioc`, InversifyJS v8 utilities: `sid<T>()` service identifiers, disposable-aware `iocModule` / `disposableBind` (disposes resolved instances on deactivation via `[Symbol.dispose]()` or `dispose()`), `createContainer` / `initIOC` bootstrap. Versioned and tagged independently (`@tsjam/ioc@x.y.z`). Its tests use legacy `@injectable()` decorators – the reason the shared `experimentalDecorators` / `emitDecoratorMetadata` (tsconfig-bases) and swc `legacyDecorator` settings must stay, even though `tsjam` itself no longer uses decorators.
 - `packages/tsconfig-bases` — `@tsjam/tsconfig-bases`: shared `tsconfig.base.json` / `tsconfig.node.json` that all tsconfigs extend.
 - `packages/lint-config` — `@tsjam/lint-config`: umbrella lint/format config. Re-exports everything from the ESLint config below (named + default) and ships the Prettier config. `exports` map: `.`, `./prettier.config.mjs` (what every package's `"prettier"` field points at), `./package.json`.
@@ -27,6 +27,8 @@ The repo intentionally carries **two** TypeScript versions via the default catal
 - `typescript7` (**alias for `npm:typescript@7`, the native Go compiler**) — a devDependency of `tsjam` and `web-messaging`; its `tsc` binary wins on PATH in those packages, so **builds compile with TS 7** while lint/docs run on TS 6.
 
 The alias name is load-bearing: peer resolution matches by the name `typescript` and climbs the dependents chain, so declaring `typescript@7` directly in `tsjam` would feed TS 7 to typescript-eslint and crash lint (`typescript@7` no longer ships the JS API). Don't "simplify" this to a single version until typescript-eslint/typedoc support TS 7 — then drop the alias and point `typescript` at `^7`.
+
+`tsjam` therefore lists **both** `typescript` (`catalog:`, 6.x) and `typescript7` as devDependencies. The direct 6.x entry is what feeds typedoc: without it pnpm resolved typedoc's `typescript` peer to the `typescript7` alias (it was `typedoc@0.28.20(typescript@7.0.2)` in the lockfile) and `pnpm doc` crashed — a pnpm `overrides` or `packageExtensions` entry does not fix that peer wiring. Both packages ship a `tsc` bin; the `typescript7` one wins in `node_modules/.bin` (check with `pnpm exec tsc -v` → 7.x after dependency changes), so builds still compile with TS 7.
 
 TS 6/7 also removed config options; the tsconfigs are already migrated. Keep new tsconfigs free of `baseUrl` (use tsconfig-relative `paths` like `./src/*`), set `rootDir` explicitly (it now defaults to the tsconfig's own directory), and remember `types` defaults to `[]` (no auto-inclusion of `@types/*` — list what you need, as `tests/tsconfig.json` does).
 
@@ -57,7 +59,7 @@ Node `>=24` and pnpm `>=11` are required at the repo root (the published library
 
 ## Architecture & conventions
 
-The library is organized into three export surfaces, all re-exported from `src/index.ts` and also published as subpath exports (`tsjam`, `tsjam/money`, `tsjam/reactive`, `tsjam/collections`):
+The library is organized into export surfaces published as subpaths (`tsjam`, `tsjam/money`, `tsjam/reactive`, `tsjam/collections`). The root `tsjam` (`src/index.ts`) re-exports **core + money only** and has no external imports – `reactive` is reachable only via `tsjam/reactive`, so core-only consumers don't need rxjs (an _optional_ peer). Never re-export `reactive` from the root barrel:
 
 - `src/core/` — pure utilities: type helpers (`types.ts`), assertions (`assert.ts`), type-narrowing unwrappers (`unwrap.ts`), `Result`, `Disposable`/`DisposeBag`, collections, math, etc. `collections.ts` is plain module exports (no `namespace`), grouped by the barrel as `export * as Collections` and published as `tsjam/collections` – the pilot for tree-shakable modules (a `namespace` compiles to an IIFE no bundler can shake; esbuild only shakes a direct `import * as`, hence the subpath).
 - `src/reactive/` — rxjs-based tools: `RxDisposable`, operators, messaging. Depends on `core/`. `rxjs ^7` is a **peer dependency**.

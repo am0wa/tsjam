@@ -33,6 +33,7 @@ catalogs:
     husky: ^9.1.7
     lint-staged: ^17.0.8
     prettier: ^3.8.4
+    '@trivago/prettier-plugin-sort-imports': ^6.0.2
   # Test runner & test config  
   jest:
     '@swc/jest': ^0.2.39
