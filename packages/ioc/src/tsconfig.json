@@ -1,6 +1,8 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
-    "rootDir": "."
+    "rootDir": ".",
+    /* published lib/ ships no src/ – maps would point at missing files */
+    "sourceMap": false
   }
 }
