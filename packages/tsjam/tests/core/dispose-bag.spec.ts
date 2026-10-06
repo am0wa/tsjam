@@ -84,7 +84,7 @@ describe('DisposeBag', () => {
       caught = err;
     }
     expect(caught).toBeInstanceOf(AggregateError);
-    expect(caught instanceof AggregateError && caught.errors).toEqual([errA, errB]);
+    expect(caught instanceof AggregateError && caught.errors).toEqual([errB, errA]); // disposal (LIFO) order
   });
   it('dispose - items added during disposal are disposed immediately', () => {
     const bag = DisposeBag.create();
@@ -95,6 +95,27 @@ describe('DisposeBag', () => {
     bag.dispose();
     expect(lateCalls).toBe(1);
     expect(bag.size).toBe(0);
+  });
+  it('dispose - LIFO: the last added is disposed first', () => {
+    const bag = DisposeBag.create();
+    const log: string[] = [];
+    bag.add(() => log.push('connection'));
+    bag.add({ dispose: () => log.push('subscription') });
+    bag.add({ [Symbol.dispose]: () => log.push('handler') });
+
+    bag.dispose();
+    expect(log).toEqual(['handler', 'subscription', 'connection']);
+  });
+  it('add - a duplicate keeps its first position', () => {
+    const bag = DisposeBag.create();
+    const log: string[] = [];
+    const a = (): number => log.push('a');
+    bag.add(a);
+    bag.add(() => log.push('b'));
+    bag.add(a);
+
+    bag.dispose();
+    expect(log).toEqual(['b', 'a']);
   });
   it('add - same item twice is kept and disposed once', () => {
     const bag = DisposeBag.create();

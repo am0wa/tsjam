@@ -122,7 +122,7 @@ describe('RxDisposable - teardown order', () => {
     expect(reactions).toEqual(['alive']);
   });
 
-  it('subscriptions → children & callbacks → disposed$, regardless of registration order', () => {
+  it('subscriptions → children & callbacks (LIFO) → disposed$', () => {
     const log: string[] = [];
     const entity = new RxDisposable();
 
@@ -134,7 +134,7 @@ describe('RxDisposable - teardown order', () => {
 
     entity.dispose();
 
-    expect(log).toEqual(['subscription', 'unsubscribable', 'callback', 'child', 'disposed$']);
+    expect(log).toEqual(['subscription', 'unsubscribable', 'child', 'callback', 'disposed$']); // children LIFO
   });
 });
 

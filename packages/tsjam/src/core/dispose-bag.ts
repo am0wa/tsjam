@@ -14,6 +14,24 @@ export interface DisposableBag<T> extends DisposableLike {
   dispose(): void;
 }
 
+/**
+ * Bag of teardowns disposed together, reverse disposal (LIFO), no Leaks.
+ *
+ * Over the native `DisposableStack`:
+ * - universal one `add()` for `dispose()`, `[Symbol.dispose]()`, `unsubscribe()` (rxjs) and callbacks – no `adopt`/`defer` wrapping
+ * - laconic: `add()` returns the item itself for any kind – `const sub = bag.add(source$.subscribe(render))`
+ * - duplicates are disposed once; adding after dispose disposes right away instead of throwing
+ * - `delete()` releases an item without disposing it (self-pruning); `size` & `id` for smooth debugging
+ * - works on every supported runtime (Node 22, Safari) – no polyfill
+ *
+ * @usage:
+ *    const bag = DisposeBag.create();
+ *    bag.add(source$.subscribe(render));
+ *    bag.add(() => timer.stop());
+ *    bag.dispose(); // timer.stop() first, then unsubscribe
+ *
+ *    using scoped = DisposeBag.create(); // disposed automatically when the block ends
+ */
 export class DisposeBag implements DisposableBag<Teardown>, SymbolDisposable {
   /**
    * Prefers `dispose()`, then `[Symbol.dispose]()`, then `unsubscribe()`, otherwise invokes the callback.
@@ -69,7 +87,10 @@ export class DisposeBag implements DisposableBag<Teardown>, SymbolDisposable {
     return DisposeBag._counter++ as RipId;
   }
 
-  /** Insertion ordered (FIFO teardown), duplicates ignored. */
+  /**
+   * Insertion ordered, duplicates ignored; disposed in reverse (LIFO).
+   * Why LIFO: something registered later usually depends on something registered earlier.
+   */
   private readonly _disposables = new Set<Teardown>();
   private _disposed = false;
 
@@ -108,7 +129,8 @@ export class DisposeBag implements DisposableBag<Teardown>, SymbolDisposable {
   }
 
   /**
-   * Disposes all added items, even if some of them throw (errors are rethrown afterwards).
+   * Disposes all added items in reverse order (LIFO, like `DisposableStack`): the last added goes first,
+   * since later items usually depend on earlier ones. Continues even if some throw (errors are rethrown afterwards).
    * Items added during disposal are disposed immediately.
    */
   dispose(): void {
@@ -117,7 +139,7 @@ export class DisposeBag implements DisposableBag<Teardown>, SymbolDisposable {
     }
     this._disposed = true; // finalize first: re-entrant `add` disposes right away
     try {
-      DisposeBag.disposeAll(this._disposables);
+      DisposeBag.disposeAll(Array.from(this._disposables).reverse());
     } finally {
       this._disposables.clear(); // erase, even if some teardown threw
     }

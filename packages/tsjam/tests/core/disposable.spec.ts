@@ -25,7 +25,7 @@ describe('Standard ES disposal interop', () => {
     bag.add(() => calls.push('callback'));
     bag.dispose();
 
-    expect(calls).toEqual(['dispose', 'symbol', 'callback']);
+    expect(calls).toEqual(['callback', 'symbol', 'dispose']); // LIFO
   });
 
   it('DisposeBag - prefers dispose() when an object has both, disposing once', () => {
