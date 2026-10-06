@@ -1,6 +1,6 @@
 {
   "name": "tsjam",
-  "version": "1.9.6",
+  "version": "2.0.0-0",
   "description": "vanilla typescript sweets",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -53,6 +53,7 @@
     "prepare-release": "pnpm run clean:dist && pnpm run lint && pnpm run test && pnpm run patch-version && pnpm run doc:html",
     "prepublishOnly": "pnpm run clean:dist && pnpm run build && pnpm run test",
     "publish-public": "pnpm publish --access=public",
+    "publish-next": "pnpm publish --access=public --tag next",
     "postpublish": "git push --tags origin master"
   },
   "engines": {
