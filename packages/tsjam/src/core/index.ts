@@ -16,6 +16,7 @@ export * from './io.js';
 export * from './optional.js';
 export * from './blank.js';
 export * from './result.js';
+export * from './strict-id.js';
 export * as Collections from './collections.js';
 export * from './math.js';
 export * from './pipe.js';

@@ -94,8 +94,10 @@ export class DisposeBag implements DisposableBag<Teardown>, SymbolDisposable {
   private readonly _disposables = new Set<Teardown>();
   private _disposed = false;
 
-  protected constructor(readonly id: RipId) {
-    /* empty */
+  readonly id: RipId;
+
+  protected constructor(id: RipId) {
+    this.id = id;
   }
 
   get size(): number {

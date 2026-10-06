@@ -43,13 +43,11 @@ export class ConfigurationError extends JamError {
 
 export class APIError<ErrorCodeT = unknown> extends JamError {
   declare protected readonly _APIError: never;
+  readonly code: ErrorCodeT;
 
-  constructor(
-    readonly code: ErrorCodeT,
-    message: string,
-    options?: ErrorOptions,
-  ) {
+  constructor(code: ErrorCodeT, message: string, options?: ErrorOptions) {
     super(message, options);
+    this.code = code;
   }
 }
 

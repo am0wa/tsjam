@@ -13,20 +13,22 @@ const sanitizeSemantic = (ver: string): string => {
   return ver.replace(sem, '');
 };
 
-export enum VersionSignificanceLvl {
-  Major = 1,
-  Minor = 2,
-  Patch = 3,
-}
+export const VersionSignificanceLvl = {
+  Major: 1,
+  Minor: 2,
+  Patch: 3,
+} as const;
+export type VersionSignificanceLvl = (typeof VersionSignificanceLvl)[keyof typeof VersionSignificanceLvl];
 
-export enum SemanticRange {
-  All = '*',
-  Compatible = '^',
-  Approximate = '~',
-  Higher = '>',
-  Lower = '<',
-  Same = '=',
-}
+export const SemanticRange = {
+  All: '*',
+  Compatible: '^',
+  Approximate: '~',
+  Higher: '>',
+  Lower: '<',
+  Same: '=',
+} as const;
+export type SemanticRange = (typeof SemanticRange)[keyof typeof SemanticRange];
 
 const levelsOf = (ver: string): number[] =>
   sanitizeSemantic(ver)

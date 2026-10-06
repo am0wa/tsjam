@@ -3,6 +3,8 @@
   "compilerOptions": {
     "rootDir": ".",
     /* published lib/ ships no src/ – maps would point at missing files (lodash ships none either) */
-    "sourceMap": false
+    "sourceMap": false,
+    /* only TypeScript syntax that type stripping can erase – no enums, runtime namespaces, parameter properties */
+    "erasableSyntaxOnly": true
   }
 }

@@ -54,7 +54,10 @@ describe('comparison', () => {
 
   describe('Comparable', () => {
     class Money implements Comparable<Money> {
-      constructor(readonly cents: number) {}
+      readonly cents: number;
+      constructor(cents: number) {
+        this.cents = cents;
+      }
       compare(other: Money): number {
         return this.cents - other.cents;
       }

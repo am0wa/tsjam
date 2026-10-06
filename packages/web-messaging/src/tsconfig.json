@@ -4,6 +4,8 @@
     "target": "es6",
     "rootDir": ".",
     /* published lib/ ships no src/ – maps would point at missing files */
-    "sourceMap": false
+    "sourceMap": false,
+    /* only TypeScript syntax that type stripping can erase – no enums, runtime namespaces, parameter properties */
+    "erasableSyntaxOnly": true
   }
 }

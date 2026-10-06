@@ -67,6 +67,7 @@ using the tables below.
   - use `Result.isOk` / `Result.isFail` as guards
 - **`Collections.equalByContent(a, b, keyOf)`**: the third argument is a key, not an equality predicate. `(a, b) => a.id === b.id` becomes `(item) => item.id`. It runs in O(n) instead of O(n²).
 - **`ComparisonResult`** is a plain `as const` object, so the reverse mapping (`ComparisonResult[-1]`) is gone. `Comparator` and `Comparable.compare` return `number`, as `Array.sort` comparators do. Use `Math.sign` if you need exactly `-1 | 0 | 1`.
+- **`SemanticRange`, `VersionSignificanceLvl`, `CacheControl`** are `as const` objects + union types instead of `enum`s (erasable TypeScript). `SemanticRange.Compatible` and `: SemanticRange` work as before; gone: the reverse mapping (`VersionSignificanceLvl[2]`), and plain literals like `'^'` are now assignable.
 - **`RxDisposable._rxBag`** is an rxjs `Subscription`. `add()` returns `void`; there is no `size` / `id` / `disposed`.
 - **`blank`** is an `as const` object, so its signs have literal types (`blank.dash: '-'`).
 - **`JamError`** and its subclasses accept `options?: ErrorOptions` (`{ cause }`). `name` is non-enumerable, and the brand fields no longer exist at runtime.
@@ -83,6 +84,7 @@ using the tables below.
 ## 6. New in 2.0
 
 - `clamp(value, min, max)`
+- `StringId` / `NumberId` / `IdFactory` (branded ids: `StringId<'User'>`, `StringId.create`, `StringId.factoryOf`) – now exported (they existed but were never reachable)
 - `roundTo(value, digits)`: same result as `+value.toFixed(digits)`, without the string round-trip
 - `floorTo(value, digits)`: `floorTo(2.3, 2) → 2.3`, where `Math.floor(2.3 * 100) / 100` gives `2.29`
 - `pipeline(value, ...fns)` and `not(predicate)`

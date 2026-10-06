@@ -6,7 +6,7 @@
 /**
  * Cache Control which is used in fetch() data methods
  */
-export enum CacheControl {
+export const CacheControl = {
   /**
    * The default behavior of browsers when downloading resources.
    * The browser first looks inside the HTTP cache to see if there is a matching request.
@@ -15,7 +15,7 @@ export enum CacheControl {
    * that the response has not changed, it will be read from the HTTP cache.
    * Otherwise it will be downloaded from the network, and the HTTP cache will be updated with the new response.
    */
-  Default = 'default',
+  Default: 'default',
 
   /**
    * Bypass the HTTP cache completely.
@@ -23,7 +23,7 @@ export enum CacheControl {
    * and never store the resulting response in the HTTP cache.
    * Using this cache mode, fetch() will behave as if no HTTP cache exists.
    */
-  NoStore = 'no-store',
+  NoStore: 'no-store',
 
   /**
    * Bypass the HTTP cache on the way to the network, but update it with the newly downloaded response.
@@ -31,7 +31,7 @@ export enum CacheControl {
    * but update the HTTP cache with the downloaded response.
    * Future requests can use that updated response if appropriate.
    */
-  Reload = 'reload',
+  Reload: 'reload',
 
   /**
    *  Always validate a response that is in the HTTP cache even if the browser thinks that it’s fresh.
@@ -41,7 +41,7 @@ export enum CacheControl {
    *  If a matching cached entry is not found, a normal request will be made.
    *  After a response has been downloaded, the HTTP cache will always be updated with that response.
    */
-  NoCache = 'no-cache',
+  NoCache: 'no-cache',
 
   /**
    *  The browser will always use a cached response if a matching entry is found in the cache,
@@ -51,8 +51,9 @@ export enum CacheControl {
    *  If a matching entry is not found in the cache, the browser will make a normal request,
    *  and will update the HTTP cache with the downloaded response.
    */
-  ForceCache = 'force-cache',
-}
+  ForceCache: 'force-cache',
+} as const;
+export type CacheControl = (typeof CacheControl)[keyof typeof CacheControl];
 
 /**
  * Fetch does not fire reject event when external resources was not found.
