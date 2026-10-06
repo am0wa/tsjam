@@ -2,6 +2,9 @@
   "extends": "@tsjam/tsconfig-bases/tsconfig.base.json",
   "compilerOptions": {
     "target": "es6",
+    /* published as "type": "module": nodenext makes tsc require `.js` extensions on relative imports (bundler resolution doesn't) */
+    "module": "NodeNext",
+    "moduleResolution": "nodenext",
     "outDir": "lib"
   }
 }
